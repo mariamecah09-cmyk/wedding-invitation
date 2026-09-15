@@ -1,24 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
->
-
-<meta name="theme-color" content="#25070d">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#3c0c15">
 
 <title>Happy Alves & Nico Alves | Wedding Invitation</title>
 
-
 <style>
-
-/* =========================================================
-   FONTS + VARIABLES
-========================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Parisienne&display=swap');
 
@@ -45,6 +34,7 @@
   --serif:"Cormorant Garamond",Georgia,serif;
   --sans:"DM Sans",Arial,sans-serif;
   --script:"Parisienne",cursive;
+
 }
 
 
@@ -86,7 +76,7 @@ body{
 }
 
 
-body.curtain-active{
+body.locked{
   overflow:hidden;
 }
 
@@ -108,80 +98,300 @@ a{
 }
 
 
+
 /* =========================================================
-   CURTAIN SCREEN
+   CURTAIN OPENING
 ========================================================= */
 
-.curtain-screen{
 
-  position:fixed;
+.curtain-stage{
 
-  inset:0;
+  position:relative;
 
   width:100%;
-  height:100%;
 
-  z-index:1000;
+  height:100svh;
 
-  background:#25070d;
+  min-height:620px;
 
   overflow:hidden;
 
-  touch-action:none;
+  background:var(--cream-light);
+
+  isolation:isolate;
+
+  touch-action:pan-y;
 
 }
 
 
+
+/* INVITATION BEHIND CURTAINS */
+
+
+.curtain-invite{
+
+  position:absolute;
+
+  inset:0;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-align:center;
+
+  padding:40px 25px;
+
+  z-index:1;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(184,148,69,.09),
+      transparent 55%
+    ),
+    var(--cream-light);
+
+}
+
+
+.curtain-invite-inner{
+
+  width:min(590px,100%);
+
+  padding:58px 25px;
+
+  position:relative;
+
+  border:1px solid rgba(184,148,69,.5);
+
+  opacity:0;
+
+  transform:translateY(18px);
+
+  transition:
+    opacity 1.5s .65s cubic-bezier(.16,1,.3,1),
+    transform 1.5s .65s cubic-bezier(.16,1,.3,1);
+
+}
+
+
+.curtain-stage.is-opening
+.curtain-invite-inner{
+
+  opacity:1;
+
+  transform:translateY(0);
+
+}
+
+
+.curtain-invite-inner:before,
+.curtain-invite-inner:after{
+
+  content:"";
+
+  position:absolute;
+
+  width:62px;
+
+  height:62px;
+
+  border-color:var(--gold);
+
+  border-style:solid;
+
+  opacity:.65;
+
+}
+
+
+.curtain-invite-inner:before{
+
+  top:12px;
+
+  left:12px;
+
+  border-width:1px 0 0 1px;
+
+}
+
+
+.curtain-invite-inner:after{
+
+  bottom:12px;
+
+  right:12px;
+
+  border-width:0 1px 1px 0;
+
+}
+
+
+.curtain-invite .eyebrow{
+
+  display:block;
+
+  margin-bottom:14px;
+
+  font-size:10px;
+
+  letter-spacing:.28em;
+
+  text-transform:uppercase;
+
+  color:var(--gold);
+
+}
+
+
+.curtain-invite h1{
+
+  margin:0;
+
+  font-family:var(--serif);
+
+  font-size:clamp(46px,11vw,82px);
+
+  font-weight:500;
+
+  line-height:.9;
+
+  color:var(--red-dark);
+
+}
+
+
+.curtain-invite h1 span{
+
+  display:block;
+
+  font-family:var(--script);
+
+  font-size:.55em;
+
+  color:var(--gold);
+
+  margin:9px 0;
+
+}
+
+
+.ornamental-line{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:14px;
+
+  margin:25px 0;
+
+  color:var(--gold);
+
+}
+
+
+.ornamental-line:before,
+.ornamental-line:after{
+
+  content:"";
+
+  width:70px;
+
+  height:1px;
+
+  background:rgba(184,148,69,.55);
+
+}
+
+
+.curtain-invite p{
+
+  max-width:430px;
+
+  margin:0 auto;
+
+  font-family:var(--serif);
+
+  font-size:19px;
+
+  line-height:1.55;
+
+  color:#65595a;
+
+}
+
+
+.hero-theme{
+
+  margin-top:24px;
+
+  font-size:9px;
+
+  letter-spacing:.25em;
+
+  text-transform:uppercase;
+
+  color:var(--muted);
+
+}
+
+
+
 /* =========================================================
-   CURTAIN PANELS
+   VELVET CURTAINS
 ========================================================= */
+
 
 .curtain{
 
   position:absolute;
 
-  top:-4%;
-  bottom:-4%;
+  top:-3%;
 
-  width:54%;
+  bottom:-3%;
 
-  z-index:10;
+  width:56%;
+
+  z-index:5;
 
   background:
 
     linear-gradient(
       90deg,
 
-      #350811 0%,
-
-      #711827 8%,
-
-      #470b16 17%,
-
-      #8b2635 27%,
-
-      #510f1b 37%,
-
-      #8f2938 47%,
-
-      #4b0c17 58%,
-
-      #781c2b 68%,
-
-      #3d0913 79%,
-
-      #802131 90%,
-
-      #320710 100%
+      #3d0912 0%,
+      #751b29 9%,
+      #4b0d18 18%,
+      #8d2635 27%,
+      #55101c 37%,
+      #8d2635 47%,
+      #4a0c17 58%,
+      #751b29 68%,
+      #400914 79%,
+      #7e202e 90%,
+      #360811 100%
     );
 
   box-shadow:
 
-    inset -28px 0 42px rgba(0,0,0,.30),
+    inset -25px 0 35px rgba(0,0,0,.28),
 
-    inset 28px 0 42px rgba(255,255,255,.035);
+    inset 25px 0 35px rgba(255,255,255,.04);
 
   will-change:transform;
+
+  transition:
+
+    transform 2.15s cubic-bezier(.16,1,.3,1),
+
+    filter 2.15s cubic-bezier(.16,1,.3,1);
 
 }
 
@@ -197,15 +407,17 @@ a{
   background:
 
     repeating-linear-gradient(
+
       90deg,
 
       rgba(255,255,255,.025) 0px,
 
       rgba(255,255,255,.025) 3px,
 
-      rgba(0,0,0,.10) 8px,
+      rgba(0,0,0,.09) 8px,
 
-      rgba(0,0,0,.10) 15px
+      rgba(0,0,0,.09) 15px
+
     );
 
   mix-blend-mode:soft-light;
@@ -224,15 +436,17 @@ a{
   background:
 
     linear-gradient(
+
       90deg,
 
-      rgba(0,0,0,.48),
+      rgba(0,0,0,.4),
 
-      transparent 18%,
+      transparent 20%,
 
-      transparent 82%,
+      transparent 80%,
 
-      rgba(0,0,0,.50)
+      rgba(0,0,0,.45)
+
     );
 
 }
@@ -240,163 +454,107 @@ a{
 
 .curtain-left{
 
-  left:-2%;
+  left:0;
 
   transform-origin:left center;
 
   border-right:
     1px solid
-    rgba(216,191,121,.18);
+    rgba(216,191,121,.16);
 
 }
 
 
 .curtain-right{
 
-  right:-2%;
+  right:0;
 
   transform-origin:right center;
 
   border-left:
     1px solid
-    rgba(216,191,121,.18);
+    rgba(216,191,121,.16);
 
 }
+
+
+
+/* OPENED CURTAINS */
+
+
+.curtain-stage.is-open
+.curtain-left{
+
+  transform:
+    translateX(-8%)
+    scaleX(.22);
+
+  filter:brightness(.8);
+
+}
+
+
+.curtain-stage.is-open
+.curtain-right{
+
+  transform:
+    translateX(8%)
+    scaleX(.22);
+
+  filter:brightness(.8);
+
+}
+
 
 
 /* =========================================================
-   CURTAIN OPENING ANIMATION
+   GOLD CURTAIN TIE BACKS
 ========================================================= */
 
-.curtain-screen.opening .curtain-left{
-
-  animation:
-    curtainOpenLeft
-    2.7s
-    cubic-bezier(.16,1,.3,1)
-    forwards;
-
-}
-
-
-.curtain-screen.opening .curtain-right{
-
-  animation:
-    curtainOpenRight
-    2.7s
-    cubic-bezier(.16,1,.3,1)
-    forwards;
-
-}
-
-
-/*
-   IMPORTANT:
-
-   The curtains do NOT leave the screen.
-
-   They remain gathered at the edges,
-   just like real theatre curtains.
-*/
-
-
-@keyframes curtainOpenLeft{
-
-  0%{
-
-    transform:
-      translateX(0)
-      scaleX(1);
-
-  }
-
-  55%{
-
-    transform:
-      translateX(-55%)
-      scaleX(.97);
-
-  }
-
-  100%{
-
-    transform:
-      translateX(-82%)
-      scaleX(.91);
-
-  }
-
-}
-
-
-@keyframes curtainOpenRight{
-
-  0%{
-
-    transform:
-      translateX(0)
-      scaleX(1);
-
-  }
-
-  55%{
-
-    transform:
-      translateX(55%)
-      scaleX(.97);
-
-  }
-
-  100%{
-
-    transform:
-      translateX(82%)
-      scaleX(.91);
-
-  }
-
-}
-
-
-/* =========================================================
-   CURTAIN TIE-BACKS
-========================================================= */
 
 .curtain-tie{
 
   position:absolute;
 
+  z-index:7;
+
   top:50%;
 
-  width:32px;
-  height:78px;
+  width:30px;
 
-  z-index:20;
+  height:30px;
+
+  border-radius:50%;
+
+  background:
+
+    radial-gradient(
+      circle at 35% 30%,
+      #f1d990,
+      #b89445 55%,
+      #79591c
+    );
+
+  box-shadow:
+
+    0 3px 10px rgba(0,0,0,.28),
+
+    0 0 0 1px
+    rgba(216,191,121,.6);
 
   opacity:0;
 
   transform:
     translateY(-50%)
-    scale(.5);
+    scale(.6);
 
   transition:
 
-    opacity .6s ease 2.1s,
+    opacity .9s .95s,
 
-    transform .9s
-    cubic-bezier(.16,1,.3,1)
-    2.1s;
+    transform 1s 1s
+    cubic-bezier(.16,1,.3,1);
 
-}
-
-
-.curtain-tie-left{
-  left:3%;
-}
-
-
-.curtain-tie-right{
-  right:3%;
 }
 
 
@@ -406,61 +564,49 @@ a{
 
   position:absolute;
 
-  width:30px;
-  height:30px;
-
-  top:24px;
-
-  border-radius:50%;
-
-  background:
-
-    radial-gradient(
-      circle at 35% 30%,
-      #e6cc88,
-      #b89445 55%,
-      #745419
-    );
-
-  box-shadow:
-
-    0 3px 10px rgba(0,0,0,.35),
-
-    inset 0 0 0 1px
-    rgba(255,255,255,.4);
-
-}
-
-
-.curtain-tie:after{
-
-  content:"";
-
-  position:absolute;
+  top:50%;
 
   width:42px;
-  height:2px;
 
-  top:39px;
+  height:1px;
 
   background:var(--gold);
 
-  opacity:.75;
+  opacity:.8;
 
 }
 
 
-.curtain-tie-left:after{
-  left:12px;
+.curtain-tie-left{
+
+  left:5.5%;
+
 }
 
 
-.curtain-tie-right:after{
-  right:12px;
+.curtain-tie-left:before{
+
+  left:22px;
+
 }
 
 
-.curtain-screen.opening .curtain-tie{
+.curtain-tie-right{
+
+  right:5.5%;
+
+}
+
+
+.curtain-tie-right:before{
+
+  right:22px;
+
+}
+
+
+.curtain-stage.is-open
+.curtain-tie{
 
   opacity:1;
 
@@ -471,111 +617,24 @@ a{
 }
 
 
+
 /* =========================================================
-   OPENING CONTENT
+   TAP TO CONTINUE
 ========================================================= */
 
-.curtain-content{
+
+.curtain-open-prompt{
 
   position:absolute;
 
-  inset:0;
+  z-index:12;
 
-  z-index:30;
+  left:50%;
 
-  display:flex;
+  top:50%;
 
-  flex-direction:column;
-
-  align-items:center;
-
-  justify-content:center;
-
-  text-align:center;
-
-  color:white;
-
-  padding:20px;
-
-  pointer-events:none;
-
-  transition:
-
-    opacity .8s ease,
-
-    transform .8s ease;
-
-}
-
-
-.curtain-small{
-
-  font-size:10px;
-
-  letter-spacing:.32em;
-
-  text-transform:uppercase;
-
-  color:rgba(255,255,255,.68);
-
-  margin-bottom:18px;
-
-}
-
-
-.curtain-content h1{
-
-  margin:0;
-
-  font-family:var(--serif);
-
-  font-size:
-    clamp(45px,11vw,78px);
-
-  font-weight:400;
-
-  letter-spacing:.02em;
-
-}
-
-
-.curtain-content h1 i{
-
-  font-family:var(--script);
-
-  font-size:.65em;
-
-  color:var(--gold-light);
-
-  font-style:normal;
-
-  margin:0 8px;
-
-}
-
-
-.curtain-line{
-
-  width:70px;
-
-  height:1px;
-
-  margin:24px 0;
-
-  background:var(--gold-light);
-
-}
-
-
-/* =========================================================
-   TAP TO CONTINUE BUTTON
-========================================================= */
-
-.open-button{
-
-  pointer-events:auto;
-
-  position:relative;
+  transform:
+    translate(-50%,-50%);
 
   display:flex;
 
@@ -583,146 +642,104 @@ a{
 
   align-items:center;
 
-  justify-content:center;
-
-  gap:6px;
-
-  min-width:130px;
-
-  padding:14px 20px 12px;
-
-  background:rgba(255,255,255,.025);
+  gap:9px;
 
   border:
-
     1px solid
-    rgba(216,191,121,.65);
+    rgba(216,191,121,.7);
+
+  background:
+    rgba(37,7,13,.18);
+
+  backdrop-filter:blur(2px);
+
+  -webkit-backdrop-filter:blur(2px);
 
   color:white;
 
-  letter-spacing:.16em;
+  padding:13px 21px 12px;
 
-  font-size:9px;
-
-  text-transform:uppercase;
+  min-width:112px;
 
   transition:
 
-    background .3s ease,
+    opacity .65s ease,
 
-    transform .3s ease;
+    transform .8s
+    cubic-bezier(.16,1,.3,1),
 
-}
-
-
-.open-button:hover{
-
-  background:
-    rgba(216,191,121,.10);
+    visibility .65s;
 
 }
 
 
-/* Moving point / arrow */
+.prompt-arrow{
 
-.open-button .tap-arrow{
-
-  display:block;
-
-  font-size:20px;
+  font-size:18px;
 
   line-height:1;
 
   color:var(--gold-light);
 
   animation:
-
-    tapBounce
-    1.35s
+    promptBounce
+    1.3s
     ease-in-out
     infinite;
 
 }
 
 
-@keyframes tapBounce{
+.curtain-open-prompt span{
+
+  font-size:9px;
+
+  letter-spacing:.18em;
+
+  text-transform:uppercase;
+
+  white-space:nowrap;
+
+}
+
+
+.curtain-stage.is-opening
+.curtain-open-prompt{
+
+  opacity:0;
+
+  transform:
+    translate(-50%,-50%)
+    scale(.92);
+
+  visibility:hidden;
+
+}
+
+
+@keyframes promptBounce{
 
   0%,
   100%{
 
-    transform:
-      translateY(0);
-
-    opacity:.55;
+    transform:translateY(0);
 
   }
 
   50%{
 
-    transform:
-      translateY(7px);
-
-    opacity:1;
+    transform:translateY(6px);
 
   }
 
 }
 
 
-.open-button small{
-
-  display:block;
-
-  margin-top:1px;
-
-  opacity:.7;
-
-  letter-spacing:.12em;
-
-  font-size:8px;
-
-}
-
-
-/* Hide opening prompt while opening */
-
-.curtain-screen.opening .open-button{
-
-  opacity:0;
-
-  transform:
-    translateY(15px);
-
-}
-
-
-.curtain-screen.opening .curtain-content{
-
-  /*
-    This doesn't vanish instantly.
-
-    It fades slowly while the
-    real invitation underneath
-    begins appearing.
-  */
-
-  opacity:0;
-
-  transform:
-    translateY(-8px);
-
-  transition:
-
-    opacity 1.5s ease,
-
-    transform 1.5s ease;
-
-}
-
 
 /* =========================================================
-   MAIN INVITATION
+   MAIN
 ========================================================= */
+
 
 .invitation{
 
@@ -756,7 +773,8 @@ a{
 
   max-width:520px;
 
-  margin:0 auto 48px;
+  margin:
+    0 auto 48px;
 
 }
 
@@ -798,7 +816,8 @@ a{
 
 .section-heading p{
 
-  margin:18px auto 0;
+  margin:
+    18px auto 0;
 
   max-width:430px;
 
@@ -822,206 +841,15 @@ a{
 }
 
 
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero{
-
-  min-height:100vh;
-
-  display:grid;
-
-  place-items:center;
-
-  padding:45px 20px;
-
-  background:
-
-    radial-gradient(
-      circle at center,
-      rgba(184,148,69,.08),
-      transparent 50%
-    ),
-
-    var(--cream-light);
-
-}
-
-
-.hero-frame{
-
-  width:min(590px,100%);
-
-  padding:65px 28px;
-
-  position:relative;
-
-  text-align:center;
-
-  border:
-    1px solid
-    rgba(184,148,69,.5);
-
-}
-
-
-/* Decorative corners */
-
-.hero-frame:before,
-.hero-frame:after{
-
-  content:"";
-
-  position:absolute;
-
-  width:70px;
-  height:70px;
-
-  border-color:var(--gold);
-
-  border-style:solid;
-
-  opacity:.65;
-
-}
-
-
-.hero-frame:before{
-
-  top:12px;
-  left:12px;
-
-  border-width:
-    1px 0 0 1px;
-
-}
-
-
-.hero-frame:after{
-
-  bottom:12px;
-  right:12px;
-
-  border-width:
-    0 1px 1px 0;
-
-}
-
-
-.hero h1{
-
-  margin:18px 0 0;
-
-  font-family:var(--serif);
-
-  font-weight:500;
-
-  font-size:
-    clamp(47px,11vw,82px);
-
-  line-height:.9;
-
-  color:var(--red-dark);
-
-}
-
-
-.hero h1 span{
-
-  display:block;
-
-  font-family:var(--script);
-
-  color:var(--gold);
-
-  font-size:.55em;
-
-  margin:7px 0;
-
-}
-
-
-.ornamental-line{
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  gap:14px;
-
-  margin:25px 0;
-
-  color:var(--gold);
-
-}
-
-
-.ornamental-line:before,
-.ornamental-line:after{
-
-  content:"";
-
-  width:70px;
-
-  height:1px;
-
-  background:
-    rgba(184,148,69,.55);
-
-}
-
-
-.hero p{
-
-  max-width:430px;
-
-  margin:0 auto;
-
-  font-family:var(--serif);
-
-  font-size:19px;
-
-  line-height:1.55;
-
-  color:#65595a;
-
-}
-
-
-/*
-   DATE REMOVED FROM HERO.
-
-   It will ONLY appear after
-   scratching the date cards.
-*/
-
-
-.hero-theme{
-
-  margin-top:24px;
-
-  font-size:9px;
-
-  letter-spacing:.25em;
-
-  text-transform:uppercase;
-
-  color:var(--muted);
-
-}
-
 
 /* =========================================================
    SCRATCH DATE
 ========================================================= */
 
+
 .scratch-section{
 
   background:
-
     linear-gradient(
       rgba(121,31,44,.025),
       rgba(121,31,44,.025)
@@ -1148,13 +976,6 @@ a{
 }
 
 
-.scratch-canvas:active{
-
-  cursor:grabbing;
-
-}
-
-
 .scratch-item > span{
 
   display:block;
@@ -1204,9 +1025,11 @@ a{
 }
 
 
+
 /* =========================================================
    TIMELINE
 ========================================================= */
+
 
 .timeline{
 
@@ -1283,7 +1106,8 @@ a{
 
   height:9px;
 
-  margin:5px auto 0;
+  margin:
+    5px auto 0;
 
   border-radius:50%;
 
@@ -1324,7 +1148,8 @@ a{
 
 .timeline-content p{
 
-  margin:6px 0 0;
+  margin:
+    6px 0 0;
 
   font-size:12px;
 
@@ -1335,9 +1160,11 @@ a{
 }
 
 
+
 /* =========================================================
-   VENUES
+   VENUE
 ========================================================= */
+
 
 .venue{
 
@@ -1350,7 +1177,8 @@ a{
 
   max-width:590px;
 
-  margin:0 auto 28px;
+  margin:
+    0 auto 28px;
 
   padding:40px 25px;
 
@@ -1398,7 +1226,8 @@ a{
 
   width:min(100%,390px);
 
-  margin:0 auto 25px;
+  margin:
+    0 auto 25px;
 
 }
 
@@ -1461,7 +1290,8 @@ a{
 
   max-width:390px;
 
-  margin:18px auto 25px;
+  margin:
+    18px auto 25px;
 
   font-family:var(--serif);
 
@@ -1506,9 +1336,11 @@ a{
 }
 
 
+
 /* =========================================================
    DRESS CODE
 ========================================================= */
+
 
 .dress-code{
 
@@ -1538,7 +1370,8 @@ a{
 
   width:min(100%,350px);
 
-  margin:0 auto 20px;
+  margin:
+    0 auto 20px;
 
 }
 
@@ -1571,7 +1404,8 @@ a{
 
   max-width:400px;
 
-  margin:15px auto 0;
+  margin:
+    15px auto 0;
 
   font-family:var(--serif);
 
@@ -1597,9 +1431,11 @@ a{
 }
 
 
+
 /* =========================================================
    GIFTS
 ========================================================= */
+
 
 .gifts{
 
@@ -1657,7 +1493,8 @@ a{
 
   max-width:470px;
 
-  margin:17px auto 0;
+  margin:
+    17px auto 0;
 
   font-family:var(--serif);
 
@@ -1670,9 +1507,11 @@ a{
 }
 
 
+
 /* =========================================================
    RSVP
 ========================================================= */
+
 
 .rsvp{
 
@@ -1721,6 +1560,7 @@ a{
 .rsvp-inner:before{
 
   top:-25px;
+
   left:15px;
 
 }
@@ -1729,6 +1569,7 @@ a{
 .rsvp-inner:after{
 
   bottom:-25px;
+
   right:15px;
 
 }
@@ -1758,7 +1599,8 @@ a{
 
   max-width:400px;
 
-  margin:15px auto 25px;
+  margin:
+    15px auto 25px;
 
   font-family:var(--serif);
 
@@ -1818,9 +1660,11 @@ a{
 }
 
 
+
 /* =========================================================
    FLOATING BUTTONS
 ========================================================= */
+
 
 .floating-buttons{
 
@@ -1830,7 +1674,8 @@ a{
 
   left:50%;
 
-  transform:translateX(-50%);
+  transform:
+    translateX(-50%);
 
   z-index:50;
 
@@ -1846,6 +1691,8 @@ a{
     rgba(255,250,243,.9);
 
   backdrop-filter:blur(12px);
+
+  -webkit-backdrop-filter:blur(12px);
 
   box-shadow:
     0 10px 30px
@@ -1888,13 +1735,16 @@ a{
 }
 
 
+
 /* =========================================================
    FOOTER
 ========================================================= */
 
+
 .footer{
 
-  padding:45px 20px 110px;
+  padding:
+    45px 20px 110px;
 
   text-align:center;
 
@@ -1905,7 +1755,8 @@ a{
 
 .footer p{
 
-  margin:10px 0 4px;
+  margin:
+    10px 0 4px;
 
   font-family:var(--serif);
 
@@ -1927,21 +1778,20 @@ a{
 }
 
 
+
 /* =========================================================
    SCROLL REVEALS
 ========================================================= */
+
 
 .reveal{
 
   opacity:0;
 
-  transform:
-    translateY(25px);
+  transform:translateY(25px);
 
   transition:
-
     opacity .9s ease,
-
     transform .9s ease;
 
 }
@@ -1951,82 +1801,161 @@ a{
 
   opacity:1;
 
-  transform:
-    translateY(0);
+  transform:translateY(0);
 
 }
+
 
 
 /* =========================================================
-   FIREWORK / CONFETTI
+   FIREWORKS
 ========================================================= */
 
-.firework{
+
+.firework-spark{
 
   position:fixed;
 
-  width:5px;
-  height:5px;
+  left:0;
+
+  top:0;
+
+  width:4px;
+
+  height:14px;
+
+  border-radius:999px;
+
+  pointer-events:none;
+
+  z-index:999;
+
+  transform-origin:50% 100%;
+
+}
+
+
+.firework-core{
+
+  position:fixed;
+
+  width:10px;
+
+  height:10px;
 
   border-radius:50%;
 
-  z-index:2000;
-
   pointer-events:none;
+
+  z-index:998;
+
+  transform:
+    translate(-50%,-50%);
 
 }
 
-
-.firework-particle{
-
-  position:fixed;
-
-  width:7px;
-  height:11px;
-
-  z-index:2000;
-
-  pointer-events:none;
-
-  border-radius:1px;
-
-}
 
 
 /* =========================================================
    MOBILE
 ========================================================= */
 
+
 @media(max-width:600px){
 
-  .section{
-
-    padding:75px 20px;
-
-  }
-
-
-  .hero{
+  .curtain-stage{
 
     min-height:100svh;
 
-    padding:25px 15px;
+  }
+
+
+  .curtain-invite{
+
+    padding:
+      25px 15px;
 
   }
 
 
-  .hero-frame{
+  .curtain-invite-inner{
 
-    padding:55px 20px;
+    padding:
+      52px 18px;
 
   }
 
 
-  .hero-frame:before,
-  .hero-frame:after{
+  .curtain-invite-inner:before,
+  .curtain-invite-inner:after{
 
     width:48px;
+
     height:48px;
+
+  }
+
+
+  .curtain-invite h1{
+
+    font-size:
+      clamp(43px,12vw,66px);
+
+  }
+
+
+  .curtain-invite p{
+
+    font-size:17px;
+
+  }
+
+
+  .curtain{
+
+    width:58%;
+
+  }
+
+
+  .curtain-stage.is-open
+  .curtain-left{
+
+    transform:
+      translateX(-8%)
+      scaleX(.20);
+
+  }
+
+
+  .curtain-stage.is-open
+  .curtain-right{
+
+    transform:
+      translateX(8%)
+      scaleX(.20);
+
+  }
+
+
+  .curtain-tie-left{
+
+    left:5%;
+
+  }
+
+
+  .curtain-tie-right{
+
+    right:5%;
+
+  }
+
+
+  .section{
+
+    padding:
+      75px 20px;
 
   }
 
@@ -2113,149 +2042,8 @@ a{
 
   .floating-button{
 
-    padding:9px 13px;
-
-  }
-
-
-  /*
-    MOBILE CURTAIN:
-
-    Slightly narrower gathered curtains
-    so the invitation remains visible
-    beautifully between them.
-  */
-
-  .curtain{
-
-    width:58%;
-
-  }
-
-
-  .curtain-left{
-
-    left:-4%;
-
-  }
-
-
-  .curtain-right{
-
-    right:-4%;
-
-  }
-
-
-  @keyframes curtainOpenLeft{
-
-    0%{
-
-      transform:
-        translateX(0)
-        scaleX(1);
-
-    }
-
-    55%{
-
-      transform:
-        translateX(-60%)
-        scaleX(.96);
-
-    }
-
-    100%{
-
-      transform:
-        translateX(-83%)
-        scaleX(.88);
-
-    }
-
-  }
-
-
-  @keyframes curtainOpenRight{
-
-    0%{
-
-      transform:
-        translateX(0)
-        scaleX(1);
-
-    }
-
-    55%{
-
-      transform:
-        translateX(60%)
-        scaleX(.96);
-
-    }
-
-    100%{
-
-      transform:
-        translateX(83%)
-        scaleX(.88);
-
-    }
-
-  }
-
-
-  .curtain-content{
-
     padding:
-      20px 25px;
-
-  }
-
-
-  .curtain-content h1{
-
-    font-size:
-      clamp(42px,12vw,68px);
-
-  }
-
-
-  .curtain-small{
-
-    font-size:8px;
-
-  }
-
-
-  .open-button{
-
-    min-width:120px;
-
-    padding:13px 17px;
-
-  }
-
-
-  .curtain-tie{
-
-    transform:
-      translateY(-50%)
-      scale(.75);
-
-  }
-
-
-  .curtain-tie-left{
-
-    left:1%;
-
-  }
-
-
-  .curtain-tie-right{
-
-    right:1%;
+      9px 13px;
 
   }
 
@@ -2264,9 +2052,9 @@ a{
 
 @media(max-width:380px){
 
-  .hero h1{
+  .curtain-invite h1{
 
-    font-size:43px;
+    font-size:40px;
 
   }
 
@@ -2299,19 +2087,14 @@ a{
 
   }
 
-
-  .curtain-content h1{
-
-    font-size:42px;
-
-  }
-
 }
+
 
 
 /* =========================================================
    REDUCED MOTION
 ========================================================= */
+
 
 @media(prefers-reduced-motion:reduce){
 
@@ -2330,71 +2113,127 @@ a{
 }
 
 </style>
-
 </head>
 
 
-<body class="curtain-active">
+<body class="locked">
+
 
 
 <!-- =======================================================
-     CURTAIN OPENING
+     CURTAIN + FIRST SCREEN
 ======================================================= -->
 
-<div
-  class="curtain-screen"
-  id="curtainScreen"
->
+
+<section
+  class="curtain-stage"
+  id="curtainStage">
 
 
-  <div
-    class="curtain curtain-left"
-  ></div>
+  <!-- INVITATION HIDDEN BEHIND CURTAINS -->
 
+  <div class="curtain-invite">
 
-  <div
-    class="curtain curtain-right"
-  ></div>
+    <div class="curtain-invite-inner">
 
-
-  <!-- Tie backs -->
-
-  <div
-    class="curtain-tie curtain-tie-left"
-  ></div>
-
-  <div
-    class="curtain-tie curtain-tie-right"
-  ></div>
-
-
-  <!-- Opening prompt -->
-
-  <div class="curtain-content">
-
-    <button
-      class="open-button"
-      id="openButton"
-      type="button"
-    >
-
-      <span class="tap-arrow">
-        ↓
+      <span class="eyebrow">
+        Together with our families
       </span>
 
-      <span>
-        TAP TO CONTINUE
-      </span>
 
-      <small>
-        Open invitation
-      </small>
+      <h1>
 
-    </button>
+        Happy Alves
+
+        <span>
+          &
+        </span>
+
+        Nico Alves
+
+      </h1>
+
+
+      <div class="ornamental-line">
+
+        <span>
+          ✦
+        </span>
+
+      </div>
+
+
+      <p>
+
+        Request the pleasure of your company
+        as we celebrate the beginning of
+        our forever.
+
+      </p>
+
+
+      <div class="hero-theme">
+
+        A Rustic Celebration
+
+      </div>
+
+    </div>
 
   </div>
 
-</div>
+
+
+  <!-- LEFT CURTAIN -->
+
+  <div
+    class="curtain curtain-left">
+  </div>
+
+
+
+  <!-- RIGHT CURTAIN -->
+
+  <div
+    class="curtain curtain-right">
+  </div>
+
+
+
+  <!-- GOLD TIE BACKS -->
+
+  <div
+    class="curtain-tie curtain-tie-left">
+  </div>
+
+
+  <div
+    class="curtain-tie curtain-tie-right">
+  </div>
+
+
+
+  <!-- TAP BUTTON -->
+
+  <button
+    class="curtain-open-prompt"
+    id="openButton"
+    type="button"
+    aria-label="Open invitation">
+
+    <div class="prompt-arrow">
+      ⌄
+    </div>
+
+    <span>
+      Tap to continue
+    </span>
+
+  </button>
+
+
+</section>
+
 
 
 
@@ -2402,67 +2241,8 @@ a{
      MAIN INVITATION
 ======================================================= -->
 
+
 <main class="invitation">
-
-
-<!-- =======================================================
-     HERO
-======================================================= -->
-
-<section class="hero section">
-
-  <div class="hero-frame reveal">
-
-    <span class="eyebrow">
-      Together with our families
-    </span>
-
-
-    <h1>
-
-      Happy Alves
-
-      <span>
-        &
-      </span>
-
-      Nico Alves
-
-    </h1>
-
-
-    <div class="ornamental-line">
-
-      <span>
-        ✦
-      </span>
-
-    </div>
-
-
-    <p>
-
-      You are cordially invited to celebrate
-      the wedding of Happy and Nico.
-
-      <br><br>
-
-      We would like to invite you to join us
-      as we celebrate the beginning of
-      our forever.
-
-    </p>
-
-
-    <!-- DATE INTENTIONALLY REMOVED -->
-
-    <div class="hero-theme">
-      A Rustic Celebration
-    </div>
-
-  </div>
-
-</section>
 
 
 
@@ -2470,10 +2250,11 @@ a{
      SCRATCH DATE
 ======================================================= -->
 
+
 <section
   class="scratch-section section"
-  id="date"
->
+  id="date">
+
 
   <div class="section-heading reveal">
 
@@ -2489,15 +2270,18 @@ a{
 
     <p>
 
-      Scratch each golden circle to discover
-      when our forever begins.
+      Scratch each golden circle
+      to discover when our
+      forever begins.
 
     </p>
 
   </div>
 
 
+
   <div class="scratch-grid reveal">
+
 
 
     <!-- DAY -->
@@ -2523,9 +2307,8 @@ a{
 
         <canvas
           class="scratch-canvas"
-          data-value="22"
-          data-label="DAY"
-        ></canvas>
+          aria-label="Scratch to reveal day">
+        </canvas>
 
       </div>
 
@@ -2561,9 +2344,8 @@ a{
 
         <canvas
           class="scratch-canvas"
-          data-value="JAN"
-          data-label="MONTH"
-        ></canvas>
+          aria-label="Scratch to reveal month">
+        </canvas>
 
       </div>
 
@@ -2599,9 +2381,8 @@ a{
 
         <canvas
           class="scratch-canvas"
-          data-value="2027"
-          data-label="YEAR"
-        ></canvas>
+          aria-label="Scratch to reveal year">
+        </canvas>
 
       </div>
 
@@ -2612,7 +2393,9 @@ a{
 
     </div>
 
+
   </div>
+
 
 
   <div class="scratch-instruction">
@@ -2624,10 +2407,12 @@ a{
 
   <div
     class="revealed-date"
-    id="revealedDate"
-  ></div>
+    id="revealedDate">
+  </div>
+
 
 </section>
+
 
 
 
@@ -2635,7 +2420,9 @@ a{
      OUR DAY
 ======================================================= -->
 
+
 <section class="section">
+
 
   <div class="section-heading reveal">
 
@@ -2659,8 +2446,12 @@ a{
   </div>
 
 
+
   <div class="timeline reveal">
 
+
+
+    <!-- CEREMONY -->
 
     <div class="timeline-item">
 
@@ -2669,7 +2460,8 @@ a{
       </div>
 
 
-      <div class="timeline-dot"></div>
+      <div class="timeline-dot">
+      </div>
 
 
       <div class="timeline-content">
@@ -2692,6 +2484,8 @@ a{
 
 
 
+    <!-- RECEPTION -->
+
     <div class="timeline-item">
 
       <div class="timeline-time">
@@ -2699,7 +2493,8 @@ a{
       </div>
 
 
-      <div class="timeline-dot"></div>
+      <div class="timeline-dot">
+      </div>
 
 
       <div class="timeline-content">
@@ -2722,6 +2517,8 @@ a{
 
 
 
+    <!-- CELEBRATION -->
+
     <div class="timeline-item">
 
       <div class="timeline-time">
@@ -2729,7 +2526,8 @@ a{
       </div>
 
 
-      <div class="timeline-dot"></div>
+      <div class="timeline-dot">
+      </div>
 
 
       <div class="timeline-content">
@@ -2752,6 +2550,8 @@ a{
 
 
 
+    <!-- PARTY -->
+
     <div class="timeline-item">
 
       <div class="timeline-time">
@@ -2759,7 +2559,8 @@ a{
       </div>
 
 
-      <div class="timeline-dot"></div>
+      <div class="timeline-dot">
+      </div>
 
 
       <div class="timeline-content">
@@ -2780,9 +2581,12 @@ a{
 
     </div>
 
+
   </div>
 
+
 </section>
+
 
 
 
@@ -2790,7 +2594,9 @@ a{
      VENUES
 ======================================================= -->
 
+
 <section class="venue section">
+
 
   <div class="section-heading reveal">
 
@@ -2819,18 +2625,22 @@ a{
 
   <div class="venue-card reveal">
 
+
     <div class="venue-label">
+
       Ceremony · 2:30 PM
+
     </div>
+
 
 
     <div class="venue-illustration">
 
+
       <svg
         viewBox="0 0 500 300"
         fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+        xmlns="http://www.w3.org/2000/svg">
 
 
         <circle
@@ -2838,142 +2648,88 @@ a{
           cy="55"
           r="24"
           stroke="#b89445"
-          stroke-width="1.5"
-        />
+          stroke-width="1.5"/>
 
 
         <path
-          d="M20 210
-             L120 105
-             L175 160
-             L250 75
-             L370 210"
+          d="M20 210 L120 105 L175 160 L250 75 L370 210"
           stroke="#791f2c"
           stroke-width="2"
           stroke-linecap="round"
-          stroke-linejoin="round"
-        />
+          stroke-linejoin="round"/>
 
 
         <path
-          d="M15 218
-             C120 205 250 230 485 215"
+          d="M15 218 C120 205 250 230 485 215"
           stroke="#b89445"
-          stroke-width="1.5"
-        />
+          stroke-width="1.5"/>
 
 
         <path
-          d="M145 215
-             V150
-             L250 105
-             L355 150
-             V215"
+          d="M145 215 V150 L250 105 L355 150 V215"
           stroke="#40383a"
-          stroke-width="2"
-        />
+          stroke-width="2"/>
 
 
         <path
-          d="M125 153
-             L250 93
-             L375 153"
+          d="M125 153 L250 93 L375 153"
           stroke="#791f2c"
-          stroke-width="2.5"
-        />
+          stroke-width="2.5"/>
 
 
         <path
-          d="M225 215
-             V75
-             H275
-             V215"
+          d="M225 215 V75 H275 V215"
           stroke="#40383a"
-          stroke-width="2"
-        />
+          stroke-width="2"/>
 
 
         <path
-          d="M215 76
-             L250 45
-             L285 76"
+          d="M215 76 L250 45 L285 76"
           stroke="#791f2c"
-          stroke-width="2"
-        />
+          stroke-width="2"/>
 
 
         <path
-          d="M250 35
-             V60
-             M242 45
-             H258"
+          d="M250 35 V60 M242 45 H258"
           stroke="#b89445"
-          stroke-width="2"
-        />
+          stroke-width="2"/>
 
 
         <path
-          d="M230 215
-             V175
-             Q250 155 270 175
-             V215"
+          d="M230 215 V175 Q250 155 270 175 V215"
           stroke="#791f2c"
-          stroke-width="2"
-        />
+          stroke-width="2"/>
 
 
         <path
-          d="M165 165
-             Q180 148 195 165
-             V192
-             H165
-             Z"
+          d="M165 165 Q180 148 195 165 V192 H165 Z"
           stroke="#40383a"
-          stroke-width="1.5"
-        />
+          stroke-width="1.5"/>
 
 
         <path
-          d="M305 165
-             Q320 148 335 165
-             V192
-             H305
-             Z"
+          d="M305 165 Q320 148 335 165 V192 H305 Z"
           stroke="#40383a"
-          stroke-width="1.5"
-        />
+          stroke-width="1.5"/>
 
 
         <path
-          d="M90 215
-             V145
-             M65 175
-             L90 150
-             L115 175
-             M70 192
-             L90 168
-             L110 192"
+          d="M90 215 V145 M65 175 L90 150 L115 175 M70 192 L90 168 L110 192"
           stroke="#b89445"
-          stroke-width="2"
-        />
+          stroke-width="2"/>
 
 
         <path
-          d="M405 215
-             V150
-             M380 180
-             L405 155
-             L430 180
-             M385 198
-             L405 173
-             L425 198"
+          d="M405 215 V150 M380 180 L405 155 L430 180 M385 198 L405 173 L425 198"
           stroke="#b89445"
-          stroke-width="2"
-        />
+          stroke-width="2"/>
+
 
       </svg>
 
+
     </div>
+
 
 
     <h3>
@@ -2984,17 +2740,21 @@ a{
     </h3>
 
 
+
     <div class="venue-address">
 
       8WJ2+C5H, Edison St,
-      Cebu City, 6000 Cebu, Philippines
+      Cebu City, 6000 Cebu,
+      Philippines
 
     </div>
+
 
 
     <div class="venue-time">
       2:30 PM
     </div>
+
 
 
     <p class="venue-description">
@@ -3006,16 +2766,17 @@ a{
     </p>
 
 
+
     <a
       class="location-button"
       href="https://www.google.com/maps/search/?api=1&query=Archdiocesan+Shrine+of+St.+Therese+of+the+Child+Jesus+Cebu"
       target="_blank"
-      rel="noopener"
-    >
+      rel="noopener">
 
       View Location
 
     </a>
+
 
   </div>
 
@@ -3025,170 +2786,134 @@ a{
 
   <div class="venue-card reveal">
 
+
     <div class="venue-label">
+
       Reception · 5:00 PM
+
     </div>
+
 
 
     <div class="venue-illustration">
 
+
       <svg
         viewBox="0 0 500 300"
         fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+        xmlns="http://www.w3.org/2000/svg">
+
 
         <circle
           cx="405"
           cy="55"
           r="24"
           stroke="#b89445"
-          stroke-width="1.5"
-        />
+          stroke-width="1.5"/>
 
 
         <path
-          d="M20 210
-             L120 105
-             L175 160
-             L250 75
-             L370 210"
+          d="M20 210 L120 105 L175 160 L250 75 L370 210"
           stroke="#791f2c"
           stroke-width="2"
           stroke-linecap="round"
-          stroke-linejoin="round"
-        />
+          stroke-linejoin="round"/>
 
 
         <path
-          d="M15 218
-             C120 205 250 230 485 215"
+          d="M15 218 C120 205 250 230 485 215"
           stroke="#b89445"
-          stroke-width="1.5"
-        />
+          stroke-width="1.5"/>
 
 
         <path
-          d="M120 215
-             V145
-             L250 85
-             L380 145
-             V215"
+          d="M120 215 V145 L250 85 L380 145 V215"
           stroke="#40383a"
-          stroke-width="2"
-        />
+          stroke-width="2"/>
 
 
         <path
-          d="M100 148
-             L250 72
-             L400 148"
+          d="M100 148 L250 72 L400 148"
           stroke="#791f2c"
-          stroke-width="2.5"
-        />
+          stroke-width="2.5"/>
 
 
         <path
-          d="M150 145
-             V215
-
-             M205 120
-             V215
-
-             M295 120
-             V215
-
-             M350 145
-             V215"
+          d="M150 145 V215
+             M205 120 V215
+             M295 120 V215
+             M350 145 V215"
           stroke="#40383a"
-          stroke-width="2"
-        />
+          stroke-width="2"/>
 
 
         <path
-          d="M170 215
-             V150
-             H330
-             V215"
+          d="M170 215 V150 H330 V215"
           stroke="#b89445"
-          stroke-width="1.5"
-        />
+          stroke-width="1.5"/>
 
 
         <path
-          d="M225 215
-             V165
-             Q250 145 275 165
-             V215"
+          d="M225 215 V165 Q250 145 275 165 V215"
           stroke="#791f2c"
-          stroke-width="2"
-        />
+          stroke-width="2"/>
 
 
         <path
-          d="M75 215
-             V150
-             M52 178
-             L75 153
-             L98 178
-             M57 195
-             L75 172
-             L93 195"
+          d="M75 215 V150
+             M52 178 L75 153 L98 178
+             M57 195 L75 172 L93 195"
           stroke="#b89445"
-          stroke-width="2"
-        />
+          stroke-width="2"/>
 
 
         <path
-          d="M425 215
-             V150
-             M402 178
-             L425 153
-             L448 178
-             M407 195
-             L425 172
-             L443 195"
+          d="M425 215 V150
+             M402 178 L425 153 L448 178
+             M407 195 L425 172 L443 195"
           stroke="#b89445"
-          stroke-width="2"
-        />
+          stroke-width="2"/>
 
 
         <circle
           cx="175"
           cy="137"
           r="2"
-          fill="#b89445"
-        />
+          fill="#b89445"/>
+
 
         <circle
           cx="205"
           cy="123"
           r="2"
-          fill="#b89445"
-        />
+          fill="#b89445"/>
+
 
         <circle
           cx="295"
           cy="123"
           r="2"
-          fill="#b89445"
-        />
+          fill="#b89445"/>
+
 
         <circle
           cx="325"
           cy="137"
           r="2"
-          fill="#b89445"
-        />
+          fill="#b89445"/>
+
 
       </svg>
 
+
     </div>
+
 
 
     <h3>
       Beverly View Events Pavilion
     </h3>
+
 
 
     <div class="venue-address">
@@ -3199,9 +2924,11 @@ a{
     </div>
 
 
+
     <div class="venue-time">
       5:00 PM
     </div>
+
 
 
     <p class="venue-description">
@@ -3213,20 +2940,23 @@ a{
     </p>
 
 
+
     <a
       class="location-button"
       href="https://www.google.com/maps/search/?api=1&query=Beverly+View+Events+Pavilion+Cebu"
       target="_blank"
-      rel="noopener"
-    >
+      rel="noopener">
 
       View Location
 
     </a>
 
+
   </div>
 
+
 </section>
+
 
 
 
@@ -3234,7 +2964,9 @@ a{
      DRESS CODE
 ======================================================= -->
 
+
 <section class="dress-code section">
+
 
   <div class="section-heading reveal">
 
@@ -3250,24 +2982,27 @@ a{
   </div>
 
 
+
   <div class="dress-card reveal">
 
+
     <div class="fashion-illustration">
+
 
       <svg
         viewBox="0 0 400 280"
         xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-      >
+        fill="none">
 
+
+        <!-- WOMAN -->
 
         <circle
           cx="125"
           cy="58"
           r="22"
           stroke="#40383a"
-          stroke-width="2"
-        />
+          stroke-width="2"/>
 
 
         <path
@@ -3278,49 +3013,42 @@ a{
              L157 125
              L138 80"
           stroke="#791f2c"
-          stroke-width="2"
-        />
+          stroke-width="2"/>
 
 
         <path
-          d="M93 125
-             L65 175"
+          d="M93 125 L65 175"
           stroke="#40383a"
-          stroke-width="2"
-        />
+          stroke-width="2"/>
 
 
         <path
-          d="M157 125
-             L185 175"
+          d="M157 125 L185 175"
           stroke="#40383a"
-          stroke-width="2"
-        />
+          stroke-width="2"/>
 
 
         <path
-          d="M103 218
-             L92 250"
+          d="M103 218 L92 250"
           stroke="#40383a"
-          stroke-width="2"
-        />
+          stroke-width="2"/>
 
 
         <path
-          d="M147 218
-             L158 250"
+          d="M147 218 L158 250"
           stroke="#40383a"
-          stroke-width="2"
-        />
+          stroke-width="2"/>
 
+
+
+        <!-- MAN -->
 
         <circle
           cx="275"
           cy="58"
           r="22"
           stroke="#40383a"
-          stroke-width="2"
-        />
+          stroke-width="2"/>
 
 
         <path
@@ -3331,8 +3059,7 @@ a{
              L325 120
              L298 80"
           stroke="#40383a"
-          stroke-width="2"
-        />
+          stroke-width="2"/>
 
 
         <path
@@ -3340,36 +3067,32 @@ a{
              L275 115
              L298 80"
           stroke="#791f2c"
-          stroke-width="2"
-        />
+          stroke-width="2"/>
 
 
         <path
-          d="M275 115
-             V218"
+          d="M275 115 V218"
           stroke="#b89445"
-          stroke-width="1.5"
-        />
+          stroke-width="1.5"/>
 
 
         <path
-          d="M250 218
-             L242 250"
+          d="M250 218 L242 250"
           stroke="#40383a"
-          stroke-width="2"
-        />
+          stroke-width="2"/>
 
 
         <path
-          d="M300 218
-             L308 250"
+          d="M300 218 L308 250"
           stroke="#40383a"
-          stroke-width="2"
-        />
+          stroke-width="2"/>
+
 
       </svg>
 
+
     </div>
+
 
 
     <h3>
@@ -3391,9 +3114,12 @@ a{
 
     </div>
 
+
   </div>
 
+
 </section>
+
 
 
 
@@ -3401,7 +3127,9 @@ a{
      GIFTS
 ======================================================= -->
 
+
 <section class="gifts section">
+
 
   <div class="section-heading reveal">
 
@@ -3417,7 +3145,9 @@ a{
   </div>
 
 
+
   <div class="gifts-card reveal">
+
 
     <div class="gift-icon">
       ♢
@@ -3434,17 +3164,18 @@ a{
       Having you celebrate this special day
       with us is more than enough.
 
-      <br><br>
-
       For those who wish to give, a monetary
       gift towards our future together would
       be deeply appreciated.
 
     </p>
 
+
   </div>
 
+
 </section>
+
 
 
 
@@ -3452,9 +3183,12 @@ a{
      RSVP
 ======================================================= -->
 
+
 <section class="rsvp section">
 
+
   <div class="rsvp-inner reveal">
+
 
     <span class="eyebrow">
       We Hope To See You
@@ -3476,9 +3210,10 @@ a{
 
     <a
       href="#"
-      class="primary-button"
-    >
+      class="primary-button">
+
       RSVP
+
     </a>
 
 
@@ -3489,9 +3224,12 @@ a{
 
     </div>
 
+
   </div>
 
+
 </section>
+
 
 
 
@@ -3499,7 +3237,9 @@ a{
      FOOTER
 ======================================================= -->
 
+
 <footer class="footer">
+
 
   <div class="ornament">
     ✦
@@ -3515,6 +3255,7 @@ a{
     22 · JANUARY · 2027
   </span>
 
+
 </footer>
 
 
@@ -3522,17 +3263,21 @@ a{
 
 
 
+
 <!-- =======================================================
      FLOATING BUTTONS
 ======================================================= -->
 
+
 <div class="floating-buttons">
+
 
   <a
     href="#"
-    class="floating-button"
-  >
+    class="floating-button">
+
     RSVP
+
   </a>
 
 
@@ -3540,93 +3285,101 @@ a{
     href="https://www.google.com/maps/search/?api=1&query=Beverly+View+Events+Pavilion+Cebu"
     target="_blank"
     rel="noopener"
-    class="floating-button secondary"
-  >
+    class="floating-button secondary">
+
     Location
+
   </a>
+
 
 </div>
 
 
 
+
 <script>
 
+
+
 /* =========================================================
-   INITIAL SETUP
+   CURTAIN OPENING
 ========================================================= */
 
-document.body.classList.add("curtain-active");
 
-
-const curtainScreen =
-  document.getElementById("curtainScreen");
+const curtainStage =
+  document.getElementById(
+    "curtainStage"
+  );
 
 
 const openButton =
-  document.getElementById("openButton");
+  document.getElementById(
+    "openButton"
+  );
 
 
 let isOpening = false;
 
 
+let startX = 0;
 
-/* =========================================================
-   OPEN INVITATION
-========================================================= */
+let startY = 0;
+
+
 
 function openInvitation(){
 
-  if(isOpening) return;
+  if(isOpening){
+    return;
+  }
+
 
   isOpening = true;
 
 
   /*
-    Start the slow curtain animation.
+     Start the opening immediately.
+     The invitation behind the curtains
+     begins fading in at the same time.
   */
 
-  curtainScreen.classList.add("opening");
+  curtainStage.classList.add(
+    "is-opening"
+  );
 
 
   /*
-    Allow the page to scroll again.
-
-    The curtains themselves stay fixed
-    on the sides.
+     A tiny delay allows the text fade
+     and curtain movement to begin
+     together instead of suddenly
+     appearing.
   */
 
-  setTimeout(() => {
+  window.setTimeout(() => {
 
-    document.body.classList.remove(
-      "curtain-active"
+    curtainStage.classList.add(
+      "is-open"
     );
 
-  },900);
 
+    /*
+       The curtain stays inside the page.
+       We do NOT remove it.
 
-  /*
-    Remove ONLY the invisible overlay
-    after the animation.
+       This is what allows the user to
+       naturally scroll from the first
+       screen into the scratch section.
+    */
 
-    The curtains visually remain because
-    the animation ends with them gathered
-    at the sides.
-  */
+    document.body.classList.remove(
+      "locked"
+    );
 
-  setTimeout(() => {
-
-    curtainScreen.style.pointerEvents =
-      "none";
-
-  },2700);
+  },80);
 
 }
 
 
-
-/* =========================================================
-   BUTTON
-========================================================= */
 
 openButton.addEventListener(
   "click",
@@ -3635,53 +3388,59 @@ openButton.addEventListener(
 
 
 
+
 /* =========================================================
    SWIPE TO OPEN
 ========================================================= */
 
-let startX = 0;
-let startY = 0;
 
-
-curtainScreen.addEventListener(
+curtainStage.addEventListener(
   "pointerdown",
   function(e){
 
-    if(isOpening) return;
+    if(isOpening){
+      return;
+    }
 
-    startX = e.clientX;
 
-    startY = e.clientY;
+    startX =
+      e.clientX;
+
+
+    startY =
+      e.clientY;
 
   }
 );
 
 
-curtainScreen.addEventListener(
+
+curtainStage.addEventListener(
   "pointerup",
   function(e){
 
-    if(isOpening) return;
+    if(isOpening){
+      return;
+    }
 
 
-    const deltaX =
+    const dx =
       e.clientX - startX;
 
 
-    const deltaY =
+    const dy =
       e.clientY - startY;
 
 
     /*
-      Any deliberate swipe works.
-
-      This is intentionally generous
-      for phones.
+       Horizontal swipe opens the curtains.
+       Vertical movement is left alone so
+       normal mobile scrolling is preserved.
     */
 
     if(
-      Math.abs(deltaX) > 45 ||
-      Math.abs(deltaY) > 45
+      Math.abs(dx) > 55 &&
+      Math.abs(dx) > Math.abs(dy)
     ){
 
       openInvitation();
@@ -3693,34 +3452,43 @@ curtainScreen.addEventListener(
 
 
 
+
 /* =========================================================
    SCROLL REVEALS
 ========================================================= */
 
+
 const revealElements =
-  document.querySelectorAll(".reveal");
+  document.querySelectorAll(
+    ".reveal"
+  );
 
 
 const observer =
   new IntersectionObserver(
 
-    (entries) => {
+    function(entries){
 
-      entries.forEach(entry => {
+      entries.forEach(
+        function(entry){
 
-        if(entry.isIntersecting){
+          if(
+            entry.isIntersecting
+          ){
 
-          entry.target.classList.add(
-            "visible"
-          );
+            entry.target.classList.add(
+              "visible"
+            );
 
-          observer.unobserve(
-            entry.target
-          );
+
+            observer.unobserve(
+              entry.target
+            );
+
+          }
 
         }
-
-      });
+      );
 
     },
 
@@ -3731,11 +3499,15 @@ const observer =
   );
 
 
-revealElements.forEach(el => {
 
-  observer.observe(el);
+revealElements.forEach(
+  function(el){
 
-});
+    observer.observe(el);
+
+  }
+);
+
 
 
 
@@ -3743,57 +3515,82 @@ revealElements.forEach(el => {
    SCRATCH CARDS
 ========================================================= */
 
+
 const scratchCards =
   document.querySelectorAll(
     ".scratch-canvas"
   );
 
 
-let revealedCount = 0;
-
-
 const revealed =
   new Set();
 
 
+let revealedCount = 0;
+
+
 
 scratchCards.forEach(
-  (canvas,index) => {
-
+  function(canvas,index){
 
     const ctx =
-      canvas.getContext("2d");
+      canvas.getContext(
+        "2d",
+        {
+          willReadFrequently:true
+        }
+      );
 
 
     let scratching = false;
 
-    let scratchedPixels = 0;
+
+    let scratchCount = 0;
 
 
 
-    /* =====================================================
-       CANVAS SIZE
-    ===================================================== */
-
-    function resizeCanvas(){
+    function paintScratchSurface(){
 
       const rect =
         canvas.getBoundingClientRect();
 
 
       const ratio =
-        Math.max(
-          1,
-          window.devicePixelRatio || 1
+        Math.min(
+          window.devicePixelRatio || 1,
+          2
         );
 
 
+      const w =
+        rect.width;
+
+
+      const h =
+        rect.height;
+
+
+      if(
+        !w ||
+        !h
+      ){
+
+        return;
+
+      }
+
+
+
       canvas.width =
-        rect.width * ratio;
+        Math.round(
+          w * ratio
+        );
 
 
       canvas.height =
-        rect.height * ratio;
+        Math.round(
+          h * ratio
+        );
 
 
       ctx.setTransform(
@@ -3806,28 +3603,25 @@ scratchCards.forEach(
       );
 
 
-      const w =
-        rect.width;
+      ctx.globalCompositeOperation =
+        "source-over";
 
-
-      const h =
-        rect.height;
 
 
       /*
-        GOLD SCRATCH SURFACE
+         Gold surface
       */
 
       const gradient =
         ctx.createRadialGradient(
 
-          w*.35,
-          h*.25,
+          w * .35,
+          h * .25,
           5,
 
-          w*.5,
-          h*.5,
-          w*.7
+          w * .5,
+          h * .5,
+          w * .7
 
         );
 
@@ -3850,10 +3644,6 @@ scratchCards.forEach(
       );
 
 
-      ctx.globalCompositeOperation =
-        "source-over";
-
-
       ctx.fillStyle =
         gradient;
 
@@ -3862,11 +3652,11 @@ scratchCards.forEach(
 
 
       ctx.arc(
-        w/2,
-        h/2,
-        Math.min(w,h)/2 - 2,
+        w / 2,
+        h / 2,
+        Math.min(w,h) / 2 - 2,
         0,
-        Math.PI*2
+        Math.PI * 2
       );
 
 
@@ -3875,25 +3665,26 @@ scratchCards.forEach(
 
 
       /*
-        INNER GOLD BORDER
+         Inner gold border
       */
 
       ctx.strokeStyle =
         "rgba(255,255,255,.45)";
 
 
-      ctx.lineWidth = 1;
+      ctx.lineWidth =
+        1;
 
 
       ctx.beginPath();
 
 
       ctx.arc(
-        w/2,
-        h/2,
-        Math.min(w,h)/2 - 13,
+        w / 2,
+        h / 2,
+        Math.min(w,h) / 2 - 13,
         0,
-        Math.PI*2
+        Math.PI * 2
       );
 
 
@@ -3902,7 +3693,7 @@ scratchCards.forEach(
 
 
       /*
-        SCRATCH TEXT
+         Scratch text
       */
 
       ctx.fillStyle =
@@ -3923,8 +3714,8 @@ scratchCards.forEach(
 
       ctx.fillText(
         "SCRATCH",
-        w/2,
-        h/2 - 8
+        w / 2,
+        h / 2 - 8
       );
 
 
@@ -3934,31 +3725,35 @@ scratchCards.forEach(
 
       ctx.fillText(
         "TO REVEAL",
-        w/2,
-        h/2 + 8
+        w / 2,
+        h / 2 + 8
       );
 
     }
 
 
 
-    resizeCanvas();
+    paintScratchSurface();
+
 
 
     window.addEventListener(
       "resize",
-      resizeCanvas
+      paintScratchSurface
     );
 
 
 
-    /* =====================================================
-       SCRATCH
-    ===================================================== */
-
     function scratch(e){
 
-      if(!scratching) return;
+      if(
+        !scratching ||
+        revealed.has(index)
+      ){
+
+        return;
+
+      }
 
 
       const rect =
@@ -3966,11 +3761,13 @@ scratchCards.forEach(
 
 
       const x =
-        e.clientX - rect.left;
+        e.clientX -
+        rect.left;
 
 
       const y =
-        e.clientY - rect.top;
+        e.clientY -
+        rect.top;
 
 
       ctx.globalCompositeOperation =
@@ -3987,13 +3784,13 @@ scratchCards.forEach(
         y,
 
         Math.max(
-          16,
-          rect.width*.13
+          15,
+          rect.width * .12
         ),
 
         0,
 
-        Math.PI*2
+        Math.PI * 2
 
       );
 
@@ -4001,38 +3798,22 @@ scratchCards.forEach(
       ctx.fill();
 
 
-      scratchedPixels++;
+      scratchCount++;
 
 
 
       /*
-        Reveal each card after
-        enough scratching.
+         Reveal after enough scratching.
       */
 
       if(
-        scratchedPixels > 18 &&
+        scratchCount >= 24 &&
         !revealed.has(index)
       ){
 
         revealed.add(index);
 
         revealedCount++;
-
-
-        /*
-          Slightly reveal the rest
-          of the card so the user
-          can actually see the date.
-        */
-
-        if(revealedCount < 3){
-
-          fadeScratchCard(
-            canvas
-          );
-
-        }
 
 
         if(
@@ -4049,40 +3830,30 @@ scratchCards.forEach(
 
 
 
-    /* =====================================================
-       POINTER EVENTS
-    ===================================================== */
-
     canvas.addEventListener(
       "pointerdown",
       function(e){
 
-        e.preventDefault();
-
         scratching = true;
+
 
         canvas.setPointerCapture(
           e.pointerId
         );
 
+
         scratch(e);
 
       }
     );
+
 
 
     canvas.addEventListener(
       "pointermove",
-      function(e){
-
-        if(!scratching) return;
-
-        e.preventDefault();
-
-        scratch(e);
-
-      }
+      scratch
     );
+
 
 
     canvas.addEventListener(
@@ -4104,67 +3875,16 @@ scratchCards.forEach(
       }
     );
 
-
-    canvas.addEventListener(
-      "pointerleave",
-      function(){
-
-        /*
-          Don't stop immediately on
-          mobile because pointer capture
-          should continue the stroke.
-        */
-
-      }
-    );
-
   }
 );
 
-
-
-/* =========================================================
-   SOFT CARD FINISH
-========================================================= */
-
-function fadeScratchCard(canvas){
-
-  canvas.animate(
-
-    [
-      {
-        opacity:1
-      },
-
-      {
-        opacity:.72
-      },
-
-      {
-        opacity:0
-      }
-
-    ],
-
-    {
-      duration:650,
-
-      easing:
-        "cubic-bezier(.16,1,.3,1)",
-
-      fill:"forwards"
-
-    }
-
-  );
-
-}
 
 
 
 /* =========================================================
    DATE REVEAL
 ========================================================= */
+
 
 function revealCompleteDate(){
 
@@ -4186,7 +3906,7 @@ function revealCompleteDate(){
         opacity:0,
 
         transform:
-          "translateY(18px) scale(.96)"
+          "translateY(12px) scale(.96)"
 
       },
 
@@ -4202,7 +3922,7 @@ function revealCompleteDate(){
 
     {
 
-      duration:1000,
+      duration:900,
 
       easing:
         "cubic-bezier(.16,1,.3,1)",
@@ -4214,160 +3934,166 @@ function revealCompleteDate(){
   );
 
 
-  createFireworkShow();
+  createFireworks();
 
 }
 
 
 
+
 /* =========================================================
-   BIGGER FIREWORK SHOW
+   FIREWORKS
 ========================================================= */
 
-function createFireworkShow(){
+
+function createFireworks(){
 
   /*
-    Multiple bursts across
-    the screen instead of only
-    a small amount of confetti.
+     Five large bursts appear at slightly
+     different times so it feels like a
+     real celebration rather than one
+     small explosion.
   */
 
-  const positions = [
+  const bursts = [
 
-    {x:.18,y:.28},
+    {
+      x:.18,
+      y:.28
+    },
 
-    {x:.50,y:.20},
+    {
+      x:.50,
+      y:.20
+    },
 
-    {x:.82,y:.30},
+    {
+      x:.82,
+      y:.28
+    },
 
-    {x:.30,y:.48},
+    {
+      x:.32,
+      y:.42
+    },
 
-    {x:.70,y:.48},
-
-    {x:.50,y:.38}
+    {
+      x:.68,
+      y:.42
+    }
 
   ];
 
 
-  positions.forEach(
-    (position,index) => {
+  bursts.forEach(
+    function(burst,index){
 
-      setTimeout(
+      window.setTimeout(
 
-        () => {
+        function(){
 
-          createFirework(
-            position.x,
-            position.y
+          fireworkBurst(
+
+            window.innerWidth *
+              burst.x,
+
+            window.innerHeight *
+              burst.y,
+
+            34
+
           );
 
         },
 
-        index * 280
+        index * 180
 
       );
 
     }
   );
 
-
-  /*
-    Gold/red falling confetti
-    after the fireworks.
-  */
-
-  setTimeout(
-    createConfettiRain,
-    900
-  );
-
 }
 
 
 
-/* =========================================================
-   FIREWORK BURST
-========================================================= */
 
-function createFirework(x,y){
+function fireworkBurst(
+  x,
+  y,
+  count
+){
 
   const colors = [
 
     "#b89445",
-
-    "#d8bf79",
-
     "#791f2c",
-
-    "#f2dfa6",
-
-    "#fffaf3"
+    "#d8bf79",
+    "#fff4d4",
+    "#a64c58"
 
   ];
 
 
-  const particleCount = 34;
-
 
   /*
-    Small central flash
+     Bright center flash
   */
 
-  const flash =
+  const core =
     document.createElement(
       "div"
     );
 
 
-  flash.className =
-    "firework";
+  core.className =
+    "firework-core";
 
 
-  flash.style.left =
-    (x*100)+"vw";
+  core.style.left =
+    x + "px";
 
 
-  flash.style.top =
-    (y*100)+"vh";
+  core.style.top =
+    y + "px";
 
 
-  flash.style.width =
-    "10px";
+  core.style.background =
+    "#fff4d4";
 
 
-  flash.style.height =
-    "10px";
-
-
-  flash.style.background =
-    "#fffaf3";
-
-
-  flash.style.boxShadow =
-    "0 0 25px 8px rgba(216,191,121,.65)";
+  core.style.boxShadow =
+    "0 0 25px 10px rgba(255,244,212,.45)";
 
 
   document.body.appendChild(
-    flash
+    core
   );
 
 
-  flash.animate(
+  core.animate(
 
     [
 
       {
         transform:
-          "scale(.2)",
+          "translate(-50%,-50%) scale(.2)",
+
+        opacity:0
+
+      },
+
+      {
+        transform:
+          "translate(-50%,-50%) scale(1.8)",
 
         opacity:1
 
       },
 
       {
-
         transform:
-          "scale(3.5)",
+          "translate(-50%,-50%) scale(0)",
 
         opacity:0
 
@@ -4377,49 +4103,63 @@ function createFirework(x,y){
 
     {
 
-      duration:500,
+      duration:450,
 
       easing:"ease-out"
 
     }
 
-  ).onfinish = () => {
+  ).onfinish =
+    function(){
 
-    flash.remove();
+      core.remove();
 
-  };
+    };
 
 
 
   /*
-    Explosion particles
+     Individual rays
   */
 
   for(
-    let i=0;
-    i<particleCount;
+    let i = 0;
+    i < count;
     i++
   ){
 
-    const particle =
+    const angle =
+      (
+        Math.PI * 2 * i / count
+      )
+      +
+      Math.random() * .12;
+
+
+    const distance =
+      70 +
+      Math.random() * 100;
+
+
+    const spark =
       document.createElement(
         "div"
       );
 
 
-    particle.className =
-      "firework";
+    spark.className =
+      "firework-spark";
 
 
-    particle.style.left =
-      (x*100)+"vw";
+    spark.style.left =
+      x + "px";
 
 
-    particle.style.top =
-      (y*100)+"vh";
+    spark.style.top =
+      y + "px";
 
 
-    const color =
+    spark.style.background =
       colors[
         Math.floor(
           Math.random() *
@@ -4428,46 +4168,33 @@ function createFirework(x,y){
       ];
 
 
-    particle.style.background =
-      color;
+    spark.style.boxShadow =
+      "0 0 8px currentColor";
 
 
-    particle.style.boxShadow =
-      `0 0 8px ${color}`;
+    spark.style.transform =
+
+      `translate(-50%,-50%)
+       rotate(${angle}rad)`;
 
 
-    const angle =
-      (Math.PI*2*i) /
-      particleCount;
+    document.body.appendChild(
+      spark
+    );
 
 
-    const distance =
-      55 +
-      Math.random()*95;
 
-
-    const dx =
-      Math.cos(angle) *
-      distance;
-
-
-    const dy =
-      Math.sin(angle) *
-      distance;
-
-
-    const rotation =
-      Math.random()*720;
-
-
-    particle.animate(
+    spark.animate(
 
       [
 
         {
 
           transform:
-            "translate(-50%,-50%) scale(.4)",
+            `translate(-50%,-50%)
+             rotate(${angle}rad)
+             translateY(0)
+             scaleY(1)`,
 
           opacity:1
 
@@ -4476,16 +4203,24 @@ function createFirework(x,y){
         {
 
           transform:
-            `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) rotate(${rotation}deg) scale(1)`,
+            `translate(-50%,-50%)
+             rotate(${angle}rad)
+             translateY(-${distance}px)
+             scaleY(.45)`,
 
-          opacity:1
+          opacity:.95,
+
+          offset:.65
 
         },
 
         {
 
           transform:
-            `translate(calc(-50% + ${dx*1.18}px), calc(-50% + ${dy*1.18}px)) rotate(${rotation+180}deg) scale(.2)`,
+            `translate(-50%,-50%)
+             rotate(${angle}rad)
+             translateY(-${distance + 30}px)
+             scaleY(.1)`,
 
           opacity:0
 
@@ -4496,144 +4231,20 @@ function createFirework(x,y){
       {
 
         duration:
-          1300 +
-          Math.random()*500,
+          1100 +
+          Math.random() * 700,
 
         easing:
-          "cubic-bezier(.15,.75,.25,1)"
+          "cubic-bezier(.15,.65,.25,1)"
 
       }
 
-    ).onfinish = () => {
+    ).onfinish =
+      function(){
 
-      particle.remove();
+        spark.remove();
 
-    };
-
-  }
-
-}
-
-
-
-/* =========================================================
-   CONFETTI RAIN
-========================================================= */
-
-function createConfettiRain(){
-
-  const colors = [
-
-    "#b89445",
-
-    "#791f2c",
-
-    "#d8bf79",
-
-    "#e9dfd1",
-
-    "#fffaf3"
-
-  ];
-
-
-  for(
-    let i=0;
-    i<130;
-    i++
-  ){
-
-    const piece =
-      document.createElement(
-        "div"
-      );
-
-
-    piece.className =
-      "firework-particle";
-
-
-    piece.style.left =
-      Math.random()*100+"vw";
-
-
-    piece.style.top =
-      "-20px";
-
-
-    piece.style.background =
-      colors[
-        Math.floor(
-          Math.random()*colors.length
-        )
-      ];
-
-
-    piece.style.transform =
-      `rotate(${Math.random()*360}deg)`;
-
-
-    document.body.appendChild(
-      piece
-    );
-
-
-    const drift =
-      (Math.random()-.5)*260;
-
-
-    const duration =
-      2200 +
-      Math.random()*2400;
-
-
-    piece.animate(
-
-      [
-
-        {
-
-          transform:
-            `translateY(0) translateX(0) rotate(0deg)`,
-
-          opacity:1
-
-        },
-
-        {
-
-          transform:
-            `translateY(45vh) translateX(${drift*.5}px) rotate(${Math.random()*500}deg)`,
-
-          opacity:1
-
-        },
-
-        {
-
-          transform:
-            `translateY(115vh) translateX(${drift}px) rotate(${Math.random()*1000}deg)`,
-
-          opacity:0
-
-        }
-
-      ],
-
-      {
-
-        duration:duration,
-
-        easing:
-          "cubic-bezier(.2,.7,.3,1)"
-
-      }
-
-    ).onfinish = () => {
-
-      piece.remove();
-
-    };
+      };
 
   }
 
