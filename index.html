@@ -1,16 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#3c0c15">
 
-<title>Happy Alves & Nico Alves | Wedding Invitation</title>
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+>
+
+<meta
+  name="theme-color"
+  content="#f7f1e8"
+>
+
+<title>
+  Happy Alves & Nico Alves | Wedding Invitation
+</title>
+
 
 <style>
 
+/* =========================================================
+   FONTS
+========================================================= */
+
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Parisienne&display=swap');
 
+
+/* =========================================================
+   VARIABLES
+========================================================= */
 
 :root{
 
@@ -38,15 +58,18 @@
 }
 
 
+/* =========================================================
+   RESET
+========================================================= */
+
 *{
   box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
 }
-
 
 html{
   scroll-behavior:smooth;
 }
-
 
 body{
 
@@ -75,22 +98,18 @@ body{
 
 }
 
-
 body.locked{
   overflow:hidden;
 }
-
 
 button,
 a{
   font:inherit;
 }
 
-
 button{
   cursor:pointer;
 }
-
 
 a{
   text-decoration:none;
@@ -98,303 +117,138 @@ a{
 }
 
 
-
 /* =========================================================
    CURTAIN OPENING
 ========================================================= */
 
+/*
+   IMPORTANT:
+   The curtains are an OVERLAY.
 
-.curtain-stage{
+   The invitation already exists underneath them.
+   This prevents the "duplicate information" effect.
 
-  position:relative;
+   When opened, the curtains move to the sides
+   and remain there.
+*/
 
-  width:100%;
 
-  height:100svh;
+.curtain-screen{
 
-  min-height:620px;
+  position:fixed;
 
-  overflow:hidden;
+  inset:0;
+
+  z-index:1000;
 
   background:var(--cream-light);
 
-  isolation:isolate;
+  overflow:hidden;
+
+  pointer-events:auto;
 
   touch-action:pan-y;
 
 }
 
 
+/* ---------------------------------------------------------
+   DARK CENTER BEFORE OPENING
+--------------------------------------------------------- */
 
-/* INVITATION BEHIND CURTAINS */
+.curtain-screen:after{
 
-
-.curtain-invite{
+  content:"";
 
   position:absolute;
 
   inset:0;
 
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  text-align:center;
-
-  padding:40px 25px;
-
   z-index:1;
 
   background:
     radial-gradient(
-      circle at center,
-      rgba(184,148,69,.09),
-      transparent 55%
-    ),
-    var(--cream-light);
-
-}
-
-
-.curtain-invite-inner{
-
-  width:min(590px,100%);
-
-  padding:58px 25px;
-
-  position:relative;
-
-  border:1px solid rgba(184,148,69,.5);
-
-  opacity:0;
-
-  transform:translateY(18px);
-
-  transition:
-    opacity 1.5s .65s cubic-bezier(.16,1,.3,1),
-    transform 1.5s .65s cubic-bezier(.16,1,.3,1);
-
-}
-
-
-.curtain-stage.is-opening
-.curtain-invite-inner{
+      ellipse at center,
+      rgba(0,0,0,.08),
+      rgba(0,0,0,.42)
+    );
 
   opacity:1;
 
-  transform:translateY(0);
+  transition:
+    opacity 1.8s
+    cubic-bezier(.22,1,.36,1);
+
+  pointer-events:none;
 
 }
 
+.curtain-screen.opening:after{
 
-.curtain-invite-inner:before,
-.curtain-invite-inner:after{
-
-  content:"";
-
-  position:absolute;
-
-  width:62px;
-
-  height:62px;
-
-  border-color:var(--gold);
-
-  border-style:solid;
-
-  opacity:.65;
+  opacity:0;
 
 }
-
-
-.curtain-invite-inner:before{
-
-  top:12px;
-
-  left:12px;
-
-  border-width:1px 0 0 1px;
-
-}
-
-
-.curtain-invite-inner:after{
-
-  bottom:12px;
-
-  right:12px;
-
-  border-width:0 1px 1px 0;
-
-}
-
-
-.curtain-invite .eyebrow{
-
-  display:block;
-
-  margin-bottom:14px;
-
-  font-size:10px;
-
-  letter-spacing:.28em;
-
-  text-transform:uppercase;
-
-  color:var(--gold);
-
-}
-
-
-.curtain-invite h1{
-
-  margin:0;
-
-  font-family:var(--serif);
-
-  font-size:clamp(46px,11vw,82px);
-
-  font-weight:500;
-
-  line-height:.9;
-
-  color:var(--red-dark);
-
-}
-
-
-.curtain-invite h1 span{
-
-  display:block;
-
-  font-family:var(--script);
-
-  font-size:.55em;
-
-  color:var(--gold);
-
-  margin:9px 0;
-
-}
-
-
-.ornamental-line{
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  gap:14px;
-
-  margin:25px 0;
-
-  color:var(--gold);
-
-}
-
-
-.ornamental-line:before,
-.ornamental-line:after{
-
-  content:"";
-
-  width:70px;
-
-  height:1px;
-
-  background:rgba(184,148,69,.55);
-
-}
-
-
-.curtain-invite p{
-
-  max-width:430px;
-
-  margin:0 auto;
-
-  font-family:var(--serif);
-
-  font-size:19px;
-
-  line-height:1.55;
-
-  color:#65595a;
-
-}
-
-
-.hero-theme{
-
-  margin-top:24px;
-
-  font-size:9px;
-
-  letter-spacing:.25em;
-
-  text-transform:uppercase;
-
-  color:var(--muted);
-
-}
-
 
 
 /* =========================================================
-   VELVET CURTAINS
+   CURTAIN PANELS
 ========================================================= */
-
 
 .curtain{
 
   position:absolute;
 
-  top:-3%;
+  top:-5%;
 
-  bottom:-3%;
+  bottom:-5%;
 
-  width:56%;
+  width:58%;
 
-  z-index:5;
+  z-index:3;
 
   background:
 
-    linear-gradient(
+    /* Soft highlight */
+    radial-gradient(
+      ellipse at 50% 50%,
+      rgba(166,76,88,.35),
+      transparent 38%
+    ),
+
+    /* Velvet folds */
+    repeating-linear-gradient(
       90deg,
 
-      #3d0912 0%,
-      #751b29 9%,
-      #4b0d18 18%,
-      #8d2635 27%,
-      #55101c 37%,
-      #8d2635 47%,
-      #4a0c17 58%,
-      #751b29 68%,
-      #400914 79%,
-      #7e202e 90%,
-      #360811 100%
+      #350811 0px,
+      #4a0d17 18px,
+
+      #781b2a 34px,
+      #8d2635 46px,
+
+      #58101c 61px,
+      #350811 78px,
+
+      #6e1827 96px,
+      #8a2534 110px,
+
+      #4b0c17 128px,
+      #300710 145px
     );
 
   box-shadow:
 
-    inset -25px 0 35px rgba(0,0,0,.28),
+    inset 0 0 45px rgba(0,0,0,.45),
 
-    inset 25px 0 35px rgba(255,255,255,.04);
+    inset 0 0 100px rgba(0,0,0,.25),
+
+    0 0 40px rgba(0,0,0,.25);
 
   will-change:transform;
 
-  transition:
-
-    transform 2.15s cubic-bezier(.16,1,.3,1),
-
-    filter 2.15s cubic-bezier(.16,1,.3,1);
-
 }
 
+
+/* Fine velvet texture */
 
 .curtain:before{
 
@@ -407,23 +261,23 @@ a{
   background:
 
     repeating-linear-gradient(
-
       90deg,
 
       rgba(255,255,255,.025) 0px,
+      rgba(255,255,255,.025) 2px,
 
-      rgba(255,255,255,.025) 3px,
-
-      rgba(0,0,0,.09) 8px,
-
-      rgba(0,0,0,.09) 15px
-
+      rgba(0,0,0,.08) 5px,
+      rgba(0,0,0,.08) 10px
     );
 
-  mix-blend-mode:soft-light;
+  opacity:.8;
+
+  pointer-events:none;
 
 }
 
+
+/* Edge shading */
 
 .curtain:after{
 
@@ -436,283 +290,201 @@ a{
   background:
 
     linear-gradient(
-
       90deg,
 
-      rgba(0,0,0,.4),
-
-      transparent 20%,
-
+      rgba(0,0,0,.42),
+      transparent 18%,
       transparent 80%,
-
-      rgba(0,0,0,.45)
-
+      rgba(0,0,0,.4)
     );
+
+  pointer-events:none;
 
 }
 
 
+/* LEFT */
+
 .curtain-left{
 
-  left:0;
+  left:-5%;
 
   transform-origin:left center;
 
   border-right:
     1px solid
-    rgba(216,191,121,.16);
+    rgba(216,191,121,.18);
 
 }
 
 
+/* RIGHT */
+
 .curtain-right{
 
-  right:0;
+  right:-5%;
 
   transform-origin:right center;
 
   border-left:
     1px solid
-    rgba(216,191,121,.16);
+    rgba(216,191,121,.18);
 
 }
-
-
-
-/* OPENED CURTAINS */
-
-
-.curtain-stage.is-open
-.curtain-left{
-
-  transform:
-    translateX(-8%)
-    scaleX(.22);
-
-  filter:brightness(.8);
-
-}
-
-
-.curtain-stage.is-open
-.curtain-right{
-
-  transform:
-    translateX(8%)
-    scaleX(.22);
-
-  filter:brightness(.8);
-
-}
-
 
 
 /* =========================================================
-   GOLD CURTAIN TIE BACKS
+   CURTAIN GATHERED / TIED APPEARANCE
 ========================================================= */
 
+/*
+   These create the slightly curved/gathered inner edges
+   visible after the curtains open.
+*/
 
-.curtain-tie{
 
-  position:absolute;
+.curtain-left{
 
-  z-index:7;
+  clip-path:polygon(
+    0 0,
+    100% 0,
+    93% 8%,
+    88% 18%,
+    86% 28%,
+    87% 38%,
+    90% 48%,
+    86% 58%,
+    82% 68%,
+    84% 78%,
+    89% 88%,
+    94% 100%,
+    0 100%
+  );
 
-  top:50%;
+}
 
-  width:30px;
 
-  height:30px;
+.curtain-right{
 
-  border-radius:50%;
+  clip-path:polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    6% 100%,
+    11% 88%,
+    16% 78%,
+    18% 68%,
+    14% 58%,
+    10% 48%,
+    13% 38%,
+    14% 28%,
+    12% 18%,
+    7% 8%
+  );
 
-  background:
+}
 
-    radial-gradient(
-      circle at 35% 30%,
-      #f1d990,
-      #b89445 55%,
-      #79591c
-    );
 
-  box-shadow:
+/* =========================================================
+   OPENING ANIMATION
+========================================================= */
 
-    0 3px 10px rgba(0,0,0,.28),
-
-    0 0 0 1px
-    rgba(216,191,121,.6);
-
-  opacity:0;
+.curtain-screen.opening .curtain-left{
 
   transform:
-    translateY(-50%)
-    scale(.6);
+    translate3d(-88%,0,0)
+    scaleX(.82);
 
   transition:
-
-    opacity .9s .95s,
-
-    transform 1s 1s
+    transform
+    2.2s
     cubic-bezier(.16,1,.3,1);
 
 }
 
 
-.curtain-tie:before{
-
-  content:"";
-
-  position:absolute;
-
-  top:50%;
-
-  width:42px;
-
-  height:1px;
-
-  background:var(--gold);
-
-  opacity:.8;
-
-}
-
-
-.curtain-tie-left{
-
-  left:5.5%;
-
-}
-
-
-.curtain-tie-left:before{
-
-  left:22px;
-
-}
-
-
-.curtain-tie-right{
-
-  right:5.5%;
-
-}
-
-
-.curtain-tie-right:before{
-
-  right:22px;
-
-}
-
-
-.curtain-stage.is-open
-.curtain-tie{
-
-  opacity:1;
+.curtain-screen.opening .curtain-right{
 
   transform:
-    translateY(-50%)
-    scale(1);
+    translate3d(88%,0,0)
+    scaleX(.82);
+
+  transition:
+    transform
+    2.2s
+    cubic-bezier(.16,1,.3,1);
 
 }
 
+
+/*
+   After the animation the curtains remain
+   in their open positions.
+*/
 
 
 /* =========================================================
-   TAP TO CONTINUE
+   OPENING PROMPT
 ========================================================= */
 
-
-.curtain-open-prompt{
+.curtain-prompt{
 
   position:absolute;
 
-  z-index:12;
+  z-index:10;
 
   left:50%;
 
-  top:50%;
+  bottom:12%;
 
-  transform:
-    translate(-50%,-50%);
+  transform:translateX(-50%);
 
-  display:flex;
+  width:150px;
 
-  flex-direction:column;
+  text-align:center;
 
-  align-items:center;
+  color:white;
 
-  gap:9px;
+  pointer-events:none;
+
+  transition:
+    opacity .7s ease,
+    transform .7s ease;
+
+}
+
+
+/* Little point / arrow */
+
+.curtain-arrow{
+
+  width:42px;
+
+  height:42px;
+
+  margin:0 auto 12px;
 
   border:
     1px solid
     rgba(216,191,121,.7);
 
-  background:
-    rgba(37,7,13,.18);
+  border-radius:50%;
 
-  backdrop-filter:blur(2px);
+  display:flex;
 
-  -webkit-backdrop-filter:blur(2px);
+  align-items:center;
 
-  color:white;
-
-  padding:13px 21px 12px;
-
-  min-width:112px;
-
-  transition:
-
-    opacity .65s ease,
-
-    transform .8s
-    cubic-bezier(.16,1,.3,1),
-
-    visibility .65s;
-
-}
-
-
-.prompt-arrow{
-
-  font-size:18px;
-
-  line-height:1;
+  justify-content:center;
 
   color:var(--gold-light);
 
+  font-size:21px;
+
   animation:
     promptBounce
-    1.3s
+    1.6s
     ease-in-out
     infinite;
-
-}
-
-
-.curtain-open-prompt span{
-
-  font-size:9px;
-
-  letter-spacing:.18em;
-
-  text-transform:uppercase;
-
-  white-space:nowrap;
-
-}
-
-
-.curtain-stage.is-opening
-.curtain-open-prompt{
-
-  opacity:0;
-
-  transform:
-    translate(-50%,-50%)
-    scale(.92);
-
-  visibility:hidden;
 
 }
 
@@ -721,25 +493,85 @@ a{
 
   0%,
   100%{
-
     transform:translateY(0);
-
   }
 
   50%{
-
-    transform:translateY(6px);
-
+    transform:translateY(8px);
   }
 
 }
 
 
+.curtain-prompt span{
+
+  display:block;
+
+  font-size:9px;
+
+  letter-spacing:.25em;
+
+  text-transform:uppercase;
+
+  white-space:nowrap;
+
+  opacity:.9;
+
+}
+
+
+/* Hide prompt during opening */
+
+.curtain-screen.opening .curtain-prompt{
+
+  opacity:0;
+
+  transform:
+    translateX(-50%)
+    translateY(15px);
+
+}
+
 
 /* =========================================================
-   MAIN
+   HERO CONTENT BEHIND CURTAIN
 ========================================================= */
 
+.hero-content{
+
+  opacity:0;
+
+  transform:
+    translateY(25px);
+
+  transition:
+
+    opacity
+    1.8s
+    cubic-bezier(.16,1,.3,1)
+    .45s,
+
+    transform
+    1.8s
+    cubic-bezier(.16,1,.3,1)
+    .45s;
+
+}
+
+
+.curtain-screen.opening ~ .invitation .hero-content{
+
+  opacity:1;
+
+  transform:
+    translateY(0);
+
+}
+
+
+/* =========================================================
+   MAIN INVITATION
+========================================================= */
 
 .invitation{
 
@@ -774,7 +606,8 @@ a{
   max-width:520px;
 
   margin:
-    0 auto 48px;
+    0 auto
+    48px;
 
 }
 
@@ -803,7 +636,11 @@ a{
   font-family:var(--serif);
 
   font-size:
-    clamp(38px,8vw,55px);
+    clamp(
+      38px,
+      8vw,
+      55px
+    );
 
   line-height:1;
 
@@ -817,7 +654,8 @@ a{
 .section-heading p{
 
   margin:
-    18px auto 0;
+    18px auto
+    0;
 
   max-width:430px;
 
@@ -841,15 +679,162 @@ a{
 }
 
 
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+
+  min-height:100svh;
+
+  display:grid;
+
+  place-items:center;
+
+  padding:
+    50px 25px;
+
+  background:
+
+    radial-gradient(
+      circle at center,
+      rgba(184,148,69,.08),
+      transparent 50%
+    ),
+
+    var(--cream-light);
+
+}
+
+
+/*
+   NO SQUARE FRAME.
+   The content sits directly on the page.
+*/
+
+.hero-content{
+
+  width:100%;
+
+  max-width:600px;
+
+  text-align:center;
+
+}
+
+
+.hero h1{
+
+  margin:
+    20px 0 0;
+
+  font-family:var(--serif);
+
+  font-weight:500;
+
+  font-size:
+    clamp(
+      48px,
+      11vw,
+      84px
+    );
+
+  line-height:.9;
+
+  color:var(--red-dark);
+
+}
+
+
+.hero h1 span{
+
+  display:block;
+
+  font-family:var(--script);
+
+  color:var(--gold);
+
+  font-size:.55em;
+
+  margin:
+    10px 0;
+
+}
+
+
+.ornamental-line{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:14px;
+
+  margin:
+    28px 0;
+
+  color:var(--gold);
+
+}
+
+
+.ornamental-line:before,
+.ornamental-line:after{
+
+  content:"";
+
+  width:70px;
+
+  height:1px;
+
+  background:
+    rgba(184,148,69,.55);
+
+}
+
+
+.hero p{
+
+  max-width:470px;
+
+  margin:0 auto;
+
+  font-family:var(--serif);
+
+  font-size:20px;
+
+  line-height:1.6;
+
+  color:#65595a;
+
+}
+
+
+.hero-theme{
+
+  margin-top:27px;
+
+  font-size:9px;
+
+  letter-spacing:.28em;
+
+  text-transform:uppercase;
+
+  color:var(--muted);
+
+}
+
 
 /* =========================================================
    SCRATCH DATE
 ========================================================= */
 
-
 .scratch-section{
 
   background:
+
     linear-gradient(
       rgba(121,31,44,.025),
       rgba(121,31,44,.025)
@@ -976,6 +961,13 @@ a{
 }
 
 
+.scratch-canvas:active{
+
+  cursor:grabbing;
+
+}
+
+
 .scratch-item > span{
 
   display:block;
@@ -1008,7 +1000,7 @@ a{
 
 .revealed-date{
 
-  min-height:30px;
+  min-height:35px;
 
   margin-top:30px;
 
@@ -1016,20 +1008,20 @@ a{
 
   font-family:var(--serif);
 
-  font-size:25px;
+  font-size:26px;
 
   color:var(--red);
 
   letter-spacing:.08em;
 
-}
+  opacity:0;
 
+}
 
 
 /* =========================================================
    TIMELINE
 ========================================================= */
-
 
 .timeline{
 
@@ -1106,8 +1098,7 @@ a{
 
   height:9px;
 
-  margin:
-    5px auto 0;
+  margin:5px auto 0;
 
   border-radius:50%;
 
@@ -1160,11 +1151,9 @@ a{
 }
 
 
-
 /* =========================================================
    VENUE
 ========================================================= */
-
 
 .venue{
 
@@ -1224,7 +1213,8 @@ a{
 
 .venue-illustration{
 
-  width:min(100%,390px);
+  width:
+    min(100%,390px);
 
   margin:
     0 auto 25px;
@@ -1308,7 +1298,8 @@ a{
 
   display:inline-block;
 
-  padding:11px 22px;
+  padding:
+    11px 22px;
 
   border:
     1px solid
@@ -1336,11 +1327,9 @@ a{
 }
 
 
-
 /* =========================================================
    DRESS CODE
 ========================================================= */
-
 
 .dress-code{
 
@@ -1355,7 +1344,8 @@ a{
 
   margin:auto;
 
-  padding:45px 25px;
+  padding:
+    45px 25px;
 
   background:var(--cream);
 
@@ -1368,7 +1358,8 @@ a{
 
 .fashion-illustration{
 
-  width:min(100%,350px);
+  width:
+    min(100%,350px);
 
   margin:
     0 auto 20px;
@@ -1431,11 +1422,9 @@ a{
 }
 
 
-
 /* =========================================================
    GIFTS
 ========================================================= */
-
 
 .gifts{
 
@@ -1450,7 +1439,8 @@ a{
 
   margin:auto;
 
-  padding:50px 28px;
+  padding:
+    50px 28px;
 
   border-top:
     1px solid
@@ -1507,11 +1497,9 @@ a{
 }
 
 
-
 /* =========================================================
    RSVP
 ========================================================= */
-
 
 .rsvp{
 
@@ -1528,7 +1516,8 @@ a{
 
   margin:auto;
 
-  padding:60px 25px;
+  padding:
+    60px 25px;
 
   background:var(--red-deep);
 
@@ -1618,7 +1607,8 @@ a{
 
   display:inline-block;
 
-  padding:13px 28px;
+  padding:
+    13px 28px;
 
   background:var(--gold-light);
 
@@ -1660,11 +1650,9 @@ a{
 }
 
 
-
 /* =========================================================
    FLOATING BUTTONS
 ========================================================= */
-
 
 .floating-buttons{
 
@@ -1674,8 +1662,7 @@ a{
 
   left:50%;
 
-  transform:
-    translateX(-50%);
+  transform:translateX(-50%);
 
   z-index:50;
 
@@ -1691,8 +1678,6 @@ a{
     rgba(255,250,243,.9);
 
   backdrop-filter:blur(12px);
-
-  -webkit-backdrop-filter:blur(12px);
 
   box-shadow:
     0 10px 30px
@@ -1711,7 +1696,8 @@ a{
 
   border-radius:999px;
 
-  padding:10px 17px;
+  padding:
+    10px 17px;
 
   background:var(--red);
 
@@ -1735,11 +1721,9 @@ a{
 }
 
 
-
 /* =========================================================
    FOOTER
 ========================================================= */
-
 
 .footer{
 
@@ -1778,17 +1762,16 @@ a{
 }
 
 
-
 /* =========================================================
    SCROLL REVEALS
 ========================================================= */
-
 
 .reveal{
 
   opacity:0;
 
-  transform:translateY(25px);
+  transform:
+    translateY(25px);
 
   transition:
     opacity .9s ease,
@@ -1801,161 +1784,137 @@ a{
 
   opacity:1;
 
-  transform:translateY(0);
+  transform:
+    translateY(0);
 
 }
-
 
 
 /* =========================================================
-   FIREWORKS
+   FIREWORK / CONFETTI
 ========================================================= */
 
-
-.firework-spark{
-
-  position:fixed;
-
-  left:0;
-
-  top:0;
-
-  width:4px;
-
-  height:14px;
-
-  border-radius:999px;
-
-  pointer-events:none;
-
-  z-index:999;
-
-  transform-origin:50% 100%;
-
-}
-
-
-.firework-core{
+.firework-piece{
 
   position:fixed;
 
-  width:10px;
+  width:7px;
 
-  height:10px;
+  height:11px;
 
-  border-radius:50%;
+  z-index:9999;
 
   pointer-events:none;
 
-  z-index:998;
-
-  transform:
-    translate(-50%,-50%);
+  border-radius:2px;
 
 }
-
 
 
 /* =========================================================
    MOBILE
 ========================================================= */
 
-
 @media(max-width:600px){
 
-  .curtain-stage{
+  .section{
+
+    padding:
+      75px 20px;
+
+  }
+
+
+  .hero{
 
     min-height:100svh;
 
-  }
-
-
-  .curtain-invite{
-
     padding:
-      25px 15px;
+      30px 18px;
 
   }
 
 
-  .curtain-invite-inner{
+  .hero-content{
 
-    padding:
-      52px 18px;
-
-  }
-
-
-  .curtain-invite-inner:before,
-  .curtain-invite-inner:after{
-
-    width:48px;
-
-    height:48px;
+    max-width:500px;
 
   }
 
 
-  .curtain-invite h1{
+  .hero h1{
 
     font-size:
-      clamp(43px,12vw,66px);
+      clamp(
+        46px,
+        13vw,
+        68px
+      );
 
   }
 
 
-  .curtain-invite p{
+  .hero p{
 
-    font-size:17px;
+    font-size:18px;
+
+    padding:
+      0 10px;
 
   }
 
 
   .curtain{
 
-    width:58%;
+    width:68%;
 
   }
 
 
-  .curtain-stage.is-open
   .curtain-left{
 
-    transform:
-      translateX(-8%)
-      scaleX(.20);
+    left:-8%;
 
   }
 
 
-  .curtain-stage.is-open
   .curtain-right{
 
+    right:-8%;
+
+  }
+
+
+  .curtain-screen.opening .curtain-left{
+
     transform:
-      translateX(8%)
-      scaleX(.20);
+      translate3d(-89%,0,0)
+      scaleX(.78);
 
   }
 
 
-  .curtain-tie-left{
+  .curtain-screen.opening .curtain-right{
 
-    left:5%;
-
-  }
-
-
-  .curtain-tie-right{
-
-    right:5%;
+    transform:
+      translate3d(89%,0,0)
+      scaleX(.78);
 
   }
 
 
-  .section{
+  .curtain-prompt{
 
-    padding:
-      75px 20px;
+    bottom:10%;
+
+  }
+
+
+  .curtain-arrow{
+
+    width:40px;
+
+    height:40px;
 
   }
 
@@ -2052,9 +2011,16 @@ a{
 
 @media(max-width:380px){
 
-  .curtain-invite h1{
+  .hero h1{
 
-    font-size:40px;
+    font-size:43px;
+
+  }
+
+
+  .hero p{
+
+    font-size:17px;
 
   }
 
@@ -2090,11 +2056,9 @@ a{
 }
 
 
-
 /* =========================================================
    REDUCED MOTION
 ========================================================= */
-
 
 @media(prefers-reduced-motion:reduce){
 
@@ -2113,127 +2077,52 @@ a{
 }
 
 </style>
+
 </head>
 
 
 <body class="locked">
 
 
-
 <!-- =======================================================
-     CURTAIN + FIRST SCREEN
+     CURTAIN OPENING
 ======================================================= -->
 
-
-<section
-  class="curtain-stage"
-  id="curtainStage">
-
-
-  <!-- INVITATION HIDDEN BEHIND CURTAINS -->
-
-  <div class="curtain-invite">
-
-    <div class="curtain-invite-inner">
-
-      <span class="eyebrow">
-        Together with our families
-      </span>
-
-
-      <h1>
-
-        Happy Alves
-
-        <span>
-          &
-        </span>
-
-        Nico Alves
-
-      </h1>
-
-
-      <div class="ornamental-line">
-
-        <span>
-          ✦
-        </span>
-
-      </div>
-
-
-      <p>
-
-        Request the pleasure of your company
-        as we celebrate the beginning of
-        our forever.
-
-      </p>
-
-
-      <div class="hero-theme">
-
-        A Rustic Celebration
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-
-  <!-- LEFT CURTAIN -->
-
-  <div
-    class="curtain curtain-left">
-  </div>
-
-
-
-  <!-- RIGHT CURTAIN -->
-
-  <div
-    class="curtain curtain-right">
-  </div>
-
-
-
-  <!-- GOLD TIE BACKS -->
-
-  <div
-    class="curtain-tie curtain-tie-left">
-  </div>
+<div
+  class="curtain-screen"
+  id="curtainScreen"
+>
 
 
   <div
-    class="curtain-tie curtain-tie-right">
-  </div>
+    class="curtain curtain-left"
+  ></div>
 
 
+  <div
+    class="curtain curtain-right"
+  ></div>
 
-  <!-- TAP BUTTON -->
 
-  <button
-    class="curtain-open-prompt"
-    id="openButton"
-    type="button"
-    aria-label="Open invitation">
+  <!-- SMALL MOVING TAP INDICATOR -->
 
-    <div class="prompt-arrow">
-      ⌄
+  <div
+    class="curtain-prompt"
+    id="curtainPrompt"
+  >
+
+    <div class="curtain-arrow">
+      ↓
     </div>
 
     <span>
       Tap to continue
     </span>
 
-  </button>
+  </div>
 
 
-</section>
-
+</div>
 
 
 
@@ -2241,8 +2130,70 @@ a{
      MAIN INVITATION
 ======================================================= -->
 
-
 <main class="invitation">
+
+
+<!-- =======================================================
+     HERO
+======================================================= -->
+
+<section class="hero section">
+
+
+  <div
+    class="hero-content"
+    id="heroContent"
+  >
+
+
+    <span class="eyebrow">
+
+      Together with our families
+
+    </span>
+
+
+    <h1>
+
+      Happy Alves
+
+      <span>
+        &
+      </span>
+
+      Nico Alves
+
+    </h1>
+
+
+    <div class="ornamental-line">
+
+      <span>
+        ✦
+      </span>
+
+    </div>
+
+
+    <p>
+
+      Request the pleasure of your company
+      as we celebrate the beginning of
+      our forever.
+
+    </p>
+
+
+    <div class="hero-theme">
+
+      A Rustic Celebration
+
+    </div>
+
+
+  </div>
+
+</section>
 
 
 
@@ -2250,45 +2201,54 @@ a{
      SCRATCH DATE
 ======================================================= -->
 
-
 <section
   class="scratch-section section"
-  id="date">
+>
 
 
-  <div class="section-heading reveal">
+  <div
+    class="section-heading reveal"
+  >
+
 
     <span class="eyebrow">
+
       A Little Surprise
+
     </span>
 
 
     <h2>
+
       Reveal our date
+
     </h2>
 
 
     <p>
 
-      Scratch each golden circle
-      to discover when our
-      forever begins.
+      Scratch each golden circle to discover
+      when our forever begins.
 
     </p>
+
 
   </div>
 
 
 
-  <div class="scratch-grid reveal">
-
+  <div
+    class="scratch-grid reveal"
+  >
 
 
     <!-- DAY -->
 
     <div class="scratch-item">
 
+
       <div class="scratch-card">
+
 
         <div class="scratch-value">
 
@@ -2307,8 +2267,9 @@ a{
 
         <canvas
           class="scratch-canvas"
-          aria-label="Scratch to reveal day">
-        </canvas>
+          data-label="DAY"
+        ></canvas>
+
 
       </div>
 
@@ -2316,6 +2277,7 @@ a{
       <span>
         DAY
       </span>
+
 
     </div>
 
@@ -2325,7 +2287,9 @@ a{
 
     <div class="scratch-item">
 
+
       <div class="scratch-card">
+
 
         <div class="scratch-value">
 
@@ -2344,8 +2308,9 @@ a{
 
         <canvas
           class="scratch-canvas"
-          aria-label="Scratch to reveal month">
-        </canvas>
+          data-label="MONTH"
+        ></canvas>
+
 
       </div>
 
@@ -2353,6 +2318,7 @@ a{
       <span>
         MONTH
       </span>
+
 
     </div>
 
@@ -2362,7 +2328,9 @@ a{
 
     <div class="scratch-item">
 
+
       <div class="scratch-card">
+
 
         <div class="scratch-value">
 
@@ -2381,8 +2349,9 @@ a{
 
         <canvas
           class="scratch-canvas"
-          aria-label="Scratch to reveal year">
-        </canvas>
+          data-label="YEAR"
+        ></canvas>
+
 
       </div>
 
@@ -2390,6 +2359,7 @@ a{
       <span>
         YEAR
       </span>
+
 
     </div>
 
@@ -2405,14 +2375,14 @@ a{
   </div>
 
 
+
   <div
     class="revealed-date"
-    id="revealedDate">
-  </div>
+    id="revealedDate"
+  ></div>
 
 
 </section>
-
 
 
 
@@ -2420,14 +2390,17 @@ a{
      OUR DAY
 ======================================================= -->
 
-
 <section class="section">
 
 
-  <div class="section-heading reveal">
+  <div
+    class="section-heading reveal"
+  >
 
     <span class="eyebrow">
+
       The Celebration
+
     </span>
 
 
@@ -2447,8 +2420,9 @@ a{
 
 
 
-  <div class="timeline reveal">
-
+  <div
+    class="timeline reveal"
+  >
 
 
     <!-- CEREMONY -->
@@ -2459,17 +2433,13 @@ a{
         2:30 PM
       </div>
 
-
-      <div class="timeline-dot">
-      </div>
-
+      <div class="timeline-dot"></div>
 
       <div class="timeline-content">
 
         <h3>
           Church Ceremony
         </h3>
-
 
         <p>
 
@@ -2492,17 +2462,13 @@ a{
         5:00 PM
       </div>
 
-
-      <div class="timeline-dot">
-      </div>
-
+      <div class="timeline-dot"></div>
 
       <div class="timeline-content">
 
         <h3>
           Wedding Reception
         </h3>
-
 
         <p>
 
@@ -2525,17 +2491,13 @@ a{
         7:00 PM
       </div>
 
-
-      <div class="timeline-dot">
-      </div>
-
+      <div class="timeline-dot"></div>
 
       <div class="timeline-content">
 
         <h3>
           Celebration
         </h3>
-
 
         <p>
 
@@ -2558,17 +2520,13 @@ a{
         9:00 PM
       </div>
 
-
-      <div class="timeline-dot">
-      </div>
-
+      <div class="timeline-dot"></div>
 
       <div class="timeline-content">
 
         <h3>
           Party
         </h3>
-
 
         <p>
 
@@ -2584,9 +2542,7 @@ a{
 
   </div>
 
-
 </section>
-
 
 
 
@@ -2594,21 +2550,20 @@ a{
      VENUES
 ======================================================= -->
 
-
 <section class="venue section">
 
 
-  <div class="section-heading reveal">
+  <div
+    class="section-heading reveal"
+  >
 
     <span class="eyebrow">
       Where We Gather
     </span>
 
-
     <h2>
       The Venues
     </h2>
-
 
     <p>
 
@@ -2621,7 +2576,9 @@ a{
 
 
 
-  <!-- CHURCH -->
+  <!-- =====================================================
+       CHURCH
+  ====================================================== -->
 
   <div class="venue-card reveal">
 
@@ -2640,7 +2597,8 @@ a{
       <svg
         viewBox="0 0 500 300"
         fill="none"
-        xmlns="http://www.w3.org/2000/svg">
+        xmlns="http://www.w3.org/2000/svg"
+      >
 
 
         <circle
@@ -2648,85 +2606,140 @@ a{
           cy="55"
           r="24"
           stroke="#b89445"
-          stroke-width="1.5"/>
+          stroke-width="1.5"
+        />
 
 
         <path
-          d="M20 210 L120 105 L175 160 L250 75 L370 210"
+          d="M20 210
+             L120 105
+             L175 160
+             L250 75
+             L370 210"
           stroke="#791f2c"
           stroke-width="2"
           stroke-linecap="round"
-          stroke-linejoin="round"/>
+          stroke-linejoin="round"
+        />
 
 
         <path
-          d="M15 218 C120 205 250 230 485 215"
+          d="M15 218
+             C120 205 250 230 485 215"
           stroke="#b89445"
-          stroke-width="1.5"/>
+          stroke-width="1.5"
+        />
 
 
         <path
-          d="M145 215 V150 L250 105 L355 150 V215"
+          d="M145 215
+             V150
+             L250 105
+             L355 150
+             V215"
           stroke="#40383a"
-          stroke-width="2"/>
+          stroke-width="2"
+        />
 
 
         <path
-          d="M125 153 L250 93 L375 153"
+          d="M125 153
+             L250 93
+             L375 153"
           stroke="#791f2c"
-          stroke-width="2.5"/>
+          stroke-width="2.5"
+        />
 
 
         <path
-          d="M225 215 V75 H275 V215"
+          d="M225 215
+             V75
+             H275
+             V215"
           stroke="#40383a"
-          stroke-width="2"/>
+          stroke-width="2"
+        />
 
 
         <path
-          d="M215 76 L250 45 L285 76"
+          d="M215 76
+             L250 45
+             L285 76"
           stroke="#791f2c"
-          stroke-width="2"/>
+          stroke-width="2"
+        />
 
 
         <path
-          d="M250 35 V60 M242 45 H258"
+          d="M250 35
+             V60
+             M242 45
+             H258"
           stroke="#b89445"
-          stroke-width="2"/>
+          stroke-width="2"
+        />
 
 
         <path
-          d="M230 215 V175 Q250 155 270 175 V215"
+          d="M230 215
+             V175
+             Q250 155 270 175
+             V215"
           stroke="#791f2c"
-          stroke-width="2"/>
+          stroke-width="2"
+        />
 
 
         <path
-          d="M165 165 Q180 148 195 165 V192 H165 Z"
+          d="M165 165
+             Q180 148 195 165
+             V192
+             H165
+             Z"
           stroke="#40383a"
-          stroke-width="1.5"/>
+          stroke-width="1.5"
+        />
 
 
         <path
-          d="M305 165 Q320 148 335 165 V192 H305 Z"
+          d="M305 165
+             Q320 148 335 165
+             V192
+             H305
+             Z"
           stroke="#40383a"
-          stroke-width="1.5"/>
+          stroke-width="1.5"
+        />
 
 
         <path
-          d="M90 215 V145 M65 175 L90 150 L115 175 M70 192 L90 168 L110 192"
+          d="M90 215
+             V145
+             M65 175
+             L90 150
+             L115 175
+             M70 192
+             L90 168
+             L110 192"
           stroke="#b89445"
-          stroke-width="2"/>
+          stroke-width="2"
+        />
 
 
         <path
-          d="M405 215 V150 M380 180 L405 155 L430 180 M385 198 L405 173 L425 198"
+          d="M405 215
+             V150
+             M380 180
+             L405 155
+             L430 180
+             M385 198
+             L405 173
+             L425 198"
           stroke="#b89445"
-          stroke-width="2"/>
-
+          stroke-width="2"
+        />
 
       </svg>
-
 
     </div>
 
@@ -2740,21 +2753,19 @@ a{
     </h3>
 
 
-
     <div class="venue-address">
 
-      8WJ2+C5H, Edison St,
-      Cebu City, 6000 Cebu,
-      Philippines
+      8WJ2+C5H, Edison St, Cebu City,
+      6000 Cebu, Philippines
 
     </div>
-
 
 
     <div class="venue-time">
-      2:30 PM
-    </div>
 
+      2:30 PM
+
+    </div>
 
 
     <p class="venue-description">
@@ -2766,12 +2777,12 @@ a{
     </p>
 
 
-
     <a
       class="location-button"
       href="https://www.google.com/maps/search/?api=1&query=Archdiocesan+Shrine+of+St.+Therese+of+the+Child+Jesus+Cebu"
       target="_blank"
-      rel="noopener">
+      rel="noopener"
+    >
 
       View Location
 
@@ -2782,7 +2793,9 @@ a{
 
 
 
-  <!-- RECEPTION -->
+  <!-- =====================================================
+       RECEPTION
+  ====================================================== -->
 
   <div class="venue-card reveal">
 
@@ -2801,7 +2814,8 @@ a{
       <svg
         viewBox="0 0 500 300"
         fill="none"
-        xmlns="http://www.w3.org/2000/svg">
+        xmlns="http://www.w3.org/2000/svg"
+      >
 
 
         <circle
@@ -2809,111 +2823,155 @@ a{
           cy="55"
           r="24"
           stroke="#b89445"
-          stroke-width="1.5"/>
+          stroke-width="1.5"
+        />
 
 
         <path
-          d="M20 210 L120 105 L175 160 L250 75 L370 210"
+          d="M20 210
+             L120 105
+             L175 160
+             L250 75
+             L370 210"
           stroke="#791f2c"
           stroke-width="2"
           stroke-linecap="round"
-          stroke-linejoin="round"/>
+          stroke-linejoin="round"
+        />
 
 
         <path
-          d="M15 218 C120 205 250 230 485 215"
+          d="M15 218
+             C120 205 250 230 485 215"
           stroke="#b89445"
-          stroke-width="1.5"/>
+          stroke-width="1.5"
+        />
 
 
         <path
-          d="M120 215 V145 L250 85 L380 145 V215"
+          d="M120 215
+             V145
+             L250 85
+             L380 145
+             V215"
           stroke="#40383a"
-          stroke-width="2"/>
+          stroke-width="2"
+        />
 
 
         <path
-          d="M100 148 L250 72 L400 148"
+          d="M100 148
+             L250 72
+             L400 148"
           stroke="#791f2c"
-          stroke-width="2.5"/>
+          stroke-width="2.5"
+        />
 
 
         <path
-          d="M150 145 V215
-             M205 120 V215
-             M295 120 V215
-             M350 145 V215"
+          d="M150 145
+             V215
+
+             M205 120
+             V215
+
+             M295 120
+             V215
+
+             M350 145
+             V215"
           stroke="#40383a"
-          stroke-width="2"/>
+          stroke-width="2"
+        />
 
 
         <path
-          d="M170 215 V150 H330 V215"
+          d="M170 215
+             V150
+             H330
+             V215"
           stroke="#b89445"
-          stroke-width="1.5"/>
+          stroke-width="1.5"
+        />
 
 
         <path
-          d="M225 215 V165 Q250 145 275 165 V215"
+          d="M225 215
+             V165
+             Q250 145 275 165
+             V215"
           stroke="#791f2c"
-          stroke-width="2"/>
+          stroke-width="2"
+        />
 
 
         <path
-          d="M75 215 V150
-             M52 178 L75 153 L98 178
-             M57 195 L75 172 L93 195"
+          d="M75 215
+             V150
+             M52 178
+             L75 153
+             L98 178
+             M57 195
+             L75 172
+             L93 195"
           stroke="#b89445"
-          stroke-width="2"/>
+          stroke-width="2"
+        />
 
 
         <path
-          d="M425 215 V150
-             M402 178 L425 153 L448 178
-             M407 195 L425 172 L443 195"
+          d="M425 215
+             V150
+             M402 178
+             L425 153
+             L448 178
+             M407 195
+             L425 172
+             L443 195"
           stroke="#b89445"
-          stroke-width="2"/>
+          stroke-width="2"
+        />
 
 
         <circle
           cx="175"
           cy="137"
           r="2"
-          fill="#b89445"/>
-
+          fill="#b89445"
+        />
 
         <circle
           cx="205"
           cy="123"
           r="2"
-          fill="#b89445"/>
-
+          fill="#b89445"
+        />
 
         <circle
           cx="295"
           cy="123"
           r="2"
-          fill="#b89445"/>
-
+          fill="#b89445"
+        />
 
         <circle
           cx="325"
           cy="137"
           r="2"
-          fill="#b89445"/>
-
+          fill="#b89445"
+        />
 
       </svg>
-
 
     </div>
 
 
 
     <h3>
-      Beverly View Events Pavilion
-    </h3>
 
+      Beverly View Events Pavilion
+
+    </h3>
 
 
     <div class="venue-address">
@@ -2924,11 +2982,11 @@ a{
     </div>
 
 
-
     <div class="venue-time">
-      5:00 PM
-    </div>
 
+      5:00 PM
+
+    </div>
 
 
     <p class="venue-description">
@@ -2940,12 +2998,12 @@ a{
     </p>
 
 
-
     <a
       class="location-button"
       href="https://www.google.com/maps/search/?api=1&query=Beverly+View+Events+Pavilion+Cebu"
       target="_blank"
-      rel="noopener">
+      rel="noopener"
+    >
 
       View Location
 
@@ -2959,21 +3017,22 @@ a{
 
 
 
-
 <!-- =======================================================
      DRESS CODE
 ======================================================= -->
 
+<section
+  class="dress-code section"
+>
 
-<section class="dress-code section">
 
-
-  <div class="section-heading reveal">
+  <div
+    class="section-heading reveal"
+  >
 
     <span class="eyebrow">
       What To Wear
     </span>
-
 
     <h2>
       Dress Code
@@ -2983,7 +3042,9 @@ a{
 
 
 
-  <div class="dress-card reveal">
+  <div
+    class="dress-card reveal"
+  >
 
 
     <div class="fashion-illustration">
@@ -2992,17 +3053,17 @@ a{
       <svg
         viewBox="0 0 400 280"
         xmlns="http://www.w3.org/2000/svg"
-        fill="none">
+        fill="none"
+      >
 
-
-        <!-- WOMAN -->
 
         <circle
           cx="125"
           cy="58"
           r="22"
           stroke="#40383a"
-          stroke-width="2"/>
+          stroke-width="2"
+        />
 
 
         <path
@@ -3013,42 +3074,49 @@ a{
              L157 125
              L138 80"
           stroke="#791f2c"
-          stroke-width="2"/>
+          stroke-width="2"
+        />
 
 
         <path
-          d="M93 125 L65 175"
+          d="M93 125
+             L65 175"
           stroke="#40383a"
-          stroke-width="2"/>
+          stroke-width="2"
+        />
 
 
         <path
-          d="M157 125 L185 175"
+          d="M157 125
+             L185 175"
           stroke="#40383a"
-          stroke-width="2"/>
+          stroke-width="2"
+        />
 
 
         <path
-          d="M103 218 L92 250"
+          d="M103 218
+             L92 250"
           stroke="#40383a"
-          stroke-width="2"/>
+          stroke-width="2"
+        />
 
 
         <path
-          d="M147 218 L158 250"
+          d="M147 218
+             L158 250"
           stroke="#40383a"
-          stroke-width="2"/>
+          stroke-width="2"
+        />
 
-
-
-        <!-- MAN -->
 
         <circle
           cx="275"
           cy="58"
           r="22"
           stroke="#40383a"
-          stroke-width="2"/>
+          stroke-width="2"
+        />
 
 
         <path
@@ -3059,7 +3127,8 @@ a{
              L325 120
              L298 80"
           stroke="#40383a"
-          stroke-width="2"/>
+          stroke-width="2"
+        />
 
 
         <path
@@ -3067,29 +3136,34 @@ a{
              L275 115
              L298 80"
           stroke="#791f2c"
-          stroke-width="2"/>
+          stroke-width="2"
+        />
 
 
         <path
-          d="M275 115 V218"
+          d="M275 115
+             V218"
           stroke="#b89445"
-          stroke-width="1.5"/>
+          stroke-width="1.5"
+        />
 
 
         <path
-          d="M250 218 L242 250"
+          d="M250 218
+             L242 250"
           stroke="#40383a"
-          stroke-width="2"/>
+          stroke-width="2"
+        />
 
 
         <path
-          d="M300 218 L308 250"
+          d="M300 218
+             L308 250"
           stroke="#40383a"
-          stroke-width="2"/>
-
+          stroke-width="2"
+        />
 
       </svg>
-
 
     </div>
 
@@ -3117,9 +3191,7 @@ a{
 
   </div>
 
-
 </section>
-
 
 
 
@@ -3127,16 +3199,16 @@ a{
      GIFTS
 ======================================================= -->
 
-
 <section class="gifts section">
 
 
-  <div class="section-heading reveal">
+  <div
+    class="section-heading reveal"
+  >
 
     <span class="eyebrow">
       With Love
     </span>
-
 
     <h2>
       Gifts
@@ -3146,7 +3218,9 @@ a{
 
 
 
-  <div class="gifts-card reveal">
+  <div
+    class="gifts-card reveal"
+  >
 
 
     <div class="gift-icon">
@@ -3155,7 +3229,9 @@ a{
 
 
     <h3>
+
       Your Presence Is Our Gift
+
     </h3>
 
 
@@ -3173,9 +3249,7 @@ a{
 
   </div>
 
-
 </section>
-
 
 
 
@@ -3183,15 +3257,20 @@ a{
      RSVP
 ======================================================= -->
 
+<section
+  class="rsvp section"
+>
 
-<section class="rsvp section">
 
-
-  <div class="rsvp-inner reveal">
+  <div
+    class="rsvp-inner reveal"
+  >
 
 
     <span class="eyebrow">
+
       We Hope To See You
+
     </span>
 
 
@@ -3210,7 +3289,8 @@ a{
 
     <a
       href="#"
-      class="primary-button">
+      class="primary-button"
+    >
 
       RSVP
 
@@ -3219,24 +3299,20 @@ a{
 
     <div class="rsvp-deadline">
 
-      Please RSVP for our
-      January 22, 2027 celebration
+      Please RSVP for our January 22, 2027 celebration
 
     </div>
 
 
   </div>
 
-
 </section>
-
 
 
 
 <!-- =======================================================
      FOOTER
 ======================================================= -->
-
 
 <footer class="footer">
 
@@ -3263,18 +3339,17 @@ a{
 
 
 
-
 <!-- =======================================================
      FLOATING BUTTONS
 ======================================================= -->
-
 
 <div class="floating-buttons">
 
 
   <a
     href="#"
-    class="floating-button">
+    class="floating-button"
+  >
 
     RSVP
 
@@ -3285,7 +3360,8 @@ a{
     href="https://www.google.com/maps/search/?api=1&query=Beverly+View+Events+Pavilion+Cebu"
     target="_blank"
     rel="noopener"
-    class="floating-button secondary">
+    class="floating-button secondary"
+  >
 
     Location
 
@@ -3296,167 +3372,149 @@ a{
 
 
 
-
 <script>
-
 
 
 /* =========================================================
    CURTAIN OPENING
 ========================================================= */
 
-
-const curtainStage =
+const curtainScreen =
   document.getElementById(
-    "curtainStage"
-  );
-
-
-const openButton =
-  document.getElementById(
-    "openButton"
+    "curtainScreen"
   );
 
 
 let isOpening = false;
 
 
-let startX = 0;
-
-let startY = 0;
-
-
-
 function openInvitation(){
 
-  if(isOpening){
-    return;
-  }
-
+  if(isOpening) return;
 
   isOpening = true;
 
 
   /*
-     Start the opening immediately.
-     The invitation behind the curtains
-     begins fading in at the same time.
+     Add opening class.
+
+     The curtains animate outward.
+     The hero underneath fades in.
   */
 
-  curtainStage.classList.add(
-    "is-opening"
+  curtainScreen.classList.add(
+    "opening"
   );
 
 
   /*
-     A tiny delay allows the text fade
-     and curtain movement to begin
-     together instead of suddenly
-     appearing.
+     Allow scrolling shortly after
+     the curtains begin opening.
   */
 
-  window.setTimeout(() => {
-
-    curtainStage.classList.add(
-      "is-open"
-    );
-
-
-    /*
-       The curtain stays inside the page.
-       We do NOT remove it.
-
-       This is what allows the user to
-       naturally scroll from the first
-       screen into the scratch section.
-    */
+  setTimeout(() => {
 
     document.body.classList.remove(
       "locked"
     );
 
-  },80);
+  },900);
+
+
+  /*
+     We DO NOT remove the curtain.
+
+     This is important.
+
+     The curtains remain visually
+     gathered on both sides.
+  */
 
 }
 
 
+/* =========================================================
+   TAP / CLICK
+========================================================= */
 
-openButton.addEventListener(
+curtainScreen.addEventListener(
   "click",
   openInvitation
 );
 
 
-
-
 /* =========================================================
-   SWIPE TO OPEN
+   SWIPE
 ========================================================= */
 
+let startX = 0;
+let startY = 0;
 
-curtainStage.addEventListener(
-  "pointerdown",
+
+curtainScreen.addEventListener(
+  "touchstart",
   function(e){
 
-    if(isOpening){
-      return;
-    }
-
-
     startX =
-      e.clientX;
-
+      e.touches[0].clientX;
 
     startY =
-      e.clientY;
+      e.touches[0].clientY;
 
+  },
+  {
+    passive:true
   }
 );
 
 
-
-curtainStage.addEventListener(
-  "pointerup",
+curtainScreen.addEventListener(
+  "touchend",
   function(e){
 
-    if(isOpening){
-      return;
-    }
+    const endX =
+      e.changedTouches[0].clientX;
+
+    const endY =
+      e.changedTouches[0].clientY;
 
 
-    const dx =
-      e.clientX - startX;
+    const distanceX =
+      Math.abs(
+        endX - startX
+      );
 
 
-    const dy =
-      e.clientY - startY;
+    const distanceY =
+      Math.abs(
+        endY - startY
+      );
 
 
     /*
-       Horizontal swipe opens the curtains.
-       Vertical movement is left alone so
-       normal mobile scrolling is preserved.
+       Only treat a mostly horizontal
+       swipe as opening the curtain.
     */
 
     if(
-      Math.abs(dx) > 55 &&
-      Math.abs(dx) > Math.abs(dy)
+      distanceX > 45 &&
+      distanceX > distanceY
     ){
 
       openInvitation();
 
     }
 
+  },
+  {
+    passive:true
   }
 );
-
-
 
 
 /* =========================================================
    SCROLL REVEALS
 ========================================================= */
-
 
 const revealElements =
   document.querySelectorAll(
@@ -3467,10 +3525,10 @@ const revealElements =
 const observer =
   new IntersectionObserver(
 
-    function(entries){
+    (entries) => {
 
       entries.forEach(
-        function(entry){
+        entry => {
 
           if(
             entry.isIntersecting
@@ -3479,7 +3537,6 @@ const observer =
             entry.target.classList.add(
               "visible"
             );
-
 
             observer.unobserve(
               entry.target
@@ -3499,9 +3556,8 @@ const observer =
   );
 
 
-
 revealElements.forEach(
-  function(el){
+  el => {
 
     observer.observe(el);
 
@@ -3509,12 +3565,9 @@ revealElements.forEach(
 );
 
 
-
-
 /* =========================================================
    SCRATCH CARDS
 ========================================================= */
-
 
 const scratchCards =
   document.querySelectorAll(
@@ -3522,16 +3575,15 @@ const scratchCards =
   );
 
 
+let revealedCount = 0;
+
 const revealed =
   new Set();
 
 
-let revealedCount = 0;
-
-
-
 scratchCards.forEach(
-  function(canvas,index){
+  (canvas,index) => {
+
 
     const ctx =
       canvas.getContext(
@@ -3544,12 +3596,17 @@ scratchCards.forEach(
 
     let scratching = false;
 
+    let scratchedPixels = 0;
 
-    let scratchCount = 0;
+    let lastX = 0;
+    let lastY = 0;
 
 
+    /* -----------------------------------------------------
+       DRAW GOLD SURFACE
+    ----------------------------------------------------- */
 
-    function paintScratchSurface(){
+    function resizeCanvas(){
 
       const rect =
         canvas.getBoundingClientRect();
@@ -3562,35 +3619,12 @@ scratchCards.forEach(
         );
 
 
-      const w =
-        rect.width;
-
-
-      const h =
-        rect.height;
-
-
-      if(
-        !w ||
-        !h
-      ){
-
-        return;
-
-      }
-
-
-
       canvas.width =
-        Math.round(
-          w * ratio
-        );
+        rect.width * ratio;
 
 
       canvas.height =
-        Math.round(
-          h * ratio
-        );
+        rect.height * ratio;
 
 
       ctx.setTransform(
@@ -3603,25 +3637,23 @@ scratchCards.forEach(
       );
 
 
-      ctx.globalCompositeOperation =
-        "source-over";
+      const w =
+        rect.width;
 
+      const h =
+        rect.height;
 
-
-      /*
-         Gold surface
-      */
 
       const gradient =
         ctx.createRadialGradient(
 
-          w * .35,
-          h * .25,
+          w*.35,
+          h*.25,
           5,
 
-          w * .5,
-          h * .5,
-          w * .7
+          w*.5,
+          h*.5,
+          w*.7
 
         );
 
@@ -3644,6 +3676,10 @@ scratchCards.forEach(
       );
 
 
+      ctx.globalCompositeOperation =
+        "source-over";
+
+
       ctx.fillStyle =
         gradient;
 
@@ -3652,21 +3688,18 @@ scratchCards.forEach(
 
 
       ctx.arc(
-        w / 2,
-        h / 2,
-        Math.min(w,h) / 2 - 2,
+        w/2,
+        h/2,
+        Math.min(w,h)/2 - 2,
         0,
-        Math.PI * 2
+        Math.PI*2
       );
 
 
       ctx.fill();
 
 
-
-      /*
-         Inner gold border
-      */
+      /* Inner border */
 
       ctx.strokeStyle =
         "rgba(255,255,255,.45)";
@@ -3680,21 +3713,18 @@ scratchCards.forEach(
 
 
       ctx.arc(
-        w / 2,
-        h / 2,
-        Math.min(w,h) / 2 - 13,
+        w/2,
+        h/2,
+        Math.min(w,h)/2 - 13,
         0,
-        Math.PI * 2
+        Math.PI*2
       );
 
 
       ctx.stroke();
 
 
-
-      /*
-         Scratch text
-      */
+      /* Text */
 
       ctx.fillStyle =
         "#fff9e7";
@@ -3714,8 +3744,8 @@ scratchCards.forEach(
 
       ctx.fillText(
         "SCRATCH",
-        w / 2,
-        h / 2 - 8
+        w/2,
+        h/2 - 8
       );
 
 
@@ -3725,35 +3755,32 @@ scratchCards.forEach(
 
       ctx.fillText(
         "TO REVEAL",
-        w / 2,
-        h / 2 + 8
+        w/2,
+        h/2 + 8
       );
+
+
+      scratchedPixels = 0;
 
     }
 
 
-
-    paintScratchSurface();
-
+    resizeCanvas();
 
 
     window.addEventListener(
       "resize",
-      paintScratchSurface
+      resizeCanvas
     );
 
 
+    /* -----------------------------------------------------
+       SCRATCH FUNCTION
+    ----------------------------------------------------- */
 
     function scratch(e){
 
-      if(
-        !scratching ||
-        revealed.has(index)
-      ){
-
-        return;
-
-      }
+      if(!scratching) return;
 
 
       const rect =
@@ -3770,50 +3797,101 @@ scratchCards.forEach(
         rect.top;
 
 
+      /*
+         Connect strokes instead of
+         creating only individual circles.
+      */
+
       ctx.globalCompositeOperation =
         "destination-out";
+
+
+      ctx.lineCap =
+        "round";
+
+
+      ctx.lineJoin =
+        "round";
+
+
+      ctx.lineWidth =
+        Math.max(
+          28,
+          rect.width * .22
+        );
+
+
+      ctx.beginPath();
+
+
+      ctx.moveTo(
+        lastX,
+        lastY
+      );
+
+
+      ctx.lineTo(
+        x,
+        y
+      );
+
+
+      ctx.stroke();
 
 
       ctx.beginPath();
 
 
       ctx.arc(
-
         x,
-
         y,
-
         Math.max(
-          15,
-          rect.width * .12
+          14,
+          rect.width * .11
         ),
-
         0,
-
-        Math.PI * 2
-
+        Math.PI*2
       );
 
 
       ctx.fill();
 
 
-      scratchCount++;
+      lastX = x;
 
+      lastY = y;
+
+
+      scratchedPixels++;
 
 
       /*
-         Reveal after enough scratching.
+         Reveal after a reasonable
+         amount of scratching.
       */
 
       if(
-        scratchCount >= 24 &&
+        scratchedPixels > 18 &&
         !revealed.has(index)
       ){
 
         revealed.add(index);
 
         revealedCount++;
+
+
+        /*
+           Fade the canvas slightly
+           so the revealed value feels
+           more polished.
+        */
+
+        canvas.style.transition =
+          "opacity .6s ease";
+
+
+        canvas.style.opacity =
+          ".15";
 
 
         if(
@@ -3829,17 +3907,36 @@ scratchCards.forEach(
     }
 
 
+    /* -----------------------------------------------------
+       POINTER DOWN
+    ----------------------------------------------------- */
 
     canvas.addEventListener(
       "pointerdown",
       function(e){
 
+        e.preventDefault();
+
         scratching = true;
 
 
-        canvas.setPointerCapture(
-          e.pointerId
-        );
+        lastX =
+          e.clientX -
+          canvas.getBoundingClientRect().left;
+
+
+        lastY =
+          e.clientY -
+          canvas.getBoundingClientRect().top;
+
+
+        try{
+
+          canvas.setPointerCapture(
+            e.pointerId
+          );
+
+        }catch(error){}
 
 
         scratch(e);
@@ -3848,19 +3945,45 @@ scratchCards.forEach(
     );
 
 
+    /* -----------------------------------------------------
+       POINTER MOVE
+    ----------------------------------------------------- */
 
     canvas.addEventListener(
       "pointermove",
-      scratch
+      function(e){
+
+        if(
+          scratching
+        ){
+
+          e.preventDefault();
+
+          scratch(e);
+
+        }
+
+      }
     );
 
 
+    /* -----------------------------------------------------
+       POINTER UP
+    ----------------------------------------------------- */
 
     canvas.addEventListener(
       "pointerup",
-      function(){
+      function(e){
 
         scratching = false;
+
+        try{
+
+          canvas.releasePointerCapture(
+            e.pointerId
+          );
+
+        }catch(error){}
 
       }
     );
@@ -3875,16 +3998,26 @@ scratchCards.forEach(
       }
     );
 
+
+    canvas.addEventListener(
+      "pointerleave",
+      function(){
+
+        /*
+           Don't stop on mobile because
+           pointer capture keeps working.
+        */
+
+      }
+    );
+
   }
 );
-
-
 
 
 /* =========================================================
    DATE REVEAL
 ========================================================= */
-
 
 function revealCompleteDate(){
 
@@ -3906,11 +4039,12 @@ function revealCompleteDate(){
         opacity:0,
 
         transform:
-          "translateY(12px) scale(.96)"
+          "translateY(18px) scale(.96)"
 
       },
 
       {
+
         opacity:1,
 
         transform:
@@ -3922,7 +4056,7 @@ function revealCompleteDate(){
 
     {
 
-      duration:900,
+      duration:1200,
 
       easing:
         "cubic-bezier(.16,1,.3,1)",
@@ -3939,32 +4073,42 @@ function revealCompleteDate(){
 }
 
 
-
-
 /* =========================================================
    FIREWORKS
 ========================================================= */
 
+/*
+   Larger, fuller celebration.
+
+   Instead of only dropping a few pieces
+   from the top, this creates multiple
+   fireworks bursts around the screen.
+*/
 
 function createFireworks(){
 
-  /*
-     Five large bursts appear at slightly
-     different times so it feels like a
-     real celebration rather than one
-     small explosion.
-  */
 
-  const bursts = [
+  const colors = [
+
+    "#b89445",
+    "#791f2c",
+    "#d8bf79",
+    "#a64c58",
+    "#eee1b8"
+
+  ];
+
+
+  const positions = [
 
     {
       x:.18,
-      y:.28
+      y:.25
     },
 
     {
       x:.50,
-      y:.20
+      y:.18
     },
 
     {
@@ -3973,193 +4117,91 @@ function createFireworks(){
     },
 
     {
-      x:.32,
-      y:.42
+      x:.28,
+      y:.43
     },
 
     {
-      x:.68,
-      y:.42
+      x:.72,
+      y:.45
     }
 
   ];
 
 
-  bursts.forEach(
-    function(burst,index){
+  positions.forEach(
+    position => {
 
-      window.setTimeout(
-
-        function(){
-
-          fireworkBurst(
-
-            window.innerWidth *
-              burst.x,
-
-            window.innerHeight *
-              burst.y,
-
-            34
-
-          );
-
-        },
-
-        index * 180
-
+      createFireworkBurst(
+        position.x,
+        position.y,
+        colors
       );
 
     }
   );
 
-}
-
-
-
-
-function fireworkBurst(
-  x,
-  y,
-  count
-){
-
-  const colors = [
-
-    "#b89445",
-    "#791f2c",
-    "#d8bf79",
-    "#fff4d4",
-    "#a64c58"
-
-  ];
-
-
 
   /*
-     Bright center flash
-  */
-
-  const core =
-    document.createElement(
-      "div"
-    );
-
-
-  core.className =
-    "firework-core";
-
-
-  core.style.left =
-    x + "px";
-
-
-  core.style.top =
-    y + "px";
-
-
-  core.style.background =
-    "#fff4d4";
-
-
-  core.style.boxShadow =
-    "0 0 25px 10px rgba(255,244,212,.45)";
-
-
-  document.body.appendChild(
-    core
-  );
-
-
-  core.animate(
-
-    [
-
-      {
-        transform:
-          "translate(-50%,-50%) scale(.2)",
-
-        opacity:0
-
-      },
-
-      {
-        transform:
-          "translate(-50%,-50%) scale(1.8)",
-
-        opacity:1
-
-      },
-
-      {
-        transform:
-          "translate(-50%,-50%) scale(0)",
-
-        opacity:0
-
-      }
-
-    ],
-
-    {
-
-      duration:450,
-
-      easing:"ease-out"
-
-    }
-
-  ).onfinish =
-    function(){
-
-      core.remove();
-
-    };
-
-
-
-  /*
-     Individual rays
+     Additional falling confetti.
   */
 
   for(
-    let i = 0;
-    i < count;
+    let i=0;
+    i<130;
     i++
   ){
 
-    const angle =
-      (
-        Math.PI * 2 * i / count
-      )
-      +
-      Math.random() * .12;
+    createConfettiPiece(
+      colors
+    );
+
+  }
+
+}
 
 
-    const distance =
-      70 +
-      Math.random() * 100;
+/* =========================================================
+   FIREWORK BURST
+========================================================= */
+
+function createFireworkBurst(
+  xPercent,
+  yPercent,
+  colors
+){
+
+  const centerX =
+    window.innerWidth *
+    xPercent;
 
 
-    const spark =
+  const centerY =
+    window.innerHeight *
+    yPercent;
+
+
+  const pieces =
+    22;
+
+
+  for(
+    let i=0;
+    i<pieces;
+    i++
+  ){
+
+    const piece =
       document.createElement(
         "div"
       );
 
 
-    spark.className =
-      "firework-spark";
+    piece.className =
+      "firework-piece";
 
 
-    spark.style.left =
-      x + "px";
-
-
-    spark.style.top =
-      y + "px";
-
-
-    spark.style.background =
+    piece.style.background =
       colors[
         Math.floor(
           Math.random() *
@@ -4168,33 +4210,56 @@ function fireworkBurst(
       ];
 
 
-    spark.style.boxShadow =
-      "0 0 8px currentColor";
+    piece.style.left =
+      centerX + "px";
 
 
-    spark.style.transform =
-
-      `translate(-50%,-50%)
-       rotate(${angle}rad)`;
+    piece.style.top =
+      centerY + "px";
 
 
     document.body.appendChild(
-      spark
+      piece
     );
 
 
+    const angle =
+      (
+        Math.PI * 2
+      ) *
+      (i / pieces);
 
-    spark.animate(
+
+    const distance =
+      50 +
+      Math.random() *
+      90;
+
+
+    const endX =
+      Math.cos(angle) *
+      distance;
+
+
+    const endY =
+      Math.sin(angle) *
+      distance;
+
+
+    const duration =
+      900 +
+      Math.random() *
+      700;
+
+
+    piece.animate(
 
       [
 
         {
 
           transform:
-            `translate(-50%,-50%)
-             rotate(${angle}rad)
-             translateY(0)
-             scaleY(1)`,
+            "translate(-50%,-50%) scale(.2)",
 
           opacity:1
 
@@ -4203,24 +4268,24 @@ function fireworkBurst(
         {
 
           transform:
-            `translate(-50%,-50%)
-             rotate(${angle}rad)
-             translateY(-${distance}px)
-             scaleY(.45)`,
+            `translate(
+              calc(-50% + ${endX}px),
+              calc(-50% + ${endY}px)
+            )
+            scale(1.1)`,
 
-          opacity:.95,
-
-          offset:.65
+          opacity:.9
 
         },
 
         {
 
           transform:
-            `translate(-50%,-50%)
-             rotate(${angle}rad)
-             translateY(-${distance + 30}px)
-             scaleY(.1)`,
+            `translate(
+              calc(-50% + ${endX * 1.35}px),
+              calc(-50% + ${endY * 1.35}px)
+            )
+            scale(.3)`,
 
           opacity:0
 
@@ -4231,18 +4296,18 @@ function fireworkBurst(
       {
 
         duration:
-          1100 +
-          Math.random() * 700,
+
+          duration,
 
         easing:
-          "cubic-bezier(.15,.65,.25,1)"
+          "cubic-bezier(.16,1,.3,1)"
 
       }
 
     ).onfinish =
-      function(){
+      () => {
 
-        spark.remove();
+        piece.remove();
 
       };
 
@@ -4250,7 +4315,177 @@ function fireworkBurst(
 
 }
 
+
+/* =========================================================
+   CONFETTI PIECES
+========================================================= */
+
+function createConfettiPiece(
+  colors
+){
+
+  const piece =
+    document.createElement(
+      "div"
+    );
+
+
+  piece.className =
+    "firework-piece";
+
+
+  piece.style.width =
+    (
+      4 +
+      Math.random()*5
+    ) +
+    "px";
+
+
+  piece.style.height =
+    (
+      7 +
+      Math.random()*8
+    ) +
+    "px";
+
+
+  piece.style.background =
+    colors[
+      Math.floor(
+        Math.random() *
+        colors.length
+      )
+    ];
+
+
+  piece.style.left =
+    (
+      Math.random() *
+      100
+    ) +
+    "vw";
+
+
+  piece.style.top =
+    "-20px";
+
+
+  piece.style.transform =
+    `rotate(
+      ${Math.random()*360}deg
+    )`;
+
+
+  document.body.appendChild(
+    piece
+  );
+
+
+  const drift =
+    (
+      Math.random() -
+      .5
+    ) *
+    250;
+
+
+  const duration =
+    2200 +
+    Math.random()*2200;
+
+
+  piece.animate(
+
+    [
+
+      {
+
+        transform:
+          `translateY(0)
+           translateX(0)
+           rotate(0deg)`,
+
+        opacity:1
+
+      },
+
+      {
+
+        transform:
+          `translateY(
+             45vh
+           )
+           translateX(
+             ${drift*.45}px
+           )
+           rotate(
+             ${Math.random()*500}deg
+           )`,
+
+        opacity:1
+
+      },
+
+      {
+
+        transform:
+          `translateY(
+             110vh
+           )
+           translateX(
+             ${drift}px
+           )
+           rotate(
+             ${Math.random()*1000}deg
+           )`,
+
+        opacity:0
+
+      }
+
+    ],
+
+    {
+
+      duration:
+
+        duration,
+
+      easing:
+        "cubic-bezier(.2,.7,.3,1)"
+
+    }
+
+  ).onfinish =
+    () => {
+
+      piece.remove();
+
+    };
+
+}
+
+
+/* =========================================================
+   PREVENT OLD PAGE POSITION ISSUE
+========================================================= */
+
+window.addEventListener(
+  "load",
+  function(){
+
+    window.scrollTo(
+      0,
+      0
+    );
+
+  }
+);
+
 </script>
 
+
 </body>
+
 </html>
