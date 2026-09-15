@@ -9,15 +9,9 @@
   content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 >
 
-<meta
-  name="theme-color"
-  content="#f7f1e8"
->
+<meta name="theme-color" content="#050505">
 
-<title>
-  Happy Alves & Nico Alves | Wedding Invitation
-</title>
-
+<title>Happy & Nico | Wedding Invitation</title>
 
 <style>
 
@@ -49,7 +43,6 @@
 
   --ink:#40383a;
   --muted:#887d7a;
-  --white:#fffdf9;
 
   --serif:"Cormorant Garamond",Georgia,serif;
   --sans:"DM Sans",Arial,sans-serif;
@@ -71,24 +64,16 @@ html{
   scroll-behavior:smooth;
 }
 
+html,
+body{
+  margin:0;
+  padding:0;
+  min-height:100%;
+}
+
 body{
 
-  margin:0;
-
-  min-height:100vh;
-
-  background:
-    radial-gradient(
-      circle at 10% 10%,
-      rgba(184,148,69,.08),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 90% 80%,
-      rgba(121,31,44,.07),
-      transparent 30%
-    ),
-    var(--cream);
+  background:#050505;
 
   color:var(--ink);
 
@@ -98,94 +83,55 @@ body{
 
 }
 
-body.locked{
-  overflow:hidden;
-}
-
-button,
-a{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-a{
-  text-decoration:none;
-  color:inherit;
-}
-
 
 /* =========================================================
-   CURTAIN OPENING
+   PORTRAIT INVITATION CONTAINER
 ========================================================= */
 
-/*
-   IMPORTANT:
-   The curtains are an OVERLAY.
+.invitation{
 
-   The invitation already exists underneath them.
-   This prevents the "duplicate information" effect.
+  position:relative;
 
-   When opened, the curtains move to the sides
-   and remain there.
-*/
+  width:100%;
 
+  max-width:430px;
 
-.curtain-screen{
+  min-height:100vh;
 
-  position:fixed;
-
-  inset:0;
-
-  z-index:1000;
+  margin:0 auto;
 
   background:var(--cream-light);
 
   overflow:hidden;
 
-  pointer-events:auto;
-
-  touch-action:pan-y;
+  box-shadow:
+    0 0 80px rgba(0,0,0,.45);
 
 }
 
 
-/* ---------------------------------------------------------
-   DARK CENTER BEFORE OPENING
---------------------------------------------------------- */
+/* =========================================================
+   CURTAIN STAGE
+========================================================= */
 
-.curtain-screen:after{
-
-  content:"";
+.curtain-stage{
 
   position:absolute;
 
-  inset:0;
+  top:0;
+  left:0;
 
-  z-index:1;
+  width:100%;
 
-  background:
-    radial-gradient(
-      ellipse at center,
-      rgba(0,0,0,.08),
-      rgba(0,0,0,.42)
-    );
+  height:100svh;
 
-  opacity:1;
+  min-height:620px;
 
-  transition:
-    opacity 1.8s
-    cubic-bezier(.22,1,.36,1);
+  z-index:100;
 
-  pointer-events:none;
+  overflow:hidden;
 
-}
-
-.curtain-screen.opening:after{
-
-  opacity:0;
+  pointer-events:auto;
 
 }
 
@@ -198,59 +144,52 @@ a{
 
   position:absolute;
 
-  top:-5%;
+  top:-4%;
 
-  bottom:-5%;
+  bottom:-4%;
 
-  width:58%;
-
-  z-index:3;
+  width:53%;
 
   background:
 
-    /* Soft highlight */
-    radial-gradient(
-      ellipse at 50% 50%,
-      rgba(166,76,88,.35),
-      transparent 38%
-    ),
-
-    /* Velvet folds */
-    repeating-linear-gradient(
+    linear-gradient(
       90deg,
 
-      #350811 0px,
-      #4a0d17 18px,
-
-      #781b2a 34px,
-      #8d2635 46px,
-
-      #58101c 61px,
-      #350811 78px,
-
-      #6e1827 96px,
-      #8a2534 110px,
-
-      #4b0c17 128px,
-      #300710 145px
+      #350811 0%,
+      #701827 8%,
+      #470c17 17%,
+      #8b2635 27%,
+      #510e1a 38%,
+      #8c2635 48%,
+      #480c17 59%,
+      #761b29 70%,
+      #3b0912 81%,
+      #7c202f 91%,
+      #330710 100%
     );
 
   box-shadow:
 
-    inset 0 0 45px rgba(0,0,0,.45),
+    inset 0 0 25px rgba(0,0,0,.35),
 
-    inset 0 0 100px rgba(0,0,0,.25),
+    inset 15px 0 25px rgba(255,255,255,.035),
 
-    0 0 40px rgba(0,0,0,.25);
+    inset -15px 0 30px rgba(0,0,0,.3);
 
-  will-change:transform;
+  transition:
+
+    width 2.2s cubic-bezier(.16,1,.3,1),
+
+    transform 2.2s cubic-bezier(.16,1,.3,1),
+
+    filter 2.2s ease;
 
 }
 
 
-/* Fine velvet texture */
+/* velvet texture */
 
-.curtain:before{
+.curtain::before{
 
   content:"";
 
@@ -263,23 +202,21 @@ a{
     repeating-linear-gradient(
       90deg,
 
-      rgba(255,255,255,.025) 0px,
-      rgba(255,255,255,.025) 2px,
+      rgba(255,255,255,.035) 0px,
+      rgba(255,255,255,.035) 2px,
 
-      rgba(0,0,0,.08) 5px,
-      rgba(0,0,0,.08) 10px
+      rgba(0,0,0,.11) 7px,
+      rgba(0,0,0,.11) 14px
     );
 
-  opacity:.8;
-
-  pointer-events:none;
+  opacity:.9;
 
 }
 
 
-/* Edge shading */
+/* dark edges */
 
-.curtain:after{
+.curtain::after{
 
   content:"";
 
@@ -292,13 +229,14 @@ a{
     linear-gradient(
       90deg,
 
-      rgba(0,0,0,.42),
-      transparent 18%,
-      transparent 80%,
-      rgba(0,0,0,.4)
-    );
+      rgba(0,0,0,.45),
 
-  pointer-events:none;
+      transparent 20%,
+
+      transparent 80%,
+
+      rgba(0,0,0,.5)
+    );
 
 }
 
@@ -307,13 +245,11 @@ a{
 
 .curtain-left{
 
-  left:-5%;
+  left:-1%;
 
   transform-origin:left center;
 
-  border-right:
-    1px solid
-    rgba(216,191,121,.18);
+  border-right:1px solid rgba(216,191,121,.15);
 
 }
 
@@ -322,153 +258,223 @@ a{
 
 .curtain-right{
 
-  right:-5%;
+  right:-1%;
 
   transform-origin:right center;
 
-  border-left:
-    1px solid
-    rgba(216,191,121,.18);
+  border-left:1px solid rgba(216,191,121,.15);
 
 }
 
 
 /* =========================================================
-   CURTAIN GATHERED / TIED APPEARANCE
+   OPENED CURTAIN
 ========================================================= */
 
-/*
-   These create the slightly curved/gathered inner edges
-   visible after the curtains open.
-*/
-
-
-.curtain-left{
-
-  clip-path:polygon(
-    0 0,
-    100% 0,
-    93% 8%,
-    88% 18%,
-    86% 28%,
-    87% 38%,
-    90% 48%,
-    86% 58%,
-    82% 68%,
-    84% 78%,
-    89% 88%,
-    94% 100%,
-    0 100%
-  );
-
-}
-
-
-.curtain-right{
-
-  clip-path:polygon(
-    0 0,
-    100% 0,
-    100% 100%,
-    6% 100%,
-    11% 88%,
-    16% 78%,
-    18% 68%,
-    14% 58%,
-    10% 48%,
-    13% 38%,
-    14% 28%,
-    12% 18%,
-    7% 8%
-  );
-
-}
-
-
-/* =========================================================
-   OPENING ANIMATION
-========================================================= */
-
-.curtain-screen.opening .curtain-left{
-
-  transform:
-    translate3d(-88%,0,0)
-    scaleX(.82);
-
-  transition:
-    transform
-    2.2s
-    cubic-bezier(.16,1,.3,1);
-
-}
-
-
-.curtain-screen.opening .curtain-right{
-
-  transform:
-    translate3d(88%,0,0)
-    scaleX(.82);
-
-  transition:
-    transform
-    2.2s
-    cubic-bezier(.16,1,.3,1);
-
-}
-
-
-/*
-   After the animation the curtains remain
-   in their open positions.
-*/
-
-
-/* =========================================================
-   OPENING PROMPT
-========================================================= */
-
-.curtain-prompt{
-
-  position:absolute;
-
-  z-index:10;
-
-  left:50%;
-
-  bottom:12%;
-
-  transform:translateX(-50%);
-
-  width:150px;
-
-  text-align:center;
-
-  color:white;
+.curtain-stage.opened{
 
   pointer-events:none;
 
-  transition:
-    opacity .7s ease,
-    transform .7s ease;
+}
+
+
+/*
+   Instead of completely disappearing,
+   the curtains gather toward the sides.
+*/
+
+.curtain-stage.opened .curtain-left{
+
+  width:18%;
+
+  transform:
+    translateX(-1%)
+    scaleX(.95);
+
+  filter:
+    brightness(.88)
+    saturate(.95);
 
 }
 
 
-/* Little point / arrow */
+.curtain-stage.opened .curtain-right{
 
-.curtain-arrow{
+  width:18%;
 
-  width:42px;
+  transform:
+    translateX(1%)
+    scaleX(.95);
 
-  height:42px;
+  filter:
+    brightness(.88)
+    saturate(.95);
 
-  margin:0 auto 12px;
+}
 
-  border:
-    1px solid
-    rgba(216,191,121,.7);
+
+/* =========================================================
+   TIE-BACK EFFECT
+========================================================= */
+
+.curtain-tie{
+
+  position:absolute;
+
+  top:58%;
+
+  width:30px;
+
+  height:72px;
+
+  z-index:8;
+
+  opacity:0;
+
+  transition:
+
+    opacity .9s ease 1.1s,
+
+    transform 1s cubic-bezier(.16,1,.3,1);
+
+}
+
+
+.curtain-tie::before{
+
+  content:"";
+
+  position:absolute;
+
+  left:50%;
+
+  top:0;
+
+  width:2px;
+
+  height:100%;
+
+  background:
+
+    linear-gradient(
+      to bottom,
+      transparent,
+      var(--gold-light) 25%,
+      var(--gold) 50%,
+      var(--gold-light) 75%,
+      transparent
+    );
+
+  transform:translateX(-50%);
+
+  box-shadow:
+    0 0 8px rgba(216,191,121,.25);
+
+}
+
+
+.curtain-tie::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:50%;
+
+  top:50%;
+
+  width:13px;
+
+  height:13px;
 
   border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #f4df9c,
+      #b89445 55%,
+      #765718
+    );
+
+  transform:translate(-50%,-50%);
+
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.1),
+    0 2px 8px rgba(0,0,0,.35);
+
+}
+
+
+.curtain-tie-left{
+
+  left:14%;
+
+  transform:translateX(-25px);
+
+}
+
+
+.curtain-tie-right{
+
+  right:14%;
+
+  transform:translateX(25px);
+
+}
+
+
+.curtain-stage.opened .curtain-tie{
+
+  opacity:1;
+
+  transform:translateX(0);
+
+}
+
+
+/* =========================================================
+   OPEN BUTTON
+========================================================= */
+
+.curtain-opening-content{
+
+  position:absolute;
+
+  inset:0;
+
+  z-index:20;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-align:center;
+
+  transition:
+
+    opacity 1s ease,
+
+    transform 1.2s cubic-bezier(.16,1,.3,1);
+
+}
+
+
+/* glowing little point */
+
+.tap-indicator{
+
+  position:relative;
+
+  width:52px;
+
+  height:52px;
+
+  margin-bottom:14px;
 
   display:flex;
 
@@ -476,138 +482,437 @@ a{
 
   justify-content:center;
 
-  color:var(--gold-light);
+}
 
-  font-size:21px;
+
+/* outer moving ring */
+
+.tap-indicator::before{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  border:1px solid rgba(216,191,121,.65);
+
+  border-radius:50%;
 
   animation:
-    promptBounce
-    1.6s
-    ease-in-out
-    infinite;
+    pulseRing 1.8s ease-out infinite;
 
 }
 
 
-@keyframes promptBounce{
+/* inner ring */
+
+.tap-indicator::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:34px;
+
+  height:34px;
+
+  border:1px solid rgba(255,255,255,.35);
+
+  border-radius:50%;
+
+}
+
+
+/* point */
+
+.tap-dot{
+
+  width:7px;
+
+  height:7px;
+
+  border-radius:50%;
+
+  background:var(--gold-light);
+
+  box-shadow:
+    0 0 12px rgba(216,191,121,.8);
+
+  animation:
+    tapDot 1.2s ease-in-out infinite;
+
+}
+
+
+@keyframes pulseRing{
+
+  0%{
+    transform:scale(.7);
+    opacity:.8;
+  }
+
+  70%{
+    transform:scale(1.25);
+    opacity:0;
+  }
+
+  100%{
+    transform:scale(1.25);
+    opacity:0;
+  }
+
+}
+
+
+@keyframes tapDot{
 
   0%,
   100%{
-    transform:translateY(0);
+    transform:scale(1);
+    opacity:.8;
   }
 
   50%{
-    transform:translateY(8px);
+    transform:scale(1.45);
+    opacity:1;
   }
 
 }
 
 
-.curtain-prompt span{
+.tap-text{
 
-  display:block;
+  color:white;
 
-  font-size:9px;
+  font-size:10px;
 
   letter-spacing:.25em;
 
   text-transform:uppercase;
 
-  white-space:nowrap;
-
   opacity:.9;
+
+  animation:
+    tapText 1.6s ease-in-out infinite;
 
 }
 
 
-/* Hide prompt during opening */
+@keyframes tapText{
 
-.curtain-screen.opening .curtain-prompt{
+  0%,
+  100%{
+    opacity:.55;
+    transform:translateY(0);
+  }
+
+  50%{
+    opacity:1;
+    transform:translateY(-3px);
+  }
+
+}
+
+
+/* hide button when opened */
+
+.curtain-stage.opened .curtain-opening-content{
 
   opacity:0;
 
-  transform:
-    translateX(-50%)
-    translateY(15px);
+  transform:translateY(-25px);
+
+  pointer-events:none;
 
 }
 
 
 /* =========================================================
-   HERO CONTENT BEHIND CURTAIN
+   SWIPE HINT
 ========================================================= */
+
+.swipe-line{
+
+  position:absolute;
+
+  bottom:42px;
+
+  left:50%;
+
+  transform:translateX(-50%);
+
+  color:rgba(255,255,255,.45);
+
+  font-size:8px;
+
+  letter-spacing:.16em;
+
+  text-transform:uppercase;
+
+  white-space:nowrap;
+
+  animation:
+    swipeHint 2s ease-in-out infinite;
+
+}
+
+
+@keyframes swipeHint{
+
+  0%,
+  100%{
+    opacity:.35;
+  }
+
+  50%{
+    opacity:.8;
+  }
+
+}
+
+
+/* =========================================================
+   HERO / INVITATION TEXT
+========================================================= */
+
+.hero{
+
+  position:relative;
+
+  min-height:100svh;
+
+  padding:
+    80px
+    32px
+    90px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-align:center;
+
+  background:
+
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(184,148,69,.08),
+      transparent 48%
+    ),
+
+    var(--cream-light);
+
+}
+
+
+/*
+   Important:
+   NO BOX / NO SQUARE FRAME.
+*/
 
 .hero-content{
 
+  width:100%;
+
+  max-width:360px;
+
+  margin:0 auto;
+
   opacity:0;
 
-  transform:
-    translateY(25px);
+  transform:translateY(25px);
 
   transition:
 
-    opacity
-    1.8s
-    cubic-bezier(.16,1,.3,1)
-    .45s,
+    opacity 1.5s cubic-bezier(.16,1,.3,1) .35s,
 
-    transform
-    1.8s
-    cubic-bezier(.16,1,.3,1)
-    .45s;
+    transform 1.5s cubic-bezier(.16,1,.3,1) .35s;
 
 }
 
 
-.curtain-screen.opening ~ .invitation .hero-content{
+/* reveal text */
+
+.invitation.opened .hero-content{
 
   opacity:1;
 
-  transform:
-    translateY(0);
+  transform:translateY(0);
+
+}
+
+
+.hero-eyebrow{
+
+  display:block;
+
+  margin-bottom:25px;
+
+  color:var(--gold);
+
+  font-size:9px;
+
+  letter-spacing:.28em;
+
+  text-transform:uppercase;
+
+}
+
+
+.hero-intro{
+
+  max-width:330px;
+
+  margin:0 auto 27px;
+
+  font-family:var(--serif);
+
+  font-size:19px;
+
+  line-height:1.5;
+
+  color:#665b5c;
+
+}
+
+
+.hero h1{
+
+  margin:0;
+
+  color:var(--red-dark);
+
+  font-family:var(--serif);
+
+  font-size:clamp(57px,16vw,78px);
+
+  line-height:.78;
+
+  font-weight:500;
+
+}
+
+
+.hero h1 .name{
+
+  display:block;
+
+}
+
+
+.hero h1 .and{
+
+  display:block;
+
+  margin:15px 0;
+
+  color:var(--gold);
+
+  font-family:var(--script);
+
+  font-size:.62em;
+
+  line-height:1;
+
+  font-weight:400;
+
+}
+
+
+.hero-divider{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:14px;
+
+  margin:32px auto;
+
+}
+
+
+.hero-divider::before,
+.hero-divider::after{
+
+  content:"";
+
+  width:65px;
+
+  height:1px;
+
+  background:
+    rgba(184,148,69,.55);
+
+}
+
+
+.hero-divider span{
+
+  color:var(--gold);
+
+  font-size:13px;
+
+}
+
+
+.hero-message{
+
+  max-width:340px;
+
+  margin:0 auto;
+
+  font-family:var(--serif);
+
+  font-size:18px;
+
+  line-height:1.6;
+
+  color:#6c6061;
+
+}
+
+
+.hero-theme{
+
+  margin-top:27px;
+
+  color:var(--muted);
+
+  font-size:8px;
+
+  letter-spacing:.27em;
+
+  text-transform:uppercase;
 
 }
 
 
 /* =========================================================
-   MAIN INVITATION
+   GENERAL SECTIONS
 ========================================================= */
-
-.invitation{
-
-  width:100%;
-
-  max-width:720px;
-
-  margin:0 auto;
-
-  background:var(--cream-light);
-
-  box-shadow:
-    0 0 60px
-    rgba(62,39,29,.08);
-
-}
-
 
 .section{
 
-  padding:90px 24px;
-
   position:relative;
+
+  padding:90px 22px;
 
 }
 
 
 .section-heading{
 
+  max-width:340px;
+
+  margin:0 auto 48px;
+
   text-align:center;
-
-  max-width:520px;
-
-  margin:
-    0 auto
-    48px;
 
 }
 
@@ -618,13 +923,13 @@ a{
 
   margin-bottom:12px;
 
-  font-size:10px;
+  color:var(--gold);
+
+  font-size:9px;
 
   letter-spacing:.28em;
 
   text-transform:uppercase;
-
-  color:var(--gold);
 
 }
 
@@ -633,196 +938,30 @@ a{
 
   margin:0;
 
+  color:var(--red-dark);
+
   font-family:var(--serif);
 
-  font-size:
-    clamp(
-      38px,
-      8vw,
-      55px
-    );
+  font-size:48px;
 
-  line-height:1;
+  line-height:.95;
 
   font-weight:500;
-
-  color:var(--red-dark);
 
 }
 
 
 .section-heading p{
 
-  margin:
-    18px auto
-    0;
-
-  max-width:430px;
-
-  font-size:13px;
-
-  line-height:1.8;
+  margin:17px auto 0;
 
   color:var(--muted);
 
-}
-
-
-.ornament{
-
-  color:var(--gold);
-
-  font-size:15px;
-
-  letter-spacing:.5em;
-
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero{
-
-  min-height:100svh;
-
-  display:grid;
-
-  place-items:center;
-
-  padding:
-    50px 25px;
-
-  background:
-
-    radial-gradient(
-      circle at center,
-      rgba(184,148,69,.08),
-      transparent 50%
-    ),
-
-    var(--cream-light);
-
-}
-
-
-/*
-   NO SQUARE FRAME.
-   The content sits directly on the page.
-*/
-
-.hero-content{
-
-  width:100%;
-
-  max-width:600px;
-
-  text-align:center;
-
-}
-
-
-.hero h1{
-
-  margin:
-    20px 0 0;
-
   font-family:var(--serif);
 
-  font-weight:500;
-
-  font-size:
-    clamp(
-      48px,
-      11vw,
-      84px
-    );
-
-  line-height:.9;
-
-  color:var(--red-dark);
-
-}
-
-
-.hero h1 span{
-
-  display:block;
-
-  font-family:var(--script);
-
-  color:var(--gold);
-
-  font-size:.55em;
-
-  margin:
-    10px 0;
-
-}
-
-
-.ornamental-line{
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  gap:14px;
-
-  margin:
-    28px 0;
-
-  color:var(--gold);
-
-}
-
-
-.ornamental-line:before,
-.ornamental-line:after{
-
-  content:"";
-
-  width:70px;
-
-  height:1px;
-
-  background:
-    rgba(184,148,69,.55);
-
-}
-
-
-.hero p{
-
-  max-width:470px;
-
-  margin:0 auto;
-
-  font-family:var(--serif);
-
-  font-size:20px;
+  font-size:16px;
 
   line-height:1.6;
-
-  color:#65595a;
-
-}
-
-
-.hero-theme{
-
-  margin-top:27px;
-
-  font-size:9px;
-
-  letter-spacing:.28em;
-
-  text-transform:uppercase;
-
-  color:var(--muted);
 
 }
 
@@ -850,9 +989,9 @@ a{
   grid-template-columns:
     repeat(3,1fr);
 
-  gap:18px;
+  gap:8px;
 
-  max-width:540px;
+  max-width:360px;
 
   margin:0 auto;
 
@@ -872,7 +1011,7 @@ a{
 
   width:100%;
 
-  max-width:155px;
+  max-width:108px;
 
   aspect-ratio:1;
 
@@ -887,40 +1026,37 @@ a{
 
   inset:0;
 
+  z-index:0;
+
   display:grid;
 
   place-items:center;
-
-  z-index:0;
 
   border-radius:50%;
 
   background:
 
     radial-gradient(
-      circle at 35% 30%,
+      circle at 35% 28%,
       #f2dfa6,
       #c3a14e 48%,
       #8d6c25 100%
     );
 
-  border:
-    5px solid
-    #eee0b5;
+  border:4px solid #eee0b5;
 
   box-shadow:
 
-    0 12px 25px
-    rgba(94,69,25,.18),
+    0 12px 25px rgba(94,69,25,.18),
 
     inset 0 0 0 1px
-    rgba(255,255,255,.5);
+      rgba(255,255,255,.5);
+
+  color:#fffdf2;
 
   font-family:var(--serif);
 
-  font-size:29px;
-
-  color:#fffdf2;
+  font-size:24px;
 
 }
 
@@ -929,13 +1065,13 @@ a{
 
   display:block;
 
+  margin-top:3px;
+
   font-family:var(--sans);
 
-  font-size:8px;
+  font-size:7px;
 
-  letter-spacing:.18em;
-
-  margin-top:4px;
+  letter-spacing:.16em;
 
 }
 
@@ -946,13 +1082,13 @@ a{
 
   inset:0;
 
+  z-index:2;
+
   width:100%;
 
   height:100%;
 
   border-radius:50%;
-
-  z-index:2;
 
   touch-action:none;
 
@@ -961,37 +1097,30 @@ a{
 }
 
 
-.scratch-canvas:active{
-
-  cursor:grabbing;
-
-}
-
-
 .scratch-item > span{
 
   display:block;
 
-  margin-top:15px;
-
-  font-size:9px;
-
-  letter-spacing:.28em;
+  margin-top:14px;
 
   color:var(--muted);
+
+  font-size:8px;
+
+  letter-spacing:.25em;
 
 }
 
 
 .scratch-instruction{
 
-  margin-top:28px;
+  margin-top:30px;
 
   text-align:center;
 
-  font-size:11px;
-
   color:var(--muted);
+
+  font-size:9px;
 
   letter-spacing:.08em;
 
@@ -1006,15 +1135,13 @@ a{
 
   text-align:center;
 
+  color:var(--red);
+
   font-family:var(--serif);
 
   font-size:26px;
 
-  color:var(--red);
-
   letter-spacing:.08em;
-
-  opacity:0;
 
 }
 
@@ -1025,16 +1152,16 @@ a{
 
 .timeline{
 
-  max-width:560px;
+  position:relative;
+
+  max-width:355px;
 
   margin:auto;
-
-  position:relative;
 
 }
 
 
-.timeline:before{
+.timeline::before{
 
   content:"";
 
@@ -1044,12 +1171,12 @@ a{
 
   bottom:5px;
 
-  left:94px;
+  left:76px;
 
   width:1px;
 
   background:
-    rgba(184,148,69,.45);
+    rgba(184,148,69,.4);
 
 }
 
@@ -1059,9 +1186,7 @@ a{
   display:grid;
 
   grid-template-columns:
-    75px 38px 1fr;
-
-  gap:0;
+    59px 35px 1fr;
 
   margin-bottom:40px;
 
@@ -1077,47 +1202,44 @@ a{
 
 .timeline-time{
 
+  padding-right:9px;
+
   text-align:right;
 
-  padding-right:17px;
-
-  padding-top:2px;
+  color:var(--red);
 
   font-family:var(--serif);
 
-  font-size:16px;
-
-  color:var(--red);
+  font-size:14px;
 
 }
 
 
 .timeline-dot{
 
-  width:9px;
+  position:relative;
 
-  height:9px;
+  z-index:2;
 
-  margin:5px auto 0;
+  width:8px;
+
+  height:8px;
+
+  margin:4px auto 0;
 
   border-radius:50%;
 
   background:var(--gold);
 
   box-shadow:
-    0 0 0 5px
-    var(--cream-light);
-
-  position:relative;
-
-  z-index:2;
+    0 0 0 5px var(--cream-light);
 
 }
 
 
 .timeline-content{
 
-  padding-left:16px;
+  padding-left:10px;
 
 }
 
@@ -1126,27 +1248,26 @@ a{
 
   margin:0;
 
+  color:var(--red-dark);
+
   font-family:var(--serif);
 
-  font-size:27px;
+  font-size:25px;
 
   font-weight:500;
-
-  color:var(--red-dark);
 
 }
 
 
 .timeline-content p{
 
-  margin:
-    6px 0 0;
-
-  font-size:12px;
-
-  line-height:1.7;
+  margin:6px 0 0;
 
   color:var(--muted);
+
+  font-size:11px;
+
+  line-height:1.65;
 
 }
 
@@ -1164,26 +1285,17 @@ a{
 
 .venue-card{
 
-  max-width:590px;
+  max-width:370px;
 
-  margin:
-    0 auto 28px;
+  margin:0 auto 28px;
 
-  padding:40px 25px;
+  padding:35px 20px;
 
-  border:
-    1px solid
-    rgba(184,148,69,.4);
+  border:1px solid
+    rgba(184,148,69,.38);
 
   background:
-    rgba(255,255,255,.25);
-
-}
-
-
-.venue-card:last-child{
-
-  margin-bottom:0;
+    rgba(255,255,255,.2);
 
 }
 
@@ -1194,30 +1306,27 @@ a{
 
   margin-bottom:18px;
 
-  padding:6px 12px;
+  padding:6px 11px;
 
-  border:
-    1px solid
-    rgba(184,148,69,.45);
-
-  font-size:8px;
-
-  letter-spacing:.2em;
-
-  text-transform:uppercase;
+  border:1px solid
+    rgba(184,148,69,.4);
 
   color:var(--gold);
+
+  font-size:7px;
+
+  letter-spacing:.18em;
+
+  text-transform:uppercase;
 
 }
 
 
 .venue-illustration{
 
-  width:
-    min(100%,390px);
+  width:100%;
 
-  margin:
-    0 auto 25px;
+  margin:0 auto 23px;
 
 }
 
@@ -1235,30 +1344,32 @@ a{
 
   margin:0;
 
+  color:var(--red-dark);
+
   font-family:var(--serif);
 
-  font-size:30px;
+  font-size:26px;
+
+  line-height:1.1;
 
   font-weight:500;
-
-  color:var(--red-dark);
 
 }
 
 
 .venue-address{
 
-  margin-top:8px;
+  margin-top:9px;
 
-  font-size:10px;
+  color:var(--gold);
+
+  font-size:8px;
 
   line-height:1.6;
 
-  letter-spacing:.08em;
+  letter-spacing:.07em;
 
   text-transform:uppercase;
-
-  color:var(--gold);
 
 }
 
@@ -1267,29 +1378,28 @@ a{
 
   margin-top:12px;
 
+  color:var(--red);
+
   font-family:var(--serif);
 
-  font-size:20px;
-
-  color:var(--red);
+  font-size:19px;
 
 }
 
 
 .venue-description{
 
-  max-width:390px;
+  max-width:310px;
 
-  margin:
-    18px auto 25px;
+  margin:17px auto 23px;
+
+  color:var(--muted);
 
   font-family:var(--serif);
 
-  font-size:17px;
+  font-size:16px;
 
   line-height:1.5;
-
-  color:var(--muted);
 
 }
 
@@ -1298,31 +1408,17 @@ a{
 
   display:inline-block;
 
-  padding:
-    11px 22px;
+  padding:10px 20px;
 
-  border:
-    1px solid
-    var(--red);
+  border:1px solid var(--red);
 
   color:var(--red);
 
-  font-size:10px;
+  font-size:8px;
 
-  letter-spacing:.14em;
+  letter-spacing:.13em;
 
   text-transform:uppercase;
-
-  transition:.25s ease;
-
-}
-
-
-.location-button:hover{
-
-  background:var(--red);
-
-  color:white;
 
 }
 
@@ -1340,17 +1436,15 @@ a{
 
 .dress-card{
 
-  max-width:590px;
+  max-width:370px;
 
   margin:auto;
 
-  padding:
-    45px 25px;
+  padding:40px 20px;
 
   background:var(--cream);
 
-  border:
-    1px solid
+  border:1px solid
     rgba(184,148,69,.35);
 
 }
@@ -1358,11 +1452,11 @@ a{
 
 .fashion-illustration{
 
-  width:
-    min(100%,350px);
+  width:100%;
 
-  margin:
-    0 auto 20px;
+  max-width:320px;
+
+  margin:0 auto 20px;
 
 }
 
@@ -1380,44 +1474,43 @@ a{
 
   margin:0;
 
+  color:var(--red-dark);
+
   font-family:var(--serif);
 
-  font-size:36px;
+  font-size:34px;
 
   font-weight:500;
-
-  color:var(--red-dark);
 
 }
 
 
 .dress-card p{
 
-  max-width:400px;
+  max-width:300px;
 
-  margin:
-    15px auto 0;
+  margin:14px auto 0;
+
+  color:var(--muted);
 
   font-family:var(--serif);
 
-  font-size:17px;
+  font-size:16px;
 
   line-height:1.6;
-
-  color:var(--muted);
 
 }
 
 
 .dress-note{
 
-  margin-top:18px;
-
-  font-size:10px;
-
-  letter-spacing:.08em;
+  margin-top:17px;
 
   color:var(--gold);
+
+  font-size:8px;
+
+  letter-spacing:.08em;
 
 }
 
@@ -1435,19 +1528,16 @@ a{
 
 .gifts-card{
 
-  max-width:590px;
+  max-width:370px;
 
   margin:auto;
 
-  padding:
-    50px 28px;
+  padding:45px 20px;
 
-  border-top:
-    1px solid
+  border-top:1px solid
     rgba(184,148,69,.5);
 
-  border-bottom:
-    1px solid
+  border-bottom:1px solid
     rgba(184,148,69,.5);
 
 }
@@ -1455,11 +1545,11 @@ a{
 
 .gift-icon{
 
-  font-size:31px;
+  margin-bottom:17px;
 
   color:var(--gold);
 
-  margin-bottom:18px;
+  font-size:30px;
 
 }
 
@@ -1468,31 +1558,30 @@ a{
 
   margin:0;
 
+  color:var(--red-dark);
+
   font-family:var(--serif);
 
-  font-size:34px;
+  font-size:31px;
 
   font-weight:500;
-
-  color:var(--red-dark);
 
 }
 
 
 .gifts-card p{
 
-  max-width:470px;
+  max-width:320px;
 
-  margin:
-    17px auto 0;
+  margin:16px auto 0;
+
+  color:var(--muted);
 
   font-family:var(--serif);
 
-  font-size:18px;
+  font-size:17px;
 
-  line-height:1.65;
-
-  color:var(--muted);
+  line-height:1.6;
 
 }
 
@@ -1503,35 +1592,34 @@ a{
 
 .rsvp{
 
-  text-align:center;
+  padding-bottom:100px;
 
-  padding-bottom:110px;
+  text-align:center;
 
 }
 
 
 .rsvp-inner{
 
-  max-width:560px;
+  position:relative;
+
+  max-width:370px;
 
   margin:auto;
 
-  padding:
-    60px 25px;
+  padding:55px 20px;
+
+  overflow:hidden;
 
   background:var(--red-deep);
 
   color:white;
 
-  position:relative;
-
-  overflow:hidden;
-
 }
 
 
-.rsvp-inner:before,
-.rsvp-inner:after{
+.rsvp-inner::before,
+.rsvp-inner::after{
 
   content:"✦";
 
@@ -1539,27 +1627,27 @@ a{
 
   color:var(--gold-light);
 
-  opacity:.4;
+  opacity:.35;
 
-  font-size:70px;
-
-}
-
-
-.rsvp-inner:before{
-
-  top:-25px;
-
-  left:15px;
+  font-size:65px;
 
 }
 
 
-.rsvp-inner:after{
+.rsvp-inner::before{
 
-  bottom:-25px;
+  top:-22px;
 
-  right:15px;
+  left:12px;
+
+}
+
+
+.rsvp-inner::after{
+
+  right:12px;
+
+  bottom:-22px;
 
 }
 
@@ -1586,19 +1674,17 @@ a{
 
 .rsvp p{
 
-  max-width:400px;
+  max-width:300px;
 
-  margin:
-    15px auto 25px;
+  margin:14px auto 24px;
+
+  color:rgba(255,255,255,.72);
 
   font-family:var(--serif);
 
-  font-size:18px;
+  font-size:17px;
 
   line-height:1.5;
-
-  color:
-    rgba(255,255,255,.72);
 
 }
 
@@ -1607,45 +1693,76 @@ a{
 
   display:inline-block;
 
-  padding:
-    13px 28px;
+  padding:12px 26px;
 
   background:var(--gold-light);
 
   color:var(--red-deep);
 
-  font-size:10px;
+  font-size:9px;
 
-  letter-spacing:.16em;
+  letter-spacing:.15em;
 
   text-transform:uppercase;
-
-  transition:.25s ease;
-
-}
-
-
-.primary-button:hover{
-
-  transform:translateY(-2px);
-
-  box-shadow:
-    0 8px 20px
-    rgba(0,0,0,.2);
 
 }
 
 
 .rsvp-deadline{
 
-  margin-top:17px;
+  margin-top:16px;
 
-  font-size:9px;
+  color:rgba(255,255,255,.4);
 
-  letter-spacing:.1em;
+  font-size:8px;
 
-  color:
-    rgba(255,255,255,.45);
+  letter-spacing:.08em;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+
+  padding:45px 20px 100px;
+
+  text-align:center;
+
+  background:var(--cream);
+
+}
+
+
+.footer .ornament{
+
+  color:var(--gold);
+
+}
+
+
+.footer p{
+
+  margin:9px 0 4px;
+
+  color:var(--red-dark);
+
+  font-family:var(--serif);
+
+  font-size:23px;
+
+}
+
+
+.footer span{
+
+  color:var(--muted);
+
+  font-size:8px;
+
+  letter-spacing:.2em;
 
 }
 
@@ -1658,54 +1775,52 @@ a{
 
   position:fixed;
 
-  bottom:20px;
+  bottom:14px;
 
   left:50%;
 
-  transform:translateX(-50%);
-
-  z-index:50;
+  z-index:90;
 
   display:flex;
 
-  gap:8px;
+  gap:6px;
 
-  padding:7px;
+  padding:6px;
 
-  border-radius:999px;
-
-  background:
-    rgba(255,250,243,.9);
-
-  backdrop-filter:blur(12px);
-
-  box-shadow:
-    0 10px 30px
-    rgba(53,36,29,.15);
+  transform:translateX(-50%);
 
   border:
     1px solid
     rgba(184,148,69,.25);
+
+  border-radius:999px;
+
+  background:
+    rgba(255,250,243,.94);
+
+  backdrop-filter:blur(12px);
+
+  box-shadow:
+    0 10px 30px rgba(53,36,29,.18);
 
 }
 
 
 .floating-button{
 
-  border:0;
+  display:block;
+
+  padding:9px 15px;
 
   border-radius:999px;
-
-  padding:
-    10px 17px;
 
   background:var(--red);
 
   color:white;
 
-  font-size:9px;
+  font-size:8px;
 
-  letter-spacing:.12em;
+  letter-spacing:.11em;
 
   text-transform:uppercase;
 
@@ -1722,59 +1837,19 @@ a{
 
 
 /* =========================================================
-   FOOTER
-========================================================= */
-
-.footer{
-
-  padding:
-    45px 20px 110px;
-
-  text-align:center;
-
-  background:var(--cream);
-
-}
-
-
-.footer p{
-
-  margin:
-    10px 0 4px;
-
-  font-family:var(--serif);
-
-  font-size:25px;
-
-  color:var(--red-dark);
-
-}
-
-
-.footer span{
-
-  font-size:9px;
-
-  letter-spacing:.2em;
-
-  color:var(--muted);
-
-}
-
-
-/* =========================================================
-   SCROLL REVEALS
+   REVEAL ANIMATION
 ========================================================= */
 
 .reveal{
 
   opacity:0;
 
-  transform:
-    translateY(25px);
+  transform:translateY(25px);
 
   transition:
+
     opacity .9s ease,
+
     transform .9s ease;
 
 }
@@ -1784,29 +1859,28 @@ a{
 
   opacity:1;
 
-  transform:
-    translateY(0);
+  transform:translateY(0);
 
 }
 
 
 /* =========================================================
-   FIREWORK / CONFETTI
+   FIREWORKS CANVAS
 ========================================================= */
 
-.firework-piece{
+#fireworksCanvas{
 
   position:fixed;
 
-  width:7px;
-
-  height:11px;
+  inset:0;
 
   z-index:9999;
 
-  pointer-events:none;
+  width:100%;
 
-  border-radius:2px;
+  height:100%;
+
+  pointer-events:none;
 
 }
 
@@ -1815,241 +1889,50 @@ a{
    MOBILE
 ========================================================= */
 
-@media(max-width:600px){
+@media(max-width:430px){
 
-  .section{
+  .invitation{
 
-    padding:
-      75px 20px;
+    max-width:none;
 
-  }
-
-
-  .hero{
-
-    min-height:100svh;
-
-    padding:
-      30px 18px;
-
-  }
-
-
-  .hero-content{
-
-    max-width:500px;
-
-  }
-
-
-  .hero h1{
-
-    font-size:
-      clamp(
-        46px,
-        13vw,
-        68px
-      );
-
-  }
-
-
-  .hero p{
-
-    font-size:18px;
-
-    padding:
-      0 10px;
-
-  }
-
-
-  .curtain{
-
-    width:68%;
-
-  }
-
-
-  .curtain-left{
-
-    left:-8%;
-
-  }
-
-
-  .curtain-right{
-
-    right:-8%;
-
-  }
-
-
-  .curtain-screen.opening .curtain-left{
-
-    transform:
-      translate3d(-89%,0,0)
-      scaleX(.78);
-
-  }
-
-
-  .curtain-screen.opening .curtain-right{
-
-    transform:
-      translate3d(89%,0,0)
-      scaleX(.78);
-
-  }
-
-
-  .curtain-prompt{
-
-    bottom:10%;
-
-  }
-
-
-  .curtain-arrow{
-
-    width:40px;
-
-    height:40px;
-
-  }
-
-
-  .scratch-grid{
-
-    gap:8px;
-
-  }
-
-
-  .scratch-card{
-
-    max-width:115px;
-
-  }
-
-
-  .scratch-value{
-
-    font-size:23px;
-
-  }
-
-
-  .timeline:before{
-
-    left:72px;
-
-  }
-
-
-  .timeline-item{
-
-    grid-template-columns:
-      58px 28px 1fr;
-
-  }
-
-
-  .timeline-time{
-
-    font-size:14px;
-
-    padding-right:10px;
-
-  }
-
-
-  .timeline-content{
-
-    padding-left:10px;
-
-  }
-
-
-  .timeline-content h3{
-
-    font-size:24px;
-
-  }
-
-
-  .venue-card h3{
-
-    font-size:27px;
-
-  }
-
-
-  .venue-address{
-
-    font-size:9px;
-
-  }
-
-
-  .floating-buttons{
-
-    bottom:12px;
-
-  }
-
-
-  .floating-button{
-
-    padding:
-      9px 13px;
+    box-shadow:none;
 
   }
 
 }
 
 
-@media(max-width:380px){
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
 
-  .hero h1{
+@media(max-width:360px){
 
-    font-size:43px;
+  .hero{
+
+    padding-left:22px;
+    padding-right:22px;
 
   }
 
 
-  .hero p{
+  .hero h1{
 
-    font-size:17px;
+    font-size:52px;
+
+  }
+
+
+  .hero-message{
+
+    font-size:16px;
 
   }
 
 
   .scratch-card{
 
-    max-width:98px;
-
-  }
-
-
-  .scratch-item > span{
-
-    font-size:8px;
-
-  }
-
-
-  .timeline:before{
-
-    left:64px;
-
-  }
-
-
-  .timeline-item{
-
-    grid-template-columns:
-      51px 27px 1fr;
+    max-width:92px;
 
   }
 
@@ -2063,10 +1946,12 @@ a{
 @media(prefers-reduced-motion:reduce){
 
   *,
-  *:before,
-  *:after{
+  *::before,
+  *::after{
 
     animation-duration:.01ms!important;
+
+    animation-iteration-count:1!important;
 
     transition-duration:.01ms!important;
 
@@ -2081,105 +1966,65 @@ a{
 </head>
 
 
-<body class="locked">
+<body>
 
 
 <!-- =======================================================
-     CURTAIN OPENING
+     PORTRAIT INVITATION
 ======================================================= -->
 
-<div
-  class="curtain-screen"
-  id="curtainScreen"
->
-
-
-  <div
-    class="curtain curtain-left"
-  ></div>
-
-
-  <div
-    class="curtain curtain-right"
-  ></div>
-
-
-  <!-- SMALL MOVING TAP INDICATOR -->
-
-  <div
-    class="curtain-prompt"
-    id="curtainPrompt"
-  >
-
-    <div class="curtain-arrow">
-      ↓
-    </div>
-
-    <span>
-      Tap to continue
-    </span>
-
-  </div>
-
-
-</div>
-
-
-
-<!-- =======================================================
-     MAIN INVITATION
-======================================================= -->
-
-<main class="invitation">
+<main class="invitation" id="invitation">
 
 
 <!-- =======================================================
      HERO
 ======================================================= -->
 
-<section class="hero section">
+<section class="hero">
 
 
-  <div
-    class="hero-content"
-    id="heroContent"
-  >
+  <div class="hero-content">
 
 
-    <span class="eyebrow">
-
-      Together with our families
-
+    <span class="hero-eyebrow">
+      You Are Cordially Invited
     </span>
+
+
+    <div class="hero-intro">
+      To celebrate the wedding of
+    </div>
 
 
     <h1>
 
-      Happy Alves
+      <span class="name">
+        Happy Alves
+      </span>
 
-      <span>
+      <span class="and">
         &
       </span>
 
-      Nico Alves
+      <span class="name">
+        Nico Alves
+      </span>
 
     </h1>
 
 
-    <div class="ornamental-line">
+    <div class="hero-divider">
 
-      <span>
-        ✦
-      </span>
+      <span>✦</span>
 
     </div>
 
 
-    <p>
+    <p class="hero-message">
 
-      Request the pleasure of your company
-      as we celebrate the beginning of
-      our forever.
+      We would like to invite you
+      to join us as we celebrate
+      the beginning of our forever.
 
     </p>
 
@@ -2201,34 +2046,26 @@ a{
      SCRATCH DATE
 ======================================================= -->
 
-<section
-  class="scratch-section section"
->
+<section class="scratch-section section">
 
 
-  <div
-    class="section-heading reveal"
-  >
+  <div class="section-heading reveal">
 
 
     <span class="eyebrow">
-
       A Little Surprise
-
     </span>
 
 
     <h2>
-
-      Reveal our date
-
+      Reveal Our Date
     </h2>
 
 
     <p>
 
-      Scratch each golden circle to discover
-      when our forever begins.
+      Scratch each golden circle
+      to discover when our forever begins.
 
     </p>
 
@@ -2237,18 +2074,14 @@ a{
 
 
 
-  <div
-    class="scratch-grid reveal"
-  >
+  <div class="scratch-grid reveal">
 
 
     <!-- DAY -->
 
     <div class="scratch-item">
 
-
       <div class="scratch-card">
-
 
         <div class="scratch-value">
 
@@ -2267,9 +2100,9 @@ a{
 
         <canvas
           class="scratch-canvas"
-          data-label="DAY"
-        ></canvas>
-
+          data-value="22"
+          data-label="DAY">
+        </canvas>
 
       </div>
 
@@ -2277,7 +2110,6 @@ a{
       <span>
         DAY
       </span>
-
 
     </div>
 
@@ -2287,9 +2119,7 @@ a{
 
     <div class="scratch-item">
 
-
       <div class="scratch-card">
-
 
         <div class="scratch-value">
 
@@ -2308,9 +2138,9 @@ a{
 
         <canvas
           class="scratch-canvas"
-          data-label="MONTH"
-        ></canvas>
-
+          data-value="JAN"
+          data-label="MONTH">
+        </canvas>
 
       </div>
 
@@ -2318,7 +2148,6 @@ a{
       <span>
         MONTH
       </span>
-
 
     </div>
 
@@ -2328,9 +2157,7 @@ a{
 
     <div class="scratch-item">
 
-
       <div class="scratch-card">
-
 
         <div class="scratch-value">
 
@@ -2349,9 +2176,9 @@ a{
 
         <canvas
           class="scratch-canvas"
-          data-label="YEAR"
-        ></canvas>
-
+          data-value="2027"
+          data-label="YEAR">
+        </canvas>
 
       </div>
 
@@ -2359,7 +2186,6 @@ a{
       <span>
         YEAR
       </span>
-
 
     </div>
 
@@ -2378,8 +2204,8 @@ a{
 
   <div
     class="revealed-date"
-    id="revealedDate"
-  ></div>
+    id="revealedDate">
+  </div>
 
 
 </section>
@@ -2393,14 +2219,11 @@ a{
 <section class="section">
 
 
-  <div
-    class="section-heading reveal"
-  >
+  <div class="section-heading reveal">
+
 
     <span class="eyebrow">
-
       The Celebration
-
     </span>
 
 
@@ -2416,16 +2239,13 @@ a{
 
     </p>
 
+
   </div>
 
 
 
-  <div
-    class="timeline reveal"
-  >
+  <div class="timeline reveal">
 
-
-    <!-- CEREMONY -->
 
     <div class="timeline-item">
 
@@ -2443,8 +2263,8 @@ a{
 
         <p>
 
-          Join us as we exchange our vows
-          and begin our forever.
+          Join us as we exchange
+          our vows and begin our forever.
 
         </p>
 
@@ -2453,8 +2273,6 @@ a{
     </div>
 
 
-
-    <!-- RECEPTION -->
 
     <div class="timeline-item">
 
@@ -2483,8 +2301,6 @@ a{
 
 
 
-    <!-- CELEBRATION -->
-
     <div class="timeline-item">
 
       <div class="timeline-time">
@@ -2511,8 +2327,6 @@ a{
     </div>
 
 
-
-    <!-- PARTY -->
 
     <div class="timeline-item">
 
@@ -2553,9 +2367,7 @@ a{
 <section class="venue section">
 
 
-  <div
-    class="section-heading reveal"
-  >
+  <div class="section-heading reveal">
 
     <span class="eyebrow">
       Where We Gather
@@ -2576,23 +2388,17 @@ a{
 
 
 
-  <!-- =====================================================
-       CHURCH
-  ====================================================== -->
+  <!-- CHURCH -->
 
   <div class="venue-card reveal">
 
 
     <div class="venue-label">
-
       Ceremony · 2:30 PM
-
     </div>
 
 
-
     <div class="venue-illustration">
-
 
       <svg
         viewBox="0 0 500 300"
@@ -2744,7 +2550,6 @@ a{
     </div>
 
 
-
     <h3>
 
       Archdiocesan Shrine of
@@ -2762,9 +2567,7 @@ a{
 
 
     <div class="venue-time">
-
       2:30 PM
-
     </div>
 
 
@@ -2783,9 +2586,7 @@ a{
       target="_blank"
       rel="noopener"
     >
-
       View Location
-
     </a>
 
 
@@ -2793,23 +2594,17 @@ a{
 
 
 
-  <!-- =====================================================
-       RECEPTION
-  ====================================================== -->
+  <!-- RECEPTION -->
 
   <div class="venue-card reveal">
 
 
     <div class="venue-label">
-
       Reception · 5:00 PM
-
     </div>
 
 
-
     <div class="venue-illustration">
-
 
       <svg
         viewBox="0 0 500 300"
@@ -2835,8 +2630,6 @@ a{
              L370 210"
           stroke="#791f2c"
           stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
         />
 
 
@@ -2940,6 +2733,7 @@ a{
           fill="#b89445"
         />
 
+
         <circle
           cx="205"
           cy="123"
@@ -2947,12 +2741,14 @@ a{
           fill="#b89445"
         />
 
+
         <circle
           cx="295"
           cy="123"
           r="2"
           fill="#b89445"
         />
+
 
         <circle
           cx="325"
@@ -2966,11 +2762,8 @@ a{
     </div>
 
 
-
     <h3>
-
       Beverly View Events Pavilion
-
     </h3>
 
 
@@ -2983,9 +2776,7 @@ a{
 
 
     <div class="venue-time">
-
       5:00 PM
-
     </div>
 
 
@@ -3004,9 +2795,7 @@ a{
       target="_blank"
       rel="noopener"
     >
-
       View Location
-
     </a>
 
 
@@ -3021,14 +2810,10 @@ a{
      DRESS CODE
 ======================================================= -->
 
-<section
-  class="dress-code section"
->
+<section class="dress-code section">
 
 
-  <div
-    class="section-heading reveal"
-  >
+  <div class="section-heading reveal">
 
     <span class="eyebrow">
       What To Wear
@@ -3041,14 +2826,10 @@ a{
   </div>
 
 
-
-  <div
-    class="dress-card reveal"
-  >
+  <div class="dress-card reveal">
 
 
     <div class="fashion-illustration">
-
 
       <svg
         viewBox="0 0 400 280"
@@ -3168,7 +2949,6 @@ a{
     </div>
 
 
-
     <h3>
       Formal Attire
     </h3>
@@ -3202,9 +2982,7 @@ a{
 <section class="gifts section">
 
 
-  <div
-    class="section-heading reveal"
-  >
+  <div class="section-heading reveal">
 
     <span class="eyebrow">
       With Love
@@ -3217,10 +2995,7 @@ a{
   </div>
 
 
-
-  <div
-    class="gifts-card reveal"
-  >
+  <div class="gifts-card reveal">
 
 
     <div class="gift-icon">
@@ -3229,9 +3004,7 @@ a{
 
 
     <h3>
-
       Your Presence Is Our Gift
-
     </h3>
 
 
@@ -3257,20 +3030,14 @@ a{
      RSVP
 ======================================================= -->
 
-<section
-  class="rsvp section"
->
+<section class="rsvp section">
 
 
-  <div
-    class="rsvp-inner reveal"
-  >
+  <div class="rsvp-inner reveal">
 
 
     <span class="eyebrow">
-
       We Hope To See You
-
     </span>
 
 
@@ -3291,15 +3058,14 @@ a{
       href="#"
       class="primary-button"
     >
-
       RSVP
-
     </a>
 
 
     <div class="rsvp-deadline">
 
-      Please RSVP for our January 22, 2027 celebration
+      Please RSVP for our
+      January 22, 2027 celebration
 
     </div>
 
@@ -3340,6 +3106,79 @@ a{
 
 
 <!-- =======================================================
+     CURTAIN
+======================================================= -->
+
+<div
+  class="curtain-stage"
+  id="curtainStage"
+>
+
+
+  <div
+    class="curtain curtain-left"
+    id="curtainLeft"
+  ></div>
+
+
+  <div
+    class="curtain curtain-right"
+    id="curtainRight"
+  ></div>
+
+
+  <!-- TIE BACKS -->
+
+  <div
+    class="curtain-tie curtain-tie-left"
+  ></div>
+
+
+  <div
+    class="curtain-tie curtain-tie-right"
+  ></div>
+
+
+  <!-- OPEN BUTTON -->
+
+  <div class="curtain-opening-content">
+
+
+    <div class="tap-indicator">
+
+      <div class="tap-dot"></div>
+
+    </div>
+
+
+    <div class="tap-text">
+      Tap to continue
+    </div>
+
+
+    <div class="swipe-line">
+      or swipe to open
+    </div>
+
+
+  </div>
+
+
+</div>
+
+
+
+<!-- =======================================================
+     FIREWORKS
+======================================================= -->
+
+<canvas
+  id="fireworksCanvas">
+</canvas>
+
+
+
+<!-- =======================================================
      FLOATING BUTTONS
 ======================================================= -->
 
@@ -3350,9 +3189,7 @@ a{
     href="#"
     class="floating-button"
   >
-
     RSVP
-
   </a>
 
 
@@ -3362,9 +3199,7 @@ a{
     rel="noopener"
     class="floating-button secondary"
   >
-
     Location
-
   </a>
 
 
@@ -3374,61 +3209,52 @@ a{
 
 <script>
 
-
 /* =========================================================
-   CURTAIN OPENING
+   VARIABLES
 ========================================================= */
 
-const curtainScreen =
-  document.getElementById(
-    "curtainScreen"
-  );
+const invitation =
+  document.getElementById("invitation");
+
+const curtainStage =
+  document.getElementById("curtainStage");
+
+let invitationOpened = false;
 
 
-let isOpening = false;
-
+/* =========================================================
+   OPEN CURTAIN
+========================================================= */
 
 function openInvitation(){
 
-  if(isOpening) return;
+  if(invitationOpened){
+    return;
+  }
 
-  isOpening = true;
-
-
-  /*
-     Add opening class.
-
-     The curtains animate outward.
-     The hero underneath fades in.
-  */
-
-  curtainScreen.classList.add(
-    "opening"
-  );
+  invitationOpened = true;
 
 
   /*
-     Allow scrolling shortly after
-     the curtains begin opening.
+    This is important:
+
+    We DON'T remove the curtain.
+
+    It stays on the sides permanently,
+    exactly like the inspiration.
   */
 
-  setTimeout(() => {
+  invitation.classList.add("opened");
 
-    document.body.classList.remove(
-      "locked"
-    );
-
-  },900);
+  curtainStage.classList.add("opened");
 
 
   /*
-     We DO NOT remove the curtain.
-
-     This is important.
-
-     The curtains remain visually
-     gathered on both sides.
+    Allow scrolling after opening.
   */
+
+  document.body.style.overflowX = "hidden";
+  document.body.style.overflowY = "auto";
 
 }
 
@@ -3437,7 +3263,7 @@ function openInvitation(){
    TAP / CLICK
 ========================================================= */
 
-curtainScreen.addEventListener(
+curtainStage.addEventListener(
   "click",
   openInvitation
 );
@@ -3447,18 +3273,22 @@ curtainScreen.addEventListener(
    SWIPE
 ========================================================= */
 
-let startX = 0;
-let startY = 0;
+let touchStartX = 0;
+let touchStartY = 0;
 
 
-curtainScreen.addEventListener(
+curtainStage.addEventListener(
   "touchstart",
   function(e){
 
-    startX =
+    if(!e.touches.length){
+      return;
+    }
+
+    touchStartX =
       e.touches[0].clientX;
 
-    startY =
+    touchStartY =
       e.touches[0].clientY;
 
   },
@@ -3468,9 +3298,13 @@ curtainScreen.addEventListener(
 );
 
 
-curtainScreen.addEventListener(
+curtainStage.addEventListener(
   "touchend",
   function(e){
+
+    if(!e.changedTouches.length){
+      return;
+    }
 
     const endX =
       e.changedTouches[0].clientX;
@@ -3480,25 +3314,23 @@ curtainScreen.addEventListener(
 
 
     const distanceX =
-      Math.abs(
-        endX - startX
-      );
-
+      endX - touchStartX;
 
     const distanceY =
-      Math.abs(
-        endY - startY
-      );
+      endY - touchStartY;
 
 
     /*
-       Only treat a mostly horizontal
-       swipe as opening the curtain.
+      Accept horizontal swipe.
+
+      Also accept a normal upward swipe,
+      because this feels more natural
+      on mobile.
     */
 
     if(
-      distanceX > 45 &&
-      distanceX > distanceY
+      Math.abs(distanceX) > 45 ||
+      distanceY < -45
     ){
 
       openInvitation();
@@ -3517,22 +3349,18 @@ curtainScreen.addEventListener(
 ========================================================= */
 
 const revealElements =
-  document.querySelectorAll(
-    ".reveal"
-  );
+  document.querySelectorAll(".reveal");
 
 
 const observer =
   new IntersectionObserver(
 
-    (entries) => {
+    function(entries){
 
       entries.forEach(
-        entry => {
+        function(entry){
 
-          if(
-            entry.isIntersecting
-          ){
+          if(entry.isIntersecting){
 
             entry.target.classList.add(
               "visible"
@@ -3557,9 +3385,9 @@ const observer =
 
 
 revealElements.forEach(
-  el => {
+  function(element){
 
-    observer.observe(el);
+    observer.observe(element);
 
   }
 );
@@ -3582,35 +3410,25 @@ const revealed =
 
 
 scratchCards.forEach(
-  (canvas,index) => {
-
+  function(canvas,index){
 
     const ctx =
-      canvas.getContext(
-        "2d",
-        {
-          willReadFrequently:true
-        }
-      );
+      canvas.getContext("2d");
 
 
     let scratching = false;
 
-    let scratchedPixels = 0;
-
-    let lastX = 0;
-    let lastY = 0;
+    let scratchCount = 0;
 
 
     /* -----------------------------------------------------
-       DRAW GOLD SURFACE
+       DRAW SCRATCH SURFACE
     ----------------------------------------------------- */
 
     function resizeCanvas(){
 
       const rect =
         canvas.getBoundingClientRect();
-
 
       const ratio =
         Math.min(
@@ -3621,7 +3439,6 @@ scratchCards.forEach(
 
       canvas.width =
         rect.width * ratio;
-
 
       canvas.height =
         rect.height * ratio;
@@ -3644,35 +3461,40 @@ scratchCards.forEach(
         rect.height;
 
 
+      /* gold surface */
+
       const gradient =
         ctx.createRadialGradient(
-
-          w*.35,
+          w*.32,
           h*.25,
           5,
-
           w*.5,
           h*.5,
-          w*.7
-
+          w*.72
         );
 
 
       gradient.addColorStop(
         0,
-        "#f2dfa6"
+        "#f7e7b0"
       );
 
 
       gradient.addColorStop(
-        .45,
-        "#c3a14e"
+        .4,
+        "#d0ae5a"
+      );
+
+
+      gradient.addColorStop(
+        .72,
+        "#b28b36"
       );
 
 
       gradient.addColorStop(
         1,
-        "#8d6c25"
+        "#765718"
       );
 
 
@@ -3692,18 +3514,17 @@ scratchCards.forEach(
         h/2,
         Math.min(w,h)/2 - 2,
         0,
-        Math.PI*2
+        Math.PI * 2
       );
 
 
       ctx.fill();
 
 
-      /* Inner border */
+      /* inner circle */
 
       ctx.strokeStyle =
-        "rgba(255,255,255,.45)";
-
+        "rgba(255,255,255,.5)";
 
       ctx.lineWidth =
         1;
@@ -3715,16 +3536,16 @@ scratchCards.forEach(
       ctx.arc(
         w/2,
         h/2,
-        Math.min(w,h)/2 - 13,
+        Math.min(w,h)/2 - 12,
         0,
-        Math.PI*2
+        Math.PI * 2
       );
 
 
       ctx.stroke();
 
 
-      /* Text */
+      /* scratch text */
 
       ctx.fillStyle =
         "#fff9e7";
@@ -3745,7 +3566,7 @@ scratchCards.forEach(
       ctx.fillText(
         "SCRATCH",
         w/2,
-        h/2 - 8
+        h/2 - 7
       );
 
 
@@ -3756,11 +3577,8 @@ scratchCards.forEach(
       ctx.fillText(
         "TO REVEAL",
         w/2,
-        h/2 + 8
+        h/2 + 7
       );
-
-
-      scratchedPixels = 0;
 
     }
 
@@ -3775,12 +3593,14 @@ scratchCards.forEach(
 
 
     /* -----------------------------------------------------
-       SCRATCH FUNCTION
+       SCRATCH
     ----------------------------------------------------- */
 
     function scratch(e){
 
-      if(!scratching) return;
+      if(!scratching){
+        return;
+      }
 
 
       const rect =
@@ -3788,55 +3608,15 @@ scratchCards.forEach(
 
 
       const x =
-        e.clientX -
-        rect.left;
+        e.clientX - rect.left;
 
 
       const y =
-        e.clientY -
-        rect.top;
+        e.clientY - rect.top;
 
-
-      /*
-         Connect strokes instead of
-         creating only individual circles.
-      */
 
       ctx.globalCompositeOperation =
         "destination-out";
-
-
-      ctx.lineCap =
-        "round";
-
-
-      ctx.lineJoin =
-        "round";
-
-
-      ctx.lineWidth =
-        Math.max(
-          28,
-          rect.width * .22
-        );
-
-
-      ctx.beginPath();
-
-
-      ctx.moveTo(
-        lastX,
-        lastY
-      );
-
-
-      ctx.lineTo(
-        x,
-        y
-      );
-
-
-      ctx.stroke();
 
 
       ctx.beginPath();
@@ -3847,31 +3627,29 @@ scratchCards.forEach(
         y,
         Math.max(
           14,
-          rect.width * .11
+          rect.width * .13
         ),
         0,
-        Math.PI*2
+        Math.PI * 2
       );
 
 
       ctx.fill();
 
 
-      lastX = x;
-
-      lastY = y;
-
-
-      scratchedPixels++;
+      scratchCount++;
 
 
       /*
-         Reveal after a reasonable
-         amount of scratching.
+        Reveal after enough movement.
+
+        This makes it feel responsive
+        without requiring the user
+        to scratch forever.
       */
 
       if(
-        scratchedPixels > 18 &&
+        scratchCount >= 22 &&
         !revealed.has(index)
       ){
 
@@ -3881,17 +3659,25 @@ scratchCards.forEach(
 
 
         /*
-           Fade the canvas slightly
-           so the revealed value feels
-           more polished.
+          Fade the remaining surface
+          once revealed.
         */
 
-        canvas.style.transition =
-          "opacity .6s ease";
-
-
-        canvas.style.opacity =
-          ".15";
+        canvas.animate(
+          [
+            {
+              opacity:1
+            },
+            {
+              opacity:0
+            }
+          ],
+          {
+            duration:450,
+            easing:"ease-out",
+            fill:"forwards"
+          }
+        );
 
 
         if(
@@ -3908,36 +3694,18 @@ scratchCards.forEach(
 
 
     /* -----------------------------------------------------
-       POINTER DOWN
+       POINTER EVENTS
     ----------------------------------------------------- */
 
     canvas.addEventListener(
       "pointerdown",
       function(e){
 
-        e.preventDefault();
-
         scratching = true;
 
-
-        lastX =
-          e.clientX -
-          canvas.getBoundingClientRect().left;
-
-
-        lastY =
-          e.clientY -
-          canvas.getBoundingClientRect().top;
-
-
-        try{
-
-          canvas.setPointerCapture(
-            e.pointerId
-          );
-
-        }catch(error){}
-
+        canvas.setPointerCapture(
+          e.pointerId
+        );
 
         scratch(e);
 
@@ -3945,45 +3713,17 @@ scratchCards.forEach(
     );
 
 
-    /* -----------------------------------------------------
-       POINTER MOVE
-    ----------------------------------------------------- */
-
     canvas.addEventListener(
       "pointermove",
-      function(e){
-
-        if(
-          scratching
-        ){
-
-          e.preventDefault();
-
-          scratch(e);
-
-        }
-
-      }
+      scratch
     );
 
 
-    /* -----------------------------------------------------
-       POINTER UP
-    ----------------------------------------------------- */
-
     canvas.addEventListener(
       "pointerup",
-      function(e){
+      function(){
 
         scratching = false;
-
-        try{
-
-          canvas.releasePointerCapture(
-            e.pointerId
-          );
-
-        }catch(error){}
 
       }
     );
@@ -4004,8 +3744,8 @@ scratchCards.forEach(
       function(){
 
         /*
-           Don't stop on mobile because
-           pointer capture keeps working.
+          Don't immediately stop on mobile.
+          Pointer capture handles the gesture.
         */
 
       }
@@ -4034,29 +3774,22 @@ function revealCompleteDate(){
   date.animate(
 
     [
-
       {
         opacity:0,
-
         transform:
-          "translateY(18px) scale(.96)"
-
+          "translateY(15px) scale(.95)"
       },
 
       {
-
         opacity:1,
-
         transform:
           "translateY(0) scale(1)"
-
       }
 
     ],
 
     {
-
-      duration:1200,
+      duration:1100,
 
       easing:
         "cubic-bezier(.16,1,.3,1)",
@@ -4068,6 +3801,10 @@ function revealCompleteDate(){
   );
 
 
+  /*
+    Start a much bigger celebration.
+  */
+
   createFireworks();
 
 }
@@ -4077,415 +3814,493 @@ function revealCompleteDate(){
    FIREWORKS
 ========================================================= */
 
-/*
-   Larger, fuller celebration.
-
-   Instead of only dropping a few pieces
-   from the top, this creates multiple
-   fireworks bursts around the screen.
-*/
-
 function createFireworks(){
+
+  const canvas =
+    document.getElementById(
+      "fireworksCanvas"
+    );
+
+  const ctx =
+    canvas.getContext("2d");
+
+
+  const dpr =
+    Math.min(
+      window.devicePixelRatio || 1,
+      2
+    );
+
+
+  canvas.width =
+    window.innerWidth * dpr;
+
+  canvas.height =
+    window.innerHeight * dpr;
+
+
+  canvas.style.width =
+    window.innerWidth + "px";
+
+  canvas.style.height =
+    window.innerHeight + "px";
+
+
+  ctx.setTransform(
+    dpr,
+    0,
+    0,
+    dpr,
+    0,
+    0
+  );
+
+
+  const particles = [];
+
+  const rockets = [];
 
 
   const colors = [
 
     "#b89445",
-    "#791f2c",
     "#d8bf79",
+    "#f4df9c",
+    "#791f2c",
     "#a64c58",
-    "#eee1b8"
+    "#fff6dc"
 
   ];
 
 
-  const positions = [
+  /* -------------------------------------------------------
+     CREATE ROCKET
+  ------------------------------------------------------- */
 
-    {
-      x:.18,
-      y:.25
-    },
-
-    {
-      x:.50,
-      y:.18
-    },
-
-    {
-      x:.82,
-      y:.28
-    },
-
-    {
-      x:.28,
-      y:.43
-    },
-
-    {
-      x:.72,
-      y:.45
-    }
-
-  ];
-
-
-  positions.forEach(
-    position => {
-
-      createFireworkBurst(
-        position.x,
-        position.y,
-        colors
-      );
-
-    }
-  );
-
-
-  /*
-     Additional falling confetti.
-  */
-
-  for(
-    let i=0;
-    i<130;
-    i++
+  function createRocket(
+    x,
+    targetY,
+    delay
   ){
 
-    createConfettiPiece(
-      colors
+    setTimeout(
+      function(){
+
+        rockets.push({
+
+          x:x,
+
+          y:window.innerHeight + 10,
+
+          targetY:targetY,
+
+          speed:
+            7 + Math.random()*3,
+
+          color:
+            colors[
+              Math.floor(
+                Math.random()*colors.length
+              )
+            ]
+
+        });
+
+      },
+      delay
     );
 
   }
 
-}
 
+  /* -------------------------------------------------------
+     EXPLOSION
+  ------------------------------------------------------- */
 
-/* =========================================================
-   FIREWORK BURST
-========================================================= */
-
-function createFireworkBurst(
-  xPercent,
-  yPercent,
-  colors
-){
-
-  const centerX =
-    window.innerWidth *
-    xPercent;
-
-
-  const centerY =
-    window.innerHeight *
-    yPercent;
-
-
-  const pieces =
-    22;
-
-
-  for(
-    let i=0;
-    i<pieces;
-    i++
+  function explode(
+    x,
+    y,
+    color
   ){
 
-    const piece =
-      document.createElement(
-        "div"
+    const particleCount =
+      window.innerWidth < 500
+        ? 85
+        : 110;
+
+
+    for(
+      let i=0;
+      i<particleCount;
+      i++
+    ){
+
+      const angle =
+        Math.random() *
+        Math.PI * 2;
+
+
+      const speed =
+        2 +
+        Math.random()*5;
+
+
+      particles.push({
+
+        x:x,
+
+        y:y,
+
+        vx:
+          Math.cos(angle)*speed,
+
+        vy:
+          Math.sin(angle)*speed,
+
+        gravity:
+          .055 +
+
+          Math.random()*.035,
+
+        friction:
+          .985,
+
+        life:
+          1,
+
+        decay:
+          .008 +
+
+          Math.random()*.009,
+
+        size:
+          1.3 +
+
+          Math.random()*2.4,
+
+        color:
+          Math.random() > .35
+            ? color
+            : colors[
+                Math.floor(
+                  Math.random()*colors.length
+                )
+              ]
+
+      });
+
+    }
+
+
+    /* bright center flash */
+
+    ctx.beginPath();
+
+    ctx.arc(
+      x,
+      y,
+      4,
+      0,
+      Math.PI*2
+    );
+
+    ctx.fillStyle =
+      "#fff8dc";
+
+    ctx.shadowBlur =
+      20;
+
+    ctx.shadowColor =
+      color;
+
+    ctx.fill();
+
+    ctx.shadowBlur =
+      0;
+
+  }
+
+
+  /* -------------------------------------------------------
+     SCHEDULE MULTIPLE FIREWORKS
+  ------------------------------------------------------- */
+
+  const width =
+    window.innerWidth;
+
+  const height =
+    window.innerHeight;
+
+
+  createRocket(
+    width*.20,
+    height*.28,
+    0
+  );
+
+
+  createRocket(
+    width*.78,
+    height*.24,
+    180
+  );
+
+
+  createRocket(
+    width*.48,
+    height*.18,
+    360
+  );
+
+
+  createRocket(
+    width*.12,
+    height*.42,
+    650
+  );
+
+
+  createRocket(
+    width*.87,
+    height*.38,
+    850
+  );
+
+
+  createRocket(
+    width*.35,
+    height*.30,
+    1100
+  );
+
+
+  createRocket(
+    width*.67,
+    height*.33,
+    1350
+  );
+
+
+  createRocket(
+    width*.50,
+    height*.22,
+    1600
+  );
+
+
+  /* -------------------------------------------------------
+     ANIMATION
+  ------------------------------------------------------- */
+
+  let startTime =
+    performance.now();
+
+
+  function animate(){
+
+    const elapsed =
+      performance.now() -
+      startTime;
+
+
+    /*
+      Stop after roughly 6 seconds.
+    */
+
+    if(elapsed > 6500){
+
+      ctx.clearRect(
+        0,
+        0,
+        width,
+        height
       );
 
+      return;
 
-    piece.className =
-      "firework-piece";
-
-
-    piece.style.background =
-      colors[
-        Math.floor(
-          Math.random() *
-          colors.length
-        )
-      ];
+    }
 
 
-    piece.style.left =
-      centerX + "px";
-
-
-    piece.style.top =
-      centerY + "px";
-
-
-    document.body.appendChild(
-      piece
+    ctx.clearRect(
+      0,
+      0,
+      width,
+      height
     );
 
 
-    const angle =
-      (
-        Math.PI * 2
-      ) *
-      (i / pieces);
+    /* -----------------------------------------------
+       ROCKETS
+    ----------------------------------------------- */
+
+    rockets.forEach(
+      function(rocket,index){
+
+        rocket.y -=
+          rocket.speed;
 
 
-    const distance =
-      50 +
-      Math.random() *
-      90;
+        /*
+          Rocket trail
+        */
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+          rocket.x,
+          rocket.y + 15
+        );
+
+        ctx.lineTo(
+          rocket.x,
+          rocket.y
+        );
+
+        ctx.strokeStyle =
+          rocket.color;
+
+        ctx.lineWidth =
+          1.5;
+
+        ctx.globalAlpha =
+          .7;
+
+        ctx.stroke();
 
 
-    const endX =
-      Math.cos(angle) *
-      distance;
+        /*
+          explode when target reached
+        */
+
+        if(
+          rocket.y <=
+          rocket.targetY
+        ){
+
+          explode(
+            rocket.x,
+            rocket.y,
+            rocket.color
+          );
 
 
-    const endY =
-      Math.sin(angle) *
-      distance;
-
-
-    const duration =
-      900 +
-      Math.random() *
-      700;
-
-
-    piece.animate(
-
-      [
-
-        {
-
-          transform:
-            "translate(-50%,-50%) scale(.2)",
-
-          opacity:1
-
-        },
-
-        {
-
-          transform:
-            `translate(
-              calc(-50% + ${endX}px),
-              calc(-50% + ${endY}px)
-            )
-            scale(1.1)`,
-
-          opacity:.9
-
-        },
-
-        {
-
-          transform:
-            `translate(
-              calc(-50% + ${endX * 1.35}px),
-              calc(-50% + ${endY * 1.35}px)
-            )
-            scale(.3)`,
-
-          opacity:0
+          rockets.splice(
+            index,
+            1
+          );
 
         }
 
-      ],
+      }
+    );
 
-      {
 
-        duration:
+    /* -----------------------------------------------
+       PARTICLES
+    ----------------------------------------------- */
 
-          duration,
+    particles.forEach(
+      function(particle,index){
 
-        easing:
-          "cubic-bezier(.16,1,.3,1)"
+        particle.vx *=
+          particle.friction;
+
+        particle.vy *=
+          particle.friction;
+
+
+        particle.vy +=
+          particle.gravity;
+
+
+        particle.x +=
+          particle.vx;
+
+        particle.y +=
+          particle.vy;
+
+
+        particle.life -=
+          particle.decay;
+
+
+        if(
+          particle.life <= 0
+        ){
+
+          particles.splice(
+            index,
+            1
+          );
+
+          return;
+
+        }
+
+
+        ctx.beginPath();
+
+
+        ctx.arc(
+          particle.x,
+          particle.y,
+          particle.size,
+          0,
+          Math.PI*2
+        );
+
+
+        ctx.fillStyle =
+          particle.color;
+
+        ctx.globalAlpha =
+          Math.max(
+            particle.life,
+            0
+          );
+
+
+        ctx.shadowBlur =
+          8;
+
+        ctx.shadowColor =
+          particle.color;
+
+
+        ctx.fill();
+
+
+        ctx.shadowBlur =
+          0;
 
       }
+    );
 
-    ).onfinish =
-      () => {
 
-        piece.remove();
+    ctx.globalAlpha =
+      1;
 
-      };
+
+    requestAnimationFrame(
+      animate
+    );
 
   }
+
+
+  animate();
 
 }
 
 
 /* =========================================================
-   CONFETTI PIECES
+   PREVENT PAGE SCROLL WHILE CURTAIN IS CLOSED
 ========================================================= */
 
-function createConfettiPiece(
-  colors
-){
+document.body.style.overflowY = "hidden";
 
-  const piece =
-    document.createElement(
-      "div"
-    );
-
-
-  piece.className =
-    "firework-piece";
-
-
-  piece.style.width =
-    (
-      4 +
-      Math.random()*5
-    ) +
-    "px";
-
-
-  piece.style.height =
-    (
-      7 +
-      Math.random()*8
-    ) +
-    "px";
-
-
-  piece.style.background =
-    colors[
-      Math.floor(
-        Math.random() *
-        colors.length
-      )
-    ];
-
-
-  piece.style.left =
-    (
-      Math.random() *
-      100
-    ) +
-    "vw";
-
-
-  piece.style.top =
-    "-20px";
-
-
-  piece.style.transform =
-    `rotate(
-      ${Math.random()*360}deg
-    )`;
-
-
-  document.body.appendChild(
-    piece
-  );
-
-
-  const drift =
-    (
-      Math.random() -
-      .5
-    ) *
-    250;
-
-
-  const duration =
-    2200 +
-    Math.random()*2200;
-
-
-  piece.animate(
-
-    [
-
-      {
-
-        transform:
-          `translateY(0)
-           translateX(0)
-           rotate(0deg)`,
-
-        opacity:1
-
-      },
-
-      {
-
-        transform:
-          `translateY(
-             45vh
-           )
-           translateX(
-             ${drift*.45}px
-           )
-           rotate(
-             ${Math.random()*500}deg
-           )`,
-
-        opacity:1
-
-      },
-
-      {
-
-        transform:
-          `translateY(
-             110vh
-           )
-           translateX(
-             ${drift}px
-           )
-           rotate(
-             ${Math.random()*1000}deg
-           )`,
-
-        opacity:0
-
-      }
-
-    ],
-
-    {
-
-      duration:
-
-        duration,
-
-      easing:
-        "cubic-bezier(.2,.7,.3,1)"
-
-    }
-
-  ).onfinish =
-    () => {
-
-      piece.remove();
-
-    };
-
-}
-
-
-/* =========================================================
-   PREVENT OLD PAGE POSITION ISSUE
-========================================================= */
-
-window.addEventListener(
-  "load",
-  function(){
-
-    window.scrollTo(
-      0,
-      0
-    );
-
-  }
-);
 
 </script>
 
-
 </body>
-
 </html>
