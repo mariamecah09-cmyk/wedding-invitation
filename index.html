@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="theme-color" content="#f7f1e8">
-<title>Happy & Nico | Wedding Invitation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#791f2c">
+<title>Happy Alves & Nico Alves | Wedding Invitation</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Parisienne&display=swap');
@@ -52,6 +52,10 @@ body{
   overflow-x:hidden;
 }
 
+body.curtain-active{
+  overflow:hidden;
+}
+
 button,
 a{
   font:inherit;
@@ -77,6 +81,7 @@ a{
   z-index:1000;
   background:#25070d;
   overflow:hidden;
+  touch-action:pan-y;
 }
 
 .curtain{
@@ -85,6 +90,7 @@ a{
   bottom:-3%;
   width:53%;
   z-index:2;
+
   background:
     linear-gradient(
       90deg,
@@ -100,15 +106,19 @@ a{
       #7e202e 90%,
       #360811 100%
     );
+
   box-shadow:
     inset -25px 0 35px rgba(0,0,0,.28),
     inset 25px 0 35px rgba(255,255,255,.04);
+
+  will-change:transform;
 }
 
 .curtain:before{
   content:"";
   position:absolute;
   inset:0;
+
   background:
     repeating-linear-gradient(
       90deg,
@@ -117,6 +127,7 @@ a{
       rgba(0,0,0,.09) 8px,
       rgba(0,0,0,.09) 15px
     );
+
   mix-blend-mode:soft-light;
 }
 
@@ -124,6 +135,7 @@ a{
   content:"";
   position:absolute;
   inset:0;
+
   background:
     linear-gradient(
       90deg,
@@ -146,104 +158,206 @@ a{
   border-left:1px solid rgba(216,191,121,.16);
 }
 
+
+/* Curtain opening animation */
+
 .curtain-screen.opening .curtain-left{
-  animation:curtainLeft 1.8s cubic-bezier(.16,1,.3,1) forwards;
+  animation:
+    curtainLeft 1.8s cubic-bezier(.16,1,.3,1) forwards;
 }
 
 .curtain-screen.opening .curtain-right{
-  animation:curtainRight 1.8s cubic-bezier(.16,1,.3,1) forwards;
+  animation:
+    curtainRight 1.8s cubic-bezier(.16,1,.3,1) forwards;
 }
 
 @keyframes curtainLeft{
   0%{
-    transform:translateX(0);
+    transform:translateX(0) scaleX(1);
   }
+
+  55%{
+    transform:translateX(-55%) scaleX(1.01);
+  }
+
   100%{
-    transform:translateX(-100%);
+    transform:translateX(-105%) scaleX(1);
   }
 }
 
 @keyframes curtainRight{
   0%{
-    transform:translateX(0);
+    transform:translateX(0) scaleX(1);
   }
+
+  55%{
+    transform:translateX(55%) scaleX(1.01);
+  }
+
   100%{
-    transform:translateX(100%);
+    transform:translateX(105%) scaleX(1);
   }
 }
+
+
+/* Curtain opening button */
 
 .curtain-content{
   position:absolute;
   inset:0;
   z-index:5;
+
   display:flex;
-  flex-direction:column;
   align-items:center;
-  justify-content:center;
+  justify-content:flex-end;
+  flex-direction:column;
+
+  padding-bottom:clamp(55px,12vh,100px);
+
   text-align:center;
+
   color:white;
+
   pointer-events:none;
-  transition:opacity .5s ease;
-  padding:20px;
+
+  transition:
+    opacity .45s ease,
+    transform .45s ease;
 }
 
 .curtain-screen.opening .curtain-content{
   opacity:0;
-}
-
-.curtain-small{
-  font-size:10px;
-  letter-spacing:.32em;
-  text-transform:uppercase;
-  color:rgba(255,255,255,.7);
-  margin-bottom:18px;
-}
-
-.curtain-content h1{
-  margin:0;
-  font-family:var(--serif);
-  font-size:clamp(42px,10vw,76px);
-  font-weight:400;
-  letter-spacing:.02em;
-}
-
-.curtain-content h1 i{
-  font-family:var(--script);
-  font-size:.65em;
-  color:var(--gold-light);
-  font-style:normal;
-  margin:0 8px;
-}
-
-.curtain-line{
-  width:70px;
-  height:1px;
-  margin:24px 0;
-  background:var(--gold-light);
+  transform:translateY(10px);
 }
 
 .open-button{
   pointer-events:auto;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:11px;
+
+  border:0;
   background:transparent;
-  border:1px solid rgba(216,191,121,.7);
-  color:white;
-  padding:13px 25px;
-  letter-spacing:.14em;
-  font-size:10px;
+
+  color:rgba(255,255,255,.92);
+
+  padding:14px 20px;
+
+  font-family:var(--sans);
+  font-size:9px;
+  font-weight:500;
+  letter-spacing:.22em;
+
+  text-transform:uppercase;
+
   transition:all .3s ease;
+
+  -webkit-tap-highlight-color:transparent;
 }
 
 .open-button:hover{
-  background:rgba(216,191,121,.12);
-  transform:translateY(-2px);
+  color:var(--gold-light);
 }
 
-.open-button small{
-  display:block;
-  margin-top:5px;
-  opacity:.55;
-  letter-spacing:.08em;
-  font-size:9px;
+.open-button:active{
+  transform:scale(.96);
+}
+
+
+/* Moving point / arrow */
+
+.open-icon{
+  width:30px;
+  height:30px;
+
+  border:1px solid rgba(216,191,121,.8);
+  border-radius:50%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  color:var(--gold-light);
+
+  position:relative;
+
+  animation:
+    continuePulse 1.5s ease-in-out infinite;
+}
+
+.open-icon:before{
+  content:"";
+  width:5px;
+  height:5px;
+
+  border-radius:50%;
+
+  background:var(--gold-light);
+
+  box-shadow:
+    0 0 0 4px rgba(216,191,121,.12);
+
+  animation:
+    pointMove 1.2s ease-in-out infinite;
+}
+
+.open-icon:after{
+  content:"";
+  position:absolute;
+
+  width:7px;
+  height:7px;
+
+  border-top:1px solid var(--gold-light);
+  border-right:1px solid var(--gold-light);
+
+  transform:rotate(45deg);
+
+  right:7px;
+
+  opacity:.8;
+}
+
+@keyframes pointMove{
+  0%,
+  100%{
+    transform:translateX(-3px);
+  }
+
+  50%{
+    transform:translateX(3px);
+  }
+}
+
+@keyframes continuePulse{
+  0%,
+  100%{
+    transform:scale(1);
+    box-shadow:0 0 0 0 rgba(216,191,121,0);
+  }
+
+  50%{
+    transform:scale(1.08);
+    box-shadow:0 0 0 7px rgba(216,191,121,.08);
+  }
+}
+
+.open-text{
+  animation:
+    textPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes textPulse{
+  0%,
+  100%{
+    opacity:.65;
+  }
+
+  50%{
+    opacity:1;
+  }
 }
 
 
@@ -273,26 +387,33 @@ a{
 .eyebrow{
   display:block;
   margin-bottom:12px;
+
   font-size:10px;
   letter-spacing:.28em;
   text-transform:uppercase;
+
   color:var(--gold);
 }
 
 .section-heading h2{
   margin:0;
+
   font-family:var(--serif);
   font-size:clamp(38px,8vw,55px);
   line-height:1;
   font-weight:500;
+
   color:var(--red-dark);
 }
 
 .section-heading p{
   margin:18px auto 0;
+
   max-width:430px;
+
   font-size:13px;
   line-height:1.8;
+
   color:var(--muted);
 }
 
@@ -309,59 +430,84 @@ a{
 
 .hero{
   min-height:100vh;
+
   display:grid;
   place-items:center;
+
   padding:45px 20px;
+
   background:
-    radial-gradient(circle at center,rgba(184,148,69,.08),transparent 50%),
+    radial-gradient(
+      circle at center,
+      rgba(184,148,69,.08),
+      transparent 50%
+    ),
     var(--cream-light);
 }
 
 .hero-frame{
   width:min(590px,100%);
+
   padding:65px 28px;
+
   position:relative;
+
   text-align:center;
+
   border:1px solid rgba(184,148,69,.5);
 }
 
 .hero-frame:before,
 .hero-frame:after{
   content:"";
+
   position:absolute;
+
   width:70px;
   height:70px;
+
   border-color:var(--gold);
   border-style:solid;
+
   opacity:.65;
 }
 
 .hero-frame:before{
   top:12px;
   left:12px;
+
   border-width:1px 0 0 1px;
 }
 
 .hero-frame:after{
   bottom:12px;
   right:12px;
+
   border-width:0 1px 1px 0;
 }
 
 .hero h1{
   margin:18px 0 0;
+
   font-family:var(--serif);
   font-weight:500;
+
   font-size:clamp(47px,11vw,82px);
+
   line-height:.9;
+
   color:var(--red-dark);
 }
 
 .hero h1 span{
   display:block;
+
   font-family:var(--script);
+
   color:var(--gold);
+
   font-size:.55em;
+
   margin:7px 0;
 }
 
@@ -369,36 +515,36 @@ a{
   display:flex;
   align-items:center;
   justify-content:center;
+
   gap:14px;
+
   margin:25px 0;
+
   color:var(--gold);
 }
 
 .ornamental-line:before,
 .ornamental-line:after{
   content:"";
+
   width:70px;
   height:1px;
+
   background:rgba(184,148,69,.55);
 }
 
 .hero p{
   max-width:430px;
+
   margin:0 auto;
+
   font-family:var(--serif);
+
   font-size:19px;
+
   line-height:1.55;
+
   color:#65595a;
-}
-
-/* DATE REMOVED FROM HERO */
-
-.hero-theme{
-  margin-top:28px;
-  font-size:9px;
-  letter-spacing:.25em;
-  text-transform:uppercase;
-  color:var(--muted);
 }
 
 
@@ -416,9 +562,13 @@ a{
 
 .scratch-grid{
   display:grid;
+
   grid-template-columns:repeat(3,1fr);
+
   gap:18px;
+
   max-width:540px;
+
   margin:0 auto;
 }
 
@@ -428,19 +578,28 @@ a{
 
 .scratch-card{
   position:relative;
+
   width:100%;
+
   max-width:155px;
+
   aspect-ratio:1;
+
   margin:auto;
 }
 
 .scratch-value{
   position:absolute;
+
   inset:0;
+
   display:grid;
   place-items:center;
+
   z-index:0;
+
   border-radius:50%;
+
   background:
     radial-gradient(
       circle at 35% 30%,
@@ -448,57 +607,88 @@ a{
       #c3a14e 48%,
       #8d6c25 100%
     );
+
   border:5px solid #eee0b5;
+
   box-shadow:
     0 12px 25px rgba(94,69,25,.18),
     inset 0 0 0 1px rgba(255,255,255,.5);
+
   font-family:var(--serif);
+
   font-size:29px;
+
   color:#fffdf2;
 }
 
 .scratch-value small{
   display:block;
+
   font-family:var(--sans);
+
   font-size:8px;
+
   letter-spacing:.18em;
+
   margin-top:4px;
 }
 
 .scratch-canvas{
   position:absolute;
+
   inset:0;
+
   width:100%;
   height:100%;
+
   border-radius:50%;
+
   z-index:2;
+
   touch-action:none;
+
   cursor:grab;
+
+  -webkit-tap-highlight-color:transparent;
 }
 
 .scratch-item > span{
   display:block;
+
   margin-top:15px;
+
   font-size:9px;
+
   letter-spacing:.28em;
+
   color:var(--muted);
 }
 
 .scratch-instruction{
   margin-top:28px;
+
   text-align:center;
+
   font-size:11px;
+
   color:var(--muted);
+
   letter-spacing:.08em;
 }
 
 .revealed-date{
   min-height:30px;
+
   margin-top:30px;
+
   text-align:center;
+
   font-family:var(--serif);
+
   font-size:25px;
+
   color:var(--red);
+
   letter-spacing:.08em;
 }
 
@@ -509,24 +699,34 @@ a{
 
 .timeline{
   max-width:560px;
+
   margin:auto;
+
   position:relative;
 }
 
 .timeline:before{
   content:"";
+
   position:absolute;
+
   top:5px;
   bottom:5px;
+
   left:94px;
+
   width:1px;
+
   background:rgba(184,148,69,.45);
 }
 
 .timeline-item{
   display:grid;
+
   grid-template-columns:75px 38px 1fr;
+
   gap:0;
+
   margin-bottom:40px;
 }
 
@@ -536,21 +736,32 @@ a{
 
 .timeline-time{
   text-align:right;
+
   padding-right:17px;
   padding-top:2px;
+
   font-family:var(--serif);
+
   font-size:16px;
+
   color:var(--red);
 }
 
 .timeline-dot{
   width:9px;
   height:9px;
+
   margin:5px auto 0;
+
   border-radius:50%;
+
   background:var(--gold);
-  box-shadow:0 0 0 5px var(--cream-light);
+
+  box-shadow:
+    0 0 0 5px var(--cream-light);
+
   position:relative;
+
   z-index:2;
 }
 
@@ -560,16 +771,23 @@ a{
 
 .timeline-content h3{
   margin:0;
+
   font-family:var(--serif);
+
   font-size:27px;
+
   font-weight:500;
+
   color:var(--red-dark);
 }
 
 .timeline-content p{
   margin:6px 0 0;
+
   font-size:12px;
+
   line-height:1.7;
+
   color:var(--muted);
 }
 
@@ -584,9 +802,13 @@ a{
 
 .venue-card{
   max-width:590px;
+
   margin:0 auto 28px;
+
   padding:40px 25px;
+
   border:1px solid rgba(184,148,69,.4);
+
   background:rgba(255,255,255,.25);
 }
 
@@ -596,17 +818,25 @@ a{
 
 .venue-label{
   display:inline-block;
+
   margin-bottom:18px;
+
   padding:6px 12px;
+
   border:1px solid rgba(184,148,69,.45);
+
   font-size:8px;
+
   letter-spacing:.2em;
+
   text-transform:uppercase;
+
   color:var(--gold);
 }
 
 .venue-illustration{
   width:min(100%,390px);
+
   margin:0 auto 25px;
 }
 
@@ -617,50 +847,75 @@ a{
 
 .venue-card h3{
   margin:0;
+
   font-family:var(--serif);
+
   font-size:30px;
+
   font-weight:500;
+
   color:var(--red-dark);
 }
 
 .venue-address{
   margin-top:8px;
+
   font-size:10px;
+
   line-height:1.6;
+
   letter-spacing:.08em;
+
   text-transform:uppercase;
+
   color:var(--gold);
 }
 
 .venue-time{
   margin-top:12px;
+
   font-family:var(--serif);
+
   font-size:20px;
+
   color:var(--red);
 }
 
 .venue-description{
   max-width:390px;
+
   margin:18px auto 25px;
+
   font-family:var(--serif);
+
   font-size:17px;
+
   line-height:1.5;
+
   color:var(--muted);
 }
 
 .location-button{
   display:inline-block;
+
   padding:11px 22px;
+
   border:1px solid var(--red);
+
   color:var(--red);
+
   font-size:10px;
+
   letter-spacing:.14em;
+
   text-transform:uppercase;
+
   transition:.25s ease;
 }
 
 .location-button:hover{
   background:var(--red);
+
   color:white;
 }
 
@@ -675,14 +930,19 @@ a{
 
 .dress-card{
   max-width:590px;
+
   margin:auto;
+
   padding:45px 25px;
+
   background:var(--cream);
+
   border:1px solid rgba(184,148,69,.35);
 }
 
 .fashion-illustration{
   width:min(100%,350px);
+
   margin:0 auto 20px;
 }
 
@@ -693,25 +953,37 @@ a{
 
 .dress-card h3{
   margin:0;
+
   font-family:var(--serif);
+
   font-size:36px;
+
   font-weight:500;
+
   color:var(--red-dark);
 }
 
 .dress-card p{
   max-width:400px;
+
   margin:15px auto 0;
+
   font-family:var(--serif);
+
   font-size:17px;
+
   line-height:1.6;
+
   color:var(--muted);
 }
 
 .dress-note{
   margin-top:18px;
+
   font-size:10px;
+
   letter-spacing:.08em;
+
   color:var(--gold);
 }
 
@@ -726,32 +998,47 @@ a{
 
 .gifts-card{
   max-width:590px;
+
   margin:auto;
+
   padding:50px 28px;
+
   border-top:1px solid rgba(184,148,69,.5);
+
   border-bottom:1px solid rgba(184,148,69,.5);
 }
 
 .gift-icon{
   font-size:31px;
+
   color:var(--gold);
+
   margin-bottom:18px;
 }
 
 .gifts-card h3{
   margin:0;
+
   font-family:var(--serif);
+
   font-size:34px;
+
   font-weight:500;
+
   color:var(--red-dark);
 }
 
 .gifts-card p{
   max-width:470px;
+
   margin:17px auto 0;
+
   font-family:var(--serif);
+
   font-size:18px;
+
   line-height:1.65;
+
   color:var(--muted);
 }
 
@@ -762,25 +1049,36 @@ a{
 
 .rsvp{
   text-align:center;
+
   padding-bottom:110px;
 }
 
 .rsvp-inner{
   max-width:560px;
+
   margin:auto;
+
   padding:60px 25px;
+
   background:var(--red-deep);
+
   color:white;
+
   position:relative;
+
   overflow:hidden;
 }
 
 .rsvp-inner:before,
 .rsvp-inner:after{
   content:"✦";
+
   position:absolute;
+
   color:var(--gold-light);
+
   opacity:.4;
+
   font-size:70px;
 }
 
@@ -800,40 +1098,60 @@ a{
 
 .rsvp h2{
   margin:0;
+
   font-family:var(--serif);
+
   font-size:48px;
+
   font-weight:400;
 }
 
 .rsvp p{
   max-width:400px;
+
   margin:15px auto 25px;
+
   font-family:var(--serif);
+
   font-size:18px;
+
   line-height:1.5;
+
   color:rgba(255,255,255,.72);
 }
 
 .primary-button{
   display:inline-block;
+
   padding:13px 28px;
+
   background:var(--gold-light);
+
   color:var(--red-deep);
+
   font-size:10px;
+
   letter-spacing:.16em;
+
   text-transform:uppercase;
+
   transition:.25s ease;
 }
 
 .primary-button:hover{
   transform:translateY(-2px);
-  box-shadow:0 8px 20px rgba(0,0,0,.2);
+
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.2);
 }
 
 .rsvp-deadline{
   margin-top:17px;
+
   font-size:9px;
+
   letter-spacing:.1em;
+
   color:rgba(255,255,255,.45);
 }
 
@@ -844,33 +1162,54 @@ a{
 
 .floating-buttons{
   position:fixed;
+
   bottom:20px;
+
   left:50%;
+
   transform:translateX(-50%);
+
   z-index:50;
+
   display:flex;
+
   gap:8px;
+
   padding:7px;
+
   border-radius:999px;
+
   background:rgba(255,250,243,.9);
+
   backdrop-filter:blur(12px);
-  box-shadow:0 10px 30px rgba(53,36,29,.15);
+
+  box-shadow:
+    0 10px 30px rgba(53,36,29,.15);
+
   border:1px solid rgba(184,148,69,.25);
 }
 
 .floating-button{
   border:0;
+
   border-radius:999px;
+
   padding:10px 17px;
+
   background:var(--red);
+
   color:white;
+
   font-size:9px;
+
   letter-spacing:.12em;
+
   text-transform:uppercase;
 }
 
 .floating-button.secondary{
   background:transparent;
+
   color:var(--red);
 }
 
@@ -881,20 +1220,27 @@ a{
 
 .footer{
   padding:45px 20px 110px;
+
   text-align:center;
+
   background:var(--cream);
 }
 
 .footer p{
   margin:10px 0 4px;
+
   font-family:var(--serif);
+
   font-size:25px;
+
   color:var(--red-dark);
 }
 
 .footer span{
   font-size:9px;
+
   letter-spacing:.2em;
+
   color:var(--muted);
 }
 
@@ -905,13 +1251,115 @@ a{
 
 .reveal{
   opacity:0;
+
   transform:translateY(25px);
-  transition:opacity .9s ease,transform .9s ease;
+
+  transition:
+    opacity .9s ease,
+    transform .9s ease;
 }
 
 .reveal.visible{
   opacity:1;
+
   transform:translateY(0);
+}
+
+
+/* =========================================================
+   CELEBRATION EFFECT
+========================================================= */
+
+.celebration-container{
+  position:fixed;
+
+  inset:0;
+
+  z-index:999;
+
+  pointer-events:none;
+
+  overflow:hidden;
+}
+
+
+/* Individual confetti pieces */
+
+.confetti-piece{
+  position:absolute;
+
+  top:-30px;
+
+  width:7px;
+  height:12px;
+
+  opacity:0;
+
+  border-radius:1px;
+
+  will-change:transform,opacity;
+}
+
+
+/* Golden spark */
+
+.celebration-spark{
+  position:absolute;
+
+  width:5px;
+  height:5px;
+
+  border-radius:50%;
+
+  background:var(--gold-light);
+
+  box-shadow:
+    0 0 8px var(--gold-light),
+    0 0 18px rgba(216,191,121,.7);
+
+  opacity:0;
+}
+
+
+/* Burst ring */
+
+.celebration-ring{
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  width:20px;
+  height:20px;
+
+  margin:-10px;
+
+  border:1px solid rgba(216,191,121,.8);
+
+  border-radius:50%;
+
+  opacity:0;
+
+  transform:scale(.1);
+
+  animation:
+    celebrationRing 1.3s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+@keyframes celebrationRing{
+  0%{
+    opacity:.8;
+    transform:scale(.1);
+  }
+
+  70%{
+    opacity:.35;
+  }
+
+  100%{
+    opacity:0;
+    transform:scale(18);
+  }
 }
 
 
@@ -927,6 +1375,7 @@ a{
 
   .hero{
     min-height:100svh;
+
     padding:25px 15px;
   }
 
@@ -938,6 +1387,10 @@ a{
   .hero-frame:after{
     width:48px;
     height:48px;
+  }
+
+  .hero p{
+    font-size:18px;
   }
 
   .scratch-grid{
@@ -962,6 +1415,7 @@ a{
 
   .timeline-time{
     font-size:14px;
+
     padding-right:10px;
   }
 
@@ -988,7 +1442,26 @@ a{
   .floating-button{
     padding:9px 13px;
   }
+
+  .curtain-content{
+    padding-bottom:48px;
+  }
+
+  .open-button{
+    font-size:8px;
+    letter-spacing:.18em;
+  }
+
+  .open-icon{
+    width:28px;
+    height:28px;
+  }
 }
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
 
 @media(max-width:380px){
 
@@ -1025,7 +1498,9 @@ a{
   *:before,
   *:after{
     animation-duration:.01ms!important;
+
     transition-duration:.01ms!important;
+
     scroll-behavior:auto!important;
   }
 
@@ -1034,7 +1509,7 @@ a{
 </head>
 
 
-<body>
+<body class="curtain-active">
 
 
 <!-- =======================================================
@@ -1044,25 +1519,23 @@ a{
 <div class="curtain-screen" id="curtainScreen">
 
   <div class="curtain curtain-left"></div>
+
   <div class="curtain curtain-right"></div>
+
 
   <div class="curtain-content">
 
-    <span class="curtain-small">
-      You Are Invited
-    </span>
+    <button
+      class="open-button"
+      id="openButton"
+      type="button">
 
-    <h1>
-      Happy
-      <i>&</i>
-      Nico
-    </h1>
+      <span class="open-icon"></span>
 
-    <div class="curtain-line"></div>
+      <span class="open-text">
+        TAP TO CONTINUE
+      </span>
 
-    <button class="open-button" id="openButton">
-      OPEN INVITATION
-      <small>Tap or swipe to begin</small>
     </button>
 
   </div>
@@ -1087,28 +1560,41 @@ a{
   <div class="hero-frame reveal">
 
     <span class="eyebrow">
-      Together with our families
+      You Are Cordially Invited
     </span>
 
+
     <h1>
+
       Happy Alves
+
       <span>&</span>
+
       Nico Alves
+
     </h1>
 
+
     <div class="ornamental-line">
+
       <span>✦</span>
+
     </div>
 
+
     <p>
-      Request the pleasure of your company
-      as we celebrate the beginning of
+
+      We would like to invite you
+      to celebrate the beginning of
       our forever.
+
     </p>
 
 
-
     <div class="hero-theme">
+
+      A Rustic Celebration
+
     </div>
 
   </div>
@@ -1134,11 +1620,14 @@ a{
     </h2>
 
     <p>
+
       Scratch each golden circle to discover
       when our forever begins.
+
     </p>
 
   </div>
+
 
 
   <div class="scratch-grid reveal">
@@ -1151,11 +1640,19 @@ a{
       <div class="scratch-card">
 
         <div class="scratch-value">
+
           <div>
+
             22
-            <small>DAY</small>
+
+            <small>
+              DAY
+            </small>
+
           </div>
+
         </div>
+
 
         <canvas
           class="scratch-canvas"
@@ -1165,7 +1662,10 @@ a{
 
       </div>
 
-      <span>DAY</span>
+
+      <span>
+        DAY
+      </span>
 
     </div>
 
@@ -1178,11 +1678,19 @@ a{
       <div class="scratch-card">
 
         <div class="scratch-value">
+
           <div>
+
             JAN
-            <small>MONTH</small>
+
+            <small>
+              MONTH
+            </small>
+
           </div>
+
         </div>
+
 
         <canvas
           class="scratch-canvas"
@@ -1192,7 +1700,10 @@ a{
 
       </div>
 
-      <span>MONTH</span>
+
+      <span>
+        MONTH
+      </span>
 
     </div>
 
@@ -1205,11 +1716,19 @@ a{
       <div class="scratch-card">
 
         <div class="scratch-value">
+
           <div>
+
             2027
-            <small>YEAR</small>
+
+            <small>
+              YEAR
+            </small>
+
           </div>
+
         </div>
+
 
         <canvas
           class="scratch-canvas"
@@ -1219,16 +1738,24 @@ a{
 
       </div>
 
-      <span>YEAR</span>
+
+      <span>
+        YEAR
+      </span>
 
     </div>
 
   </div>
 
 
+
   <div class="scratch-instruction">
+
     ✦ Scratch with your finger or mouse ✦
+
   </div>
+
+
 
   <div
     class="revealed-date"
@@ -1256,11 +1783,14 @@ a{
     </h2>
 
     <p>
+
       A beautiful day filled with
       love, laughter and celebration.
+
     </p>
 
   </div>
+
 
 
   <div class="timeline reveal">
@@ -1283,8 +1813,10 @@ a{
         </h3>
 
         <p>
+
           Join us as we exchange our vows
           and begin our forever.
+
         </p>
 
       </div>
@@ -1310,8 +1842,10 @@ a{
         </h3>
 
         <p>
+
           Dinner, drinks and a celebration
           with the people we love most.
+
         </p>
 
       </div>
@@ -1337,8 +1871,10 @@ a{
         </h3>
 
         <p>
+
           Enjoy an evening of food,
           laughter, dancing and memories.
+
         </p>
 
       </div>
@@ -1364,8 +1900,10 @@ a{
         </h3>
 
         <p>
+
           Drinks, dancing and celebrations
           into the night.
+
         </p>
 
       </div>
@@ -1395,8 +1933,10 @@ a{
     </h2>
 
     <p>
+
       Two beautiful places where we will
       celebrate this special day together.
+
     </p>
 
   </div>
@@ -1419,12 +1959,14 @@ a{
         fill="none"
         xmlns="http://www.w3.org/2000/svg">
 
+
         <circle
           cx="405"
           cy="55"
           r="24"
           stroke="#b89445"
           stroke-width="1.5"/>
+
 
         <path
           d="M20 210
@@ -1437,11 +1979,13 @@ a{
           stroke-linecap="round"
           stroke-linejoin="round"/>
 
+
         <path
           d="M15 218
              C120 205 250 230 485 215"
           stroke="#b89445"
           stroke-width="1.5"/>
+
 
         <path
           d="M145 215
@@ -1452,12 +1996,14 @@ a{
           stroke="#40383a"
           stroke-width="2"/>
 
+
         <path
           d="M125 153
              L250 93
              L375 153"
           stroke="#791f2c"
           stroke-width="2.5"/>
+
 
         <path
           d="M225 215
@@ -1467,12 +2013,14 @@ a{
           stroke="#40383a"
           stroke-width="2"/>
 
+
         <path
           d="M215 76
              L250 45
              L285 76"
           stroke="#791f2c"
           stroke-width="2"/>
+
 
         <path
           d="M250 35
@@ -1482,6 +2030,7 @@ a{
           stroke="#b89445"
           stroke-width="2"/>
 
+
         <path
           d="M230 215
              V175
@@ -1489,6 +2038,7 @@ a{
              V215"
           stroke="#791f2c"
           stroke-width="2"/>
+
 
         <path
           d="M165 165
@@ -1499,6 +2049,7 @@ a{
           stroke="#40383a"
           stroke-width="1.5"/>
 
+
         <path
           d="M305 165
              Q320 148 335 165
@@ -1507,6 +2058,7 @@ a{
              Z"
           stroke="#40383a"
           stroke-width="1.5"/>
+
 
         <path
           d="M90 215
@@ -1519,6 +2071,7 @@ a{
              L110 192"
           stroke="#b89445"
           stroke-width="2"/>
+
 
         <path
           d="M405 215
@@ -1537,15 +2090,20 @@ a{
     </div>
 
 
+
     <h3>
+
       Archdiocesan Shrine of
       St. Thérèse of the Child Jesus
+
     </h3>
 
 
     <div class="venue-address">
+
       8WJ2+C5H, Edison St, Cebu City,
       6000 Cebu, Philippines
+
     </div>
 
 
@@ -1555,17 +2113,22 @@ a{
 
 
     <p class="venue-description">
+
       Our church ceremony where we will
       exchange our vows and begin our
       life together.
+
     </p>
 
 
     <a
       class="location-button"
       href="https://www.google.com/maps/search/?api=1&query=Archdiocesan+Shrine+of+St.+Therese+of+the+Child+Jesus+Cebu"
-      target="_blank">
+      target="_blank"
+      rel="noopener">
+
       View Location
+
     </a>
 
   </div>
@@ -1577,7 +2140,9 @@ a{
   <div class="venue-card reveal">
 
     <div class="venue-label">
+
       Reception · 5:00 PM
+
     </div>
 
 
@@ -1588,12 +2153,14 @@ a{
         fill="none"
         xmlns="http://www.w3.org/2000/svg">
 
+
         <circle
           cx="405"
           cy="55"
           r="24"
           stroke="#b89445"
           stroke-width="1.5"/>
+
 
         <path
           d="M20 210
@@ -1606,11 +2173,13 @@ a{
           stroke-linecap="round"
           stroke-linejoin="round"/>
 
+
         <path
           d="M15 218
              C120 205 250 230 485 215"
           stroke="#b89445"
           stroke-width="1.5"/>
+
 
         <path
           d="M120 215
@@ -1621,12 +2190,14 @@ a{
           stroke="#40383a"
           stroke-width="2"/>
 
+
         <path
           d="M100 148
              L250 72
              L400 148"
           stroke="#791f2c"
           stroke-width="2.5"/>
+
 
         <path
           d="M150 145
@@ -1643,6 +2214,7 @@ a{
           stroke="#40383a"
           stroke-width="2"/>
 
+
         <path
           d="M170 215
              V150
@@ -1651,6 +2223,7 @@ a{
           stroke="#b89445"
           stroke-width="1.5"/>
 
+
         <path
           d="M225 215
              V165
@@ -1658,6 +2231,7 @@ a{
              V215"
           stroke="#791f2c"
           stroke-width="2"/>
+
 
         <path
           d="M75 215
@@ -1671,6 +2245,7 @@ a{
           stroke="#b89445"
           stroke-width="2"/>
 
+
         <path
           d="M425 215
              V150
@@ -1682,6 +2257,7 @@ a{
              L443 195"
           stroke="#b89445"
           stroke-width="2"/>
+
 
         <circle
           cx="175"
@@ -1712,14 +2288,17 @@ a{
     </div>
 
 
+
     <h3>
       Beverly View Events Pavilion
     </h3>
 
 
     <div class="venue-address">
+
       4th Street Beverly Hills,
       Lahug, Cebu City, 6000
+
     </div>
 
 
@@ -1729,17 +2308,22 @@ a{
 
 
     <p class="venue-description">
+
       Join us for our wedding reception
       as we celebrate with dinner,
       drinks and dancing.
+
     </p>
 
 
     <a
       class="location-button"
       href="https://www.google.com/maps/search/?api=1&query=Beverly+View+Events+Pavilion+Cebu"
-      target="_blank">
+      target="_blank"
+      rel="noopener">
+
       View Location
+
     </a>
 
   </div>
@@ -1776,12 +2360,16 @@ a{
         xmlns="http://www.w3.org/2000/svg"
         fill="none">
 
+
+        <!-- Woman -->
+
         <circle
           cx="125"
           cy="58"
           r="22"
           stroke="#40383a"
           stroke-width="2"/>
+
 
         <path
           d="M112 80
@@ -1793,11 +2381,13 @@ a{
           stroke="#791f2c"
           stroke-width="2"/>
 
+
         <path
           d="M93 125
              L65 175"
           stroke="#40383a"
           stroke-width="2"/>
+
 
         <path
           d="M157 125
@@ -1805,11 +2395,13 @@ a{
           stroke="#40383a"
           stroke-width="2"/>
 
+
         <path
           d="M103 218
              L92 250"
           stroke="#40383a"
           stroke-width="2"/>
+
 
         <path
           d="M147 218
@@ -1818,12 +2410,16 @@ a{
           stroke-width="2"/>
 
 
+
+        <!-- Man -->
+
         <circle
           cx="275"
           cy="58"
           r="22"
           stroke="#40383a"
           stroke-width="2"/>
+
 
         <path
           d="M252 80
@@ -1835,6 +2431,7 @@ a{
           stroke="#40383a"
           stroke-width="2"/>
 
+
         <path
           d="M252 80
              L275 115
@@ -1842,17 +2439,20 @@ a{
           stroke="#791f2c"
           stroke-width="2"/>
 
+
         <path
           d="M275 115
              V218"
           stroke="#b89445"
           stroke-width="1.5"/>
 
+
         <path
           d="M250 218
              L242 250"
           stroke="#40383a"
           stroke-width="2"/>
+
 
         <path
           d="M300 218
@@ -1871,13 +2471,17 @@ a{
 
 
     <p>
+
       We invite you to dress elegantly
       for our special day.
+
     </p>
 
 
     <div class="dress-note">
+
       Elegant dresses · Suits or tuxedos
+
     </div>
 
   </div>
@@ -1918,12 +2522,14 @@ a{
 
 
     <p>
+
       Having you celebrate this special day
       with us is more than enough.
 
       For those who wish to give, a monetary
       gift towards our future together would
       be deeply appreciated.
+
     </p>
 
   </div>
@@ -1951,20 +2557,26 @@ a{
 
 
     <p>
+
       Please let us know if you will be
       joining us for our special day.
+
     </p>
 
 
     <a
       href="#"
       class="primary-button">
+
       RSVP
+
     </a>
 
 
     <div class="rsvp-deadline">
+
       Please RSVP for our January 22, 2027 celebration
+
     </div>
 
   </div>
@@ -2009,15 +2621,20 @@ a{
   <a
     href="#"
     class="floating-button">
+
     RSVP
+
   </a>
 
 
   <a
     href="https://www.google.com/maps/search/?api=1&query=Beverly+View+Events+Pavilion+Cebu"
     target="_blank"
+    rel="noopener"
     class="floating-button secondary">
+
     Location
+
   </a>
 
 </div>
@@ -2040,6 +2657,8 @@ const openButton =
 let isOpening = false;
 
 
+/* Open invitation */
+
 function openInvitation(){
 
   if(isOpening) return;
@@ -2048,23 +2667,36 @@ function openInvitation(){
 
   curtainScreen.classList.add("opening");
 
+  /*
+    Keep the curtain on screen while the
+    animation plays.
+  */
+
   setTimeout(() => {
 
     curtainScreen.style.opacity = "0";
+
     curtainScreen.style.pointerEvents = "none";
 
-    document.body.style.overflow = "auto";
+    document.body.classList.remove("curtain-active");
 
-    setTimeout(() => {
+  }, 1500);
 
-      curtainScreen.remove();
 
-    },600);
+  /*
+    Completely remove curtain after animation.
+  */
 
-  },1800);
+  setTimeout(() => {
+
+    curtainScreen.remove();
+
+  }, 2100);
 
 }
 
+
+/* Tap button */
 
 openButton.addEventListener(
   "click",
@@ -2074,18 +2706,30 @@ openButton.addEventListener(
 
 
 /* =========================================================
-   SWIPE TO OPEN
+   SWIPE TO OPEN — MOBILE
 ========================================================= */
 
 let startX = 0;
+let startY = 0;
+let touchStarted = false;
 
 
 curtainScreen.addEventListener(
   "touchstart",
   function(e){
 
+    if(isOpening) return;
+
+    const touch =
+      e.touches[0];
+
     startX =
-      e.touches[0].clientX;
+      touch.clientX;
+
+    startY =
+      touch.clientY;
+
+    touchStarted = true;
 
   },
   {passive:true}
@@ -2096,11 +2740,37 @@ curtainScreen.addEventListener(
   "touchend",
   function(e){
 
+    if(isOpening || !touchStarted) return;
+
+    const touch =
+      e.changedTouches[0];
+
     const endX =
-      e.changedTouches[0].clientX;
+      touch.clientX;
+
+    const endY =
+      touch.clientY;
+
+
+    const distanceX =
+      endX - startX;
+
+    const distanceY =
+      endY - startY;
+
+
+    touchStarted = false;
+
+
+    /*
+      We mainly care about a horizontal swipe.
+      This prevents normal vertical scrolling
+      from accidentally opening the invitation.
+    */
 
     if(
-      Math.abs(endX - startX) > 70
+      Math.abs(distanceX) > 55 &&
+      Math.abs(distanceX) > Math.abs(distanceY)
     ){
 
       openInvitation();
@@ -2109,6 +2779,57 @@ curtainScreen.addEventListener(
 
   },
   {passive:true}
+);
+
+
+/* =========================================================
+   ALSO SUPPORT POINTER SWIPES
+   This helps newer mobile browsers.
+========================================================= */
+
+let pointerStartX = 0;
+let pointerStartY = 0;
+
+
+curtainScreen.addEventListener(
+  "pointerdown",
+  function(e){
+
+    if(isOpening) return;
+
+    pointerStartX =
+      e.clientX;
+
+    pointerStartY =
+      e.clientY;
+
+  }
+);
+
+
+curtainScreen.addEventListener(
+  "pointerup",
+  function(e){
+
+    if(isOpening) return;
+
+    const distanceX =
+      e.clientX - pointerStartX;
+
+    const distanceY =
+      e.clientY - pointerStartY;
+
+
+    if(
+      Math.abs(distanceX) > 55 &&
+      Math.abs(distanceX) > Math.abs(distanceY)
+    ){
+
+      openInvitation();
+
+    }
+
+  }
 );
 
 
@@ -2173,13 +2894,20 @@ scratchCards.forEach((canvas,index) => {
     canvas.getContext("2d");
 
 
+  let canvasWidth = 0;
+  let canvasHeight = 0;
+
+
   function resizeCanvas(){
 
     const rect =
       canvas.getBoundingClientRect();
 
     const ratio =
-      window.devicePixelRatio || 1;
+      Math.max(
+        1,
+        window.devicePixelRatio || 1
+      );
 
 
     canvas.width =
@@ -2199,10 +2927,10 @@ scratchCards.forEach((canvas,index) => {
     );
 
 
-    const w =
+    canvasWidth =
       rect.width;
 
-    const h =
+    canvasHeight =
       rect.height;
 
 
@@ -2210,12 +2938,12 @@ scratchCards.forEach((canvas,index) => {
 
     const gradient =
       ctx.createRadialGradient(
-        w*.35,
-        h*.25,
+        canvasWidth*.35,
+        canvasHeight*.25,
         5,
-        w*.5,
-        h*.5,
-        w*.7
+        canvasWidth*.5,
+        canvasHeight*.5,
+        canvasWidth*.7
       );
 
 
@@ -2237,6 +2965,10 @@ scratchCards.forEach((canvas,index) => {
     );
 
 
+    ctx.globalCompositeOperation =
+      "source-over";
+
+
     ctx.fillStyle =
       gradient;
 
@@ -2245,9 +2977,9 @@ scratchCards.forEach((canvas,index) => {
 
 
     ctx.arc(
-      w/2,
-      h/2,
-      Math.min(w,h)/2 - 2,
+      canvasWidth/2,
+      canvasHeight/2,
+      Math.min(canvasWidth,canvasHeight)/2 - 2,
       0,
       Math.PI*2
     );
@@ -2271,9 +3003,9 @@ scratchCards.forEach((canvas,index) => {
 
 
     ctx.arc(
-      w/2,
-      h/2,
-      Math.min(w,h)/2 - 13,
+      canvasWidth/2,
+      canvasHeight/2,
+      Math.min(canvasWidth,canvasHeight)/2 - 13,
       0,
       Math.PI*2
     );
@@ -2303,8 +3035,8 @@ scratchCards.forEach((canvas,index) => {
 
     ctx.fillText(
       "SCRATCH",
-      w/2,
-      h/2 - 8
+      canvasWidth/2,
+      canvasHeight/2 - 8
     );
 
 
@@ -2314,8 +3046,8 @@ scratchCards.forEach((canvas,index) => {
 
     ctx.fillText(
       "TO REVEAL",
-      w/2,
-      h/2 + 8
+      canvasWidth/2,
+      canvasHeight/2 + 8
     );
 
   }
@@ -2345,18 +3077,12 @@ scratchCards.forEach((canvas,index) => {
       canvas.getBoundingClientRect();
 
 
-    const point =
-      e.touches
-        ? e.touches[0]
-        : e;
-
-
     const x =
-      point.clientX - rect.left;
+      e.clientX - rect.left;
 
 
     const y =
-      point.clientY - rect.top;
+      e.clientY - rect.top;
 
 
     ctx.globalCompositeOperation =
@@ -2383,6 +3109,11 @@ scratchCards.forEach((canvas,index) => {
 
     scratchedPixels++;
 
+
+    /*
+      A lower threshold makes the cards
+      easier to reveal on mobile.
+    */
 
     if(
       scratchedPixels > 25 &&
@@ -2426,7 +3157,11 @@ scratchCards.forEach((canvas,index) => {
 
   canvas.addEventListener(
     "pointermove",
-    scratch
+    function(e){
+
+      scratch(e);
+
+    }
   );
 
 
@@ -2445,6 +3180,19 @@ scratchCards.forEach((canvas,index) => {
     function(){
 
       scratching = false;
+
+    }
+  );
+
+
+  canvas.addEventListener(
+    "pointerleave",
+    function(){
+
+      /*
+        Don't stop scratching if the browser
+        is still holding the pointer capture.
+      */
 
     }
   );
@@ -2473,45 +3221,89 @@ function revealCompleteDate(){
     [
       {
         opacity:0,
-        transform:"translateY(10px)"
+        transform:"translateY(15px) scale(.95)"
       },
 
       {
         opacity:1,
-        transform:"translateY(0)"
+        transform:"translateY(0) scale(1)"
       }
 
     ],
     {
-      duration:900,
+      duration:1000,
       easing:"cubic-bezier(.16,1,.3,1)"
     }
   );
 
 
-  createConfetti();
+  createCelebration();
 
 }
 
 
 
 /* =========================================================
-   CONFETTI
+   BIG WEDDING CELEBRATION
 ========================================================= */
 
-function createConfetti(){
+function createCelebration(){
 
-  const colors = [
+  const container =
+    document.createElement("div");
+
+
+  container.className =
+    "celebration-container";
+
+
+  document.body.appendChild(
+    container
+  );
+
+
+  /*
+    Large expanding rings.
+  */
+
+  for(let i=0;i<3;i++){
+
+    const ring =
+      document.createElement("div");
+
+    ring.className =
+      "celebration-ring";
+
+
+    ring.style.animationDelay =
+      `${i * 180}ms`;
+
+
+    container.appendChild(
+      ring
+    );
+
+  }
+
+
+
+  /*
+    Main confetti rain.
+  */
+
+  const confettiColors = [
     "#b89445",
-    "#791f2c",
     "#d8bf79",
-    "#e9dfd1"
+    "#eee1b8",
+    "#791f2c",
+    "#a64c58",
+    "#fffaf3"
   ];
 
 
   for(
     let i=0;
-    i<90;
+    i<180;
     i++
   ){
 
@@ -2519,19 +3311,320 @@ function createConfetti(){
       document.createElement("div");
 
 
-    piece.style.position =
-      "fixed";
+    piece.className =
+      "confetti-piece";
 
 
-    piece.style.width =
-      "6px";
-
-
-    piece.style.height =
-      "9px";
+    piece.style.left =
+      `${Math.random()*100}%`;
 
 
     piece.style.background =
+      confettiColors[
+        Math.floor(
+          Math.random()*confettiColors.length
+        )
+      ];
+
+
+    piece.style.width =
+      `${4 + Math.random()*5}px`;
+
+
+    piece.style.height =
+      `${7 + Math.random()*9}px`;
+
+
+    piece.style.borderRadius =
+      Math.random() > .6
+        ? "50%"
+        : "1px";
+
+
+    container.appendChild(
+      piece
+    );
+
+
+    const duration =
+      2500 +
+      Math.random()*2600;
+
+
+    const delay =
+      Math.random()*850;
+
+
+    const drift =
+      (Math.random()-.5)*280;
+
+
+    const rotation =
+      360 +
+      Math.random()*1000;
+
+
+    piece.animate(
+      [
+
+        {
+          transform:
+            `translate3d(0,-30px,0)
+             rotate(0deg)`,
+
+          opacity:0
+        },
+
+        {
+          transform:
+            `translate3d(${drift*.25}px,18vh,0)
+             rotate(${rotation*.25}deg)`,
+
+          opacity:1,
+
+          offset:.12
+        },
+
+        {
+          transform:
+            `translate3d(${drift}px,110vh,0)
+             rotate(${rotation}deg)`,
+
+          opacity:0
+        }
+
+      ],
+      {
+        duration:duration,
+        delay:delay,
+        easing:"cubic-bezier(.15,.65,.3,1)",
+        fill:"forwards"
+      }
+    );
+
+  }
+
+
+
+  /*
+    Large center burst particles.
+  */
+
+  const burstColors = [
+    "#b89445",
+    "#d8bf79",
+    "#eee1b8",
+    "#791f2c",
+    "#ffffff"
+  ];
+
+
+  for(
+    let i=0;
+    i<75;
+    i++
+  ){
+
+    const spark =
+      document.createElement("div");
+
+
+    spark.className =
+      "celebration-spark";
+
+
+    spark.style.background =
+      burstColors[
+        Math.floor(
+          Math.random()*burstColors.length
+        )
+      ];
+
+
+    const angle =
+      Math.random()*Math.PI*2;
+
+
+    const distance =
+      80 +
+      Math.random()*270;
+
+
+    const startX =
+      50;
+
+
+    const startY =
+      48;
+
+
+    container.appendChild(
+      spark
+    );
+
+
+    const endX =
+      Math.cos(angle)*distance;
+
+
+    const endY =
+      Math.sin(angle)*distance;
+
+
+    spark.style.left =
+      `${startX}%`;
+
+
+    spark.style.top =
+      `${startY}%`;
+
+
+    const duration =
+      900 +
+      Math.random()*900;
+
+
+    const delay =
+      Math.random()*250;
+
+
+    spark.animate(
+      [
+
+        {
+          transform:
+            "translate(-50%,-50%) scale(.2)",
+
+          opacity:0
+        },
+
+        {
+          transform:
+            "translate(-50%,-50%) scale(1.4)",
+
+          opacity:1,
+
+          offset:.12
+        },
+
+        {
+          transform:
+            `translate(
+              calc(-50% + ${endX}px),
+              calc(-50% + ${endY}px)
+            )
+            scale(.2)`,
+
+          opacity:0
+
+        }
+
+      ],
+      {
+        duration:duration,
+        delay:delay,
+        easing:"cubic-bezier(.12,.8,.25,1)",
+        fill:"forwards"
+      }
+    );
+
+  }
+
+
+
+  /*
+    Second burst from the lower center.
+    This makes the celebration feel fuller
+    rather than like one small explosion.
+  */
+
+  setTimeout(() => {
+
+    createBurst(
+      container,
+      50,
+      65,
+      55
+    );
+
+  },350);
+
+
+
+  /*
+    Third burst from the upper center.
+  */
+
+  setTimeout(() => {
+
+    createBurst(
+      container,
+      50,
+      30,
+      40
+    );
+
+  },700);
+
+
+
+  /*
+    Clean up.
+  */
+
+  setTimeout(() => {
+
+    container.remove();
+
+  },6500);
+
+}
+
+
+
+/* =========================================================
+   ADDITIONAL FIREWORK BURST
+========================================================= */
+
+function createBurst(
+  container,
+  centerX,
+  centerY,
+  size
+){
+
+  const colors = [
+    "#b89445",
+    "#d8bf79",
+    "#eee1b8",
+    "#791f2c",
+    "#ffffff"
+  ];
+
+
+  for(
+    let i=0;
+    i<35;
+    i++
+  ){
+
+    const spark =
+      document.createElement("div");
+
+
+    spark.className =
+      "celebration-spark";
+
+
+    spark.style.left =
+      `${centerX}%`;
+
+
+    spark.style.top =
+      `${centerY}%`;
+
+
+    spark.style.background =
       colors[
         Math.floor(
           Math.random()*colors.length
@@ -2539,61 +3632,70 @@ function createConfetti(){
       ];
 
 
-    piece.style.left =
-      Math.random()*100+"vw";
-
-
-    piece.style.top =
-      "-15px";
-
-
-    piece.style.zIndex =
-      "999";
-
-
-    piece.style.pointerEvents =
-      "none";
-
-
-    piece.style.transform =
-      `rotate(${Math.random()*360}deg)`;
-
-
-    document.body.appendChild(
-      piece
+    container.appendChild(
+      spark
     );
 
 
-    const duration =
-      1800 +
-      Math.random()*1800;
+    const angle =
+      (Math.PI*2/35)*i;
 
 
-    piece.animate(
+    const distance =
+      size +
+      Math.random()*90;
+
+
+    const x =
+      Math.cos(angle)*distance;
+
+
+    const y =
+      Math.sin(angle)*distance;
+
+
+    spark.animate(
       [
+
         {
           transform:
-            `translateY(0) rotate(0deg)`,
-          opacity:1
+            "translate(-50%,-50%) scale(.1)",
+
+          opacity:0
         },
 
         {
           transform:
-            `translateY(110vh) translateX(${(Math.random()-.5)*250}px) rotate(${Math.random()*900}deg)`,
+            "translate(-50%,-50%) scale(1.5)",
+
+          opacity:1,
+
+          offset:.15
+        },
+
+        {
+          transform:
+            `translate(
+              calc(-50% + ${x}px),
+              calc(-50% + ${y}px)
+            )
+            scale(.1)`,
+
           opacity:0
+
         }
 
       ],
       {
-        duration,
-        easing:"cubic-bezier(.2,.7,.3,1)"
+        duration:
+          1100 +
+          Math.random()*500,
+
+        easing:"cubic-bezier(.1,.8,.2,1)",
+
+        fill:"forwards"
       }
-
-    ).onfinish = () => {
-
-      piece.remove();
-
-    };
+    );
 
   }
 
