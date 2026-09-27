@@ -126,9 +126,14 @@ a{
 
     .curtain-stage {
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: 50%;
+      right: auto;
+      width: min(100vw, 720px);
+      height: 100svh;
+      transform: translateX(-50%);
       z-index: 9999;
-      background: #050505;
+      background: transparent;
       display: flex;
       justify-content: center;
       align-items: stretch;
@@ -141,15 +146,17 @@ a{
        After opening it becomes part of the first hero only, so it
        scrolls away naturally and is NOT visible in later sections. */
     .curtain-stage.finished {
-      /* After opening, the curtain becomes part of the top hero
-         instead of staying fixed over the whole invitation. */
+      /* After opening, keep the curtain frame aligned exactly with
+         the 720px portrait invitation, never with the black desktop margins. */
       position: absolute;
       top: 0;
-      left: 0;
-      right: 0;
+      left: 50%;
+      right: auto;
       bottom: auto;
+      width: min(100vw, 720px);
       height: 100svh;
       min-height: 100svh;
+      transform: translateX(-50%);
       opacity: 1;
       visibility: visible;
       pointer-events: none;
@@ -166,10 +173,10 @@ a{
       position: absolute;
       top: 0;
       bottom: 0;
-      left: 50%;
-      width: min(100vw, 520px);
-      transform: translateX(-50%);
-      background: var(--cream);
+      left: 0;
+      width: 100%;
+      transform: none;
+      background: transparent;
       overflow: hidden;
       z-index: 1;
     }
@@ -227,9 +234,12 @@ a{
           rgba(0,0,0,.18) 15px,
           rgba(255,255,255,.02) 21px
         );
+      background-size: 84px 100%;
+      background-position: 0 0;
 
       opacity: .9;
       pointer-events: none;
+      transition: background-position 2.25s cubic-bezier(.76,0,.24,1);
     }
 
     .curtain::after {
@@ -274,6 +284,12 @@ a{
 
     .curtain-stage.opening .curtain-right {
       transform: translateX(72%);
+    }
+
+    /* Subtle fold drift during the pull, so the velvet feels like fabric
+       moving rather than a flat graphic sliding sideways. */
+    .curtain-stage.opening .curtain::before {
+      background-position: 30px 0;
     }
 
 
@@ -2393,6 +2409,7 @@ body:not(.locked) .reveal{
 
 </style>
 
+<!-- V14: reverted to clean curtain geometry; subtle velvet-fold drift only. -->
 </head>
 
 
