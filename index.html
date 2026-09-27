@@ -1,125 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
-  />
 
-  <title>Happy & Nico | Wedding Invitation</title>
+<meta charset="UTF-8">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
+>
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
-    rel="stylesheet"
-  />
+<meta name="theme-color" content="#080708">
 
-  <style>
-    /* =========================================================
-       RESET
-    ========================================================= */
+<title>Happy & Nico | Wedding Invitation</title>
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    html {
-      scroll-behavior: smooth;
-      background: #050505;
-    }
+<link
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Parisienne&display=swap"
+  rel="stylesheet"
+>
 
-    body {
-      margin: 0;
-      background: #050505;
-      color: #4c3e3b;
-      font-family: "Montserrat", sans-serif;
-      overflow-x: hidden;
-    }
+<style>
 
-    button,
-    a {
-      font-family: inherit;
-    }
+/* =========================================================
+   RESET
+========================================================= */
 
-    button {
-      border: 0;
-      cursor: pointer;
-    }
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    img {
-      max-width: 100%;
-      display: block;
-    }
+html{
+  scroll-behavior:smooth;
+  background:#080708;
+}
 
+body{
+  min-height:100vh;
+  background:#080708;
+  color:#40383a;
+  font-family:"DM Sans",Arial,sans-serif;
+  overflow-x:hidden;
+}
 
-    /* =========================================================
-       COLOURS
-    ========================================================= */
+body.locked{
+  overflow:hidden;
+}
 
-    :root {
-      --cream: #f8f1e7;
-      --cream-light: #fffaf3;
-      --cream-dark: #eee2d3;
+button,
+a{
+  font:inherit;
+}
 
-      --burgundy: #791d2d;
-      --burgundy-dark: #54121f;
-      --burgundy-deep: #3d0c17;
+button{
+  cursor:pointer;
+}
 
-      --gold: #bd9140;
-      --gold-light: #dfbd72;
-      --gold-pale: #f1dca9;
-
-      --text: #554643;
-      --muted: #8d817d;
-
-      --black: #050505;
-
-      --serif: "Cormorant Garamond", Georgia, serif;
-      --sans: "Montserrat", Arial, sans-serif;
-    }
+a{
+  text-decoration:none;
+  color:inherit;
+}
 
 
-    /* =========================================================
-       DESKTOP BACKGROUND
-       The invitation itself remains portrait.
-    ========================================================= */
+/* =========================================================
+   COLORS
+========================================================= */
 
-    body {
-      background:
-        radial-gradient(
-          circle at center,
-          #181818 0%,
-          #080808 55%,
-          #000000 100%
-        );
-    }
+:root{
 
-    .page-shell {
-      width: 100%;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      position: relative;
-    }
+  --cream:#f7f1e8;
+  --cream-light:#fffaf3;
+  --cream-dark:#e9dfd1;
 
-    .invitation-page {
-      width: min(100%, 520px);
-      min-height: 100vh;
-      background: var(--cream);
-      position: relative;
-      overflow: hidden;
-      box-shadow:
-        0 0 80px rgba(0,0,0,.35),
-        0 0 0 1px rgba(255,255,255,.04);
-    }
+  --red:#791f2c;
+  --red-dark:#55131e;
+  --red-deep:#3c0c15;
+
+  --gold:#b89445;
+  --gold-light:#d8bf79;
+  --gold-pale:#eee1b8;
+
+  --ink:#40383a;
+  --muted:#887d7a;
+
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --sans:"DM Sans",Arial,sans-serif;
+  --script:"Parisienne",cursive;
+}
 
 
-    /* =========================================================
+/* =========================================================
+   DESKTOP PAGE BACKGROUND
+========================================================= */
+
+.page-shell{
+  width:100%;
+  min-height:100vh;
+  background:#080708;
+}
+
+
+/* =========================================================
+   PORTRAIT INVITATION
+========================================================= */
+
+.invitation{
+  width:100%;
+  max-width:720px;
+  min-height:100vh;
+  margin:0 auto;
+  background:var(--cream-light);
+  position:relative;
+  overflow:hidden;
+  box-shadow:
+    0 0 70px rgba(0,0,0,.45);
+}
+
+
+/* =========================================================
        CURTAIN INTRO
     ========================================================= */
 
@@ -132,6 +133,26 @@
       justify-content: center;
       align-items: stretch;
       overflow: hidden;
+      pointer-events: auto;
+      transition: opacity .9s ease, visibility .9s ease;
+    }
+
+    /* The opening curtain starts fixed over the screen.
+       After opening it becomes part of the first hero only, so it
+       scrolls away naturally and is NOT visible in later sections. */
+    .curtain-stage.finished {
+      /* After opening, the curtain becomes part of the top hero
+         instead of staying fixed over the whole invitation. */
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: auto;
+      height: 100svh;
+      min-height: 100svh;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: none;
     }
 
     /*
@@ -187,9 +208,9 @@
         0 0 25px rgba(0,0,0,.25);
 
       transition:
-        transform 2.2s cubic-bezier(.76, 0, .24, 1),
-        width 2.2s cubic-bezier(.76, 0, .24, 1),
-        filter 2.2s ease;
+        transform 2.25s cubic-bezier(.76, 0, .24, 1),
+        width 2.25s cubic-bezier(.76, 0, .24, 1),
+        filter 2.25s ease;
     }
 
     .curtain::before {
@@ -436,18 +457,16 @@
       text-align: center;
 
       opacity: 0;
-      transform: translateY(12px);
+      transform: none;
 
-      transition:
-        opacity 2s ease 1s,
-        transform 2s cubic-bezier(.22,1,.36,1) 1s;
+      transition: opacity .55s ease;
 
       pointer-events: none;
     }
 
     .curtain-stage.opening .intro-content {
       opacity: 1;
-      transform: translateY(0);
+      transform: none;
     }
 
     .intro-eyebrow {
@@ -530,1769 +549,3276 @@
     }
 
 
-    /* =========================================================
-       MAIN INVITATION
-    ========================================================= */
+    
 
-    .main-invitation {
-      position: relative;
-      background: var(--cream);
-      min-height: 100vh;
+/* =========================================================
+   HERO
+========================================================= */
 
-      opacity: 0;
-      visibility: hidden;
+.hero{
 
-      transition:
-        opacity 1.2s ease,
-        visibility 0s linear 1.2s;
-    }
+  min-height:100svh;
 
-    .main-invitation.visible {
-      opacity: 1;
-      visibility: visible;
-      transition:
-        opacity 1.4s ease,
-        visibility 0s linear 0s;
-    }
+  display:flex;
 
+  align-items:center;
 
-    /* =========================================================
-       GENERAL SECTIONS
-    ========================================================= */
+  justify-content:center;
 
-    .section {
-      position: relative;
-      padding: 85px 28px;
-      text-align: center;
-    }
+  position:relative;
 
-    .eyebrow {
-      display: block;
-      color: var(--gold);
-      font-size: 8px;
-      letter-spacing: .32em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
+  padding:
+    70px
+    25px
+    90px;
 
-    .section h2 {
-      font-family: var(--serif);
-      font-weight: 500;
-      font-size: clamp(36px, 10vw, 52px);
-      color: var(--burgundy);
-      line-height: 1;
-      margin-bottom: 18px;
-    }
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(184,148,69,.08),
+      transparent 52%
+    ),
+    var(--cream-light);
 
-    .section-description {
-      font-family: var(--serif);
-      font-size: 18px;
-      line-height: 1.55;
-      color: var(--text);
-      max-width: 350px;
-      margin: 0 auto;
-    }
+  overflow:hidden;
 
-    .ornament {
-      color: var(--gold);
-      font-size: 14px;
-      margin: 18px 0;
-    }
+}
 
 
-    /* =========================================================
-       HERO
-    ========================================================= */
+/* The fixed opening curtains remain at the sides after the reveal.
+   Do not add a second set of curtains to the hero. */
+.hero::before,
+.hero::after{
+  display:none !important;
+}
 
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
 
-      background:
-        radial-gradient(
-          ellipse at center,
-          rgba(255,255,255,.5),
-          transparent 70%
-        );
-    }
+.hero-frame{
 
-    .hero-inner {
-      width: 100%;
-      max-width: 450px;
-    }
+  width:74%;
 
-    .hero-eyebrow {
-      font-size: 8px;
-      letter-spacing: .35em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 28px;
-    }
+  max-width:570px;
 
-    .hero-small {
-      font-family: var(--serif);
-      font-size: 21px;
-      color: var(--text);
-      margin-bottom: 25px;
-    }
+  min-height:70vh;
 
-    .hero-names {
-      font-family: var(--serif);
-      color: var(--burgundy);
-      font-size: clamp(54px, 15vw, 86px);
-      line-height: .78;
-      font-weight: 500;
-      letter-spacing: -.04em;
-    }
+  padding:
+    65px
+    25px;
 
-    .hero-names span {
-      display: block;
-      white-space: nowrap;
-    }
+  display:flex;
 
-    .hero-and {
-      font-size: 42px;
-      color: var(--gold);
-      margin: 18px 0;
-      line-height: 1;
-    }
+  flex-direction:column;
 
-    .hero-divider {
-      width: 150px;
-      height: 1px;
-      background: linear-gradient(
-        to right,
-        transparent,
-        var(--gold),
-        transparent
+  justify-content:center;
+
+  align-items:center;
+
+  text-align:center;
+
+  position:relative;
+
+  z-index:2;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(184,148,69,.07),
+      transparent 55%
+    );
+
+}
+
+
+/* =========================================================
+   HERO TEXT ANIMATION
+========================================================= */
+
+.hero-frame{
+
+  opacity:0;
+
+  transform:
+    translateY(20px);
+
+  transition:
+    opacity 1.7s ease,
+    transform 1.7s ease;
+
+}
+
+.invitation.opened .hero-frame{
+
+  opacity:1;
+
+  transform:
+    translateY(0);
+
+}
+
+
+/* =========================================================
+   HERO TYPOGRAPHY
+========================================================= */
+
+.eyebrow{
+
+  display:block;
+
+  font-size:9px;
+
+  letter-spacing:.28em;
+
+  text-transform:uppercase;
+
+  color:var(--gold);
+
+  margin-bottom:17px;
+
+}
+
+
+.hero h1{
+
+  margin:0;
+
+  font-family:var(--serif);
+
+  font-weight:500;
+
+  font-size:
+    clamp(
+      45px,
+      10vw,
+      74px
+    );
+
+  line-height:.88;
+
+  color:var(--red-dark);
+
+}
+
+
+.hero h1 span{
+
+  display:block;
+
+  font-family:var(--script);
+
+  font-size:.55em;
+
+  line-height:1;
+
+  color:var(--gold);
+
+  margin:
+    10px
+    0;
+
+}
+
+
+.ornamental-line{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:14px;
+
+  margin:29px 0;
+
+  color:var(--gold);
+
+}
+
+.ornamental-line::before,
+.ornamental-line::after{
+
+  content:"";
+
+  width:55px;
+
+  height:1px;
+
+  background:
+    rgba(184,148,69,.55);
+
+}
+
+
+.hero p{
+
+  max-width:390px;
+
+  font-family:var(--serif);
+
+  font-size:
+    clamp(
+      17px,
+      4vw,
+      21px
+    );
+
+  line-height:1.5;
+
+  color:#65595a;
+
+}
+
+
+.hero-theme{
+
+  margin-top:30px;
+
+  font-size:8px;
+
+  letter-spacing:.28em;
+
+  text-transform:uppercase;
+
+  color:var(--muted);
+
+}
+
+
+/* =========================================================
+   SCROLL INDICATOR
+========================================================= */
+
+.scroll-hint{
+
+  position:absolute;
+
+  bottom:28px;
+
+  left:50%;
+
+  transform:translateX(-50%);
+
+  z-index:3;
+
+  text-align:center;
+
+  opacity:0;
+
+  transition:
+    opacity 1s ease 2s;
+
+}
+
+.invitation.opened .scroll-hint{
+
+  opacity:1;
+
+}
+
+.scroll-hint span{
+
+  display:block;
+
+  font-size:8px;
+
+  letter-spacing:.2em;
+
+  text-transform:uppercase;
+
+  color:var(--muted);
+
+  margin-bottom:7px;
+
+}
+
+.scroll-arrow{
+
+  width:13px;
+  height:13px;
+
+  border-right:1px solid var(--gold);
+  border-bottom:1px solid var(--gold);
+
+  transform:
+    rotate(45deg);
+
+  margin:auto;
+
+  animation:
+    scrollArrow 1.7s
+    ease-in-out
+    infinite;
+
+}
+
+@keyframes scrollArrow{
+
+  0%,
+  100%{
+    transform:
+      rotate(45deg)
+      translate(0,0);
+  }
+
+  50%{
+    transform:
+      rotate(45deg)
+      translate(4px,4px);
+  }
+
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.section{
+
+  padding:
+    85px
+    24px;
+
+  position:relative;
+
+}
+
+
+.section-heading{
+
+  text-align:center;
+
+  max-width:500px;
+
+  margin:
+    0
+    auto
+    48px;
+
+}
+
+
+.section-heading h2{
+
+  font-family:var(--serif);
+
+  font-size:
+    clamp(
+      38px,
+      9vw,
+      55px
+    );
+
+  line-height:1;
+
+  font-weight:500;
+
+  color:var(--red-dark);
+
+}
+
+
+.section-heading p{
+
+  margin:
+    17px
+    auto
+    0;
+
+  max-width:400px;
+
+  font-size:13px;
+
+  line-height:1.8;
+
+  color:var(--muted);
+
+}
+
+
+/* =========================================================
+   SCRATCH DATE
+========================================================= */
+
+.scratch-section{
+
+  /* Match the invitation background exactly */
+  background:var(--cream-light);
+
+}
+
+
+.scratch-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:12px;
+
+  max-width:500px;
+
+  margin:auto;
+
+}
+
+
+.scratch-item{
+
+  text-align:center;
+
+}
+
+
+.scratch-card{
+
+  position:relative;
+
+  width:100%;
+
+  max-width:145px;
+
+  aspect-ratio:1;
+
+  margin:auto;
+
+}
+
+
+.scratch-value{
+
+  position:absolute;
+
+  inset:0;
+
+  z-index:0;
+
+  border-radius:50%;
+
+  display:grid;
+
+  place-items:center;
+
+  text-align:center;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #f2dfa6,
+      #c3a14e 48%,
+      #8d6c25 100%
+    );
+
+  border:
+    5px solid
+    #eee0b5;
+
+  box-shadow:
+    0 12px 25px
+    rgba(94,69,25,.18);
+
+  font-family:var(--serif);
+
+  font-size:27px;
+
+  color:#fffdf2;
+
+}
+
+
+.scratch-value small{
+
+  display:none;
+
+}
+
+
+.scratch-canvas{
+
+  position:absolute;
+
+  inset:0;
+
+  width:100%;
+  height:100%;
+
+  border-radius:50%;
+
+  z-index:2;
+
+  cursor:grab;
+
+  touch-action:none;
+
+}
+
+
+.scratch-item > span{
+
+  display:none;
+
+}
+
+
+.scratch-instruction{
+
+  margin-top:27px;
+
+  text-align:center;
+
+  font-size:10px;
+
+  letter-spacing:.07em;
+
+  color:var(--muted);
+
+}
+
+
+.revealed-date{
+
+  min-height:94px;
+
+  margin-top:28px;
+
+  text-align:center;
+
+  opacity:0;
+
+  transform:translateY(8px);
+
+  transition:opacity .6s ease, transform .6s ease;
+
+}
+
+.revealed-date.show{
+
+  opacity:1;
+
+  transform:translateY(0);
+
+}
+
+.countdown-title{
+
+  margin-bottom:14px;
+
+  font-family:var(--sans);
+
+  font-size:9px;
+
+  letter-spacing:.28em;
+
+  text-transform:uppercase;
+
+  color:var(--muted);
+
+}
+
+.countdown-grid{
+
+  display:flex;
+
+  justify-content:center;
+
+  gap:18px;
+
+  flex-wrap:wrap;
+
+}
+
+.countdown-unit{
+
+  min-width:58px;
+
+  text-align:center;
+
+}
+
+.countdown-number{
+
+  display:block;
+
+  font-family:var(--serif);
+
+  font-size:28px;
+
+  line-height:1;
+
+  color:var(--red);
+
+}
+
+.countdown-label{
+
+  display:block;
+
+  margin-top:6px;
+
+  font-family:var(--sans);
+
+  font-size:7px;
+
+  letter-spacing:.2em;
+
+  text-transform:uppercase;
+
+  color:var(--muted);
+
+}
+
+
+/* =========================================================
+   CONFETTI
+========================================================= */
+
+#confettiCanvas{
+
+  position:fixed;
+
+  inset:0;
+
+  width:100%;
+  height:100%;
+
+  z-index:9998;
+
+  pointer-events:none;
+
+}
+
+
+/* =========================================================
+   TIMELINE
+========================================================= */
+
+.timeline{
+
+  max-width:540px;
+
+  margin:auto;
+
+  position:relative;
+
+}
+
+
+.timeline::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:5px;
+  bottom:5px;
+
+  left:82px;
+
+  width:1px;
+
+  background:
+    rgba(184,148,69,.45);
+
+}
+
+
+.timeline-item{
+
+  display:grid;
+
+  grid-template-columns:
+    65px
+    35px
+    1fr;
+
+  margin-bottom:38px;
+
+}
+
+
+.timeline-time{
+
+  text-align:right;
+
+  padding-right:12px;
+
+  font-family:var(--serif);
+
+  font-size:15px;
+
+  color:var(--red);
+
+}
+
+
+.timeline-dot{
+
+  width:9px;
+  height:9px;
+
+  margin:
+    5px
+    auto
+    0;
+
+  border-radius:50%;
+
+  background:var(--gold);
+
+  box-shadow:
+    0 0 0 5px var(--cream-light);
+
+  position:relative;
+
+  z-index:2;
+
+}
+
+
+.timeline-content{
+
+  padding-left:12px;
+
+}
+
+
+.timeline-content h3{
+
+  font-family:var(--serif);
+
+  font-size:25px;
+
+  font-weight:500;
+
+  color:var(--red-dark);
+
+}
+
+
+.timeline-content p{
+
+  margin-top:6px;
+
+  font-size:12px;
+
+  line-height:1.7;
+
+  color:var(--muted);
+
+}
+
+
+/* =========================================================
+   VENUES
+========================================================= */
+
+.venue{
+
+  text-align:center;
+
+}
+
+
+.venue-card{
+
+  max-width:580px;
+
+  margin:
+    0
+    auto
+    28px;
+
+  padding:
+    40px
+    23px;
+
+  border:
+    1px solid
+    rgba(184,148,69,.4);
+
+  background:
+    rgba(255,255,255,.25);
+
+}
+
+
+.venue-label{
+
+  display:inline-block;
+
+  padding:
+    6px
+    11px;
+
+  margin-bottom:20px;
+
+  border:
+    1px solid
+    rgba(184,148,69,.45);
+
+  font-size:8px;
+
+  letter-spacing:.18em;
+
+  text-transform:uppercase;
+
+  color:var(--gold);
+
+}
+
+
+.venue-illustration{
+
+  width:min(100%,390px);
+
+  margin:
+    0
+    auto
+    23px;
+
+}
+
+
+.venue-illustration svg{
+
+  width:100%;
+  height:auto;
+
+}
+
+
+.venue-card h3{
+
+  font-family:var(--serif);
+
+  font-size:29px;
+
+  font-weight:500;
+
+  line-height:1.05;
+
+  color:var(--red-dark);
+
+}
+
+
+.venue-address{
+
+  margin-top:9px;
+
+  font-size:9px;
+
+  line-height:1.6;
+
+  letter-spacing:.07em;
+
+  text-transform:uppercase;
+
+  color:var(--gold);
+
+}
+
+
+.venue-time{
+
+  margin-top:12px;
+
+  font-family:var(--serif);
+
+  font-size:20px;
+
+  color:var(--red);
+
+}
+
+
+.venue-description{
+
+  max-width:390px;
+
+  margin:
+    16px
+    auto
+    23px;
+
+  font-family:var(--serif);
+
+  font-size:17px;
+
+  line-height:1.5;
+
+  color:var(--muted);
+
+}
+
+
+.location-button{
+
+  display:inline-block;
+
+  padding:
+    11px
+    20px;
+
+  border:
+    1px solid
+    var(--red);
+
+  color:var(--red);
+
+  font-size:9px;
+
+  letter-spacing:.13em;
+
+  text-transform:uppercase;
+
+}
+
+
+/* =========================================================
+   DRESS CODE
+========================================================= */
+
+.dress-code{
+
+  text-align:center;
+
+}
+
+
+.dress-card{
+
+  max-width:580px;
+
+  margin:auto;
+
+  padding:
+    40px
+    22px;
+
+  background:var(--cream);
+
+  border:
+    1px solid
+    rgba(184,148,69,.35);
+
+}
+
+
+.fashion-illustration{
+
+  width:min(100%,340px);
+
+  margin:
+    0
+    auto
+    20px;
+
+}
+
+
+.fashion-illustration svg{
+
+  width:100%;
+  height:auto;
+
+}
+
+
+.dress-card h3{
+
+  font-family:var(--serif);
+
+  font-size:34px;
+
+  font-weight:500;
+
+  color:var(--red-dark);
+
+}
+
+
+.dress-card p{
+
+  max-width:390px;
+
+  margin:
+    14px
+    auto
+    0;
+
+  font-family:var(--serif);
+
+  font-size:17px;
+
+  line-height:1.6;
+
+  color:var(--muted);
+
+}
+
+
+.dress-note{
+
+  margin-top:17px;
+
+  font-size:9px;
+
+  letter-spacing:.08em;
+
+  color:var(--gold);
+
+}
+
+
+/* =========================================================
+   GIFTS
+========================================================= */
+
+.gifts{
+
+  text-align:center;
+
+}
+
+
+.gifts-card{
+
+  max-width:580px;
+
+  margin:auto;
+
+  padding:
+    48px
+    25px;
+
+  border-top:
+    1px solid
+    rgba(184,148,69,.5);
+
+  border-bottom:
+    1px solid
+    rgba(184,148,69,.5);
+
+}
+
+
+.gift-icon{
+
+  font-size:30px;
+
+  color:var(--gold);
+
+  margin-bottom:17px;
+
+}
+
+
+.gifts-card h3{
+
+  font-family:var(--serif);
+
+  font-size:32px;
+
+  font-weight:500;
+
+  color:var(--red-dark);
+
+}
+
+
+.gifts-card p{
+
+  max-width:450px;
+
+  margin:
+    16px
+    auto
+    0;
+
+  font-family:var(--serif);
+
+  font-size:17px;
+
+  line-height:1.65;
+
+  color:var(--muted);
+
+}
+
+
+/* =========================================================
+   RSVP
+========================================================= */
+
+.rsvp{
+
+  text-align:center;
+
+  padding-bottom:90px;
+
+}
+
+
+.rsvp-inner{
+
+  max-width:550px;
+
+  margin:auto;
+
+  padding:
+    55px
+    22px;
+
+  background:var(--red-deep);
+
+  color:white;
+
+  position:relative;
+
+  overflow:hidden;
+
+}
+
+
+.rsvp-inner::before,
+.rsvp-inner::after{
+
+  content:"✦";
+
+  position:absolute;
+
+  color:var(--gold-light);
+
+  opacity:.35;
+
+  font-size:70px;
+
+}
+
+
+.rsvp-inner::before{
+
+  top:-25px;
+  left:15px;
+
+}
+
+
+.rsvp-inner::after{
+
+  bottom:-25px;
+  right:15px;
+
+}
+
+
+.rsvp .eyebrow{
+
+  color:var(--gold-light);
+
+}
+
+
+.rsvp h2{
+
+  font-family:var(--serif);
+
+  font-size:47px;
+
+  font-weight:400;
+
+}
+
+
+.rsvp p{
+
+  max-width:390px;
+
+  margin:
+    14px
+    auto
+    24px;
+
+  font-family:var(--serif);
+
+  font-size:17px;
+
+  line-height:1.5;
+
+  color:
+    rgba(255,255,255,.72);
+
+}
+
+
+.primary-button{
+
+  display:inline-block;
+
+  padding:
+    13px
+    27px;
+
+  background:var(--gold-light);
+
+  color:var(--red-deep);
+
+  font-size:9px;
+
+  letter-spacing:.15em;
+
+  text-transform:uppercase;
+
+}
+
+
+.rsvp-deadline{
+
+  margin-top:16px;
+
+  font-size:8px;
+
+  letter-spacing:.08em;
+
+  color:
+    rgba(255,255,255,.45);
+
+}
+
+
+/* =========================================================
+   FLOATING BUTTONS
+========================================================= */
+
+.floating-buttons{
+
+  position:fixed;
+
+  left:50%;
+  bottom:16px;
+
+  transform:translateX(-50%);
+
+  z-index:100;
+
+  display:flex;
+
+  gap:5px;
+
+  padding:6px;
+
+  border-radius:999px;
+
+  background:
+    rgba(255,250,243,.93);
+
+  backdrop-filter:blur(12px);
+
+  box-shadow:
+    0 10px 30px
+    rgba(53,36,29,.18);
+
+  border:
+    1px solid
+    rgba(184,148,69,.25);
+
+}
+
+
+.floating-button{
+
+  border-radius:999px;
+
+  padding:
+    9px
+    15px;
+
+  background:var(--red);
+
+  color:white;
+
+  font-size:8px;
+
+  letter-spacing:.12em;
+
+  text-transform:uppercase;
+
+}
+
+
+.floating-button.secondary{
+
+  background:transparent;
+
+  color:var(--red);
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+
+  padding:
+    45px
+    20px
+    110px;
+
+  text-align:center;
+
+  background:var(--cream);
+
+}
+
+
+.footer p{
+
+  margin:
+    10px
+    0
+    4px;
+
+  font-family:var(--serif);
+
+  font-size:25px;
+
+  color:var(--red-dark);
+
+}
+
+
+.footer span{
+
+  font-size:8px;
+
+  letter-spacing:.2em;
+
+  color:var(--muted);
+
+}
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+.reveal{
+
+  opacity:0;
+
+  transform:
+    translateY(25px);
+
+  transition:
+    opacity .9s ease,
+    transform .9s ease;
+
+}
+
+
+.reveal.visible{
+
+  opacity:1;
+
+  transform:
+    translateY(0);
+
+}
+
+/* Fallback: the invitation should remain fully readable even if
+   an IntersectionObserver is delayed by the opening overlay. */
+body:not(.locked) .reveal{
+  opacity:1;
+  transform:translateY(0);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:600px){
+
+  .invitation{
+    width:100%;
+    box-shadow:none;
+  }
+
+  .hero{
+
+    min-height:100svh;
+
+    padding:
+      55px
+      10px
+      80px;
+
+  }
+
+  .hero::before,
+  .hero::after{
+
+    width:13%;
+
+    min-width:38px;
+
+  }
+
+  .hero-frame{
+
+    width:74%;
+
+    min-height:72svh;
+
+    padding:
+      50px
+      10px;
+
+  }
+
+  .hero h1{
+
+    font-size:
+      clamp(
+        38px,
+        10.5vw,
+        60px
       );
-      margin: 35px auto 30px;
-    }
 
-    .hero-message {
-      font-family: var(--serif);
-      font-size: 18px;
-      line-height: 1.55;
-      max-width: 340px;
-      margin: auto;
-    }
+  }
 
-    .hero-label {
-      margin-top: 24px;
-      font-size: 8px;
-      letter-spacing: .3em;
-      color: var(--muted);
-    }
+  .hero p{
 
+    font-size:16px;
 
-    /* =========================================================
-       SCRATCH DATE
-    ========================================================= */
+  }
 
-    .scratch-section {
-      background:
-        linear-gradient(
-          to bottom,
-          var(--cream),
-          var(--cream-light)
-        );
-    }
+  .ornamental-line{
 
-    .scratch-heading {
-      margin-bottom: 45px;
-    }
+    margin:
+      23px
+      0;
 
-    .scratch-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      max-width: 430px;
-      margin: auto;
-    }
+  }
 
-    .scratch-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+  .ornamental-line::before,
+  .ornamental-line::after{
 
-    .scratch-circle {
-      width: min(27vw, 125px);
-      height: min(27vw, 125px);
-      max-width: 125px;
-      max-height: 125px;
-      min-width: 88px;
-      min-height: 88px;
+    width:32px;
 
-      position: relative;
-      border-radius: 50%;
+  }
 
-      background:
-        radial-gradient(
-          circle at 35% 28%,
-          #f8e4a7 0%,
-          #d5ae59 35%,
-          #a87b29 70%,
-          #79561b 100%
-        );
+  .section{
 
-      box-shadow:
-        inset 0 0 0 2px rgba(255,255,255,.4),
-        inset 0 0 0 6px rgba(110,75,17,.15),
-        0 10px 25px rgba(120,85,25,.16);
+    padding:
+      70px
+      18px;
 
-      overflow: hidden;
-      touch-action: none;
-    }
+  }
 
-    .scratch-value {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
+  .section-heading{
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    margin-bottom:38px;
 
-      font-family: var(--serif);
-      font-size: clamp(29px, 8vw, 42px);
-      color: var(--burgundy);
-      font-weight: 600;
+  }
 
-      pointer-events: none;
-    }
+  .section-heading h2{
 
-    .scratch-canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 2;
-      cursor: grab;
-      touch-action: none;
-    }
+    font-size:40px;
 
-    .scratch-canvas:active {
-      cursor: grabbing;
-    }
+  }
 
-    .scratch-label {
-      margin-top: 15px;
-      font-size: 8px;
-      letter-spacing: .25em;
-      color: var(--muted);
-    }
+  .scratch-grid{
 
-    .scratch-instruction {
-      margin-top: 30px;
-      font-size: 9px;
-      letter-spacing: .16em;
-      color: #988983;
-      text-transform: uppercase;
-    }
+    gap:5px;
 
-    .revealed-date {
-      min-height: 50px;
-      margin-top: 25px;
+  }
 
-      font-family: var(--serif);
-      color: var(--burgundy);
-      font-size: 27px;
+  .scratch-card{
 
-      opacity: 0;
-      transform: translateY(10px);
-      transition: .7s ease;
-    }
+    max-width:110px;
 
-    .revealed-date.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  }
 
+  .scratch-value{
 
-    /* =========================================================
-       TIMELINE
-    ========================================================= */
+    font-size:22px;
 
-    .schedule {
-      background: var(--cream);
-    }
+  }
 
-    .timeline {
-      max-width: 400px;
-      margin: 50px auto 0;
-      text-align: left;
-      position: relative;
-    }
+  .scratch-item > span{
 
-    .timeline::before {
-      content: "";
-      position: absolute;
-      left: 74px;
-      top: 10px;
-      bottom: 10px;
-      width: 1px;
-      background:
-        linear-gradient(
-          to bottom,
-          transparent,
-          var(--gold),
-          var(--gold),
-          transparent
-        );
-    }
+    display:none;
 
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 60px 28px 1fr;
-      gap: 12px;
-      margin-bottom: 42px;
-      position: relative;
-    }
+  }
 
-    .timeline-time {
-      font-family: var(--serif);
-      font-size: 17px;
-      color: var(--burgundy);
-      text-align: right;
-      padding-top: 2px;
-    }
+  .timeline::before{
 
-    .timeline-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--gold);
-      margin: 6px auto 0;
-      box-shadow: 0 0 0 4px var(--cream);
-      position: relative;
-      z-index: 2;
-    }
+    left:70px;
 
-    .timeline-content h3 {
-      font-family: var(--serif);
-      font-size: 26px;
-      font-weight: 500;
-      color: var(--burgundy);
-      margin-bottom: 4px;
-    }
+  }
 
-    .timeline-content p {
-      font-family: var(--serif);
-      font-size: 16px;
-      line-height: 1.45;
-      color: var(--text);
-    }
+  .timeline-item{
 
+    grid-template-columns:
+      55px
+      30px
+      1fr;
 
-    /* =========================================================
-       VENUE
-    ========================================================= */
+  }
 
-    .venue {
-      background: var(--cream-light);
-    }
+  .timeline-time{
 
-    .venue-card {
-      max-width: 420px;
-      margin: 45px auto 0;
-      padding: 38px 25px;
-      border: 1px solid rgba(189,145,64,.35);
-      position: relative;
-    }
+    font-size:13px;
 
-    .venue-card::before,
-    .venue-card::after {
-      content: "✦";
-      position: absolute;
-      color: var(--gold);
-      font-size: 10px;
-      background: var(--cream-light);
-      padding: 0 8px;
-    }
+    padding-right:9px;
 
-    .venue-card::before {
-      top: -7px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
+  }
 
-    .venue-card::after {
-      bottom: -7px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
+  .timeline-content{
 
-    .venue-illustration {
-      width: 160px;
-      height: 120px;
-      margin: 0 auto 25px;
-      color: var(--burgundy);
-    }
+    padding-left:9px;
 
-    .venue-name {
-      font-family: var(--serif);
-      font-size: 34px;
-      color: var(--burgundy);
-      margin-bottom: 7px;
-    }
+  }
 
-    .venue-address {
-      font-size: 8px;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
+  .timeline-content h3{
 
-    .venue-description {
-      font-family: var(--serif);
-      font-size: 17px;
-      line-height: 1.5;
-      margin-top: 22px;
-    }
+    font-size:23px;
 
+  }
 
-    /* =========================================================
-       DRESS CODE
-    ========================================================= */
+  .venue-card{
 
-    .dress-code {
-      background: var(--cream);
-    }
+    padding:
+      35px
+      17px;
 
-    .fashion {
-      margin: 40px auto 25px;
-      width: 240px;
-      height: 170px;
-      position: relative;
-    }
+  }
 
-    .person {
-      position: absolute;
-      bottom: 0;
-    }
+  .venue-card h3{
 
-    .person-left {
-      left: 28px;
-      width: 75px;
-      height: 145px;
-    }
+    font-size:26px;
 
-    .person-right {
-      right: 28px;
-      width: 75px;
-      height: 145px;
-    }
+  }
 
-    .person .head {
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      background: #d3a17e;
-      position: absolute;
-      left: 25px;
-      top: 0;
-    }
+  .venue-address{
 
-    .person .body {
-      position: absolute;
-      top: 24px;
-      left: 10px;
-      width: 55px;
-      height: 100px;
-    }
+    font-size:8px;
 
-    .person-left .body {
-      background: var(--burgundy);
-      clip-path: polygon(
-        30% 0,
-        70% 0,
-        100% 100%,
-        0 100%
+  }
+
+  .dress-card{
+
+    padding:
+      35px
+      17px;
+
+  }
+
+  .dress-card h3{
+
+    font-size:31px;
+
+  }
+
+  .gifts-card{
+
+    padding:
+      42px
+      17px;
+
+  }
+
+  .gifts-card h3{
+
+    font-size:29px;
+
+  }
+
+  .floating-buttons{
+
+    bottom:
+      calc(
+        12px + env(safe-area-inset-bottom)
       );
-    }
-
-    .person-right .body {
-      background: #2b2928;
-      clip-path: polygon(
-        25% 0,
-        75% 0,
-        92% 100%,
-        8% 100%
-      );
-    }
-
-    .fashion-label {
-      font-size: 8px;
-      letter-spacing: .25em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-top: 15px;
-    }
-
-    .dress-title {
-      font-family: var(--serif);
-      color: var(--burgundy);
-      font-size: 36px;
-      margin-bottom: 12px;
-    }
-
-    .dress-description {
-      font-family: var(--serif);
-      font-size: 17px;
-      line-height: 1.5;
-      max-width: 350px;
-      margin: auto;
-    }
-
-
-    /* =========================================================
-       GIFTS
-    ========================================================= */
-
-    .gifts {
-      background: var(--cream-light);
-    }
-
-    .gifts-card {
-      max-width: 420px;
-      margin: 40px auto 0;
-      padding: 45px 28px;
-      background: #fffaf4;
-      border: 1px solid rgba(189,145,64,.28);
-      box-shadow: 0 20px 50px rgba(90,50,30,.08);
-    }
-
-    .gift-icon {
-      font-size: 35px;
-      color: var(--gold);
-      margin-bottom: 20px;
-    }
-
-    .gifts-card h3 {
-      font-family: var(--serif);
-      color: var(--burgundy);
-      font-size: 31px;
-      font-weight: 500;
-      margin-bottom: 15px;
-    }
-
-    .gifts-card p {
-      font-family: var(--serif);
-      font-size: 17px;
-      line-height: 1.6;
-    }
-
-
-    /* =========================================================
-       RSVP
-    ========================================================= */
-
-    .rsvp {
-      min-height: 75vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      background:
-        linear-gradient(
-          180deg,
-          var(--cream),
-          #f2e6d9
-        );
-    }
-
-    .rsvp h2 {
-      font-size: 48px;
-    }
-
-    .rsvp-date {
-      font-family: var(--serif);
-      font-size: 17px;
-      margin-bottom: 30px;
-    }
 
-    .primary-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+  }
 
-      min-width: 180px;
-      min-height: 52px;
+}
 
-      padding: 15px 28px;
 
-      border-radius: 40px;
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
 
-      background: var(--burgundy);
-      color: white;
+@media(max-width:380px){
 
-      font-size: 9px;
-      letter-spacing: .25em;
-      text-transform: uppercase;
+  .hero h1{
 
-      text-decoration: none;
+    font-size:37px;
 
-      box-shadow:
-        0 10px 25px rgba(121,29,45,.2);
+  }
 
-      transition:
-        transform .3s ease,
-        box-shadow .3s ease;
-    }
+  .hero-frame{
 
-    .primary-button:hover {
-      transform: translateY(-3px);
-      box-shadow:
-        0 15px 30px rgba(121,29,45,.25);
-    }
+    width:76%;
 
+  }
 
-    /* =========================================================
-       FLOATING BUTTONS
-    ========================================================= */
+  .scratch-card{
 
-    .floating-buttons {
-      position: fixed;
-      left: 50%;
-      bottom: max(18px, env(safe-area-inset-bottom) + 10px);
-      transform: translateX(-50%);
-      z-index: 500;
+    max-width:96px;
 
-      display: flex;
-      align-items: center;
-      gap: 4px;
+  }
 
-      padding: 5px;
+  .scratch-value{
 
-      background: rgba(255,250,243,.94);
-      border: 1px solid rgba(189,145,64,.3);
-      border-radius: 50px;
+    font-size:20px;
 
-      box-shadow:
-        0 12px 35px rgba(50,30,20,.15);
+  }
 
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
+  .timeline::before{
 
-    .floating-button {
-      min-width: 105px;
-      height: 42px;
+    left:65px;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+  }
 
-      border-radius: 30px;
+  .timeline-item{
 
-      text-decoration: none;
+    grid-template-columns:
+      50px
+      28px
+      1fr;
 
-      color: var(--burgundy);
+  }
 
-      font-size: 8px;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-    }
+}
 
-    .floating-button.primary {
-      background: var(--burgundy);
-      color: white;
-    }
 
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
 
-    /* =========================================================
-       FOOTER
-    ========================================================= */
+@media(prefers-reduced-motion:reduce){
 
-    .footer {
-      padding: 55px 25px 110px;
-      text-align: center;
-      background: var(--cream);
-    }
+  *,
+  *::before,
+  *::after{
 
-    .footer p {
-      font-family: var(--serif);
-      color: var(--burgundy);
-      font-size: 25px;
-    }
+    animation-duration:.01ms!important;
 
-    .footer span {
-      display: block;
-      margin-top: 8px;
-      color: var(--muted);
-      font-size: 8px;
-      letter-spacing: .25em;
-    }
+    transition-duration:.01ms!important;
 
+    scroll-behavior:auto!important;
 
-    /* =========================================================
-       CONFETTI
-    ========================================================= */
+  }
 
-    .confetti-piece {
-      position: fixed;
-      z-index: 99999;
-      top: -30px;
-
-      width: 9px;
-      height: 15px;
+}
 
-      pointer-events: none;
-
-      animation:
-        confettiFall var(--fall-time) cubic-bezier(.18,.7,.3,1) forwards;
-
-      transform:
-        translate3d(0,0,0)
-        rotate(0deg);
-    }
-
-    @keyframes confettiFall {
-      0% {
-        opacity: 1;
-        transform:
-          translate3d(0, -20px, 0)
-          rotate(0deg);
-      }
-
-      70% {
-        opacity: 1;
-      }
-
-      100% {
-        opacity: 0;
-        transform:
-          translate3d(var(--x), 105vh, 0)
-          rotate(var(--rotation));
-      }
-    }
-
-
-    /* =========================================================
-       MOBILE
-    ========================================================= */
-
-    @media (max-width: 600px) {
-
-      body {
-        background: #000;
-      }
-
-      .invitation-page {
-        width: 100%;
-        max-width: 520px;
-        box-shadow: none;
-      }
-
-      .curtain-center {
-        width: 100%;
-      }
-
-      .curtain {
-        width: 50%;
-      }
-
-      /*
-        On mobile we open the curtains enough to reveal
-        the full portrait invitation without cutting text.
-      */
-
-      .curtain-stage.opening .curtain-left {
-        transform: translateX(-82%);
-      }
-
-      .curtain-stage.opening .curtain-right {
-        transform: translateX(82%);
-      }
-
-      .curtain-tie-left {
-        left: 0;
-      }
-
-      .curtain-tie-right {
-        right: 0;
-      }
-
-      .intro-content {
-        padding:
-          70px
-          25px
-          120px;
-      }
-
-      .intro-eyebrow {
-        font-size: 7px;
-        letter-spacing: .28em;
-        margin-bottom: 20px;
-      }
-
-      .intro-small {
-        font-size: 18px;
-        margin-bottom: 18px;
-      }
-
-      .intro-names {
-        font-size: clamp(49px, 15vw, 72px);
-      }
-
-      .intro-ampersand {
-        font-size: 37px;
-        margin: 13px 0;
-      }
-
-      .intro-line {
-        margin: 25px auto 21px;
-      }
-
-      .intro-message {
-        font-size: 16px;
-        line-height: 1.45;
-        max-width: 310px;
-      }
-
-      .intro-bottom {
-        font-size: 7px;
-      }
-
-      .section {
-        padding-left: 23px;
-        padding-right: 23px;
-      }
-
-      .hero {
-        min-height: 90vh;
-      }
-
-      .hero-small {
-        font-size: 19px;
-      }
-
-      .hero-names {
-        font-size: clamp(49px, 15vw, 72px);
-      }
-
-      .hero-message {
-        font-size: 17px;
-      }
-
-      .scratch-circle {
-        width: 27vw;
-        height: 27vw;
-      }
-
-      .timeline::before {
-        left: 67px;
-      }
-
-      .timeline-item {
-        grid-template-columns: 54px 26px 1fr;
-        gap: 10px;
-      }
-
-      .timeline-time {
-        font-size: 15px;
-      }
-
-      .timeline-content h3 {
-        font-size: 24px;
-      }
-
-      .timeline-content p {
-        font-size: 15px;
-      }
-
-      .floating-button {
-        min-width: 100px;
-      }
-    }
-
-
-    /* =========================================================
-       SMALL PHONES
-    ========================================================= */
-
-    @media (max-width: 380px) {
-
-      .intro-content {
-        padding-left: 18px;
-        padding-right: 18px;
-      }
-
-      .intro-small {
-        font-size: 16px;
-      }
-
-      .intro-names {
-        font-size: 47px;
-      }
-
-      .intro-ampersand {
-        font-size: 33px;
-        margin: 10px 0;
-      }
-
-      .intro-message {
-        font-size: 15px;
-        max-width: 280px;
-      }
-
-      .hero-names {
-        font-size: 48px;
-      }
-
-      .section {
-        padding-top: 70px;
-        padding-bottom: 70px;
-      }
-
-      .floating-button {
-        min-width: 92px;
-        font-size: 7px;
-      }
-    }
-
-
-    /* =========================================================
-       REDUCED MOTION
-    ========================================================= */
-
-    @media (prefers-reduced-motion: reduce) {
-
-      html {
-        scroll-behavior: auto;
-      }
-
-      *,
-      *::before,
-      *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .01ms !important;
-      }
-    }
-  </style>
+
+/* =========================================================
+   FINAL CURTAIN BEHAVIOUR
+   The real invitation is the only invitation shown.
+   The curtains simply reveal it at its final size.
+========================================================= */
+
+.curtain-stage{
+  background:transparent !important;
+}
+
+.curtain-center{
+  background:transparent !important;
+  pointer-events:none;
+}
+
+.curtain-center .intro-content{
+  display:none !important;
+}
+
+/* The real hero stays at its final size. No fade/zoom animation. */
+.hero-frame{
+  opacity:1 !important;
+  transform:none !important;
+  transition:none !important;
+}
+
+/* Keep the actual invitation ready behind the curtains. */
+.invitation{
+  visibility:visible !important;
+}
+
+/* The curtain instruction is the only thing shown before opening. */
+.curtain-instruction{
+  z-index:30;
+}
+
+
+
+/* =========================================================
+   CURTAIN POLISH V10 — NATURAL VELVET MOVEMENT
+   Subtle fabric motion only. No wavy/jagged clipping and no scaling.
+========================================================= */
+.curtain{
+  width:50% !important;
+  transform-style:preserve-3d;
+  backface-visibility:hidden;
+  background:
+    radial-gradient(ellipse at 18% 48%, rgba(255,92,111,.18) 0%, rgba(255,92,111,0) 20%),
+    radial-gradient(ellipse at 52% 52%, rgba(255,70,95,.10) 0%, rgba(255,70,95,0) 18%),
+    radial-gradient(ellipse at 82% 45%, rgba(255,95,116,.16) 0%, rgba(255,95,116,0) 20%),
+    repeating-linear-gradient(
+      90deg,
+      #3f0611 0px,
+      #5c0b1b 12px,
+      #8a1b30 25px,
+      #570918 39px,
+      #961f35 53px,
+      #5a0a1a 68px,
+      #7f172c 82px,
+      #450712 98px
+    ) !important;
+  box-shadow:
+    inset -22px 0 32px rgba(0,0,0,.34),
+    inset 12px 0 22px rgba(255,255,255,.045),
+    0 0 30px rgba(0,0,0,.30) !important;
+  transition:transform 2.45s cubic-bezier(.72,0,.18,1) !important;
+}
+
+.curtain::before{
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,0) 0px,
+      rgba(255,255,255,0) 7px,
+      rgba(255,255,255,.055) 12px,
+      rgba(255,255,255,.11) 16px,
+      rgba(0,0,0,.20) 22px,
+      rgba(0,0,0,.34) 31px,
+      rgba(255,255,255,.025) 40px,
+      rgba(255,255,255,0) 49px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.28),
+      transparent 16%,
+      rgba(255,255,255,.035) 32%,
+      transparent 49%,
+      rgba(0,0,0,.20) 66%,
+      transparent 82%,
+      rgba(0,0,0,.34)
+    ) !important;
+  opacity:.92 !important;
+  will-change:background-position,transform;
+}
+
+.curtain::after{
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.42) 0%,
+      transparent 9%,
+      transparent 72%,
+      rgba(0,0,0,.24) 86%,
+      rgba(0,0,0,.52) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,.22),
+      transparent 14%,
+      transparent 82%,
+      rgba(0,0,0,.30)
+    ) !important;
+}
+
+.curtain-left{
+  border-right:0 !important;
+  box-shadow:
+    inset -26px 0 30px rgba(0,0,0,.38),
+    inset 10px 0 20px rgba(255,255,255,.045),
+    14px 0 26px rgba(0,0,0,.20) !important;
+}
+
+.curtain-right{
+  border-left:0 !important;
+  box-shadow:
+    inset 26px 0 30px rgba(0,0,0,.38),
+    inset -10px 0 20px rgba(255,255,255,.045),
+    -14px 0 26px rgba(0,0,0,.20) !important;
+}
+
+.curtain-tie{display:none !important;}
+
+/* The cloth travels as one piece. The fold highlights drift slightly,
+   which gives the eye the impression of heavy velvet following the pull. */
+.curtain-stage.opening .curtain-left{
+  transform:translateX(-72%) !important;
+}
+.curtain-stage.opening .curtain-right{
+  transform:translateX(72%) !important;
+}
+
+.curtain-stage.opening .curtain-left::before{
+  animation:velvetFlowLeft 2.45s cubic-bezier(.72,0,.18,1) both;
+}
+.curtain-stage.opening .curtain-right::before{
+  animation:velvetFlowRight 2.45s cubic-bezier(.72,0,.18,1) both;
+}
+
+@keyframes velvetFlowLeft{
+  0%{background-position:0 0,0 0; transform:translateX(0);}
+  35%{background-position:18px 0,8px 0; transform:translateX(-5px);}
+  72%{background-position:42px 0,18px 0; transform:translateX(-11px);}
+  100%{background-position:58px 0,24px 0; transform:translateX(-13px);}
+}
+
+@keyframes velvetFlowRight{
+  0%{background-position:0 0,0 0; transform:translateX(0);}
+  35%{background-position:-18px 0,-8px 0; transform:translateX(5px);}
+  72%{background-position:-42px 0,-18px 0; transform:translateX(11px);}
+  100%{background-position:-58px 0,-24px 0; transform:translateX(13px);}
+}
+
+@media (max-width:600px){
+  .curtain-stage.opening .curtain-left{
+    transform:translateX(-82%) !important;
+  }
+  .curtain-stage.opening .curtain-right{
+    transform:translateX(82%) !important;
+  }
+}
+
+</style>
+
 </head>
 
 
-<body>
+<body class="locked">
 
-  <!-- =======================================================
-       CURTAIN INTRO
-  ======================================================== -->
 
-  <div class="curtain-stage" id="curtainStage">
+<!-- =======================================================
+     CONFETTI
+======================================================= -->
 
-    <!-- Portrait invitation underneath -->
-    <div class="curtain-center">
+<canvas id="confettiCanvas"></canvas>
 
-      <div class="intro-content">
 
-        <div class="intro-eyebrow">
-          YOU ARE CORDIALLY INVITED
-        </div>
+<!-- =======================================================
+     CURTAIN OPENING
+======================================================= -->
 
-        <div class="intro-small">
-          To celebrate the wedding of
-        </div>
+<div class="curtain-stage" id="curtainStage">
 
-        <div class="intro-names">
-          <span class="intro-name">Happy Alves</span>
+  <div class="curtain-center">
 
-          <span class="intro-ampersand">&amp;</span>
+  <div class="intro-content">
 
-          <span class="intro-name">Nico Alves</span>
-        </div>
-
-        <div class="intro-line"></div>
-
-        <p class="intro-message">
-          We would like to invite you to join us as we
-          celebrate the beginning of our forever.
-        </p>
-
-        <div class="intro-bottom">
-          A RUSTIC CELEBRATION
-        </div>
-
-      </div>
-
+    <div class="intro-eyebrow">
+      YOU ARE CORDIALLY INVITED
     </div>
 
+    <div class="intro-small">
+      To celebrate the wedding of
+    </div>
 
-    <!-- Left curtain -->
-    <div class="curtain curtain-left"></div>
+    <div class="intro-names">
+      <span class="intro-name">Happy Alves</span>
 
-    <!-- Right curtain -->
-    <div class="curtain curtain-right"></div>
+      <span class="intro-ampersand">&amp;</span>
+
+      <span class="intro-name">Nico Alves</span>
+    </div>
+
+    <div class="intro-line"></div>
+
+    <p class="intro-message">
+      We would like to invite you to join us as we
+      celebrate the beginning of our forever.
+    </p>
+
+    <div class="intro-bottom">
+      A RUSTIC CELEBRATION
+    </div>
+
+  </div>
+
+</div>
+
+  <div class="curtain curtain-left"></div>
+  <div class="curtain curtain-right"></div>
+
+  <div class="curtain-tie curtain-tie-left"></div>
+  <div class="curtain-tie curtain-tie-right"></div>
+
+  <div class="curtain-instruction">
+
+    <button
+      class="tap-button"
+      id="openInvitation"
+      aria-label="Open invitation"
+    >
+      <span class="tap-arrow"></span>
+    </button>
+
+    <span class="tap-text">
+      Tap to continue
+    </span>
+
+  </div>
+
+</div>
 
 
-    <!-- Gold tie backs -->
-    <div class="curtain-tie curtain-tie-left"></div>
-    <div class="curtain-tie curtain-tie-right"></div>
+<!-- =======================================================
+     INVITATION
+======================================================= -->
+
+<div class="page-shell">
+
+<main class="invitation" id="invitation">
 
 
-    <!-- Tap button -->
-    <div class="curtain-instruction">
+<!-- =======================================================
+     HERO
+======================================================= -->
 
-      <button
-        class="tap-button"
-        id="openInvitation"
-        aria-label="Open invitation"
-      >
-        <span class="tap-arrow"></span>
-      </button>
+<section class="hero">
 
-      <span class="tap-text">
-        Tap to continue
+  <div class="hero-frame">
+
+    <span class="eyebrow">
+      You Are Cordially Invited
+    </span>
+
+
+    <p
+      style="
+        margin-bottom:24px;
+        font-size:20px;
+        color:#65595a;
+      "
+    >
+      To celebrate the wedding of
+    </p>
+
+
+    <h1>
+
+      Happy Alves
+
+      <span>
+        &
       </span>
 
+      Nico Alves
+
+    </h1>
+
+
+    <div class="ornamental-line">
+      <span>✦</span>
+    </div>
+
+
+    <p>
+
+      We would like to invite you to join us
+      as we celebrate the beginning of our
+      forever.
+
+    </p>
+
+
+    <div class="hero-theme">
+      A Rustic Celebration
     </div>
 
   </div>
 
 
-  <!-- =======================================================
-       MAIN INVITATION
-  ======================================================== -->
+  <div class="scroll-hint">
 
-  <div class="page-shell">
+    <span>
+      Scroll to discover
+    </span>
 
-    <main class="invitation-page">
+    <div class="scroll-arrow"></div>
 
-      <div
-        class="main-invitation"
-        id="mainInvitation"
-      >
+  </div>
 
+</section>
 
-        <!-- =================================================
-             HERO
-        ================================================== -->
 
-        <section class="section hero">
 
-          <div class="hero-inner">
+<!-- =======================================================
+     SCRATCH DATE
+======================================================= -->
 
-            <div class="hero-eyebrow">
-              YOU ARE CORDIALLY INVITED
-            </div>
+<section class="scratch-section section">
 
-            <div class="hero-small">
-              To celebrate the wedding of
-            </div>
+  <div class="section-heading reveal">
 
-            <div class="hero-names">
+    <span class="eyebrow">
+      A Little Surprise
+    </span>
 
-              <span>Happy Alves</span>
+    <h2>
+      Reveal our date
+    </h2>
 
-              <div class="hero-and">
-                &amp;
-              </div>
-
-              <span>Nico Alves</span>
-
-            </div>
-
-            <div class="hero-divider"></div>
-
-            <p class="hero-message">
-              We would like to invite you to join us as we
-              celebrate the beginning of our forever.
-            </p>
-
-            <div class="hero-label">
-              A RUSTIC CELEBRATION
-            </div>
-
-          </div>
-
-        </section>
-
-
-        <!-- =================================================
-             SCRATCH DATE
-        ================================================== -->
-
-        <section class="section scratch-section">
-
-          <div class="scratch-heading">
-
-            <span class="eyebrow">
-              A LITTLE SURPRISE
-            </span>
-
-            <h2>
-              Reveal our date
-            </h2>
-
-            <p class="section-description">
-              Scratch each golden circle to discover
-              when our forever begins.
-            </p>
-
-          </div>
-
-
-          <div class="scratch-grid">
-
-            <!-- DAY -->
-            <div class="scratch-item">
-
-              <div class="scratch-circle">
-
-                <div class="scratch-value">
-                  16
-                </div>
-
-                <canvas
-                  class="scratch-canvas"
-                  data-value="16"
-                ></canvas>
-
-              </div>
-
-              <span class="scratch-label">
-                DAY
-              </span>
-
-            </div>
-
-
-            <!-- MONTH -->
-            <div class="scratch-item">
-
-              <div class="scratch-circle">
-
-                <div class="scratch-value">
-                  SEPT
-                </div>
-
-                <canvas
-                  class="scratch-canvas"
-                  data-value="SEPT"
-                ></canvas>
-
-              </div>
-
-              <span class="scratch-label">
-                MONTH
-              </span>
-
-            </div>
-
-
-            <!-- YEAR -->
-            <div class="scratch-item">
-
-              <div class="scratch-circle">
-
-                <div class="scratch-value">
-                  2027
-                </div>
-
-                <canvas
-                  class="scratch-canvas"
-                  data-value="2027"
-                ></canvas>
-
-              </div>
-
-              <span class="scratch-label">
-                YEAR
-              </span>
-
-            </div>
-
-          </div>
-
-
-          <div class="scratch-instruction">
-            Scratch each circle to reveal
-          </div>
-
-
-          <div
-            class="revealed-date"
-            id="revealedDate"
-          ></div>
-
-        </section>
-
-
-        <!-- =================================================
-             SCHEDULE
-        ================================================== -->
-
-        <section class="section schedule">
-
-          <span class="eyebrow">
-            THE CELEBRATION
-          </span>
-
-          <h2>
-            Our Day
-          </h2>
-
-          <p class="section-description">
-            A beautiful evening filled with love,
-            good food and happy memories.
-          </p>
-
-
-          <div class="timeline">
-
-            <div class="timeline-item">
-
-              <div class="timeline-time">
-                4:00 PM
-              </div>
-
-              <div class="timeline-dot"></div>
-
-              <div class="timeline-content">
-
-                <h3>
-                  Ceremony
-                </h3>
-
-                <p>
-                  Join us as we exchange our vows
-                  and begin our forever together.
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-              <div class="timeline-time">
-                5:30 PM
-              </div>
-
-              <div class="timeline-dot"></div>
-
-              <div class="timeline-content">
-
-                <h3>
-                  Aperitivo
-                </h3>
-
-                <p>
-                  Drinks, canapés and time to
-                  celebrate with the people we love.
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-              <div class="timeline-time">
-                7:00 PM
-              </div>
-
-              <div class="timeline-dot"></div>
-
-              <div class="timeline-content">
-
-                <h3>
-                  Dinner
-                </h3>
-
-                <p>
-                  An intimate dinner surrounded by
-                  family and friends.
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-              <div class="timeline-time">
-                9:00 PM
-              </div>
-
-              <div class="timeline-dot"></div>
-
-              <div class="timeline-content">
-
-                <h3>
-                  Party
-                </h3>
-
-                <p>
-                  Drinks, dancing and celebrations
-                  into the night.
-                </p>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </section>
-
-
-        <!-- =================================================
-             VENUE
-        ================================================== -->
-
-        <section class="section venue">
-
-          <span class="eyebrow">
-            WHERE WE'LL CELEBRATE
-          </span>
-
-          <h2>
-            The Venue
-          </h2>
-
-
-          <div class="venue-card">
-
-            <div class="venue-illustration">
-
-              <svg
-                viewBox="0 0 200 150"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-
-                <path
-                  d="M20 125H180"
-                  stroke="currentColor"
-                  stroke-width="1.4"
-                />
-
-                <path
-                  d="M35 125V70L100 30L165 70V125"
-                  stroke="currentColor"
-                  stroke-width="1.4"
-                />
-
-                <path
-                  d="M65 125V82H135V125"
-                  stroke="currentColor"
-                  stroke-width="1.4"
-                />
-
-                <path
-                  d="M78 125V95H122V125"
-                  stroke="currentColor"
-                  stroke-width="1.4"
-                />
-
-                <path
-                  d="M28 70H172"
-                  stroke="currentColor"
-                  stroke-width="1.4"
-                />
-
-                <path
-                  d="M100 30V15"
-                  stroke="currentColor"
-                  stroke-width="1.4"
-                />
-
-                <path
-                  d="M90 18H110"
-                  stroke="currentColor"
-                  stroke-width="1.4"
-                />
-
-                <path
-                  d="M22 125C30 108 37 104 45 125"
-                  stroke="currentColor"
-                  stroke-width="1"
-                />
-
-                <path
-                  d="M155 125C163 108 170 104 178 125"
-                  stroke="currentColor"
-                  stroke-width="1"
-                />
-
-              </svg>
-
-            </div>
-
-
-            <div class="venue-name">
-              Villa Amor
-            </div>
-
-            <div class="venue-address">
-              Lake Como, Italy
-            </div>
-
-            <p class="venue-description">
-              A beautiful setting surrounded by
-              breathtaking views and the people
-              we love most.
-            </p>
-
-          </div>
-
-        </section>
-
-
-        <!-- =================================================
-             DRESS CODE
-        ================================================== -->
-
-        <section class="section dress-code">
-
-          <span class="eyebrow">
-            WHAT TO WEAR
-          </span>
-
-          <h2>
-            Dress Code
-          </h2>
-
-
-          <div class="fashion">
-
-            <div class="person person-left">
-
-              <div class="head"></div>
-
-              <div class="body"></div>
-
-            </div>
-
-
-            <div class="person person-right">
-
-              <div class="head"></div>
-
-              <div class="body"></div>
-
-            </div>
-
-          </div>
-
-
-          <div class="fashion-label">
-            FORMAL ATTIRE
-          </div>
-
-          <div class="dress-title">
-            Formal Attire
-          </div>
-
-          <p class="dress-description">
-            We invite you to dress elegantly for
-            our special evening.
-          </p>
-
-        </section>
-
-
-        <!-- =================================================
-             GIFTS
-        ================================================== -->
-
-        <section class="section gifts">
-
-          <span class="eyebrow">
-            WITH LOVE
-          </span>
-
-          <h2>
-            Gifts
-          </h2>
-
-
-          <div class="gifts-card">
-
-            <div class="gift-icon">
-              ♡
-            </div>
-
-            <h3>
-              Your Presence Is Our Gift
-            </h3>
-
-            <p>
-              Having you celebrate this special
-              day with us is more than enough.
-              For those who wish to give, a
-              monetary gift towards our future
-              together would be deeply appreciated.
-            </p>
-
-          </div>
-
-        </section>
-
-
-        <!-- =================================================
-             RSVP
-        ================================================== -->
-
-        <section class="section rsvp">
-
-          <span class="eyebrow">
-            WE HOPE TO SEE YOU
-          </span>
-
-          <h2>
-            RSVP
-          </h2>
-
-          <p class="rsvp-date">
-            Please RSVP by 16 August 2027
-          </p>
-
-          <a
-            href="#"
-            class="primary-button"
-          >
-            RSVP NOW
-          </a>
-
-        </section>
-
-
-        <!-- =================================================
-             FOOTER
-        ================================================== -->
-
-        <footer class="footer">
-
-          <div class="ornament">
-            ✦
-          </div>
-
-          <p>
-            Happy &amp; Nico
-          </p>
-
-          <span>
-            16 · SEPT · 2027
-          </span>
-
-        </footer>
-
-
-      </div>
-
-    </main>
+    <p>
+      Scratch each golden circle to discover
+      when our forever begins.
+    </p>
 
   </div>
 
 
-  <!-- =======================================================
-       FLOATING BUTTONS
-  ======================================================== -->
+  <div class="scratch-grid reveal">
 
-  <div class="floating-buttons">
+
+    <!-- DAY -->
+
+    <div class="scratch-item">
+
+      <div class="scratch-card">
+
+        <div class="scratch-value">
+
+          <div>
+
+            22
+
+          </div>
+
+        </div>
+
+
+        <canvas
+          class="scratch-canvas"
+          data-value="22"
+          data-label="DAY"
+        ></canvas>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- MONTH -->
+
+    <div class="scratch-item">
+
+      <div class="scratch-card">
+
+        <div class="scratch-value">
+
+          <div>
+
+            JAN
+
+          </div>
+
+        </div>
+
+
+        <canvas
+          class="scratch-canvas"
+          data-value="JAN"
+          data-label="MONTH"
+        ></canvas>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- YEAR -->
+
+    <div class="scratch-item">
+
+      <div class="scratch-card">
+
+        <div class="scratch-value">
+
+          <div>
+
+            2027
+
+          </div>
+
+        </div>
+
+
+        <canvas
+          class="scratch-canvas"
+          data-value="2027"
+          data-label="YEAR"
+        ></canvas>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="scratch-instruction">
+
+    ✦ Scratch with your finger or mouse ✦
+
+  </div>
+
+
+  <div
+    class="revealed-date"
+    id="revealedDate"
+    aria-live="polite"
+  >
+    <div class="countdown-title">Counting down to our forever</div>
+    <div class="countdown-grid">
+      <div class="countdown-unit">
+        <span class="countdown-number" id="countDays">0</span>
+        <span class="countdown-label">Days</span>
+      </div>
+      <div class="countdown-unit">
+        <span class="countdown-number" id="countHours">0</span>
+        <span class="countdown-label">Hours</span>
+      </div>
+      <div class="countdown-unit">
+        <span class="countdown-number" id="countMinutes">0</span>
+        <span class="countdown-label">Minutes</span>
+      </div>
+      <div class="countdown-unit">
+        <span class="countdown-number" id="countSeconds">0</span>
+        <span class="countdown-label">Seconds</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     OUR DAY
+======================================================= -->
+
+<section class="section">
+
+  <div class="section-heading reveal">
+
+    <span class="eyebrow">
+      The Celebration
+    </span>
+
+    <h2>
+      Our Day
+    </h2>
+
+    <p>
+      A beautiful day filled with love,
+      laughter and celebration.
+    </p>
+
+  </div>
+
+
+  <div class="timeline reveal">
+
+
+    <div class="timeline-item">
+
+      <div class="timeline-time">
+        2:30 PM
+      </div>
+
+      <div class="timeline-dot"></div>
+
+      <div class="timeline-content">
+
+        <h3>
+          Church Ceremony
+        </h3>
+
+        <p>
+          Join us as we exchange our vows
+          and begin our forever.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="timeline-item">
+
+      <div class="timeline-time">
+        5:00 PM
+      </div>
+
+      <div class="timeline-dot"></div>
+
+      <div class="timeline-content">
+
+        <h3>
+          Wedding Reception
+        </h3>
+
+        <p>
+          Dinner, drinks and a celebration
+          with the people we love most.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="timeline-item">
+
+      <div class="timeline-time">
+        7:00 PM
+      </div>
+
+      <div class="timeline-dot"></div>
+
+      <div class="timeline-content">
+
+        <h3>
+          Celebration
+        </h3>
+
+        <p>
+          Enjoy an evening of food,
+          laughter, dancing and memories.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="timeline-item">
+
+      <div class="timeline-time">
+        9:00 PM
+      </div>
+
+      <div class="timeline-dot"></div>
+
+      <div class="timeline-content">
+
+        <h3>
+          Party
+        </h3>
+
+        <p>
+          Drinks, dancing and celebrations
+          into the night.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     VENUES
+======================================================= -->
+
+<section class="venue section">
+
+  <div class="section-heading reveal">
+
+    <span class="eyebrow">
+      Where We Gather
+    </span>
+
+    <h2>
+      The Venues
+    </h2>
+
+    <p>
+      Two beautiful places where we will
+      celebrate this special day together.
+    </p>
+
+  </div>
+
+
+  <!-- CHURCH -->
+
+  <div class="venue-card reveal">
+
+    <div class="venue-label">
+      Ceremony · 2:30 PM
+    </div>
+
+
+    <div class="venue-illustration">
+
+      <svg
+        viewBox="0 0 500 300"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+
+        <circle
+          cx="405"
+          cy="55"
+          r="24"
+          stroke="#b89445"
+          stroke-width="1.5"
+        />
+
+        <path
+          d="
+            M20 210
+            L120 105
+            L175 160
+            L250 75
+            L370 210
+          "
+          stroke="#791f2c"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+
+        <path
+          d="
+            M15 218
+            C120 205 250 230 485 215
+          "
+          stroke="#b89445"
+          stroke-width="1.5"
+        />
+
+        <path
+          d="
+            M145 215
+            V150
+            L250 105
+            L355 150
+            V215
+          "
+          stroke="#40383a"
+          stroke-width="2"
+        />
+
+        <path
+          d="
+            M225 215
+            V75
+            H275
+            V215
+          "
+          stroke="#40383a"
+          stroke-width="2"
+        />
+
+        <path
+          d="
+            M215 76
+            L250 45
+            L285 76
+          "
+          stroke="#791f2c"
+          stroke-width="2"
+        />
+
+        <path
+          d="
+            M250 35
+            V60
+            M242 45
+            H258
+          "
+          stroke="#b89445"
+          stroke-width="2"
+        />
+
+        <path
+          d="
+            M230 215
+            V175
+            Q250 155 270 175
+            V215
+          "
+          stroke="#791f2c"
+          stroke-width="2"
+        />
+
+        <path
+          d="
+            M90 215
+            V145
+            M65 175
+            L90 150
+            L115 175
+            M70 192
+            L90 168
+            L110 192
+          "
+          stroke="#b89445"
+          stroke-width="2"
+        />
+
+        <path
+          d="
+            M405 215
+            V150
+            M380 180
+            L405 155
+            L430 180
+            M385 198
+            L405 173
+            L425 198
+          "
+          stroke="#b89445"
+          stroke-width="2"
+        />
+
+      </svg>
+
+    </div>
+
+
+    <h3>
+      Archdiocesan Shrine of
+      St. Thérèse of the Child Jesus
+    </h3>
+
+
+    <div class="venue-address">
+      8WJ2+C5H, Edison St, Cebu City,
+      6000 Cebu, Philippines
+    </div>
+
+
+    <div class="venue-time">
+      2:30 PM
+    </div>
+
+
+    <p class="venue-description">
+      Our church ceremony where we will
+      exchange our vows and begin our
+      life together.
+    </p>
+
+
+    <a
+      class="location-button"
+      href="https://www.google.com/maps/search/?api=1&query=Archdiocesan+Shrine+of+St.+Therese+of+the+Child+Jesus+Cebu"
+      target="_blank"
+      rel="noopener"
+    >
+      View Location
+    </a>
+
+  </div>
+
+
+
+  <!-- RECEPTION -->
+
+  <div class="venue-card reveal">
+
+    <div class="venue-label">
+      Reception · 5:00 PM
+    </div>
+
+
+    <div class="venue-illustration">
+
+      <svg
+        viewBox="0 0 500 300"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+
+        <circle
+          cx="405"
+          cy="55"
+          r="24"
+          stroke="#b89445"
+          stroke-width="1.5"
+        />
+
+        <path
+          d="
+            M20 210
+            L120 105
+            L175 160
+            L250 75
+            L370 210
+          "
+          stroke="#791f2c"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+
+        <path
+          d="
+            M15 218
+            C120 205 250 230 485 215
+          "
+          stroke="#b89445"
+          stroke-width="1.5"
+        />
+
+        <path
+          d="
+            M120 215
+            V145
+            L250 85
+            L380 145
+            V215
+          "
+          stroke="#40383a"
+          stroke-width="2"
+        />
+
+        <path
+          d="
+            M100 148
+            L250 72
+            L400 148
+          "
+          stroke="#791f2c"
+          stroke-width="2.5"
+        />
+
+        <path
+          d="
+            M150 145
+            V215
+
+            M205 120
+            V215
+
+            M295 120
+            V215
+
+            M350 145
+            V215
+          "
+          stroke="#40383a"
+          stroke-width="2"
+        />
+
+        <path
+          d="
+            M170 215
+            V150
+            H330
+            V215
+          "
+          stroke="#b89445"
+          stroke-width="1.5"
+        />
+
+        <path
+          d="
+            M225 215
+            V165
+            Q250 145 275 165
+            V215
+          "
+          stroke="#791f2c"
+          stroke-width="2"
+        />
+
+        <path
+          d="
+            M75 215
+            V150
+            M52 178
+            L75 153
+            L98 178
+            M57 195
+            L75 172
+            L93 195
+          "
+          stroke="#b89445"
+          stroke-width="2"
+        />
+
+        <path
+          d="
+            M425 215
+            V150
+            M402 178
+            L425 153
+            L448 178
+            M407 195
+            L425 172
+            L443 195
+          "
+          stroke="#b89445"
+          stroke-width="2"
+        />
+
+        <circle
+          cx="175"
+          cy="137"
+          r="2"
+          fill="#b89445"
+        />
+
+        <circle
+          cx="205"
+          cy="123"
+          r="2"
+          fill="#b89445"
+        />
+
+        <circle
+          cx="295"
+          cy="123"
+          r="2"
+          fill="#b89445"
+        />
+
+        <circle
+          cx="325"
+          cy="137"
+          r="2"
+          fill="#b89445"
+        />
+
+      </svg>
+
+    </div>
+
+
+    <h3>
+      Beverly View Events Pavilion
+    </h3>
+
+
+    <div class="venue-address">
+      4th Street Beverly Hills,
+      Lahug, Cebu City, 6000
+    </div>
+
+
+    <div class="venue-time">
+      5:00 PM
+    </div>
+
+
+    <p class="venue-description">
+      Join us for our wedding reception
+      as we celebrate with dinner,
+      drinks and dancing.
+    </p>
+
+
+    <a
+      class="location-button"
+      href="https://www.google.com/maps/search/?api=1&query=Beverly+View+Events+Pavilion+Cebu"
+      target="_blank"
+      rel="noopener"
+    >
+      View Location
+    </a>
+
+  </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     DRESS CODE
+======================================================= -->
+
+<section class="dress-code section">
+
+  <div class="section-heading reveal">
+
+    <span class="eyebrow">
+      What To Wear
+    </span>
+
+    <h2>
+      Dress Code
+    </h2>
+
+  </div>
+
+
+  <div class="dress-card reveal">
+
+    <div class="fashion-illustration">
+
+      <svg
+        viewBox="0 0 400 280"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+      >
+
+        <circle
+          cx="125"
+          cy="58"
+          r="22"
+          stroke="#40383a"
+          stroke-width="2"
+        />
+
+        <path
+          d="
+            M112 80
+            L93 125
+            L75 218
+            L175 218
+            L157 125
+            L138 80
+          "
+          stroke="#791f2c"
+          stroke-width="2"
+        />
+
+        <path
+          d="
+            M93 125
+            L65 175
+          "
+          stroke="#40383a"
+          stroke-width="2"
+        />
+
+        <path
+          d="
+            M157 125
+            L185 175
+          "
+          stroke="#40383a"
+          stroke-width="2"
+        />
+
+        <path
+          d="
+            M103 218
+            L92 250
+          "
+          stroke="#40383a"
+          stroke-width="2"
+        />
+
+        <path
+          d="
+            M147 218
+            L158 250
+          "
+          stroke="#40383a"
+          stroke-width="2"
+        />
+
+        <circle
+          cx="275"
+          cy="58"
+          r="22"
+          stroke="#40383a"
+          stroke-width="2"
+        />
+
+        <path
+          d="
+            M252 80
+            L225 120
+            L235 218
+            L315 218
+            L325 120
+            L298 80
+          "
+          stroke="#40383a"
+          stroke-width="2"
+        />
+
+        <path
+          d="
+            M252 80
+            L275 115
+            L298 80
+          "
+          stroke="#791f2c"
+          stroke-width="2"
+        />
+
+        <path
+          d="
+            M275 115
+            V218
+          "
+          stroke="#b89445"
+          stroke-width="1.5"
+        />
+
+        <path
+          d="
+            M250 218
+            L242 250
+          "
+          stroke="#40383a"
+          stroke-width="2"
+        />
+
+        <path
+          d="
+            M300 218
+            L308 250
+          "
+          stroke="#40383a"
+          stroke-width="2"
+        />
+
+      </svg>
+
+    </div>
+
+
+    <h3>
+      Formal Attire
+    </h3>
+
+
+    <p>
+      We invite you to dress elegantly
+      for our special day.
+    </p>
+
+
+    <div class="dress-note">
+      Elegant dresses · Suits or tuxedos
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     GIFTS
+======================================================= -->
+
+<section class="gifts section">
+
+  <div class="section-heading reveal">
+
+    <span class="eyebrow">
+      With Love
+    </span>
+
+    <h2>
+      Gifts
+    </h2>
+
+  </div>
+
+
+  <div class="gifts-card reveal">
+
+    <div class="gift-icon">
+      ♢
+    </div>
+
+
+    <h3>
+      Your Presence Is Our Gift
+    </h3>
+
+
+    <p>
+      Having you celebrate this special day
+      with us is more than enough.
+
+      For those who wish to give, a monetary
+      gift towards our future together would
+      be deeply appreciated.
+    </p>
+
+  </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     RSVP
+======================================================= -->
+
+<section class="rsvp section">
+
+  <div class="rsvp-inner reveal">
+
+    <span class="eyebrow">
+      We Hope To See You
+    </span>
+
+
+    <h2>
+      RSVP
+    </h2>
+
+
+    <p>
+      Please let us know if you will be
+      joining us for our special day.
+    </p>
+
 
     <a
       href="#"
-      class="floating-button primary"
+      class="primary-button"
     >
       RSVP
     </a>
 
-    <a
-      href="#"
-      class="floating-button"
-    >
-      Location
-    </a>
+
+    <div class="rsvp-deadline">
+      Please RSVP for our January 22, 2027 celebration
+    </div>
 
   </div>
 
-
-  <!-- =======================================================
-       JAVASCRIPT
-  ======================================================== -->
-
-  <script>
-
-    /* =====================================================
-       CURTAIN OPENING
-    ====================================================== */
-
-    const curtainStage =
-      document.getElementById("curtainStage");
-
-    const openButton =
-      document.getElementById("openInvitation");
-
-    const mainInvitation =
-      document.getElementById("mainInvitation");
+</section>
 
 
-    let invitationOpened = false;
+
+<!-- =======================================================
+     FOOTER
+======================================================= -->
+
+<footer class="footer">
+
+  <div class="ornament">
+    ✦
+  </div>
+
+  <p>
+    Happy Alves & Nico Alves
+  </p>
+
+  <span>
+    22 · JANUARY · 2027
+  </span>
+
+</footer>
 
 
-    function openInvitation() {
+</main>
 
-      if (invitationOpened) return;
-
-      invitationOpened = true;
+</div>
 
 
-      /*
-        Start curtain animation.
-      */
 
-      curtainStage.classList.add("opening");
+<!-- =======================================================
+     FLOATING BUTTONS
+======================================================= -->
 
+<div class="floating-buttons">
 
-      /*
-        Give the curtains time to move
-        before making the page active.
-      */
-
-      setTimeout(() => {
-
-        curtainStage.classList.add("opened");
-
-        mainInvitation.classList.add("visible");
-
-      }, 700);
+  <a
+    href="#"
+    class="floating-button"
+  >
+    RSVP
+  </a>
 
 
-      /*
-        Remove the curtain layer only after
-        the animation has completely finished.
+  <a
+    href="https://www.google.com/maps/search/?api=1&query=Beverly+View+Events+Pavilion+Cebu"
+    target="_blank"
+    rel="noopener"
+    class="floating-button secondary"
+  >
+    Location
+  </a>
 
-        This prevents the weird "duplicate screen"
-        effect from happening.
-      */
-
-      setTimeout(() => {
-
-        curtainStage.style.pointerEvents = "none";
-
-      }, 2400);
-
-    }
+</div>
 
 
-    openButton.addEventListener(
-      "click",
-      openInvitation
-    );
+
+<script>
+
+/* =========================================================
+   OPEN CURTAIN
+========================================================= */
+
+const curtainStage =
+  document.getElementById("curtainStage");
+
+const openButton =
+  document.getElementById("openInvitation");
+
+const invitation =
+  document.getElementById("invitation");
+
+let opening = false;
+
+
+function openInvitation(){
+
+  if(opening) return;
+
+  opening = true;
+
+  /* Lock scrolling while the curtains are moving. */
+  document.body.classList.add("locked");
+
+  /* Make the REAL invitation visible at its final size immediately.
+     The curtains are simply covering it, then revealing it. */
+  invitation.classList.add("opened");
+
+  /* Start the left/right curtain animation. */
+  curtainStage.classList.add("opening");
+
+  setTimeout(() => {
+
+    /* Once fully open, the curtain belongs to the first hero.
+       It will scroll away with the page instead of covering later sections. */
+    curtainStage.classList.add("opened");
+    curtainStage.classList.add("finished");
+
+    document.querySelectorAll(".reveal").forEach(function(element){
+      element.classList.add("visible");
+    });
+
+    /* Unlock scrolling. The curtain now scrolls away with the first hero. */
+    document.body.classList.remove("locked");
+    document.documentElement.style.overflowY = "auto";
+
+  }, 2250);
+
+}
+
+
+openButton.addEventListener(
+  "click",
+  openInvitation
+);
+
+
+/* =========================================================
+   OPTIONAL SWIPE TO OPEN
+========================================================= */
+
+let startX = 0;
+let startY = 0;
+
+
+curtainStage.addEventListener(
+  "touchstart",
+  function(event){
+
+    if(!event.touches.length) return;
+
+    startX =
+      event.touches[0].clientX;
+
+    startY =
+      event.touches[0].clientY;
+
+  },
+  {
+    passive:true
+  }
+);
+
+
+curtainStage.addEventListener(
+  "touchend",
+  function(event){
+
+    if(!event.changedTouches.length) return;
+
+    const endX =
+      event.changedTouches[0].clientX;
+
+    const endY =
+      event.changedTouches[0].clientY;
+
+    const distanceX =
+      endX - startX;
+
+    const distanceY =
+      endY - startY;
 
 
     /*
-      Also allow tapping anywhere around the
-      instruction area on mobile.
+      Only trigger if the swipe is
+      mainly horizontal.
     */
 
-    document
-      .querySelector(".curtain-instruction")
-      .addEventListener("click", openInvitation);
+    if(
+      Math.abs(distanceX) > 70 &&
+      Math.abs(distanceX) > Math.abs(distanceY)
+    ){
+
+      openInvitation();
+
+    }
+
+  },
+  {
+    passive:true
+  }
+);
 
 
+/* =========================================================
+   SCROLL REVEALS
+========================================================= */
 
-    /* =====================================================
-       SCRATCH CARDS
-    ====================================================== */
-
-    const scratchCanvases =
-      document.querySelectorAll(".scratch-canvas");
-
-    const revealed =
-      [false, false, false];
-
-    let confettiAlreadyShown = false;
+const revealElements =
+  document.querySelectorAll(".reveal");
 
 
-    function setupScratchCard(canvas, index) {
+const observer =
+  new IntersectionObserver(
 
-      const parent =
-        canvas.parentElement;
+    function(entries){
+
+      entries.forEach(
+        function(entry){
+
+          if(entry.isIntersecting){
+
+            entry.target.classList.add("visible");
+
+            observer.unobserve(
+              entry.target
+            );
+
+          }
+
+        }
+      );
+
+    },
+
+    {
+      threshold:.12
+    }
+
+  );
+
+
+revealElements.forEach(
+  function(element){
+
+    observer.observe(element);
+
+  }
+);
+
+
+/* =========================================================
+   SCRATCH CARDS
+========================================================= */
+
+const scratchCards =
+  document.querySelectorAll(".scratch-canvas");
+
+
+const revealed =
+  new Set();
+
+
+let allRevealed = false;
+
+
+scratchCards.forEach(
+  function(canvas,index){
+
+    const ctx =
+      canvas.getContext("2d");
+
+
+    let scratching = false;
+
+
+    function drawScratchSurface(){
 
       const rect =
-        parent.getBoundingClientRect();
-
-      const size =
-        Math.round(rect.width);
+        canvas.getBoundingClientRect();
 
 
-      /*
-        Use a high-resolution canvas so it stays
-        sharp on Retina/iPhone screens.
-      */
-
-      const pixelRatio =
-        Math.min(window.devicePixelRatio || 1, 2);
+      const ratio =
+        Math.max(
+          1,
+          window.devicePixelRatio || 1
+        );
 
 
       canvas.width =
-        size * pixelRatio;
+        rect.width * ratio;
 
       canvas.height =
-        size * pixelRatio;
-
-      canvas.style.width =
-        size + "px";
-
-      canvas.style.height =
-        size + "px";
+        rect.height * ratio;
 
 
-      const ctx =
-        canvas.getContext("2d");
-
-
-      ctx.scale(
-        pixelRatio,
-        pixelRatio
+      ctx.setTransform(
+        ratio,
+        0,
+        0,
+        ratio,
+        0,
+        0
       );
 
 
+      const w =
+        rect.width;
+
+      const h =
+        rect.height;
+
+
       /*
-        GOLD SCRATCH SURFACE
+        Gold scratch coating
       */
 
       const gradient =
         ctx.createRadialGradient(
-          size * .30,
-          size * .25,
+          w*.32,
+          h*.25,
           5,
-          size * .5,
-          size * .5,
-          size * .7
+          w*.5,
+          h*.5,
+          w*.72
         );
 
 
       gradient.addColorStop(
         0,
-        "#f5df9b"
+        "#f3e2a8"
       );
 
       gradient.addColorStop(
-        .35,
-        "#d2ac58"
-      );
-
-      gradient.addColorStop(
-        .72,
-        "#a77a2b"
+        .48,
+        "#c4a34f"
       );
 
       gradient.addColorStop(
         1,
-        "#795619"
+        "#87651f"
       );
 
 
@@ -2303,44 +3829,45 @@
       ctx.beginPath();
 
       ctx.arc(
-        size / 2,
-        size / 2,
-        size / 2,
+        w/2,
+        h/2,
+        Math.min(w,h)/2 - 2,
         0,
-        Math.PI * 2
+        Math.PI*2
       );
 
       ctx.fill();
 
 
       /*
-        Inner gold ring
+        Inner border
       */
 
       ctx.strokeStyle =
-        "rgba(255,255,255,.4)";
+        "rgba(255,255,255,.45)";
 
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 1;
+
 
       ctx.beginPath();
 
       ctx.arc(
-        size / 2,
-        size / 2,
-        size * .40,
+        w/2,
+        h/2,
+        Math.min(w,h)/2 - 13,
         0,
-        Math.PI * 2
+        Math.PI*2
       );
 
       ctx.stroke();
 
 
       /*
-        Scratch instruction
+        Scratch instructions
       */
 
       ctx.fillStyle =
-        "#fff7df";
+        "#fff9e7";
 
       ctx.textAlign =
         "center";
@@ -2348,711 +3875,691 @@
       ctx.textBaseline =
         "middle";
 
+
       ctx.font =
-        "600 9px Montserrat, sans-serif";
+        "600 9px DM Sans";
 
       ctx.fillText(
         "SCRATCH",
-        size / 2,
-        size / 2 - 7
+        w/2,
+        h/2 - 8
       );
 
+
       ctx.font =
-        "7px Montserrat, sans-serif";
+        "8px DM Sans";
 
       ctx.fillText(
         "TO REVEAL",
-        size / 2,
-        size / 2 + 8
+        w/2,
+        h/2 + 8
+      );
+
+    }
+
+
+    drawScratchSurface();
+
+
+    window.addEventListener(
+      "resize",
+      drawScratchSurface
+    );
+
+
+    function getPoint(event){
+
+      const rect =
+        canvas.getBoundingClientRect();
+
+
+      return {
+
+        x:
+          event.clientX -
+          rect.left,
+
+        y:
+          event.clientY -
+          rect.top
+
+      };
+
+    }
+
+
+    function scratch(event){
+
+      const point =
+        getPoint(event);
+
+
+      ctx.globalCompositeOperation =
+        "destination-out";
+
+
+      ctx.beginPath();
+
+
+      ctx.arc(
+        point.x,
+        point.y,
+        19,
+        0,
+        Math.PI*2
       );
 
 
-      let isScratching = false;
-      let lastPoint = null;
+      ctx.fill();
 
 
-      function getPoint(event) {
+      /*
+        Add small scratch marks
+        around the main scratch.
+      */
 
-        const bounds =
-          canvas.getBoundingClientRect();
+      for(
+        let i=0;
+        i<3;
+        i++
+      ){
 
-        let clientX;
-        let clientY;
+        const angle =
+          Math.random() *
+          Math.PI *
+          2;
 
+        const distance =
+          Math.random() *
+          18;
 
-        if (event.touches && event.touches.length) {
+        const x =
+          point.x +
+          Math.cos(angle) *
+          distance;
 
-          clientX =
-            event.touches[0].clientX;
-
-          clientY =
-            event.touches[0].clientY;
-
-        } else {
-
-          clientX =
-            event.clientX;
-
-          clientY =
-            event.clientY;
-
-        }
-
-
-        return {
-
-          x:
-            clientX - bounds.left,
-
-          y:
-            clientY - bounds.top
-
-        };
-
-      }
-
-
-      function scratch(event) {
-
-        event.preventDefault();
-
-
-        const point =
-          getPoint(event);
-
-
-        ctx.globalCompositeOperation =
-          "destination-out";
-
-
-        /*
-          Bigger brush makes mobile scratching
-          much easier.
-        */
-
-        const brush =
-          Math.max(16, size * .105);
-
-
-        ctx.lineCap =
-          "round";
-
-        ctx.lineJoin =
-          "round";
-
-        ctx.lineWidth =
-          brush;
-
-
-        if (lastPoint) {
-
-          ctx.beginPath();
-
-          ctx.moveTo(
-            lastPoint.x,
-            lastPoint.y
-          );
-
-          ctx.lineTo(
-            point.x,
-            point.y
-          );
-
-          ctx.stroke();
-
-        }
+        const y =
+          point.y +
+          Math.sin(angle) *
+          distance;
 
 
         ctx.beginPath();
 
         ctx.arc(
-          point.x,
-          point.y,
-          brush / 2,
+          x,
+          y,
+          5,
           0,
-          Math.PI * 2
+          Math.PI*2
         );
 
         ctx.fill();
 
-
-        lastPoint =
-          point;
-
-
-        checkScratch();
       }
 
 
-      function checkScratch() {
-
-        /*
-          Don't calculate every single pixel on
-          every movement because mobile devices
-          can struggle.
-
-          Instead, sample the canvas.
-        */
-
-        const sampleSize = 60;
-
-        const offscreen =
-          document.createElement("canvas");
-
-        offscreen.width =
-          sampleSize;
-
-        offscreen.height =
-          sampleSize;
-
-
-        const sampleCtx =
-          offscreen.getContext("2d");
-
-
-        sampleCtx.drawImage(
-          canvas,
-          0,
-          0,
-          sampleSize,
-          sampleSize
-        );
-
-
-        const data =
-          sampleCtx.getImageData(
-            0,
-            0,
-            sampleSize,
-            sampleSize
-          ).data;
-
-
-        let transparent = 0;
-
-
-        for (
-          let i = 3;
-          i < data.length;
-          i += 4
-        ) {
-
-          if (data[i] < 80) {
-            transparent++;
-          }
-
-        }
-
-
-        const percentage =
-          transparent /
-          (data.length / 4);
-
-
-        /*
-          Reveal after approximately 45%.
-        */
-
-        if (
-          percentage > .45 &&
-          !revealed[index]
-        ) {
-
-          revealed[index] =
-            true;
-
-
-          revealCard(
-            index
-          );
-
-        }
-
-      }
-
-
-      function startScratch(event) {
-
-        isScratching = true;
-
-        lastPoint = null;
-
-        scratch(event);
-
-      }
-
-
-      function moveScratch(event) {
-
-        if (!isScratching)
-          return;
-
-        scratch(event);
-
-      }
-
-
-      function stopScratch() {
-
-        isScratching = false;
-
-        lastPoint = null;
-
-      }
-
-
-      /*
-        Pointer events work for both
-        mouse and touch on modern phones.
-      */
-
-      canvas.addEventListener(
-        "pointerdown",
-        startScratch,
-        { passive: false }
-      );
-
-      canvas.addEventListener(
-        "pointermove",
-        moveScratch,
-        { passive: false }
-      );
-
-      canvas.addEventListener(
-        "pointerup",
-        stopScratch
-      );
-
-      canvas.addEventListener(
-        "pointercancel",
-        stopScratch
-      );
-
-      canvas.addEventListener(
-        "pointerleave",
-        stopScratch
-      );
-
-
-      /*
-        Prevent the browser from trying to
-        scroll while scratching.
-      */
-
-      canvas.addEventListener(
-        "touchstart",
-        function(e) {
-          e.preventDefault();
-        },
-        { passive: false }
-      );
+      checkScratch();
 
     }
 
 
-    function revealCard(index) {
+    function checkScratch(){
 
-      const labels = [
-        "16",
-        "SEPT",
-        "2027"
-      ];
+      const pixels =
+        ctx.getImageData(
+          0,
+          0,
+          canvas.width,
+          canvas.height
+        ).data;
 
 
-      /*
-        Fade the scratch surface away.
-      */
+      let transparent = 0;
 
-      const canvas =
-        scratchCanvases[index];
+      const total =
+        pixels.length / 4;
+
+
+      for(
+        let i=3;
+        i<pixels.length;
+        i+=4
+      ){
+
+        if(
+          pixels[i] < 30
+        ){
+
+          transparent++;
+
+        }
+
+      }
+
+
+      const percentage =
+        transparent / total;
+
+
+      if(
+        percentage > .52
+      ){
+
+        revealCard();
+
+      }
+
+    }
+
+
+    function revealCard(){
+
+      if(
+        revealed.has(index)
+      ){
+
+        return;
+
+      }
+
+
+      revealed.add(index);
 
 
       canvas.style.transition =
-        "opacity .7s ease";
-
+        "opacity .45s ease";
 
       canvas.style.opacity =
         "0";
 
 
+      setTimeout(
+        function(){
+
+          canvas.style.display =
+            "none";
+
+        },
+        450
+      );
+
+
+      const value =
+        canvas.dataset.value;
+
       /*
-        Check whether all three
-        are now revealed.
+        When all three are revealed
       */
 
-      if (
-        revealed[0] &&
-        revealed[1] &&
-        revealed[2]
-      ) {
+      if(
+        revealed.size ===
+        scratchCards.length
+      ){
 
-        const revealedDate =
-          document.getElementById(
-            "revealedDate"
-          );
+        allRevealed = true;
 
+        startCountdown();
 
-        revealedDate.textContent =
-          "16 · SEPTEMBER · 2027";
-
-
-        revealedDate.classList.add(
-          "show"
-        );
-
-
-        if (!confettiAlreadyShown) {
-
-          confettiAlreadyShown =
-            true;
-
-          launchConfetti();
-
-        }
+        launchCelebration();
 
       }
 
     }
 
 
-    /*
-      Set up each card after the page loads.
-    */
+    canvas.addEventListener(
+      "pointerdown",
+      function(event){
 
-    function initializeScratchCards() {
+        scratching = true;
 
-      scratchCanvases.forEach(
-        (canvas, index) => {
-
-          setupScratchCard(
-            canvas,
-            index
-          );
-
-        }
-      );
-
-    }
-
-
-    window.addEventListener(
-      "load",
-      initializeScratchCards
-    );
-
-
-    /*
-      Rebuild canvases if the device
-      orientation changes.
-    */
-
-    let resizeTimeout;
-
-    window.addEventListener(
-      "resize",
-      () => {
-
-        clearTimeout(
-          resizeTimeout
+        canvas.setPointerCapture(
+          event.pointerId
         );
 
-        resizeTimeout =
-          setTimeout(() => {
-
-            /*
-              Only rebuild if no card has
-              already been revealed.
-            */
-
-            scratchCanvases.forEach(
-              (canvas, index) => {
-
-                if (!revealed[index]) {
-
-                  const parent =
-                    canvas.parentElement;
-
-                  canvas.remove();
-
-                  const newCanvas =
-                    document.createElement(
-                      "canvas"
-                    );
-
-                  newCanvas.className =
-                    "scratch-canvas";
-
-                  newCanvas.dataset.value =
-                    canvas.dataset.value;
-
-                  parent.appendChild(
-                    newCanvas
-                  );
-
-                  scratchCanvases[index] =
-                    newCanvas;
-
-                  setupScratchCard(
-                    newCanvas,
-                    index
-                  );
-
-                }
-
-              }
-            );
-
-          }, 300);
+        scratch(event);
 
       }
     );
 
 
+    canvas.addEventListener(
+      "pointermove",
+      function(event){
 
-    /* =====================================================
-       CONFETTI
-    ====================================================== */
+        if(!scratching) return;
 
-    function launchConfetti() {
-
-      const colors = [
-        "#791d2d",
-        "#bd9140",
-        "#dfbd72",
-        "#f5e7c7",
-        "#ffffff",
-        "#54121f"
-      ];
-
-
-      /*
-        Large burst from the middle.
-      */
-
-      createConfettiBurst(
-        window.innerWidth * .5,
-        window.innerHeight * .42,
-        110
-      );
-
-
-      /*
-        Left burst.
-      */
-
-      setTimeout(() => {
-
-        createConfettiBurst(
-          window.innerWidth * .15,
-          window.innerHeight * .35,
-          65
-        );
-
-      }, 150);
-
-
-      /*
-        Right burst.
-      */
-
-      setTimeout(() => {
-
-        createConfettiBurst(
-          window.innerWidth * .85,
-          window.innerHeight * .35,
-          65
-        );
-
-      }, 280);
-
-
-      /*
-        A second softer wave.
-      */
-
-      setTimeout(() => {
-
-        createConfettiBurst(
-          window.innerWidth * .5,
-          window.innerHeight * .25,
-          80
-        );
-
-      }, 550);
-
-
-      function createConfettiBurst(
-        originX,
-        originY,
-        amount
-      ) {
-
-        for (
-          let i = 0;
-          i < amount;
-          i++
-        ) {
-
-          const piece =
-            document.createElement(
-              "div"
-            );
-
-
-          piece.className =
-            "confetti-piece";
-
-
-          const size =
-            5 +
-            Math.random() * 7;
-
-
-          piece.style.width =
-            size + "px";
-
-
-          piece.style.height =
-            size *
-            (1.3 + Math.random()) +
-            "px";
-
-
-          piece.style.left =
-            originX + "px";
-
-
-          piece.style.top =
-            originY + "px";
-
-
-          piece.style.background =
-            colors[
-              Math.floor(
-                Math.random() *
-                colors.length
-              )
-            ];
-
-
-          piece.style.borderRadius =
-            Math.random() > .7
-              ? "50%"
-              : "2px";
-
-
-          piece.style.setProperty(
-            "--x",
-            (
-              (Math.random() - .5) *
-              (window.innerWidth * .95)
-            ) + "px"
-          );
-
-
-          piece.style.setProperty(
-            "--rotation",
-            (
-              360 +
-              Math.random() * 1440
-            ) + "deg"
-          );
-
-
-          piece.style.setProperty(
-            "--fall-time",
-            (
-              2.4 +
-              Math.random() * 2.2
-            ) + "s"
-          );
-
-
-          document.body.appendChild(
-            piece
-          );
-
-
-          setTimeout(() => {
-
-            piece.remove();
-
-          }, 5000);
-
-        }
+        scratch(event);
 
       }
+    );
+
+
+    canvas.addEventListener(
+      "pointerup",
+      function(){
+
+        scratching = false;
+
+      }
+    );
+
+
+    canvas.addEventListener(
+      "pointercancel",
+      function(){
+
+        scratching = false;
+
+      }
+    );
+
+  }
+);
+
+
+/* =========================================================
+   COUNTDOWN TO JANUARY 22, 2027
+========================================================= */
+
+let countdownTimer = null;
+
+function startCountdown(){
+
+  const container =
+    document.getElementById("revealedDate");
+
+  const daysEl =
+    document.getElementById("countDays");
+
+  const hoursEl =
+    document.getElementById("countHours");
+
+  const minutesEl =
+    document.getElementById("countMinutes");
+
+  const secondsEl =
+    document.getElementById("countSeconds");
+
+  const weddingDate =
+    new Date("2027-01-22T00:00:00+08:00");
+
+  function updateCountdown(){
+
+    const now = new Date();
+
+    let difference =
+      weddingDate.getTime() - now.getTime();
+
+    if(difference <= 0){
+
+      daysEl.textContent = "0";
+      hoursEl.textContent = "0";
+      minutesEl.textContent = "0";
+      secondsEl.textContent = "0";
+
+      if(countdownTimer){
+        clearInterval(countdownTimer);
+      }
+
+      return;
 
     }
 
+    const totalSeconds =
+      Math.floor(difference / 1000);
+
+    const days =
+      Math.floor(totalSeconds / 86400);
+
+    const hours =
+      Math.floor((totalSeconds % 86400) / 3600);
+
+    const minutes =
+      Math.floor((totalSeconds % 3600) / 60);
+
+    const seconds =
+      totalSeconds % 60;
+
+    daysEl.textContent = days;
+    hoursEl.textContent = String(hours).padStart(2, "0");
+    minutesEl.textContent = String(minutes).padStart(2, "0");
+    secondsEl.textContent = String(seconds).padStart(2, "0");
+
+  }
+
+  updateCountdown();
+
+  if(countdownTimer){
+    clearInterval(countdownTimer);
+  }
+
+  countdownTimer =
+    setInterval(updateCountdown, 1000);
+
+  requestAnimationFrame(function(){
+    container.classList.add("show");
+  });
+
+}
 
 
-    /* =====================================================
-       KEEP FLOATING BUTTONS OUT OF THE WAY
-    ====================================================== */
+/* =========================================================
+   CONFETTI / FIREWORK CELEBRATION
+========================================================= */
 
-    /*
-      The floating buttons remain visible once the
-      invitation is opened, but are hidden while
-      the curtain is still covering the screen.
-    */
+const confettiCanvas =
+  document.getElementById(
+    "confettiCanvas"
+  );
 
-    const floatingButtons =
-      document.querySelector(
-        ".floating-buttons"
+const confettiCtx =
+  confettiCanvas.getContext("2d");
+
+
+let confettiParticles = [];
+
+
+function resizeConfetti(){
+
+  const ratio =
+    window.devicePixelRatio || 1;
+
+
+  confettiCanvas.width =
+    window.innerWidth * ratio;
+
+  confettiCanvas.height =
+    window.innerHeight * ratio;
+
+
+  confettiCtx.setTransform(
+    ratio,
+    0,
+    0,
+    ratio,
+    0,
+    0
+  );
+
+}
+
+
+resizeConfetti();
+
+
+window.addEventListener(
+  "resize",
+  resizeConfetti
+);
+
+
+/*
+  Different elegant wedding colours.
+*/
+
+const confettiColors = [
+
+  "#791f2c",
+  "#b89445",
+  "#d8bf79",
+  "#f2dfa6",
+  "#fffaf3",
+  "#55131e"
+
+];
+
+
+function createBurst(
+  centerX,
+  centerY,
+  amount
+){
+
+  for(
+    let i=0;
+    i<amount;
+    i++
+  ){
+
+    const angle =
+      Math.random() *
+      Math.PI *
+      2;
+
+
+    const speed =
+      4 +
+      Math.random() *
+      9;
+
+
+    confettiParticles.push({
+
+      x:centerX,
+
+      y:centerY,
+
+      vx:
+        Math.cos(angle) *
+        speed,
+
+      vy:
+        Math.sin(angle) *
+        speed,
+
+      gravity:
+        .13 +
+        Math.random()*.08,
+
+      drag:.985,
+
+      size:
+        4 +
+        Math.random()*5,
+
+      rotation:
+        Math.random()*Math.PI,
+
+      rotationSpeed:
+        -.15 +
+        Math.random()*.3,
+
+      life:
+        90 +
+        Math.random()*80,
+
+      color:
+        confettiColors[
+          Math.floor(
+            Math.random() *
+            confettiColors.length
+          )
+        ]
+
+    });
+
+  }
+
+}
+
+
+function launchCelebration(){
+
+  if(
+    document.body.dataset.celebrated
+  ){
+
+    return;
+
+  }
+
+
+  document.body.dataset.celebrated =
+    "true";
+
+
+  /*
+    Large centre burst
+  */
+
+  createBurst(
+    window.innerWidth/2,
+    window.innerHeight*.42,
+    150
+  );
+
+
+  /*
+    Left and right bursts
+  */
+
+  setTimeout(
+    function(){
+
+      createBurst(
+        window.innerWidth*.18,
+        window.innerHeight*.35,
+        85
+      );
+
+      createBurst(
+        window.innerWidth*.82,
+        window.innerHeight*.35,
+        85
+      );
+
+    },
+    180
+  );
+
+
+  /*
+    Second wave
+  */
+
+  setTimeout(
+    function(){
+
+      createBurst(
+        window.innerWidth*.32,
+        window.innerHeight*.28,
+        65
+      );
+
+      createBurst(
+        window.innerWidth*.68,
+        window.innerHeight*.28,
+        65
+      );
+
+    },
+    450
+  );
+
+
+  animateConfetti();
+
+}
+
+
+function animateConfetti(){
+
+  confettiCtx.clearRect(
+    0,
+    0,
+    window.innerWidth,
+    window.innerHeight
+  );
+
+
+  confettiParticles =
+    confettiParticles.filter(
+      function(p){
+
+        return p.life > 0;
+
+      }
+    );
+
+
+  confettiParticles.forEach(
+    function(p){
+
+      p.vx *= p.drag;
+
+      p.vy += p.gravity;
+
+      p.x += p.vx;
+
+      p.y += p.vy;
+
+      p.rotation +=
+        p.rotationSpeed;
+
+      p.life--;
+
+
+      confettiCtx.save();
+
+      confettiCtx.translate(
+        p.x,
+        p.y
+      );
+
+      confettiCtx.rotate(
+        p.rotation
       );
 
 
-    floatingButtons.style.opacity =
-      "0";
+      confettiCtx.globalAlpha =
+        Math.min(
+          1,
+          p.life/30
+        );
 
 
-    floatingButtons.style.pointerEvents =
-      "none";
+      confettiCtx.fillStyle =
+        p.color;
 
 
-    floatingButtons.style.transition =
-      "opacity 1s ease";
-
-
-    setTimeout(() => {
-
-      const observer =
-        new MutationObserver(() => {
-
-          if (
-            mainInvitation.classList.contains(
-              "visible"
-            )
-          ) {
-
-            floatingButtons.style.opacity =
-              "1";
-
-            floatingButtons.style.pointerEvents =
-              "auto";
-
-            observer.disconnect();
-
-          }
-
-        });
-
-
-      observer.observe(
-        mainInvitation,
-        {
-          attributes: true,
-          attributeFilter: [
-            "class"
-          ]
-        }
+      confettiCtx.fillRect(
+        -p.size/2,
+        -p.size/2,
+        p.size,
+        p.size*1.7
       );
 
-    }, 100);
+
+      confettiCtx.restore();
+
+    }
+  );
 
 
-  </script>
+  if(
+    confettiParticles.length
+  ){
+
+    requestAnimationFrame(
+      animateConfetti
+    );
+
+  }else{
+
+    confettiCtx.clearRect(
+      0,
+      0,
+      window.innerWidth,
+      window.innerHeight
+    );
+
+  }
+
+}
+
+</script>
 
 </body>
 </html>
