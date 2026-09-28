@@ -1547,6 +1547,24 @@ a{
 
 }
 
+.theme-board{
+
+  width:min(100%, 560px);
+  margin:0 auto 28px;
+  overflow:hidden;
+  border:1px solid rgba(184,148,69,.28);
+  background:#fff;
+
+}
+
+.theme-board img{
+
+  display:block;
+  width:100%;
+  height:auto;
+
+}
+
 
 .dress-card h3{
 
@@ -1580,6 +1598,13 @@ a{
 
 }
 
+
+.dress-note-secondary{
+
+  margin-top:10px;
+  color:var(--muted);
+
+}
 
 .dress-note{
 
@@ -2439,6 +2464,60 @@ body:not(.locked) .reveal{
   }
 }
 
+
+/* =========================================================
+   ROMANTIC RUSTIC FALL PALETTE
+========================================================= */
+.color-palette{
+  width:100%;
+  margin:4px auto 30px;
+}
+
+.palette-swatches{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:14px;
+  margin-bottom:14px;
+}
+
+.palette-swatch{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  display:block;
+  border:3px solid var(--cream-light);
+  box-shadow:0 4px 12px rgba(64,56,58,.12);
+}
+
+.palette-labels{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:6px;
+  text-align:center;
+  color:var(--muted);
+  font-family:var(--sans);
+  font-size:10px;
+  line-height:1.25;
+  letter-spacing:.03em;
+}
+
+@media (max-width:600px){
+  .palette-swatches{
+    gap:9px;
+  }
+
+  .palette-swatch{
+    width:43px;
+    height:43px;
+  }
+
+  .palette-labels{
+    font-size:8.5px;
+    gap:3px;
+  }
+}
+
 </style>
 
 <!-- V14: reverted to clean curtain geometry; subtle velvet-fold drift only. -->
@@ -2993,144 +3072,32 @@ body:not(.locked) .reveal{
 
   <div class="dress-card reveal">
 
-    <div class="fashion-illustration">
+    <div class="color-palette" aria-label="Romantic Rustic Fall colour palette">
+      <div class="palette-swatches">
+        <span class="palette-swatch" style="background:#C98D86;"></span>
+        <span class="palette-swatch" style="background:#A95743;"></span>
+        <span class="palette-swatch" style="background:#73775A;"></span>
+        <span class="palette-swatch" style="background:#DCCBB8;"></span>
+        <span class="palette-swatch" style="background:#8B7769;"></span>
+      </div>
 
-      <svg
-        viewBox="0 0 400 280"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-      >
-
-        <circle
-          cx="125"
-          cy="58"
-          r="22"
-          stroke="#40383a"
-          stroke-width="2"
-        />
-
-        <path
-          d="
-            M112 80
-            L93 125
-            L75 218
-            L175 218
-            L157 125
-            L138 80
-          "
-          stroke="#791f2c"
-          stroke-width="2"
-        />
-
-        <path
-          d="
-            M93 125
-            L65 175
-          "
-          stroke="#40383a"
-          stroke-width="2"
-        />
-
-        <path
-          d="
-            M157 125
-            L185 175
-          "
-          stroke="#40383a"
-          stroke-width="2"
-        />
-
-        <path
-          d="
-            M103 218
-            L92 250
-          "
-          stroke="#40383a"
-          stroke-width="2"
-        />
-
-        <path
-          d="
-            M147 218
-            L158 250
-          "
-          stroke="#40383a"
-          stroke-width="2"
-        />
-
-        <circle
-          cx="275"
-          cy="58"
-          r="22"
-          stroke="#40383a"
-          stroke-width="2"
-        />
-
-        <path
-          d="
-            M252 80
-            L225 120
-            L235 218
-            L315 218
-            L325 120
-            L298 80
-          "
-          stroke="#40383a"
-          stroke-width="2"
-        />
-
-        <path
-          d="
-            M252 80
-            L275 115
-            L298 80
-          "
-          stroke="#791f2c"
-          stroke-width="2"
-        />
-
-        <path
-          d="
-            M275 115
-            V218
-          "
-          stroke="#b89445"
-          stroke-width="1.5"
-        />
-
-        <path
-          d="
-            M250 218
-            L242 250
-          "
-          stroke="#40383a"
-          stroke-width="2"
-        />
-
-        <path
-          d="
-            M300 218
-            L308 250
-          "
-          stroke="#40383a"
-          stroke-width="2"
-        />
-
-      </svg>
-
+      <div class="palette-labels">
+        <span>Dusty Rose</span>
+        <span>Terracotta</span>
+        <span>Olive</span>
+        <span>Warm Beige</span>
+        <span>Taupe</span>
+      </div>
     </div>
 
-
     <h3>
-      Formal Attire
+      Romantic Rustic Fall
     </h3>
 
-
     <p>
-      We invite you to dress elegantly
-      for our special day.
+      Warm, elegant and earthy tones inspired by
+      the romantic rustic fall theme.
     </p>
-
 
     <div class="dress-note">
       Elegant dresses · Suits or tuxedos
