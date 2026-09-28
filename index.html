@@ -1393,13 +1393,19 @@ a{
     auto
     23px;
 
+  overflow:hidden;
+  border:1px solid rgba(184,148,69,.35);
+  background:var(--cream-light);
+
 }
 
 
-.venue-illustration svg{
+.venue-illustration img{
 
+  display:block;
   width:100%;
   height:auto;
+  max-width:100%;
 
 }
 
@@ -1805,75 +1811,6 @@ a{
 
 
 /* =========================================================
-   FLOATING BUTTONS
-========================================================= */
-
-.floating-buttons{
-
-  position:fixed;
-
-  left:50%;
-  bottom:16px;
-
-  transform:translateX(-50%);
-
-  z-index:100;
-
-  display:flex;
-
-  gap:5px;
-
-  padding:6px;
-
-  border-radius:999px;
-
-  background:
-    rgba(255,250,243,.93);
-
-  backdrop-filter:blur(12px);
-
-  box-shadow:
-    0 10px 30px
-    rgba(53,36,29,.18);
-
-  border:
-    1px solid
-    rgba(184,148,69,.25);
-
-}
-
-
-.floating-button{
-
-  border-radius:999px;
-
-  padding:
-    9px
-    15px;
-
-  background:var(--red);
-
-  color:white;
-
-  font-size:8px;
-
-  letter-spacing:.12em;
-
-  text-transform:uppercase;
-
-}
-
-
-.floating-button.secondary{
-
-  background:transparent;
-
-  color:var(--red);
-
-}
-
-
-/* =========================================================
    FOOTER
 ========================================================= */
 
@@ -2152,15 +2089,6 @@ body:not(.locked) .reveal{
   .gifts-card h3{
 
     font-size:29px;
-
-  }
-
-  .floating-buttons{
-
-    bottom:
-      calc(
-        12px + env(safe-area-inset-bottom)
-      );
 
   }
 
@@ -2901,53 +2829,6 @@ body:not(.locked) .reveal{
     </div>
 
 
-    <div class="timeline-item">
-
-      <div class="timeline-time">
-        7:00 PM
-      </div>
-
-      <div class="timeline-dot"></div>
-
-      <div class="timeline-content">
-
-        <h3>
-          Celebration
-        </h3>
-
-        <p>
-          Enjoy an evening of food,
-          laughter, dancing and memories.
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <div class="timeline-item">
-
-      <div class="timeline-time">
-        9:00 PM
-      </div>
-
-      <div class="timeline-dot"></div>
-
-      <div class="timeline-content">
-
-        <h3>
-          Party
-        </h3>
-
-        <p>
-          Drinks, dancing and celebrations
-          into the night.
-        </p>
-
-      </div>
-
-    </div>
-
   </div>
 
 </section>
@@ -2989,129 +2870,10 @@ body:not(.locked) .reveal{
 
     <div class="venue-illustration">
 
-      <svg
-        viewBox="0 0 500 300"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-
-        <circle
-          cx="405"
-          cy="55"
-          r="24"
-          stroke="#b89445"
-          stroke-width="1.5"
-        />
-
-        <path
-          d="
-            M20 210
-            L120 105
-            L175 160
-            L250 75
-            L370 210
-          "
-          stroke="#791f2c"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-
-        <path
-          d="
-            M15 218
-            C120 205 250 230 485 215
-          "
-          stroke="#b89445"
-          stroke-width="1.5"
-        />
-
-        <path
-          d="
-            M145 215
-            V150
-            L250 105
-            L355 150
-            V215
-          "
-          stroke="#40383a"
-          stroke-width="2"
-        />
-
-        <path
-          d="
-            M225 215
-            V75
-            H275
-            V215
-          "
-          stroke="#40383a"
-          stroke-width="2"
-        />
-
-        <path
-          d="
-            M215 76
-            L250 45
-            L285 76
-          "
-          stroke="#791f2c"
-          stroke-width="2"
-        />
-
-        <path
-          d="
-            M250 35
-            V60
-            M242 45
-            H258
-          "
-          stroke="#b89445"
-          stroke-width="2"
-        />
-
-        <path
-          d="
-            M230 215
-            V175
-            Q250 155 270 175
-            V215
-          "
-          stroke="#791f2c"
-          stroke-width="2"
-        />
-
-        <path
-          d="
-            M90 215
-            V145
-            M65 175
-            L90 150
-            L115 175
-            M70 192
-            L90 168
-            L110 192
-          "
-          stroke="#b89445"
-          stroke-width="2"
-        />
-
-        <path
-          d="
-            M405 215
-            V150
-            M380 180
-            L405 155
-            L430 180
-            M385 198
-            L405 173
-            L425 198
-          "
-          stroke="#b89445"
-          stroke-width="2"
-        />
-
-      </svg>
+      <img
+        src="./church.jpg"
+        alt="Archdiocesan Shrine of St. Thérèse of the Child Jesus"
+      />
 
     </div>
 
@@ -3164,164 +2926,10 @@ body:not(.locked) .reveal{
 
     <div class="venue-illustration">
 
-      <svg
-        viewBox="0 0 500 300"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-
-        <circle
-          cx="405"
-          cy="55"
-          r="24"
-          stroke="#b89445"
-          stroke-width="1.5"
-        />
-
-        <path
-          d="
-            M20 210
-            L120 105
-            L175 160
-            L250 75
-            L370 210
-          "
-          stroke="#791f2c"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-
-        <path
-          d="
-            M15 218
-            C120 205 250 230 485 215
-          "
-          stroke="#b89445"
-          stroke-width="1.5"
-        />
-
-        <path
-          d="
-            M120 215
-            V145
-            L250 85
-            L380 145
-            V215
-          "
-          stroke="#40383a"
-          stroke-width="2"
-        />
-
-        <path
-          d="
-            M100 148
-            L250 72
-            L400 148
-          "
-          stroke="#791f2c"
-          stroke-width="2.5"
-        />
-
-        <path
-          d="
-            M150 145
-            V215
-
-            M205 120
-            V215
-
-            M295 120
-            V215
-
-            M350 145
-            V215
-          "
-          stroke="#40383a"
-          stroke-width="2"
-        />
-
-        <path
-          d="
-            M170 215
-            V150
-            H330
-            V215
-          "
-          stroke="#b89445"
-          stroke-width="1.5"
-        />
-
-        <path
-          d="
-            M225 215
-            V165
-            Q250 145 275 165
-            V215
-          "
-          stroke="#791f2c"
-          stroke-width="2"
-        />
-
-        <path
-          d="
-            M75 215
-            V150
-            M52 178
-            L75 153
-            L98 178
-            M57 195
-            L75 172
-            L93 195
-          "
-          stroke="#b89445"
-          stroke-width="2"
-        />
-
-        <path
-          d="
-            M425 215
-            V150
-            M402 178
-            L425 153
-            L448 178
-            M407 195
-            L425 172
-            L443 195
-          "
-          stroke="#b89445"
-          stroke-width="2"
-        />
-
-        <circle
-          cx="175"
-          cy="137"
-          r="2"
-          fill="#b89445"
-        />
-
-        <circle
-          cx="205"
-          cy="123"
-          r="2"
-          fill="#b89445"
-        />
-
-        <circle
-          cx="295"
-          cy="123"
-          r="2"
-          fill="#b89445"
-        />
-
-        <circle
-          cx="325"
-          cy="137"
-          r="2"
-          fill="#b89445"
-        />
-
-      </svg>
+      <img
+        src="./reception.jpg"
+        alt="Beverly View Events Pavilion"
+      />
 
     </div>
 
@@ -3644,33 +3252,6 @@ body:not(.locked) .reveal{
 
 
 </main>
-
-</div>
-
-
-
-<!-- =======================================================
-     FLOATING BUTTONS
-======================================================= -->
-
-<div class="floating-buttons">
-
-  <a
-    href="#"
-    class="floating-button"
-  >
-    RSVP
-  </a>
-
-
-  <a
-    href="https://www.google.com/maps/search/?api=1&query=Beverly+View+Events+Pavilion+Cebu"
-    target="_blank"
-    rel="noopener"
-    class="floating-button secondary"
-  >
-    Location
-  </a>
 
 </div>
 
