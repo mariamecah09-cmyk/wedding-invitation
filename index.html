@@ -2492,12 +2492,21 @@ body:not(.locked) .reveal{
   margin:4px auto 30px;
 }
 
-.palette-swatches{
+.palette-swatches,
+.palette-labels{
   display:flex;
   justify-content:center;
-  align-items:center;
+  align-items:flex-start;
   gap:14px;
-  margin-bottom:14px;
+}
+
+.palette-item{
+  flex:1 1 0;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
 }
 
 .palette-swatch{
@@ -2505,15 +2514,13 @@ body:not(.locked) .reveal{
   height:52px;
   border-radius:50%;
   display:block;
+  flex:0 0 auto;
   border:3px solid var(--cream-light);
   box-shadow:0 4px 12px rgba(64,56,58,.12);
 }
 
 .palette-labels{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:6px;
-  text-align:center;
+  margin-top:14px;
   color:var(--muted);
   font-family:var(--sans);
   font-size:10px;
@@ -2522,7 +2529,8 @@ body:not(.locked) .reveal{
 }
 
 @media (max-width:600px){
-  .palette-swatches{
+  .palette-swatches,
+  .palette-labels{
     gap:9px;
   }
 
@@ -2532,8 +2540,8 @@ body:not(.locked) .reveal{
   }
 
   .palette-labels{
+    margin-top:11px;
     font-size:8.5px;
-    gap:3px;
   }
 }
 
@@ -3093,19 +3101,29 @@ body:not(.locked) .reveal{
 
     <div class="color-palette" aria-label="Romantic Rustic Fall colour palette">
       <div class="palette-swatches">
-        <span class="palette-swatch" style="background:#C98D86;"></span>
-        <span class="palette-swatch" style="background:#A95743;"></span>
-        <span class="palette-swatch" style="background:#73775A;"></span>
-        <span class="palette-swatch" style="background:#DCCBB8;"></span>
-        <span class="palette-swatch" style="background:#8B7769;"></span>
+        <div class="palette-item">
+          <span class="palette-swatch" style="background:#C98D86;"></span>
+        </div>
+        <div class="palette-item">
+          <span class="palette-swatch" style="background:#A95743;"></span>
+        </div>
+        <div class="palette-item">
+          <span class="palette-swatch" style="background:#73775A;"></span>
+        </div>
+        <div class="palette-item">
+          <span class="palette-swatch" style="background:#DCCBB8;"></span>
+        </div>
+        <div class="palette-item">
+          <span class="palette-swatch" style="background:#8B7769;"></span>
+        </div>
       </div>
 
       <div class="palette-labels">
-        <span>Dusty Rose</span>
-        <span>Terracotta</span>
-        <span>Olive</span>
-        <span>Warm Beige</span>
-        <span>Taupe</span>
+        <div class="palette-item">Dusty Rose</div>
+        <div class="palette-item">Terracotta</div>
+        <div class="palette-item">Olive</div>
+        <div class="palette-item">Warm Beige</div>
+        <div class="palette-item">Taupe</div>
       </div>
     </div>
 
