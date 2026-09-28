@@ -957,255 +957,229 @@ a{
 ========================================================= */
 
 .scratch-section{
-
-  /* Match the invitation background exactly */
   background:var(--cream-light);
-
 }
-
 
 .scratch-grid{
-
   display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:12px;
-
-  max-width:500px;
-
-  margin:auto;
-
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  max-width:540px;
+  margin:42px auto 0;
 }
-
 
 .scratch-item{
-
   text-align:center;
-
 }
-
 
 .scratch-card{
-
   position:relative;
-
   width:100%;
-
-  max-width:145px;
-
+  max-width:158px;
   aspect-ratio:1;
-
   margin:auto;
-
+  filter:drop-shadow(0 14px 17px rgba(82,61,24,.16));
 }
 
+.scratch-card::before{
+  content:"";
+  position:absolute;
+  inset:3px;
+  border-radius:50%;
+  z-index:0;
+  background:linear-gradient(145deg,#f8e8af 0%,#d5b761 26%,#b28a32 55%,#d8bd68 78%,#8e6c27 100%);
+  box-shadow:
+    inset 0 2px 3px rgba(255,255,255,.72),
+    inset 0 -3px 5px rgba(86,59,13,.26);
+}
 
 .scratch-value{
-
   position:absolute;
-
   inset:0;
-
   z-index:0;
-
   border-radius:50%;
-
   display:grid;
-
   place-items:center;
-
   text-align:center;
-
   background:
-    radial-gradient(
-      circle at 35% 30%,
-      #f2dfa6,
-      #c3a14e 48%,
-      #8d6c25 100%
-    );
-
-  border:
-    5px solid
-    #eee0b5;
-
+    radial-gradient(circle at 34% 25%,rgba(255,247,207,.72),transparent 24%),
+    radial-gradient(circle at 68% 76%,rgba(105,75,19,.17),transparent 42%),
+    linear-gradient(145deg,#e7cf82 0%,#c6a34d 48%,#a77e28 100%);
+  border:7px solid #efe0ae;
   box-shadow:
-    0 12px 25px
-    rgba(94,69,25,.18);
-
+    inset 0 0 0 1px rgba(255,255,255,.48),
+    inset 0 5px 9px rgba(255,255,255,.25),
+    inset 0 -8px 13px rgba(90,63,16,.17);
   font-family:var(--serif);
-
-  font-size:27px;
-
+  font-size:30px;
   color:#fffdf2;
-
 }
 
+.scratch-value::after{
+  content:"";
+  position:absolute;
+  inset:16px;
+  border-radius:50%;
+  border:1px solid rgba(255,250,221,.58);
+  pointer-events:none;
+}
 
 .scratch-value small{
-
   display:none;
-
 }
-
 
 .scratch-canvas{
-
   position:absolute;
-
   inset:0;
-
   width:100%;
   height:100%;
-
   border-radius:50%;
-
   z-index:2;
-
   cursor:grab;
-
   touch-action:none;
-
 }
 
+.scratch-canvas:active{
+  cursor:grabbing;
+}
 
 .scratch-item > span{
-
   display:none;
-
 }
-
 
 .scratch-instruction{
-
-  margin-top:27px;
-
+  margin-top:44px;
   text-align:center;
-
+  font-family:var(--sans);
   font-size:10px;
-
-  letter-spacing:.07em;
-
+  letter-spacing:.09em;
   color:var(--muted);
-
 }
 
-
 .revealed-date{
-
-  min-height:120px;
-
-  margin-top:100px;
-
+  min-height:170px;
+  margin-top:105px;
+  padding-bottom:20px;
   text-align:center;
-
   opacity:0;
-
-  transform:translateY(8px);
-
-  transition:opacity .6s ease, transform .6s ease;
-
+  transform:translateY(12px);
+  transition:opacity .7s ease,transform .7s ease;
 }
 
 .revealed-date.show{
-
   opacity:1;
-
   transform:translateY(0);
-
 }
 
 .countdown-title{
-
-  margin-bottom:14px;
-
+  margin-bottom:26px;
   font-family:var(--sans);
-
-  font-size:9px;
-
-  letter-spacing:.28em;
-
+  font-size:10px;
+  letter-spacing:.3em;
   text-transform:uppercase;
-
-  color:var(--muted);
-
+  color:#8a7d78;
 }
 
 .countdown-grid{
-
-  display:flex;
-
-  justify-content:center;
-
-  gap:24px;
-
-  flex-wrap:wrap;
-
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  max-width:475px;
+  margin:auto;
 }
 
 .countdown-unit{
-
-  min-width:72px;
-
+  position:relative;
+  min-width:0;
+  padding:17px 8px 14px;
   text-align:center;
+  border:1px solid rgba(177,144,66,.42);
+  border-radius:4px;
+  background:linear-gradient(180deg,rgba(255,255,255,.74),rgba(246,235,211,.38));
+  box-shadow:0 9px 20px rgba(91,70,39,.08);
+}
 
+.countdown-unit::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:20%;
+  right:20%;
+  height:2px;
+  background:#b89445;
 }
 
 .countdown-number{
-
   display:block;
-
   font-family:var(--serif);
-
-  font-size:52px;
-
-  line-height:1;
-
+  font-size:60px;
+  line-height:.95;
   color:var(--red);
-
+  font-variant-numeric:tabular-nums;
+  text-shadow:0 1px 0 rgba(255,255,255,.7);
 }
 
 .countdown-label{
-
   display:block;
-
-  margin-top:8px;
-
+  margin-top:11px;
   font-family:var(--sans);
-
   font-size:8px;
-
   letter-spacing:.2em;
-
   text-transform:uppercase;
-
-  color:var(--muted);
-
+  color:#81736e;
 }
 
 @media (max-width:600px){
+  .scratch-grid{
+    gap:10px;
+    margin-top:35px;
+  }
+
+  .scratch-card{
+    max-width:115px;
+  }
+
+  .scratch-value{
+    border-width:5px;
+    font-size:24px;
+  }
+
+  .scratch-value::after{
+    inset:12px;
+  }
+
+  .scratch-instruction{
+    margin-top:38px;
+    font-size:8.5px;
+  }
 
   .revealed-date{
-    margin-top:82px;
+    margin-top:88px;
+  }
+
+  .countdown-title{
+    margin-bottom:20px;
+    font-size:8px;
   }
 
   .countdown-grid{
-    gap:14px;
+    gap:7px;
+    max-width:100%;
   }
 
   .countdown-unit{
-    min-width:62px;
+    padding:13px 4px 11px;
   }
 
   .countdown-number{
-    font-size:44px;
+    font-size:42px;
   }
 
   .countdown-label{
-    font-size:7px;
+    margin-top:8px;
+    font-size:6px;
+    letter-spacing:.14em;
   }
-
 }
 
 
@@ -3472,147 +3446,101 @@ scratchCards.forEach(
 
     function drawScratchSurface(){
 
-      const rect =
-        canvas.getBoundingClientRect();
+      const rect = canvas.getBoundingClientRect();
+      const ratio = Math.max(1, window.devicePixelRatio || 1);
 
+      canvas.width = rect.width * ratio;
+      canvas.height = rect.height * ratio;
 
-      const ratio =
-        Math.max(
-          1,
-          window.devicePixelRatio || 1
-        );
+      ctx.setTransform(ratio,0,0,ratio,0,0);
 
+      const w = rect.width;
+      const h = rect.height;
+      const cx = w/2;
+      const cy = h/2;
+      const r = Math.min(w,h)/2 - 3;
 
-      canvas.width =
-        rect.width * ratio;
+      ctx.clearRect(0,0,w,h);
 
-      canvas.height =
-        rect.height * ratio;
-
-
-      ctx.setTransform(
-        ratio,
-        0,
-        0,
-        ratio,
-        0,
-        0
+      // Metallic gold scratch coating
+      const gradient = ctx.createRadialGradient(
+        w*.31,h*.23,3,
+        w*.5,h*.52,w*.78
       );
+      gradient.addColorStop(0,"#fff0b8");
+      gradient.addColorStop(.18,"#ead28a");
+      gradient.addColorStop(.48,"#c7a451");
+      gradient.addColorStop(.74,"#d7b968");
+      gradient.addColorStop(1,"#967126");
 
-
-      const w =
-        rect.width;
-
-      const h =
-        rect.height;
-
-
-      /*
-        Gold scratch coating
-      */
-
-      const gradient =
-        ctx.createRadialGradient(
-          w*.32,
-          h*.25,
-          5,
-          w*.5,
-          h*.5,
-          w*.72
-        );
-
-
-      gradient.addColorStop(
-        0,
-        "#f3e2a8"
-      );
-
-      gradient.addColorStop(
-        .48,
-        "#c4a34f"
-      );
-
-      gradient.addColorStop(
-        1,
-        "#87651f"
-      );
-
-
-      ctx.fillStyle =
-        gradient;
-
-
+      ctx.save();
       ctx.beginPath();
+      ctx.arc(cx,cy,r,0,Math.PI*2);
+      ctx.clip();
+      ctx.fillStyle=gradient;
+      ctx.fillRect(0,0,w,h);
 
-      ctx.arc(
-        w/2,
-        h/2,
-        Math.min(w,h)/2 - 2,
-        0,
-        Math.PI*2
-      );
+      // Soft metallic diagonal sheen
+      const sheen=ctx.createLinearGradient(0,h,w,0);
+      sheen.addColorStop(0,"rgba(255,255,255,0)");
+      sheen.addColorStop(.44,"rgba(255,255,255,.10)");
+      sheen.addColorStop(.5,"rgba(255,255,255,.28)");
+      sheen.addColorStop(.56,"rgba(255,255,255,.08)");
+      sheen.addColorStop(1,"rgba(255,255,255,0)");
+      ctx.fillStyle=sheen;
+      ctx.fillRect(0,0,w,h);
 
-      ctx.fill();
+      // Fine foil texture
+      for(let i=0;i<420;i++){
+        const x=Math.random()*w;
+        const y=Math.random()*h;
+        const alpha=.025+Math.random()*.09;
+        const size=Math.random()<.86 ? .45 : 1.15;
+        ctx.fillStyle=Math.random()>.5 ? `rgba(255,248,205,${alpha})` : `rgba(93,65,16,${alpha*.55})`;
+        ctx.fillRect(x,y,size,size);
+      }
 
+      // Subtle curved scratch-film rings
+      ctx.strokeStyle="rgba(255,249,214,.30)";
+      ctx.lineWidth=1;
+      for(let ring=0;ring<3;ring++){
+        ctx.beginPath();
+        ctx.arc(cx,cy,r-12-ring*7,0,Math.PI*2);
+        ctx.stroke();
+      }
 
-      /*
-        Inner border
-      */
+      ctx.restore();
 
-      ctx.strokeStyle =
-        "rgba(255,255,255,.45)";
-
-      ctx.lineWidth = 1;
-
-
+      // Raised outer rim
+      ctx.strokeStyle="rgba(255,245,202,.86)";
+      ctx.lineWidth=5;
       ctx.beginPath();
-
-      ctx.arc(
-        w/2,
-        h/2,
-        Math.min(w,h)/2 - 13,
-        0,
-        Math.PI*2
-      );
-
+      ctx.arc(cx,cy,r-1,0,Math.PI*2);
       ctx.stroke();
 
+      ctx.strokeStyle="rgba(119,84,22,.26)";
+      ctx.lineWidth=1.5;
+      ctx.beginPath();
+      ctx.arc(cx,cy,r-6,0,Math.PI*2);
+      ctx.stroke();
 
-      /*
-        Scratch instructions
-      */
+      // Scratch-to-reveal label
+      ctx.fillStyle="#fff9e9";
+      ctx.textAlign="center";
+      ctx.textBaseline="middle";
+      ctx.font="700 11px DM Sans";
+      ctx.fillText("SCRATCH",cx,cy-8);
+      ctx.font="500 9px DM Sans";
+      ctx.fillText("TO REVEAL",cx,cy+9);
 
-      ctx.fillStyle =
-        "#fff9e7";
-
-      ctx.textAlign =
-        "center";
-
-      ctx.textBaseline =
-        "middle";
-
-
-      ctx.font =
-        "600 9px DM Sans";
-
-      ctx.fillText(
-        "SCRATCH",
-        w/2,
-        h/2 - 8
-      );
-
-
-      ctx.font =
-        "8px DM Sans";
-
-      ctx.fillText(
-        "TO REVEAL",
-        w/2,
-        h/2 + 8
-      );
-
+      // Tiny hand-scratch hint
+      ctx.strokeStyle="rgba(255,249,226,.62)";
+      ctx.lineWidth=1;
+      ctx.beginPath();
+      ctx.moveTo(cx-28,cy+25);
+      ctx.lineTo(cx+28,cy+25);
+      ctx.stroke();
     }
-
 
     drawScratchSurface();
 
@@ -3660,7 +3588,7 @@ scratchCards.forEach(
       ctx.arc(
         point.x,
         point.y,
-        19,
+        16,
         0,
         Math.PI*2
       );
@@ -3676,7 +3604,7 @@ scratchCards.forEach(
 
       for(
         let i=0;
-        i<3;
+        i<5;
         i++
       ){
 
@@ -3705,7 +3633,7 @@ scratchCards.forEach(
         ctx.arc(
           x,
           y,
-          5,
+          3.5,
           0,
           Math.PI*2
         );
