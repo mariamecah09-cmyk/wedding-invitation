@@ -2854,12 +2854,6 @@ body:not(.locked) .reveal{
   </div>
 
 
-  <div class="scratch-instruction">
-
-    ✦ Scratch with your finger or mouse ✦
-
-  </div>
-
 
   <div
     class="revealed-date"
@@ -3570,14 +3564,6 @@ scratchCards.forEach(
       ctx.arc(cx,cy,r-6,0,Math.PI*2);
       ctx.stroke();
 
-      // Scratch-to-reveal label
-      ctx.fillStyle="#fff9e9";
-      ctx.textAlign="center";
-      ctx.textBaseline="middle";
-      ctx.font="700 12px DM Sans";
-      ctx.fillText("SCRATCH",cx,cy-8);
-      ctx.font="500 9px DM Sans";
-      ctx.fillText("TO REVEAL",cx,cy+10);
     }
 
     drawScratchSurface();
