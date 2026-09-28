@@ -1094,9 +1094,9 @@ a{
 
 .revealed-date{
 
-  min-height:94px;
+  min-height:120px;
 
-  margin-top:28px;
+  margin-top:58px;
 
   text-align:center;
 
@@ -1138,7 +1138,7 @@ a{
 
   justify-content:center;
 
-  gap:18px;
+  gap:24px;
 
   flex-wrap:wrap;
 
@@ -1146,7 +1146,7 @@ a{
 
 .countdown-unit{
 
-  min-width:58px;
+  min-width:72px;
 
   text-align:center;
 
@@ -1158,7 +1158,7 @@ a{
 
   font-family:var(--serif);
 
-  font-size:28px;
+  font-size:38px;
 
   line-height:1;
 
@@ -1170,17 +1170,41 @@ a{
 
   display:block;
 
-  margin-top:6px;
+  margin-top:8px;
 
   font-family:var(--sans);
 
-  font-size:7px;
+  font-size:8px;
 
   letter-spacing:.2em;
 
   text-transform:uppercase;
 
   color:var(--muted);
+
+}
+
+@media (max-width:600px){
+
+  .revealed-date{
+    margin-top:48px;
+  }
+
+  .countdown-grid{
+    gap:14px;
+  }
+
+  .countdown-unit{
+    min-width:62px;
+  }
+
+  .countdown-number{
+    font-size:32px;
+  }
+
+  .countdown-label{
+    font-size:7px;
+  }
 
 }
 
@@ -2484,15 +2508,6 @@ body:not(.locked) .reveal{
 }
 
 
-.dress-color-photo{
-  width:100%;
-  max-width:520px;
-  height:auto;
-  margin:4px auto 30px;
-  display:block;
-  border-radius:4px;
-}
-
 /* =========================================================
    ROMANTIC RUSTIC FALL PALETTE
 ========================================================= */
@@ -2501,21 +2516,12 @@ body:not(.locked) .reveal{
   margin:4px auto 30px;
 }
 
-.palette-swatches,
-.palette-labels{
+.palette-swatches{
   display:flex;
   justify-content:center;
-  align-items:flex-start;
-  gap:14px;
-}
-
-.palette-item{
-  flex:1 1 0;
-  min-width:0;
-  display:flex;
-  flex-direction:column;
   align-items:center;
-  text-align:center;
+  gap:14px;
+  margin-bottom:14px;
 }
 
 .palette-swatch{
@@ -2523,13 +2529,15 @@ body:not(.locked) .reveal{
   height:52px;
   border-radius:50%;
   display:block;
-  flex:0 0 auto;
   border:3px solid var(--cream-light);
   box-shadow:0 4px 12px rgba(64,56,58,.12);
 }
 
 .palette-labels{
-  margin-top:14px;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:6px;
+  text-align:center;
   color:var(--muted);
   font-family:var(--sans);
   font-size:10px;
@@ -2538,8 +2546,7 @@ body:not(.locked) .reveal{
 }
 
 @media (max-width:600px){
-  .palette-swatches,
-  .palette-labels{
+  .palette-swatches{
     gap:9px;
   }
 
@@ -2549,8 +2556,8 @@ body:not(.locked) .reveal{
   }
 
   .palette-labels{
-    margin-top:11px;
     font-size:8.5px;
+    gap:3px;
   }
 }
 
@@ -3108,11 +3115,23 @@ body:not(.locked) .reveal{
 
   <div class="dress-card reveal">
 
-    <img
-      src="./Colors.jpg"
-      alt="Romantic Rustic Fall colour palette"
-      class="dress-color-photo"
-    >
+    <div class="color-palette" aria-label="Romantic Rustic Fall colour palette">
+      <div class="palette-swatches">
+        <span class="palette-swatch" style="background:#C98D86;"></span>
+        <span class="palette-swatch" style="background:#A95743;"></span>
+        <span class="palette-swatch" style="background:#73775A;"></span>
+        <span class="palette-swatch" style="background:#DCCBB8;"></span>
+        <span class="palette-swatch" style="background:#8B7769;"></span>
+      </div>
+
+      <div class="palette-labels">
+        <span>Dusty Rose</span>
+        <span>Terracotta</span>
+        <span>Olive</span>
+        <span>Warm Beige</span>
+        <span>Taupe</span>
+      </div>
+    </div>
 
     <h3>
       Romantic Rustic Fall
