@@ -1002,17 +1002,17 @@ a{
   place-items:center;
   text-align:center;
   background:
-    radial-gradient(circle at 34% 25%,rgba(255,247,207,.72),transparent 24%),
-    radial-gradient(circle at 68% 76%,rgba(105,75,19,.17),transparent 42%),
-    linear-gradient(145deg,#e7cf82 0%,#c6a34d 48%,#a77e28 100%);
-  border:7px solid #efe0ae;
+    radial-gradient(circle at 32% 24%,rgba(255,247,236,.96),transparent 26%),
+    radial-gradient(circle at 72% 78%,rgba(119,55,48,.08),transparent 42%),
+    linear-gradient(145deg,#fffaf1 0%,#f1ded0 48%,#d8b5a5 100%);
+  border:7px solid #ead9bd;
   box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,.48),
-    inset 0 5px 9px rgba(255,255,255,.25),
-    inset 0 -8px 13px rgba(90,63,16,.17);
+    inset 0 0 0 1px rgba(255,255,255,.88),
+    inset 0 5px 10px rgba(255,255,255,.8),
+    inset 0 -8px 14px rgba(105,67,53,.10);
   font-family:var(--serif);
   font-size:30px;
-  color:#fffdf2;
+  color:var(--red);
 }
 
 .scratch-value::after{
@@ -1020,12 +1020,17 @@ a{
   position:absolute;
   inset:16px;
   border-radius:50%;
-  border:1px solid rgba(255,250,221,.58);
+  border:1px solid rgba(165,123,74,.45);
   pointer-events:none;
 }
 
-.scratch-value small{
-  display:none;
+.scratch-value::before{
+  content:"";
+  position:absolute;
+  inset:11px;
+  border-radius:50%;
+  border:1px dashed rgba(255,255,255,.6);
+  pointer-events:none;
 }
 
 .scratch-canvas{
@@ -1037,10 +1042,21 @@ a{
   z-index:2;
   cursor:grab;
   touch-action:none;
+  transition:opacity .7s ease, transform .7s ease;
 }
 
 .scratch-canvas:active{
   cursor:grabbing;
+}
+
+.scratch-card.scratched .scratch-value{
+  animation:revealedPaper .65s ease both;
+}
+
+@keyframes revealedPaper{
+  0%{transform:scale(.97);filter:saturate(.8);}
+  55%{transform:scale(1.015);filter:saturate(1.08);}
+  100%{transform:scale(1);filter:saturate(1);}
 }
 
 .scratch-item > span{
@@ -1072,7 +1088,7 @@ a{
 }
 
 .countdown-title{
-  margin-bottom:26px;
+  margin-bottom:30px;
   font-family:var(--sans);
   font-size:10px;
   letter-spacing:.3em;
@@ -1083,30 +1099,44 @@ a{
 .countdown-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:12px;
-  max-width:475px;
+  gap:14px;
+  max-width:500px;
   margin:auto;
 }
 
 .countdown-unit{
   position:relative;
   min-width:0;
-  padding:17px 8px 14px;
+  min-height:122px;
+  padding:18px 8px 15px;
   text-align:center;
-  border:1px solid rgba(177,144,66,.42);
-  border-radius:4px;
-  background:linear-gradient(180deg,rgba(255,255,255,.74),rgba(246,235,211,.38));
-  box-shadow:0 9px 20px rgba(91,70,39,.08);
+  border:1px solid rgba(177,144,66,.55);
+  border-radius:2px;
+  background:linear-gradient(145deg,rgba(255,252,246,.95),rgba(245,231,210,.62));
+  box-shadow:0 10px 24px rgba(91,70,39,.10), inset 0 0 0 4px rgba(255,255,255,.32);
+}
+
+.countdown-unit::before,
+.countdown-unit::after{
+  content:"";
+  position:absolute;
+  width:13px;
+  height:13px;
+  border-color:#b89445;
+  border-style:solid;
+  opacity:.75;
 }
 
 .countdown-unit::before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:20%;
-  right:20%;
-  height:2px;
-  background:#b89445;
+  top:6px;
+  left:6px;
+  border-width:1px 0 0 1px;
+}
+
+.countdown-unit::after{
+  right:6px;
+  bottom:6px;
+  border-width:0 1px 1px 0;
 }
 
 .countdown-number{
@@ -1116,12 +1146,12 @@ a{
   line-height:.95;
   color:var(--red);
   font-variant-numeric:tabular-nums;
-  text-shadow:0 1px 0 rgba(255,255,255,.7);
+  text-shadow:0 1px 0 rgba(255,255,255,.8);
 }
 
 .countdown-label{
   display:block;
-  margin-top:11px;
+  margin-top:12px;
   font-family:var(--sans);
   font-size:8px;
   letter-spacing:.2em;
@@ -1148,6 +1178,10 @@ a{
     inset:12px;
   }
 
+  .scratch-value::before{
+    inset:9px;
+  }
+
   .scratch-instruction{
     margin-top:38px;
     font-size:8.5px;
@@ -1163,16 +1197,17 @@ a{
   }
 
   .countdown-grid{
-    gap:7px;
+    gap:8px;
     max-width:100%;
   }
 
   .countdown-unit{
+    min-height:96px;
     padding:13px 4px 11px;
   }
 
   .countdown-number{
-    font-size:42px;
+    font-size:44px;
   }
 
   .countdown-label{
@@ -3462,16 +3497,17 @@ scratchCards.forEach(
 
       ctx.clearRect(0,0,w,h);
 
-      // Metallic gold scratch coating
+      // Realistic metallic scratch-off coating
       const gradient = ctx.createRadialGradient(
-        w*.31,h*.23,3,
-        w*.5,h*.52,w*.78
+        w*.30,h*.20,2,
+        w*.52,h*.52,w*.78
       );
-      gradient.addColorStop(0,"#fff0b8");
-      gradient.addColorStop(.18,"#ead28a");
-      gradient.addColorStop(.48,"#c7a451");
-      gradient.addColorStop(.74,"#d7b968");
-      gradient.addColorStop(1,"#967126");
+      gradient.addColorStop(0,"#fff3c5");
+      gradient.addColorStop(.14,"#e8cb78");
+      gradient.addColorStop(.38,"#bd9638");
+      gradient.addColorStop(.58,"#e0c36d");
+      gradient.addColorStop(.80,"#b1872d");
+      gradient.addColorStop(1,"#7d5b1e");
 
       ctx.save();
       ctx.beginPath();
@@ -3480,45 +3516,49 @@ scratchCards.forEach(
       ctx.fillStyle=gradient;
       ctx.fillRect(0,0,w,h);
 
-      // Soft metallic diagonal sheen
-      const sheen=ctx.createLinearGradient(0,h,w,0);
+      // Fine foil grain gives the coating a physical, slightly rough surface
+      for(let i=0;i<900;i++){
+        const angle=Math.random()*Math.PI*2;
+        const rr=Math.sqrt(Math.random())*r;
+        const x=cx+Math.cos(angle)*rr;
+        const y=cy+Math.sin(angle)*rr;
+        const alpha=.025+Math.random()*.075;
+        const size=Math.random()<.9 ? .45 : 1.15;
+        ctx.fillStyle=Math.random()>.5
+          ? `rgba(255,249,216,${alpha})`
+          : `rgba(72,48,10,${alpha*.7})`;
+        ctx.fillRect(x,y,size,size);
+      }
+
+      // Soft reflective band
+      const sheen=ctx.createLinearGradient(0,h*.1,w,h*.9);
       sheen.addColorStop(0,"rgba(255,255,255,0)");
-      sheen.addColorStop(.44,"rgba(255,255,255,.10)");
-      sheen.addColorStop(.5,"rgba(255,255,255,.28)");
-      sheen.addColorStop(.56,"rgba(255,255,255,.08)");
+      sheen.addColorStop(.42,"rgba(255,255,255,.04)");
+      sheen.addColorStop(.50,"rgba(255,255,255,.30)");
+      sheen.addColorStop(.58,"rgba(255,255,255,.06)");
       sheen.addColorStop(1,"rgba(255,255,255,0)");
       ctx.fillStyle=sheen;
       ctx.fillRect(0,0,w,h);
 
-      // Fine foil texture
-      for(let i=0;i<420;i++){
-        const x=Math.random()*w;
-        const y=Math.random()*h;
-        const alpha=.025+Math.random()*.09;
-        const size=Math.random()<.86 ? .45 : 1.15;
-        ctx.fillStyle=Math.random()>.5 ? `rgba(255,248,205,${alpha})` : `rgba(93,65,16,${alpha*.55})`;
-        ctx.fillRect(x,y,size,size);
-      }
-
-      // Subtle curved scratch-film rings
-      ctx.strokeStyle="rgba(255,249,214,.30)";
+      // Imperfect concentric foil marks
+      ctx.strokeStyle="rgba(255,249,214,.28)";
       ctx.lineWidth=1;
-      for(let ring=0;ring<3;ring++){
+      for(let ring=0;ring<4;ring++){
         ctx.beginPath();
-        ctx.arc(cx,cy,r-12-ring*7,0,Math.PI*2);
+        ctx.arc(cx,cy,r-11-ring*6,0,Math.PI*2);
         ctx.stroke();
       }
 
       ctx.restore();
 
-      // Raised outer rim
-      ctx.strokeStyle="rgba(255,245,202,.86)";
+      // Raised foil edge
+      ctx.strokeStyle="rgba(255,245,202,.92)";
       ctx.lineWidth=5;
       ctx.beginPath();
       ctx.arc(cx,cy,r-1,0,Math.PI*2);
       ctx.stroke();
 
-      ctx.strokeStyle="rgba(119,84,22,.26)";
+      ctx.strokeStyle="rgba(101,70,16,.35)";
       ctx.lineWidth=1.5;
       ctx.beginPath();
       ctx.arc(cx,cy,r-6,0,Math.PI*2);
@@ -3528,18 +3568,10 @@ scratchCards.forEach(
       ctx.fillStyle="#fff9e9";
       ctx.textAlign="center";
       ctx.textBaseline="middle";
-      ctx.font="700 11px DM Sans";
+      ctx.font="700 12px DM Sans";
       ctx.fillText("SCRATCH",cx,cy-8);
       ctx.font="500 9px DM Sans";
-      ctx.fillText("TO REVEAL",cx,cy+9);
-
-      // Tiny hand-scratch hint
-      ctx.strokeStyle="rgba(255,249,226,.62)";
-      ctx.lineWidth=1;
-      ctx.beginPath();
-      ctx.moveTo(cx-28,cy+25);
-      ctx.lineTo(cx+28,cy+25);
-      ctx.stroke();
+      ctx.fillText("TO REVEAL",cx,cy+10);
     }
 
     drawScratchSurface();
@@ -3578,68 +3610,31 @@ scratchCards.forEach(
         getPoint(event);
 
 
-      ctx.globalCompositeOperation =
-        "destination-out";
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
 
-
+      // A real scratch is made of uneven short strokes, not perfect circles.
+      const brush = 13 + Math.random()*4;
+      ctx.lineWidth = brush;
       ctx.beginPath();
+      ctx.moveTo(point.x - 8, point.y + 3);
+      ctx.lineTo(point.x + 7, point.y - 2);
+      ctx.stroke();
 
-
-      ctx.arc(
-        point.x,
-        point.y,
-        16,
-        0,
-        Math.PI*2
-      );
-
-
-      ctx.fill();
-
-
-      /*
-        Add small scratch marks
-        around the main scratch.
-      */
-
-      for(
-        let i=0;
-        i<5;
-        i++
-      ){
-
-        const angle =
-          Math.random() *
-          Math.PI *
-          2;
-
-        const distance =
-          Math.random() *
-          18;
-
-        const x =
-          point.x +
-          Math.cos(angle) *
-          distance;
-
-        const y =
-          point.y +
-          Math.sin(angle) *
-          distance;
-
-
+      // Fine secondary scratches around the main stroke
+      for(let i=0;i<7;i++){
+        const angle=Math.random()*Math.PI*2;
+        const length=7+Math.random()*15;
+        const ox=(Math.random()-.5)*18;
+        const oy=(Math.random()-.5)*18;
+        const x1=point.x+ox;
+        const y1=point.y+oy;
+        ctx.lineWidth=.8+Math.random()*1.5;
         ctx.beginPath();
-
-        ctx.arc(
-          x,
-          y,
-          3.5,
-          0,
-          Math.PI*2
-        );
-
-        ctx.fill();
-
+        ctx.moveTo(x1,y1);
+        ctx.lineTo(x1+Math.cos(angle)*length,y1+Math.sin(angle)*length);
+        ctx.stroke();
       }
 
 
@@ -3711,11 +3706,16 @@ scratchCards.forEach(
       revealed.add(index);
 
 
-      canvas.style.transition =
-        "opacity .45s ease";
+      const card = canvas.closest(".scratch-card");
+      if(card){
+        card.classList.add("scratched");
+      }
 
-      canvas.style.opacity =
-        "0";
+      canvas.style.transition =
+        "opacity .65s ease, transform .65s ease";
+
+      canvas.style.opacity = "0";
+      canvas.style.transform = "scale(1.025)";
 
 
       setTimeout(
