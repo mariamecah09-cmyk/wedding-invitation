@@ -1747,149 +1747,240 @@ a{
 }
 
 
+
 /* =========================================================
    RSVP + NOTE FROM US
+   Two intentionally different section designs
 ========================================================= */
 
+/* RSVP — light, editorial, framed */
 .rsvp{
-
   text-align:center;
-
-  padding-bottom:70px;
-
+  padding-top:78px;
+  padding-bottom:78px;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(220,203,184,.16),
+      rgba(255,250,243,.92)
+    );
 }
-
-.rsvp-note{
-  text-align:center;
-  padding-top:15px;
-  padding-bottom:90px;
-}
-
 
 .rsvp-inner{
-
-  max-width:550px;
-
+  max-width:570px;
   margin:auto;
-
-  padding:
-    55px
-    22px;
-
-  background:var(--red-deep);
-
-  color:white;
-
+  padding:58px 26px 52px;
+  background:var(--cream-light);
+  color:var(--ink);
   position:relative;
-
-  overflow:hidden;
-
+  border:1px solid rgba(184,148,69,.48);
+  box-shadow:0 12px 35px rgba(64,56,58,.07);
 }
-
 
 .rsvp-inner::before,
 .rsvp-inner::after{
-
-  content:"✦";
-
+  content:"";
   position:absolute;
-
-  color:var(--gold-light);
-
-  opacity:.35;
-
-  font-size:70px;
-
+  width:34px;
+  height:34px;
+  border-color:var(--gold);
+  opacity:.75;
 }
-
 
 .rsvp-inner::before{
-
-  top:-25px;
-  left:15px;
-
+  top:14px;
+  left:14px;
+  border-top:1px solid var(--gold);
+  border-left:1px solid var(--gold);
 }
-
 
 .rsvp-inner::after{
-
-  bottom:-25px;
-  right:15px;
-
+  right:14px;
+  bottom:14px;
+  border-right:1px solid var(--gold);
+  border-bottom:1px solid var(--gold);
 }
-
 
 .rsvp .eyebrow{
-
-  color:var(--gold-light);
-
+  color:var(--gold);
 }
-
 
 .rsvp h2{
-
   font-family:var(--serif);
-
-  font-size:47px;
-
-  font-weight:400;
-
+  font-size:clamp(45px,9vw,58px);
+  font-weight:500;
+  line-height:1;
+  color:var(--red-dark);
 }
-
 
 .rsvp p{
-
-  max-width:390px;
-
-  margin:
-    14px
-    auto
-    24px;
-
+  max-width:410px;
+  margin:17px auto 27px;
   font-family:var(--serif);
-
-  font-size:17px;
-
-  line-height:1.5;
-
-  color:
-    rgba(255,255,255,.72);
-
+  font-size:18px;
+  line-height:1.55;
+  color:#776b68;
 }
-
 
 .primary-button{
-
-  display:inline-block;
-
-  padding:
-    13px
-    27px;
-
-  background:var(--gold-light);
-
-  color:var(--red-deep);
-
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:205px;
+  padding:14px 26px;
+  background:var(--red-dark);
+  color:var(--cream-light);
+  border:1px solid var(--red-dark);
   font-size:9px;
-
-  letter-spacing:.15em;
-
+  letter-spacing:.16em;
   text-transform:uppercase;
+  transition:
+    background .25s ease,
+    color .25s ease,
+    transform .25s ease;
+}
 
+.primary-button:hover{
+  background:var(--gold);
+  border-color:var(--gold);
+  color:var(--cream-light);
+  transform:translateY(-2px);
+}
+
+.rsvp-deadline{
+  margin-top:17px;
+  font-size:8px;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  color:#9a8d87;
 }
 
 
-.rsvp-deadline{
+/* NOTE FROM US — warm, intimate, softer design */
+.rsvp-note{
+  padding-top:28px;
+  padding-bottom:90px;
+  background:var(--cream-light);
+}
 
-  margin-top:16px;
+.rsvp-note .rsvp-inner{
+  max-width:570px;
+  padding:66px 28px 62px;
+  background:#c98d86;
+  color:var(--cream-light);
+  border:0;
+  box-shadow:none;
+}
 
-  font-size:8px;
+.rsvp-note .rsvp-inner::before,
+.rsvp-note .rsvp-inner::after{
+  width:46px;
+  height:46px;
+  border:0;
+  opacity:.45;
+}
 
+.rsvp-note .rsvp-inner::before{
+  content:"✦";
+  top:17px;
+  left:18px;
+  color:var(--gold-pale);
+  font-size:48px;
+  line-height:1;
+}
+
+.rsvp-note .rsvp-inner::after{
+  content:"✦";
+  right:18px;
+  bottom:17px;
+  color:var(--gold-pale);
+  font-size:48px;
+  line-height:1;
+}
+
+.rsvp-note .eyebrow{
+  color:#f6e8d7;
+  margin-bottom:18px;
+}
+
+.rsvp-note h2{
+  color:#fffaf3;
+  font-size:clamp(40px,8vw,54px);
+  line-height:1;
+  font-weight:500;
+}
+
+.rsvp-note h2::after{
+  content:"";
+  display:block;
+  width:90px;
+  height:1px;
+  margin:25px auto 25px;
+  background:rgba(255,250,243,.55);
+}
+
+.rsvp-note p{
+  max-width:410px;
+  margin:0 auto 21px;
+  font-family:var(--serif);
+  font-size:18px;
+  line-height:1.6;
+  color:rgba(255,250,243,.9);
+}
+
+.rsvp-note .rsvp-deadline{
+  margin-top:29px;
+  font-family:var(--sans);
+  font-size:10px;
+  line-height:1.5;
   letter-spacing:.08em;
+  color:#fffaf3;
+  text-transform:none;
+}
 
-  color:
-    rgba(255,255,255,.45);
+.rsvp-note .rsvp-deadline strong{
+  display:inline-block;
+  margin-top:5px;
+  font-family:var(--script);
+  font-size:26px;
+  font-weight:400;
+  letter-spacing:.01em;
+}
 
+
+/* =========================================================
+   ROMANTIC RUSTIC FALL PALETTE IMAGE
+========================================================= */
+
+.color-palette{
+  width:100%;
+  margin:0 auto 30px;
+}
+
+.palette-image{
+  display:block;
+  width:100%;
+  max-width:520px;
+  height:auto;
+  margin:0 auto;
+  border:1px solid rgba(184,148,69,.32);
+  box-shadow:0 8px 22px rgba(64,56,58,.06);
+}
+
+@media (max-width:600px){
+  .palette-image{
+    width:100%;
+  }
+
+  .rsvp-inner{
+    padding-left:20px;
+    padding-right:20px;
+  }
+
+  .rsvp-note .rsvp-inner{
+    padding-left:22px;
+    padding-right:22px;
+  }
 }
 
 
@@ -3130,22 +3221,12 @@ body:not(.locked) .reveal{
 
   <div class="dress-card reveal">
 
-    <div class="color-palette" aria-label="Romantic Rustic Fall colour palette">
-      <div class="palette-swatches">
-        <span class="palette-swatch" style="background:#C98D86;"></span>
-        <span class="palette-swatch" style="background:#A95743;"></span>
-        <span class="palette-swatch" style="background:#73775A;"></span>
-        <span class="palette-swatch" style="background:#DCCBB8;"></span>
-        <span class="palette-swatch" style="background:#8B7769;"></span>
-      </div>
-
-      <div class="palette-labels">
-        <span>Dusty Rose</span>
-        <span>Terracotta</span>
-        <span>Olive</span>
-        <span>Warm Beige</span>
-        <span>Taupe</span>
-      </div>
+    <div class="color-palette">
+      <img
+        src="./Colors.jpg"
+        alt="Romantic Rustic Fall wedding colour palette"
+        class="palette-image"
+      >
     </div>
 
     <h3>
