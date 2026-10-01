@@ -697,12 +697,6 @@ a{
 
   margin:0;
 
-
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:24px;
-
   font-family:var(--serif);
 
   font-weight:500;
@@ -732,7 +726,10 @@ a{
   line-height:1;
 
   color:var(--gold);
-  margin:0;
+
+  margin:
+    10px
+    0;
 
 }
 
@@ -1825,6 +1822,78 @@ a{
   color:#776b68;
 }
 
+
+.rsvp-choice-text{
+  margin-top:-8px !important;
+  margin-bottom:24px !important;
+  font-family:var(--serif);
+  font-size:16px !important;
+  color:#8a7a74 !important;
+}
+
+.rsvp-buttons{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  width:100%;
+  margin:0 auto;
+}
+
+.rsvp-choice-button{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:min(100%, 270px);
+  min-height:48px;
+  padding:14px 22px;
+  background:var(--red-dark);
+  color:var(--cream-light);
+  border:1px solid var(--red-dark);
+  font-size:9px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  text-decoration:none;
+  transition:
+    background .25s ease,
+    color .25s ease,
+    border-color .25s ease,
+    transform .25s ease;
+}
+
+.rsvp-choice-button:hover{
+  background:var(--gold);
+  border-color:var(--gold);
+  color:var(--cream-light);
+  transform:translateY(-2px);
+}
+
+.rsvp-official-note{
+  max-width:430px !important;
+  margin:25px auto 0 !important;
+  font-family:var(--sans) !important;
+  font-size:11px !important;
+  line-height:1.7 !important;
+  letter-spacing:.01em;
+  color:#8a7a74 !important;
+}
+
+@media (max-width:600px){
+  .rsvp-buttons{
+    gap:10px;
+  }
+
+  .rsvp-choice-button{
+    width:100%;
+    max-width:270px;
+  }
+
+  .rsvp-official-note{
+    font-size:10px !important;
+    line-height:1.65 !important;
+  }
+}
+
 .primary-button{
   display:inline-flex;
   align-items:center;
@@ -2118,8 +2187,6 @@ body:not(.locked) .reveal{
         10.5vw,
         60px
       );
-
-    gap:18px;
 
   }
 
@@ -2713,7 +2780,8 @@ body:not(.locked) .reveal{
     </div>
 
     <div class="intro-names">
-      <span class="intro-name">Happy</span>
+      <span class="intro-name">Happy </span>
+      
 
       <span class="intro-ampersand">&amp;</span>
 
@@ -3325,24 +3393,45 @@ body:not(.locked) .reveal{
 
 
     <p>
-      We would be so happy to celebrate this beautiful day with you.
-      Please let us know if you’ll be joining us
+      We’d love to know if you’ll be joining us
       for our special day.
     </p>
 
+    <p class="rsvp-choice-text">
+      Choose either Happy or Nico to RSVP through Messenger.
+    </p>
 
-    <a
-      href="https://m.me/feliz.olario"
-      class="primary-button"
-      target="_blank"
-      rel="noopener"
-    >
-      RSVP VIA MESSENGER
-    </a>
+
+    <div class="rsvp-buttons">
+
+      <a
+        href="https://m.me/feliz.olario"
+        class="rsvp-choice-button"
+        target="_blank"
+        rel="noopener"
+      >
+        RSVP TO HAPPY
+      </a>
+
+      <a
+        href="https://m.me/ocinsevla"
+        class="rsvp-choice-button"
+        target="_blank"
+        rel="noopener"
+      >
+        RSVP TO NICO
+      </a>
+
+    </div>
+
+
+    <p class="rsvp-official-note">
+      Once you’ve confirmed your attendance, we’ll send you the final/official invitation with all the details for our special day.
+    </p>
 
 
     <div class="rsvp-deadline">
-      RSVP on or before November 15, 2026
+      Please RSVP on or before November 15, 2026.
     </div>
 
   </div>
@@ -3401,7 +3490,7 @@ body:not(.locked) .reveal{
   </div>
 
   <p>
-    Happy & Nico Alves
+    Happy Alves & Nico Alves
   </p>
 
   <span>
